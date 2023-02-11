@@ -1,0 +1,41 @@
+name: Lint and Test
+
+on: [push]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    timeout-minutes: 10
+    name: Lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Cache node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          key: node-${{ matrix.node-version }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          path: |
+            node_modules
+      - name: Install dependencies
+        run: yarn install
+        env:
+          CI: true
+      - name: Lint
+        run: yarn lint
+      - name: Typecheck
+        run: yarn typecheck
+        env:
+          CI: true
