@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./page.module.css";
 
 export default function Page() {
@@ -139,6 +140,14 @@ export default function Page() {
         </section>
       </main>
       <footer className={styles.footer}>
+        <nav>
+          <h3>Sitemap</h3>
+          <ul>
+            <li>
+              <Link href="/marry">望月のあと結婚とする</Link>
+            </li>
+          </ul>
+        </nav>
         <small>&copy; 2023 もちもちクリエイト</small>
       </footer>
     </div>
