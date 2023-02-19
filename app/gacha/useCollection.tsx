@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import data from "../../public/gacha/data.json";
 
 const COLLECTION_KEY = "mcgc";
@@ -84,17 +84,17 @@ interface CollectionProviderProps {
 }
 
 export const CollectionProvider = ({ children }: CollectionProviderProps) => {
-  const [collection, setCollection] = useState<[number, number][]>(
-    JSON.parse(localStorage.getItem(COLLECTION_KEY) ?? "[]")
-  );
+  const [collection, setCollection] = useState<[number, number][]>([]);
 
-  const [tickets, setTickets] = useState<number>(
-    parseInt(localStorage.getItem(TICKET_KEY) ?? `0`, 10)
-  );
+  const [tickets, setTickets] = useState<number>(0);
 
-  const [ticketLogs, setTicketLogs] = useState<TicketLog[]>(
-    JSON.parse(localStorage.getItem(TICKEY_LOG_KEY) ?? "[]")
-  );
+  const [ticketLogs, setTicketLogs] = useState<TicketLog[]>([]);
+
+  useEffect(() => {
+    setCollection(JSON.parse(localStorage.getItem(COLLECTION_KEY) ?? "[]"));
+    setTickets(parseInt(localStorage.getItem(TICKET_KEY) ?? `0`, 10));
+    setTicketLogs(JSON.parse(localStorage.getItem(TICKEY_LOG_KEY) ?? "[]"));
+  }, []);
 
   return (
     <TicketContext.Provider value={tickets}>
