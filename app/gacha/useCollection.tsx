@@ -134,20 +134,15 @@ export const CollectionProvider = ({ children }: CollectionProviderProps) => {
           <DispatchCollectionContext.Provider
             value={{
               draw: () => {
-                let noTicket = false;
+                if (tickets === 0) {
+                  return false;
+                }
+
                 setTickets((prev) => {
-                  if (prev === 0) {
-                    noTicket = true;
-                    return 0;
-                  }
-                  const next = prev - 1;
+                  const next = prev ? prev - 1 : 0;
                   localStorage.setItem(TICKET_KEY, next.toString());
                   return next;
                 });
-
-                if (noTicket) {
-                  return false;
-                }
 
                 const shuffled = shuffle(dataWithIndex);
 
