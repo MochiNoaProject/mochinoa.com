@@ -9,10 +9,15 @@ import { AppHeader } from "../AppHeader";
 import { IndexModal } from "./IndexModal";
 import { Result } from "./Result";
 import { TicketModal } from "./TicketModal";
+import { useEffect, useState } from "react";
 import { useModal } from "./useModal";
-import { useState } from "react";
 import data from "../../public/gacha/data.json";
 import styles from "./page.module.css";
+
+const preloadImage = (url: string) => {
+  const img = new Image();
+  img.src = url;
+};
 
 const Content = () => {
   const [Modal, open] = useModal(IndexModal);
@@ -21,6 +26,12 @@ const Content = () => {
   const [chara, setChara] = useState<(typeof data)[number]>();
 
   const [Ticket, openTicket] = useModal(TicketModal);
+
+  useEffect(() => {
+    data.forEach((chara) => {
+      preloadImage(chara.image);
+    });
+  }, []);
 
   return (
     <section className={styles.container}>
