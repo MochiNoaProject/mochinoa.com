@@ -27,7 +27,7 @@ const Content = () => {
       <AppHeader />
       <Ticket />
       <Modal />
-      <Result chara={chara} />
+      <Result chara={chara} key={ticket.amount} />
       <footer className={styles.footer}>
         <button className={styles.button} onClick={open}>
           図鑑

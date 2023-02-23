@@ -1,11 +1,12 @@
 import React from "react";
+import clsx from "clsx";
 import data from "../../public/gacha/data.json";
 import styles from "./Result.module.css";
 
 export const Result = ({ chara }: { chara?: (typeof data)[number] }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.frame}>
+      <div className={clsx(styles.frame, chara && styles.frame_active)}>
         {chara ? (
           <React.Fragment>
             <header>
