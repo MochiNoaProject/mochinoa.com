@@ -1,0 +1,5 @@
+.header {
+  padding: 8px 4vw;
+  background-color: #f8b186;
+  box-shadow: var(--shadow-level-2);
+}
