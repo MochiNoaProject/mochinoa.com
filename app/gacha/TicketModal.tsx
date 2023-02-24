@@ -17,6 +17,7 @@ export const TicketModal = () => {
       </header>
 
       <article>
+        <p>ガチャチケの取得は1日毎にリセットされます。</p>
         <ul>
           {[
             {

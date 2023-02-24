@@ -56,8 +56,14 @@ const Content = () => {
             }
           }}
         >
-          ガチャ (残り:
-          {ticket.amount > 99 ? "99" : ticket.amount})
+          {ticket.amount === 0 ? (
+            <span>ガチャチケをGET</span>
+          ) : (
+            <span>
+              ガチャ (残り:
+              {ticket.amount > 99 ? "99" : ticket.amount})
+            </span>
+          )}
         </button>
       </footer>
     </section>

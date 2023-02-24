@@ -15,9 +15,16 @@
 }
 
 .container article {
-  padding: 24px 48px;
+  padding: 24px 24px;
 }
 
+.container article p {
+  margin-bottom: 16px;
+}
+
+.container article ul {
+  padding-left: 16px;
+}
 .container article ul li {
   padding: 8px 0px;
 }

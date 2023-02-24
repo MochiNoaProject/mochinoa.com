@@ -27,7 +27,9 @@ export const Result = ({ chara }: { chara?: (typeof data)[number] }) => {
             />
             <p className={styles.note}>{chara.description}</p>
           </React.Fragment>
-        ) : null}
+        ) : (
+          <div className={styles.octagram} />
+        )}
       </div>
     </div>
   );
