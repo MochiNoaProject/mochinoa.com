@@ -1,5 +1,32 @@
 import "./index.css";
 import "./ress.css";
+import { Metadata } from "next";
+
+export const metadata = {
+  title: {
+    default: "望月のあ公式サイト",
+    template: "%s | 望月のあ公式サイト",
+  },
+  icons: {
+    icon: "/favicon.png",
+  },
+  viewport: "width=device-width, initial-scale=1.0",
+  twitter: {
+    site: "@_noach",
+    creator: "@_noach",
+    card: "summary_large_image",
+    images: "https://www.mochinoa.com/img/ogp.jpg",
+  },
+  openGraph: {
+    type: "website",
+    title: "望月のあ公式サイト",
+    siteName: "望月のあ公式サイト",
+    url: "https://www.mochinoa.com",
+    images: "https://www.mochinoa.com/img/ogp.jpg",
+    description:
+      "歌とお絵描きが好き!全て自作のVTuber望月のあの公式サイトです。活動実績や各種SNSのリンクなどを掲載しています。今すぐアクセスして魅力的な配信や活躍をチェックしてください!",
+  },
+} satisfies Metadata;
 
 export default function RootLayout({
   children,

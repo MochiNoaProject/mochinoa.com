@@ -1,6 +1,19 @@
 import { AppHeader } from "../AppHeader";
 import { MarryOff } from "./MarryOff";
+import { Metadata } from "next";
 import styles from "./page.module.css";
+
+const title = "望月のあと結婚する";
+const description = "望月のあと結婚したいあなたへ";
+
+export const metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+  },
+} satisfies Metadata;
 
 export default function Page() {
   return (
