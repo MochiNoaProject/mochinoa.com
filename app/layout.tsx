@@ -1,6 +1,7 @@
 import "./index.css";
 import "./ress.css";
 import { Metadata } from "next";
+import GoogleAnalytics from "./GoogleAnalytics";
 
 export const metadata = {
   title: {
@@ -46,6 +47,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400&display=swap"
           rel="stylesheet"
         />
+        <GoogleAnalytics />
       </head>
 
       <body>{children}</body>
