@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import clsx from "clsx";
 import styles from "./page.module.css";
 
 export default function Page() {
@@ -28,7 +29,10 @@ export default function Page() {
           src="/img/logo.png"
           alt="望月のあ Official Site"
         />
-        <a href="#contact">CONTACT</a>
+        <nav>
+          <a href="#apps">APPS</a>
+          <a href="#contact">CONTACT</a>
+        </nav>
       </header>
       <div
         style={{
@@ -36,8 +40,23 @@ export default function Page() {
         }}
       />
       <main className={styles.main}>
+        <section className={styles.section_about}>
+          <h2>
+            About
+            <span aria-hidden="true"> - 紹介</span>
+          </h2>
+          <div className={clsx(styles.card, styles.card_black)}>
+            <p>
+              歌とお絵描きが好きなVTuber！得意のお絵描きとLive2Dのちからで自分自身を錬成し、全て自作で活動中！
+              これまでに受けたお仕事を実績としてまとめているので、望月のあに依頼したい案件などありましたらご相談ください！食べ物のPR系や歌唱依頼、リアルイベント、その他わくわくするお仕事をたくさんできると嬉しいです！
+            </p>
+          </div>
+        </section>
         <section className={styles.section_achievements}>
-          <h2>Achievements</h2>
+          <h2>
+            Achievements
+            <span aria-hidden="true"> - 実績</span>
+          </h2>
           <ul className={styles.list}>
             {[
               {
@@ -67,7 +86,10 @@ export default function Page() {
               },
             ].map((item) => {
               return (
-                <li key={item.title} className={styles.card_black}>
+                <li
+                  key={item.title}
+                  className={clsx(styles.card, styles.card_black)}
+                >
                   <h3>{item.title}</h3>
 
                   <p>{item.description}</p>
@@ -76,8 +98,48 @@ export default function Page() {
             })}
           </ul>
         </section>
+        <section className={styles.section_apps}>
+          <h2 id="apps">
+            Apps
+            <span aria-hidden="true"> - 遊戯</span>
+          </h2>
+          <ul>
+            {[
+              {
+                title: "結婚アプリ",
+                description: "望月のあと結婚したいあなたへ",
+                href: "/marry",
+                color: "#EE9B44",
+              },
+              {
+                title: "ガチャアプリ",
+                description: "望月のあ自作キャラクターをガチャで引こう",
+                href: "/gacha",
+                color: "#FFC200",
+              },
+            ].map((item) => {
+              return (
+                <li key={item.title}>
+                  <Link
+                    href={item.href}
+                    className={styles.card}
+                    style={{
+                      backgroundColor: item.color,
+                    }}
+                  >
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
         <section className={styles.section_links}>
-          <h2>Links</h2>
+          <h2>
+            Links
+            <span aria-hidden="true"> - 住処</span>
+          </h2>
           <ul className={styles.list}>
             {[
               {
@@ -117,9 +179,12 @@ export default function Page() {
             })}
           </ul>
         </section>
+
         <section>
-          <h2 id="contact">Contact</h2>
-          <div className={styles.card_black}>
+          <h2 id="contact">
+            Contact <span aria-hidden="true"> - 連絡</span>
+          </h2>
+          <div className={clsx(styles.card, styles.card_black)}>
             <h3>お問い合わせ方法</h3>
             <p>
               お仕事の依頼、コラボなどのご相談は
@@ -140,14 +205,6 @@ export default function Page() {
         </section>
       </main>
       <footer className={styles.footer}>
-        <nav>
-          <h3>Sitemap</h3>
-          <ul>
-            <li>
-              <Link href="/marry">望月のあと結婚とする</Link>
-            </li>
-          </ul>
-        </nav>
         <small>&copy; 2023 もちもちクリエイト</small>
       </footer>
     </div>
