@@ -3,11 +3,15 @@ import "./ress.css";
 import { Metadata } from "next";
 import GoogleAnalytics from "./GoogleAnalytics";
 
+const title = "望月のあ公式サイト";
+const description = `歌とお絵描きが好き!全て自作のVTuber望月のあの公式サイトです。活動実績や各種SNSのリンクなどを掲載しています。今すぐアクセスして魅力的な配信や活躍をチェックしてください!`;
+
 export const metadata = {
   title: {
-    default: "望月のあ公式サイト",
-    template: "%s | 望月のあ公式サイト",
+    default: title,
+    template: `%s | ${title}`,
   },
+  description,
   icons: {
     icon: "/favicon.png",
   },
@@ -20,12 +24,11 @@ export const metadata = {
   },
   openGraph: {
     type: "website",
-    title: "望月のあ公式サイト",
-    siteName: "望月のあ公式サイト",
+    title,
+    siteName: title,
     url: "https://www.mochinoa.com",
     images: "https://www.mochinoa.com/img/ogp.jpg",
-    description:
-      "歌とお絵描きが好き!全て自作のVTuber望月のあの公式サイトです。活動実績や各種SNSのリンクなどを掲載しています。今すぐアクセスして魅力的な配信や活躍をチェックしてください!",
+    description,
   },
 } satisfies Metadata;
 
