@@ -30,8 +30,8 @@ export default function Page() {
           alt="望月のあ Official Site"
         />
         <nav>
-          <a href="#apps">APPS</a>
-          <a href="#contact">CONTACT</a>
+          <a href="#apps">アプリ</a>
+          <a href="#contact">お問い合せ</a>
         </nav>
       </header>
       <div
