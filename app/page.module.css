@@ -95,7 +95,7 @@
 
 .header nav {
   display: flex;
-  gap: 24px;
+  gap: 16px;
 }
 
 .header a {
