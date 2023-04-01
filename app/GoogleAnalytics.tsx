@@ -1,29 +1,8 @@
-"use client";
-
-import { useEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
 
 const GA_ID = "G-J9CW3CGVL4";
 
-const pageview = (path: string) => {
-  // @ts-expect-error ...
-  window.gtag("config", GA_ID, {
-    page_path: path,
-  });
-};
-
 const GoogleAnalytics = () => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    if (pathname) {
-      const url = pathname + searchParams.toString();
-      pageview(url);
-    }
-  }, [pathname, searchParams]);
-
   return (
     <>
       <Script
