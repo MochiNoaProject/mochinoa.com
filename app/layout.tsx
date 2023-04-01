@@ -1,7 +1,6 @@
 import "./index.css";
 import "./ress.css";
 import { Metadata } from "next";
-import GoogleAnalytics from "./GoogleAnalytics";
 
 const title = "望月のあ公式サイト";
 const description = `歌とお絵描きが好き!全て自作のVTuber望月のあの公式サイトです。活動実績や各種SNSのリンクなどを掲載しています。今すぐアクセスして魅力的な配信や活躍をチェックしてください!`;
@@ -50,7 +49,6 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400&display=swap"
           rel="stylesheet"
         />
-        <GoogleAnalytics />
       </head>
 
       <body>{children}</body>
