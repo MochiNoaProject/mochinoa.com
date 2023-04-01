@@ -1,4 +1,5 @@
 import { AppHeader } from "../AppHeader";
+import { Content } from "./Content";
 import { Metadata } from "next";
 
 const title = "話題ガチャAI";
@@ -16,8 +17,8 @@ export const metadata = {
 export default function Page() {
   return (
     <div>
-      <AppHeader />
-      <div>Hello, World</div>
+      <AppHeader backgroundColor="#ee4444" />
+      <Content />
     </div>
   );
 }

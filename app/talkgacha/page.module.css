@@ -1,0 +1,44 @@
+.container {
+  background-color: #ee4444a1;
+  min-height: 100vh;
+  padding-top: 64px;
+}
+
+.content {
+  max-width: 560px;
+  margin: auto;
+  display: grid;
+  gap: 32px;
+}
+
+.paper {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-level-2);
+  text-align: center;
+  display: grid;
+  gap: 24px;
+  padding: 32px;
+}
+
+.suggestion {
+  font-size: 24px;
+}
+
+.button {
+  background-color: #ee4444;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-level-2);
+  min-width: 160px;
+}
+
+.field {
+  background-color: white;
+  resize: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  border: 4px solid #ee4444;
+}
