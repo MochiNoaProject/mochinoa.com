@@ -5,9 +5,9 @@ const config = {
   experimental: {
     appDir: true,
   },
-  eslint:{
+  eslint: {
     ignoreDuringBuilds: true,
-  }
+  },
 };
 
 module.exports = config;
