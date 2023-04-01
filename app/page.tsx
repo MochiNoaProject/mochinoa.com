@@ -117,6 +117,12 @@ export default function Page() {
                 href: "/gacha",
                 color: "#FFC200",
               },
+              {
+                title: "話題ガチャAI",
+                description: "AIが話題を決めてくれるガチャ",
+                href: "/talkgacha",
+                color: "#ee4444",
+              },
             ].map((item) => {
               return (
                 <li key={item.title}>

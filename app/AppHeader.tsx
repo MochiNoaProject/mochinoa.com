@@ -2,9 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./AppHeader.module.css";
 
-export const AppHeader = () => {
+interface AppHeaderProps {
+  backgroundColor?: string;
+}
+
+export const AppHeader = (props: AppHeaderProps) => {
   return (
-    <header className={styles.header}>
+    <header
+      className={styles.header}
+      style={{
+        backgroundColor: props.backgroundColor,
+      }}
+    >
       <Link href="/">
         <Image
           priority
