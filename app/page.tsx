@@ -113,7 +113,7 @@ export default function Page() {
               },
               {
                 title: "ガチャアプリ",
-                description: "望月のあ自作キャラクターをガチャで引こう",
+                description: "望月のあ自作キャラクターを集めよう",
                 href: "/gacha",
                 color: "#FFC200",
               },
@@ -122,6 +122,12 @@ export default function Page() {
                 description: "AIが話題を決めてくれるガチャ",
                 href: "/talkgacha",
                 color: "#ee4444",
+              },
+              {
+                title: "合成音声アプリ",
+                description: "誰でも望月のあの声になれる",
+                href: "https://huggingface.co/spaces/hrdtbs/rvc-mochinoa",
+                color: "#5b44ee",
               },
             ].map((item) => {
               return (
