@@ -8,7 +8,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "next-sitemap",
     "typecheck": "tsc",
     "lint": "eslint .",
     "postlint": "prettier --check .",
