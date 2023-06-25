@@ -1,6 +1,5 @@
 import "./global.css";
 import "./index.css";
-import "./ress.css";
 import { Metadata } from "next";
 import GoogleAnalytics from "./GoogleAnalytics";
 
