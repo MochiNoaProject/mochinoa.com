@@ -1,3 +1,4 @@
+import { css } from "../styled-system/css";
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
@@ -6,7 +7,16 @@ import styles from "./page.module.css";
 export default function Page() {
   return (
     <div>
-      <div className={styles.background}>
+      <div
+        className={css({
+          position: "fixed",
+          zIndex: -1,
+          display: "flex",
+          width: "100%",
+          height: "100dvh",
+          objectFit: "cover",
+        })}
+      >
         <Image fill src="/img/background.png" alt="" />
       </div>
       <div className={styles.avator}>
