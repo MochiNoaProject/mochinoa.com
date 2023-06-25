@@ -1,3 +1,4 @@
+import { css } from "../styled-system/css";
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
@@ -6,10 +7,40 @@ import styles from "./page.module.css";
 export default function Page() {
   return (
     <div>
-      <div className={styles.background}>
-        <Image fill src="/img/background.png" alt="" />
+      <div
+        className={css({
+          position: "fixed",
+          zIndex: -1,
+          display: "flex",
+          width: "100%",
+          height: "100dvh",
+          objectFit: "cover",
+        })}
+      >
+        <Image
+          className={css({
+            objectFit: "cover",
+          })}
+          fill
+          src="/img/background.png"
+          alt=""
+        />
       </div>
-      <div className={styles.avator}>
+      <div
+        className={css({
+          position: "fixed",
+          zIndex: -1,
+          display: "flex",
+          width: {
+            base: "900px",
+            md: "1200px",
+          },
+          height: "auto",
+          aspectRatio: "1920/1080",
+          bottom: 0,
+          right: "-50px",
+        })}
+      >
         <Image priority fill src="/img/avator.png" alt="望月のあ" />
       </div>
       <div className={styles.effect_container}>
