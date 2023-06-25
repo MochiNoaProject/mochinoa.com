@@ -17,9 +17,30 @@ export default function Page() {
           objectFit: "cover",
         })}
       >
-        <Image fill src="/img/background.png" alt="" />
+        <Image
+          className={css({
+            objectFit: "cover",
+          })}
+          fill
+          src="/img/background.png"
+          alt=""
+        />
       </div>
-      <div className={styles.avator}>
+      <div
+        className={css({
+          position: "fixed",
+          zIndex: -1,
+          display: "flex",
+          width: {
+            base: "900px",
+            md: "1200px",
+          },
+          height: "auto",
+          aspectRatio: "1920/1080",
+          bottom: 0,
+          right: "-50px",
+        })}
+      >
         <Image priority fill src="/img/avator.png" alt="望月のあ" />
       </div>
       <div className={styles.effect_container}>
