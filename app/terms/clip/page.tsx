@@ -41,9 +41,12 @@ const Heading2 = ({
     <h2
       {...props}
       className={css({
-        fontSize: "24px",
+        fontSize: "20px",
         marginBlock: "24px",
         borderBottom: "1px solid #424242",
+        sm: {
+          fontSize: "24px",
+        },
       })}
     >
       {children}
@@ -164,16 +167,17 @@ export default function Page() {
             color: "#424242",
           })}
         >
+          <Heading1>切り抜きガイドライン</Heading1>
           <div
             className={css({
-              float: "right",
+              display: "flex",
+              justifyContent: "flex-end",
             })}
           >
             <Paragraph>
               更新日： <time>2023年7月1日</time>
             </Paragraph>
           </div>
-          <Heading1>切り抜きガイドライン</Heading1>
           <Paragraph>{description}</Paragraph>
 
           <Heading2>切り抜きに利用できる素材について</Heading2>
