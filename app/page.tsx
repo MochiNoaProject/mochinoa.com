@@ -91,7 +91,7 @@ export default function Page() {
           <ul className={styles.list}>
             {[
               {
-                title: "バーチャル物産展月末のご褒美祭出演",
+                title: "バーチャル物産展月末のご褒美祭り出演",
                 description:
                   "オンライン空間上に多数の生産者やメーカーが出店し、VTuber・Vライバーが出店ブースの売り子として商品やサービスをアピールするお祭りイベントに出演しました。",
               },
