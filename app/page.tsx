@@ -224,6 +224,31 @@ export default function Page() {
         </section>
 
         <section>
+          <h2 id="terms">
+            Terms <span aria-hidden="true"> - 協約</span>
+          </h2>
+          <ul className={styles.list}>
+            {[
+              {
+                name: "切り抜きガイドライン",
+                href: "/terms/clip",
+              },
+            ].map((item) => {
+              return (
+                <li
+                  key={item.name}
+                  className={clsx(styles.card, styles.card_black)}
+                >
+                  <Link href={item.href}>
+                    <h3>{item.name}</h3>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
+        <section>
           <h2 id="contact">
             Contact <span aria-hidden="true"> - 連絡</span>
           </h2>
