@@ -1,7 +1,5 @@
 import { Metadata } from "next";
 import { css } from "../../../styled-system/css";
-import Image from "next/image";
-import Link from "next/link";
 
 const title = "切り抜きガイドライン｜望月のあ";
 const description =
@@ -42,7 +40,7 @@ const Heading2 = ({
       {...props}
       className={css({
         fontSize: "20px",
-        marginBlock: "24px",
+        marginBlock: "32px",
         borderBottom: "1px solid #424242",
         sm: {
           fontSize: "24px",
@@ -63,7 +61,7 @@ const Heading3 = ({
       {...props}
       className={css({
         fontSize: "16px",
-        marginBlock: "16px",
+        marginBlock: "24px",
         fontWeight: "bold",
       })}
     >
@@ -78,6 +76,7 @@ const List = ({ children, ...props }: React.ComponentPropsWithoutRef<"ul">) => {
       {...props}
       className={css({
         listStyle: "disc",
+        fontSize: "14px",
         paddingInlineStart: "24px",
       })}
     >
@@ -94,8 +93,8 @@ const Paragraph = ({
     <h2
       {...props}
       className={css({
-        fontSize: "16px",
-        marginBlock: "16px",
+        fontSize: "14px",
+        marginBlock: "24px",
       })}
     >
       {children}
@@ -106,56 +105,10 @@ const Paragraph = ({
 export default function Page() {
   return (
     <div>
-      <div
-        className={css({
-          position: "fixed",
-          zIndex: -1,
-          display: "flex",
-          width: "100%",
-          height: "100dvh",
-          objectFit: "cover",
-        })}
-      >
-        <Image
-          className={css({
-            objectFit: "cover",
-          })}
-          fill
-          src="/img/background.png"
-          alt=""
-        />
-      </div>
-      <header
-        className={css({
-          position: "sticky",
-          top: 0,
-          padding: "8px 4vw",
-          backgroundColor: "rgba(255, 255, 255, 0.2)",
-          backdropFilter: "blur(5px)",
-          zIndex: 1200,
-          color: "white",
-          boxShadow: "var(--shadow-level-2)",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        })}
-      >
-        <Link href="/">
-          <Image
-            priority
-            width={146}
-            height={(146 / 400) * 155}
-            src="/img/logo.png"
-            alt="望月のあ Official Site"
-          />
-        </Link>
-      </header>
       <div>
         <div
           className={css({
-            fontFamily: ` system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", "Segoe UI", "Meiryo", sans-serif;`,
             backgroundColor: "rgba(255, 255, 255, 0.9)",
-            boxShadow: "var(--shadow-level-2)",
             maxWidth: 740,
             marginInline: "auto",
             marginBlock: "24px",
