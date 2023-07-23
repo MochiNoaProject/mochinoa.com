@@ -11,9 +11,41 @@ export default defineConfig({
 
   // Useful for theme customization
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        down: {
+          "0%": {
+            translate: "0px -200px",
+          },
+          "100%": {
+            translate: "0px 200px",
+          },
+        },
+        rumble: {
+          "0%": {
+            rotate: "2deg",
+          },
+          "100%": {
+            rotate: "-2deg",
+          },
+        },
+        fadeInOut: {
+          "0%": {
+            opacity: 0,
+          },
+          "10%": {
+            opacity: 1,
+          },
+          "80%": {
+            opacity: 1,
+          },
+          "100%": {
+            opacity: 0,
+          },
+        },
+      },
+    },
   },
-
   // The output directory for your css system
   outdir: "styled-system",
 });
