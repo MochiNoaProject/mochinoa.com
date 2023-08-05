@@ -107,7 +107,7 @@ export const CollectionProvider = ({ children }: CollectionProviderProps) => {
             }-${date.getDate()}`;
 
             return ticketLogs.some(
-              (ticket) => ticket.key === key && ticket.issuedAt === issuedAt
+              (ticket) => ticket.key === key && ticket.issuedAt === issuedAt,
             );
           },
           issue: (key) => {

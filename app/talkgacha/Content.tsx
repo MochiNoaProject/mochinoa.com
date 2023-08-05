@@ -26,7 +26,7 @@ const messages: ChatCompletionRequestMessage[] = [
 
 export const Content = () => {
   const [suggestion, setSuggestion] = useState(
-    "これはChatGPTを利用しています。OpenAI API Keyを入力して利用してください。"
+    "これはChatGPTを利用しています。OpenAI API Keyを入力して利用してください。",
   );
   const [apiKey, setApiKey] = useState("");
   return (
