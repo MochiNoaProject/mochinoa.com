@@ -1,1 +1,7 @@
 @layer reset, base, tokens, recipes, utilities;
+
+body:has(dialog:modal) {
+  touch-action: none;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
