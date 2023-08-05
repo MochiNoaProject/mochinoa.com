@@ -18,6 +18,7 @@ export const metadata = {
   icons: {
     icon: "/favicon.png",
   },
+  metadataBase: new URL("https://www.mochinoa.com/"),
   viewport: "width=device-width, initial-scale=1.0",
   twitter: {
     site: "@_noach",
@@ -37,8 +38,10 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html
@@ -66,7 +69,10 @@ export default function RootLayout({
         <GoogleAnalytics />
       </head>
 
-      <body>{children}</body>
+      <body>
+        {children}
+        {modal}
+      </body>
     </html>
   );
 }
