@@ -71,92 +71,98 @@ const Card = (props: React.ComponentPropsWithoutRef<"div">) => {
   );
 };
 
-export default function Page() {
+const Background = () => {
   return (
-    <div>
+    <div
+      className={css({
+        position: "relative",
+        zIndex: -1,
+      })}
+    >
       <div
         className={css({
-          position: "relative",
+          position: "fixed",
+          top: 8,
+          right: 8,
+          animation: `rumble 1s ease-in-out infinite alternate`,
+        })}
+      >
+        <Image
+          src="/img/sign.png"
+          alt="望月のあ"
+          width={300}
+          height={300 / (1302 / 945)}
+        />
+      </div>
+      <div
+        className={css({
+          position: "fixed",
+          zIndex: -1,
+          display: "flex",
+          width: "100%",
+          height: "100dvh",
+          objectFit: "cover",
+        })}
+      >
+        <Image
+          className={css({
+            objectFit: "cover",
+          })}
+          fill
+          src="/img/background.png"
+          alt=""
+        />
+      </div>
+      <div
+        className={css({
+          position: "fixed",
+          zIndex: -1,
+          display: "flex",
+          width: {
+            base: "900px",
+            md: "1200px",
+          },
+          height: "auto",
+          aspectRatio: "1920/1080",
+          bottom: 0,
+          right: "-50px",
+        })}
+      >
+        <Image priority fill src="/img/avator.png" alt="望月のあ" />
+      </div>
+      <div
+        className={css({
+          position: "fixed",
+          width: "100vw",
+          height: "100vh",
+          overflow: "hidden",
           zIndex: -1,
         })}
       >
-        <div
+        <Image
+          fill
+          loading="lazy"
           className={css({
-            position: "fixed",
-            top: 8,
-            right: 8,
-            animation: `rumble 1s ease-in-out infinite alternate`,
-          })}
-        >
-          <Image
-            src="/img/sign.png"
-            alt="望月のあ"
-            width={300}
-            height={300 / (1302 / 945)}
-          />
-        </div>
-        <div
-          className={css({
-            position: "fixed",
-            zIndex: -1,
-            display: "flex",
-            width: "100%",
-            height: "100dvh",
             objectFit: "cover",
+            width: "100%",
+            height: "100%",
+            scale: 1.3,
+            animation: `rumble 4s ease-in-out infinite alternate,
+        fadeInOut 30s linear infinite,
+        down 30s linear infinite`,
           })}
-        >
-          <Image
-            className={css({
-              objectFit: "cover",
-            })}
-            fill
-            src="/img/background.png"
-            alt=""
-          />
-        </div>
-        <div
-          className={css({
-            position: "fixed",
-            zIndex: -1,
-            display: "flex",
-            width: {
-              base: "900px",
-              md: "1200px",
-            },
-            height: "auto",
-            aspectRatio: "1920/1080",
-            bottom: 0,
-            right: "-50px",
-          })}
-        >
-          <Image priority fill src="/img/avator.png" alt="望月のあ" />
-        </div>
-        <div
-          className={css({
-            position: "fixed",
-            width: "100vw",
-            height: "100vh",
-            overflow: "hidden",
-            zIndex: -1,
-          })}
-        >
-          <Image
-            fill
-            loading="lazy"
-            className={css({
-              objectFit: "cover",
-              width: "100%",
-              height: "100%",
-              scale: 1.3,
-              animation: `rumble 4s ease-in-out infinite alternate,
-            fadeInOut 30s linear infinite,
-            down 30s linear infinite`,
-            })}
-            src="/img/background-effect.png"
-            alt=""
-          />
-        </div>
+          src="/img/background-effect.png"
+          alt=""
+        />
       </div>
+    </div>
+  );
+};
+
+export default function Page() {
+  return (
+    <div>
+      <Background />
 
       <main
         className={css({
@@ -172,13 +178,6 @@ export default function Page() {
         <section>
           <Card>
             <SectionHeading>About 望月のあ</SectionHeading>
-            <p>
-              歌とお絵描きが好きなVTuber!得意のお絵描きとLive2Dのちからで自分自身を錬成し、全て自作で活動中!
-            </p>
-            <p>
-              これまでに受けたお仕事を実績としてまとめているので、望月のあに依頼したい案件などありましたらご相談ください!食べ物のPR系や歌唱依頼、リアルイベント、その他わくわくするお仕事をたくさんできると嬉しいです！
-            </p>
-
             <ul
               className={css({
                 display: "flex",
@@ -235,6 +234,13 @@ export default function Page() {
                 );
               })}
             </ul>
+            <p>
+              歌とお絵描きが好きなVTuber!得意のお絵描きとLive2Dのちからで自分自身を錬成し、全て自作で活動中!
+            </p>
+            <p>
+              これまでに受けたお仕事を実績としてまとめているので、望月のあに依頼したい案件などありましたらご相談ください!食べ物のPR系や歌唱依頼、リアルイベント、その他わくわくするお仕事をたくさんできると嬉しいです！
+            </p>
+
             <div
               className={css({
                 display: "flex",
@@ -246,85 +252,94 @@ export default function Page() {
               <LinkButton href="#contact">
                 お仕事、コラボなどのご相談はこちら
               </LinkButton>
-              <LinkButton href="/terms/clip" variant="outlined">
-                切り抜きガイドライン
-              </LinkButton>
             </div>
           </Card>
         </section>
         <section>
-          <Card>
+          <Card style={{ maxWidth: "none" }}>
             <SectionHeading>今までの活動</SectionHeading>
-            <ul
+            <div
               className={css({
                 display: "grid",
-                gap: "4px",
+                gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+                gap: 2,
               })}
             >
               {[
-                {
-                  title: "バーチャル物産展月末のご褒美祭り出演",
-                  description:
-                    "オンライン空間上に多数の生産者やメーカーが出店し、VTuber・Vライバーが出店ブースの売り子として商品やサービスをアピールするお祭りイベントに出演しました。",
-                },
-                {
-                  title: "音楽WEBメディアmuevo voiceにて記事掲載",
-                  description:
-                    "「読者の声を形にする」音楽特化のウェブメディアにて「気になるアーティスト」として紹介していただき、歌ってみた動画のレビューを記事にしていただきました。",
-                },
-                {
-                  title: "わくわく!VTuberひろばおんらいんvol.26出演",
-                  description:
-                    "Akihabara Labが主催している『わくわくVTuberひろばおんらいん』で『わんおんわん』に出演しました。専用のアプリを使用し、ファンの方と1対1でお話をしました。",
-                },
-                {
-                  title: "PRIROLLバレンタイン商品ケーキ&マカロンコラボ",
-                  description:
-                    "PRIROLLと望月のあのコラボ商品を販売しました。望月のあのキャラクターが印刷されたケーキとマカロンがデザインされ、缶バッジ付きで生産されました。",
-                },
-                {
-                  title: "ラヨン漢方医院ダイエット漢方提供",
-                  description:
-                    "ラヨン漢方医院よりダイエットをサポートする漢方を提供していただき、1ヶ月間服用して使用感や効果をレビューすることになりました。Twitterやnoteでレビューを書きました。",
-                },
-                {
-                  title: "三ヶ日みかんオリジナル段ボールコラボ",
-                  description:
-                    "三ヶ日みかんの農家とコラボしました。望月のあのキャラクターがデザインされたオリジナル段ボールに入ったみかんが通販で販売されました。",
-                },
-                {
-                  title: "VTuberキャラクターデザイン・Live2D制作",
-                  description:
-                    "望月のあのキャラクターをデザインしイラストを描くところからLive2Dの制作までを全て自作で行いました。その他にも、法人・個人のLive2Dの制作を経験しています。",
-                },
-              ].map((item) => {
+                [
+                  "かんらくヤ商品提供",
+                  "チーズケーキを提供、限定サイン付きでの販売をしていただきました。配信の中で食レポを行い紹介させていただきました。",
+                ],
+
+                [
+                  "こくちょう菓詩屋商品提供",
+                  "ケロケ〜ロカエル缶というクッキー缶を提供いただき、配信の中で食レポを行い紹介させていただきました。",
+                ],
+
+                [
+                  "肉汁★やバーグ商品提供",
+                  "A5ランクの仙台牛を使ったハンバーグを提供いただき、配信の中で食レポを行い紹介させていただきました。",
+                ],
+
+                [
+                  "北海道えんがるスープカレー商品提供",
+                  "北海道えんがる地方のスープカレーを提供いただき、配信の中で食レポを行い紹介させていただきました。",
+                ],
+
+                [
+                  "エタメデジタルメダル販売",
+                  "応援が形あるものとして残りコレクションもできるボイス付きの「VTuberメダル」を制作、販売していただきました。",
+                ],
+
+                [
+                  "バーチャル物産展月末のご褒美祭り出演",
+                  "オンライン空間上に多数の生産者やメーカーが出店し、VTuber・Vライバーが出店ブースの売り子として商品やサービスをアピールするお祭りイベントに出演しました。",
+                ],
+                [
+                  "音楽WEBメディアmuevo voiceにて記事掲載",
+                  "「読者の声を形にする」音楽特化のウェブメディアにて「気になるアーティスト」として紹介していただき、歌ってみた動画のレビューを記事にしていただきました。",
+                ],
+                [
+                  "わくわく!VTuberひろばおんらいんvol.26出演",
+                  "Akihabara Labが主催している『わくわくVTuberひろばおんらいん』で『わんおんわん』に出演しました。専用のアプリを使用し、ファンの方と1対1でお話をしました。",
+                ],
+                [
+                  "PRIROLLバレンタイン商品ケーキ&マカロンコラボ",
+                  "PRIROLLと望月のあのコラボ商品を販売しました。望月のあのキャラクターが印刷されたケーキとマカロンがデザインされ、缶バッジ付きで生産されました。",
+                ],
+                [
+                  "ラヨン漢方医院ダイエット漢方提供",
+                  "ラヨン漢方医院よりダイエットをサポートする漢方を提供していただき、1ヶ月間服用して使用感や効果をレビューすることになりました。Twitterやnoteでレビューを書きました。",
+                ],
+                [
+                  "三ヶ日みかんオリジナル段ボールコラボ",
+                  "三ヶ日みかんの農家とコラボしました。望月のあのキャラクターがデザインされたオリジナル段ボールに入ったみかんが通販で販売されました。",
+                ],
+                [
+                  "VTuberキャラクターデザイン・Live2D制作",
+                  "望月のあのキャラクターをデザインしイラストを描くところからLive2Dの制作までを全て自作で行いました。その他にも、法人・個人のLive2Dの制作を経験しています。",
+                ],
+              ].map(([title, description]) => {
                 return (
-                  <li
-                    key={item.title}
-                    className={css({
-                      cursor: "pointer",
-                    })}
-                  >
-                    <Card>
-                      <h3
-                        className={css({
-                          fontSize: 16,
-                        })}
-                      >
-                        {item.title}
-                      </h3>
-                      <p
-                        className={css({
-                          fontSize: 12,
-                        })}
-                      >
-                        {item.description}
-                      </p>
-                    </Card>
-                  </li>
+                  <Card key={title}>
+                    <h3
+                      className={css({
+                        fontSize: 16,
+                      })}
+                    >
+                      {title}
+                    </h3>
+                    <p
+                      className={css({
+                        fontSize: 12,
+                      })}
+                    >
+                      {description}
+                    </p>
+                  </Card>
                 );
               })}
-            </ul>
+            </div>
           </Card>
         </section>
 
