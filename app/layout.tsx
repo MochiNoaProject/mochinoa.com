@@ -1,6 +1,6 @@
 import "./global.css";
 import "./index.css";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { ZenMaruGothic } from "../styles/font";
 import { css } from "../styled-system/css";
 import GoogleAnalytics from "./GoogleAnalytics";
@@ -8,6 +8,11 @@ import clsx from "clsx";
 
 const title = "望月のあ公式サイト";
 const description = `歌とお絵描きが好き!全て自作のVTuber望月のあの公式サイトです。活動実績や各種SNSのリンクなどを掲載しています。今すぐアクセスして魅力的な配信や活躍をチェックしてください!`;
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata = {
   title: {
@@ -19,7 +24,6 @@ export const metadata = {
     icon: "/favicon.png",
   },
   metadataBase: new URL("https://www.mochinoa.com/"),
-  viewport: "width=device-width, initial-scale=1.0",
   twitter: {
     site: "@_noach",
     creator: "@_noach",
@@ -52,7 +56,7 @@ export default function RootLayout({
           fontSmoothing: "antialiased",
           scrollBehavior: "smooth",
           lineHeight: 1.8,
-        }),
+        })
       )}
     >
       <head>
