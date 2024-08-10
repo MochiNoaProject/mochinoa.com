@@ -394,12 +394,6 @@ export default function Page() {
                   color: "#FFC200",
                 },
                 {
-                  title: "話題ガチャAI",
-                  description: "AIが話題を決めてくれるガチャ",
-                  href: "/talkgacha",
-                  color: "#ee4444",
-                },
-                {
                   title: "合成音声アプリ",
                   description: "誰でも望月のあの声になれる",
                   href: "https://huggingface.co/spaces/hrdtbs/rvc-mochinoa",
