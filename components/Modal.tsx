@@ -18,7 +18,7 @@ export default function Modal({ children }: { children: React.ReactNode }) {
         onDismiss();
       }
     },
-    [onDismiss]
+    [onDismiss],
   );
 
   useEffect(() => {

@@ -34,8 +34,8 @@ export const MarryOff = ({ className }: { className?: string }) => {
             {score > 3
               ? "なんですぐに答えられないのかな。"
               : score > 1
-              ? "もう少し頑張りましょう。"
-              : "まあ合格やな。"}
+                ? "もう少し頑張りましょう。"
+                : "まあ合格やな。"}
           </p>
         </div>
       ) : null}
