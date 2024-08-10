@@ -27,6 +27,7 @@ export const GuessNumber = () => {
           if (isStarted) {
             setIsStarted(false);
             setTime(0);
+            setSerif("もう一回あそぶ？❤");
             if (timer.current !== null) {
               window.clearInterval(timer.current);
             }
