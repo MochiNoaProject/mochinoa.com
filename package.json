@@ -2,6 +2,9 @@
   "name": "mochinoa.com",
   "private": true,
   "version": "1.0.0",
+  "engines": {
+    "node": "^20.0.0"
+  },
   "type": "module",
   "main": "index.js",
   "repository": "git@github.com:MochiNoaProject/mochinoa.com.git",

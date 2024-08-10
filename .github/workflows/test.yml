@@ -11,14 +11,11 @@ jobs:
     timeout-minutes: 10
     name: Lint
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
     steps:
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: package.json
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -26,7 +23,7 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          key: node-${{ matrix.node-version }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          key: node-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
           path: |
             node_modules
       - name: Install dependencies
