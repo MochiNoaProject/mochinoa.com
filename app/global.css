@@ -22,6 +22,12 @@ ul {
   list-style: none;
 }
 
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 body:has(dialog:modal) {
   touch-action: none;
   overflow: hidden;
