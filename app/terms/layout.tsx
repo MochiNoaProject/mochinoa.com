@@ -1,6 +1,6 @@
-import { css } from "../../styled-system/css";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "./layout.module.css";
 
 export default function TermLayout({
   children,
@@ -9,18 +9,7 @@ export default function TermLayout({
 }) {
   return (
     <div>
-      <header
-        className={css({
-          display: "flex",
-          justifyContent: "space-between",
-          paddingInline: "4vw",
-          paddingBlock: "8px",
-          position: "sticky",
-          top: 0,
-          backgroundColor: "gray.50",
-          shadow: "md",
-        })}
-      >
+      <header className={styles.header}>
         <Link href="/">
           <Image
             priority

@@ -1,0 +1,49 @@
+.root {
+  background-color: rgba(255, 255, 255, 0.9);
+  max-width: 740px;
+  margin-inline: auto;
+  margin-block: 24px;
+  margin-block-end: 88px;
+  padding-block-end: 88px;
+  padding-block-start: 24px;
+  padding-inline: min(48px, 4vw);
+  border-radius: 16px;
+  color: #424242;
+}
+
+.root p {
+  font-size: 14px;
+  margin-block: 24px;
+}
+.root p:has(time) {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.root ul {
+  list-style-type: disc;
+  font-size: 14px;
+  padding-inline-start: 24px;
+}
+
+.root h3 {
+  font-size: 16px;
+  margin-block: 24px;
+  font-weight: bold;
+}
+
+.root h2 {
+  font-size: 20px;
+  margin-block: 32px;
+  border-bottom: 1px solid #424242;
+}
+
+.root h1 {
+  font-size: 32px;
+  margin-block: 32px;
+}
+
+.root a {
+  color: #3f51b5;
+  text-decoration: underline;
+}
