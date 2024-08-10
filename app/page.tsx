@@ -266,7 +266,7 @@ export default function Page() {
                 gap: 2,
               })}
             >
-              {activities.map(([title, description]) => {
+              {activities.map(({ title, description }) => {
                 return (
                   <Card key={title}>
                     <h3
