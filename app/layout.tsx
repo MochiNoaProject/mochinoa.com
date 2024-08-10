@@ -56,7 +56,7 @@ export default function RootLayout({
           fontSmoothing: "antialiased",
           scrollBehavior: "smooth",
           lineHeight: 1.8,
-        })
+        }),
       )}
     >
       <head>
