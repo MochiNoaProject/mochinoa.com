@@ -91,9 +91,16 @@ export const CollectionProvider = ({ children }: CollectionProviderProps) => {
   const [ticketLogs, setTicketLogs] = useState<TicketLog[]>([]);
 
   useEffect(() => {
-    setCollection(JSON.parse(localStorage.getItem(COLLECTION_KEY) ?? "[]"));
+    setCollection(
+      JSON.parse(localStorage.getItem(COLLECTION_KEY) ?? "[]") as [
+        number,
+        number,
+      ][]
+    );
     setTickets(parseInt(localStorage.getItem(TICKET_KEY) ?? `0`, 10));
-    setTicketLogs(JSON.parse(localStorage.getItem(TICKEY_LOG_KEY) ?? "[]"));
+    setTicketLogs(
+      JSON.parse(localStorage.getItem(TICKEY_LOG_KEY) ?? "[]") as TicketLog[]
+    );
   }, []);
 
   return (
@@ -107,7 +114,7 @@ export const CollectionProvider = ({ children }: CollectionProviderProps) => {
             }-${date.getDate()}`;
 
             return ticketLogs.some(
-              (ticket) => ticket.key === key && ticket.issuedAt === issuedAt,
+              (ticket) => ticket.key === key && ticket.issuedAt === issuedAt
             );
           },
           issue: (key) => {
