@@ -1,21 +1,14 @@
-import { css } from "../styled-system/css";
 import Image from "next/image";
 import Link, { LinkProps } from "next/link";
 import activities from "../data/activities.json";
+import styles from "./page.module.css";
 
 const SectionHeading = ({
   children,
   id,
 }: React.PropsWithChildren<{ id?: string }>) => {
   return (
-    <h2
-      id={id}
-      className={css({
-        fontSize: "32px",
-        lineHeight: 1.5,
-        marginBottom: "16px",
-      })}
-    >
+    <h2 id={id} className={styles.SectionHeading}>
       {children}
     </h2>
   );
@@ -32,62 +25,20 @@ const LinkButton = ({
   ...props
 }: LinkButtonProps) => {
   return (
-    <Link
-      {...props}
-      className={css({
-        borderRadius: "24px",
-        padding: "8px 16px",
-        backgroundColor: variant === "filled" ? "amber.500" : "transparent",
-        border: "1px solid transparent",
-        borderColor: "amber.500",
-        fontSize: "16px",
-        lineHeight: 2,
-        shadow: "md",
-        position: "relative",
-      })}
-    >
+    <Link {...props} data-variant={variant} className={styles.LinkButton}>
       {children}
     </Link>
   );
 };
 
 const Card = (props: React.ComponentPropsWithoutRef<"div">) => {
-  return (
-    <div
-      {...props}
-      className={css({
-        borderRadius: "24px 96px 24px 24px",
-        padding: "24px",
-        display: "grid",
-        gap: "8px",
-        backgroundColor: "rgba(0, 0, 0, 0.1)",
-        backdropFilter: "blur(5px)",
-        transform: "translateZ(0)",
-        maxWidth: 720,
-        fontSize: "14px",
-        lineHeight: 2,
-        shadow: "md",
-      })}
-    />
-  );
+  return <div {...props} className={styles.Card} />;
 };
 
 const Background = () => {
   return (
-    <div
-      className={css({
-        position: "relative",
-        zIndex: -1,
-      })}
-    >
-      <div
-        className={css({
-          position: "fixed",
-          top: 8,
-          right: 8,
-          animation: `rumble 1s ease-in-out infinite alternate`,
-        })}
-      >
+    <div className={styles.Background__root}>
+      <div className={styles.Background__sign}>
         <Image
           src="/img/sign.png"
           alt="望月のあ"
@@ -95,66 +46,14 @@ const Background = () => {
           height={300 / (1302 / 945)}
         />
       </div>
-      <div
-        className={css({
-          position: "fixed",
-          zIndex: -1,
-          display: "flex",
-          width: "100%",
-          height: "100dvh",
-          objectFit: "cover",
-        })}
-      >
-        <Image
-          className={css({
-            objectFit: "cover",
-          })}
-          fill
-          src="/img/background.png"
-          alt=""
-        />
+      <div className={styles.Background__cover}>
+        <Image fill src="/img/background.png" alt="" />
       </div>
-      <div
-        className={css({
-          position: "fixed",
-          zIndex: -1,
-          display: "flex",
-          width: {
-            base: "900px",
-            md: "1200px",
-          },
-          height: "auto",
-          aspectRatio: "1920/1080",
-          bottom: 0,
-          right: "-50px",
-        })}
-      >
+      <div className={styles.Background__avatar}>
         <Image priority fill src="/img/avator.png" alt="望月のあ" />
       </div>
-      <div
-        className={css({
-          position: "fixed",
-          width: "100vw",
-          height: "100vh",
-          overflow: "hidden",
-          zIndex: -1,
-        })}
-      >
-        <Image
-          fill
-          loading="lazy"
-          className={css({
-            objectFit: "cover",
-            width: "100%",
-            height: "100%",
-            scale: 1.3,
-            animation: `rumble 4s ease-in-out infinite alternate,
-        fadeInOut 30s linear infinite,
-        down 30s linear infinite`,
-          })}
-          src="/img/background-effect.png"
-          alt=""
-        />
+      <div className={styles.Background__effect}>
+        <Image fill loading="lazy" src="/img/background-effect.png" alt="" />
       </div>
     </div>
   );
@@ -165,28 +64,11 @@ export default function Page() {
     <div>
       <Background />
 
-      <main
-        className={css({
-          color: "white",
-          padding: {
-            base: "100px 2vw 64px",
-            md: "48px 4vw 256px",
-          },
-          display: "grid",
-          gap: "48px",
-        })}
-      >
+      <main className={styles.main}>
         <section>
           <Card>
             <SectionHeading>About 望月のあ</SectionHeading>
-            <ul
-              className={css({
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "16px",
-                marginBlock: "8px",
-              })}
-            >
+            <ul className={styles.SnsList}>
               {[
                 {
                   name: "YouTube",
@@ -215,11 +97,6 @@ export default function Page() {
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={css({
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "4px",
-                      })}
                     >
                       {item.icon ? (
                         <Image
@@ -242,15 +119,8 @@ export default function Page() {
               これまでに受けたお仕事を実績としてまとめているので、望月のあに依頼したい案件などありましたらご相談ください!食べ物のPR系や歌唱依頼、リアルイベント、その他わくわくするお仕事をたくさんできると嬉しいです！
             </p>
 
-            <div
-              className={css({
-                display: "flex",
-                flexDirection: "column",
-                gap: "8px",
-                alignItems: "flex-end",
-              })}
-            >
-              <LinkButton href="#contact">
+            <div>
+              <LinkButton href="#contact" style={{ float: "right" }}>
                 お仕事、コラボなどのご相談はこちら
               </LinkButton>
             </div>
@@ -259,28 +129,12 @@ export default function Page() {
         <section>
           <Card style={{ maxWidth: "none" }}>
             <SectionHeading>今までの活動</SectionHeading>
-            <div
-              className={css({
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-                gap: 2,
-              })}
-            >
+            <div className={styles.ActivityList}>
               {activities.map(({ title, description }) => {
                 return (
                   <Card key={title}>
-                    <h3
-                      className={css({
-                        fontSize: 16,
-                      })}
-                    >
-                      {title}
-                    </h3>
-                    <p
-                      className={css({
-                        fontSize: 12,
-                      })}
-                    >
+                    <h3 className={styles.ActivityItem__title}>{title}</h3>
+                    <p className={styles.ActivityList__description}>
                       {description}
                     </p>
                   </Card>
@@ -298,10 +152,7 @@ export default function Page() {
                 href="https://twitter.com/_noach"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={css({
-                  textDecoration: "underline wavy currentColor",
-                  textDecorationColor: "amber.500",
-                })}
+                className={styles.TwitterLink}
               >
                 TwitterのDM
               </a>
@@ -320,13 +171,7 @@ export default function Page() {
         <section>
           <Card>
             <SectionHeading>おもちゃ</SectionHeading>
-            <ul
-              className={css({
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-                gap: "8px",
-              })}
-            >
+            <ul className={styles.HobbyList}>
               {[
                 {
                   title: "結婚アプリ",
@@ -354,20 +199,9 @@ export default function Page() {
                       style={{
                         backgroundColor: item.color,
                       }}
-                      className={css({
-                        display: "block",
-                        paddingBlock: "8px",
-                        paddingInline: "16px",
-                        borderRadius: "8px",
-                      })}
+                      className={styles.HobbyItem}
                     >
-                      <h3
-                        className={css({
-                          fontSize: "18px",
-                        })}
-                      >
-                        {item.title}
-                      </h3>
+                      <h3 className={styles.HobbyItem__title}>{item.title}</h3>
                       <p>{item.description}</p>
                     </Link>
                   </li>
@@ -378,20 +212,8 @@ export default function Page() {
         </section>
       </main>
 
-      <footer
-        className={css({
-          backgroundColor: "gray.900",
-          color: "white",
-          padding: "8px",
-        })}
-      >
-        <small
-          className={css({
-            display: "block",
-            textAlign: "right",
-            fontSize: "16px",
-          })}
-        >
+      <footer className={styles.Footer}>
+        <small className={styles.Footer__copyright}>
           &copy; 2023 もちもちクリエイト
         </small>
       </footer>

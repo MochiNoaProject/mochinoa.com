@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { css } from "../../../styled-system/css";
+import styles from "./page.module.css";
 
 const title = "切り抜きガイドライン｜望月のあ";
 const description =
@@ -14,210 +14,90 @@ export const metadata = {
   },
 } satisfies Metadata;
 
-const Heading1 = ({
-  children,
-  ...props
-}: React.ComponentPropsWithoutRef<"h1">) => {
-  return (
-    <h1
-      {...props}
-      className={css({
-        fontSize: "32px",
-        marginBlock: "32px",
-      })}
-    >
-      {children}
-    </h1>
-  );
-};
-
-const Heading2 = ({
-  children,
-  ...props
-}: React.ComponentPropsWithoutRef<"h2">) => {
-  return (
-    <h2
-      {...props}
-      className={css({
-        fontSize: "20px",
-        marginBlock: "32px",
-        borderBottom: "1px solid #424242",
-        sm: {
-          fontSize: "24px",
-        },
-      })}
-    >
-      {children}
-    </h2>
-  );
-};
-
-const Heading3 = ({
-  children,
-  ...props
-}: React.ComponentPropsWithoutRef<"h3">) => {
-  return (
-    <h2
-      {...props}
-      className={css({
-        fontSize: "16px",
-        marginBlock: "24px",
-        fontWeight: "bold",
-      })}
-    >
-      {children}
-    </h2>
-  );
-};
-
-const List = ({ children, ...props }: React.ComponentPropsWithoutRef<"ul">) => {
-  return (
-    <ul
-      {...props}
-      className={css({
-        listStyle: "disc",
-        fontSize: "14px",
-        paddingInlineStart: "24px",
-      })}
-    >
-      {children}
-    </ul>
-  );
-};
-
-const Paragraph = ({
-  children,
-  ...props
-}: React.ComponentPropsWithoutRef<"p">) => {
-  return (
-    <h2
-      {...props}
-      className={css({
-        fontSize: "14px",
-        marginBlock: "24px",
-      })}
-    >
-      {children}
-    </h2>
-  );
-};
-
 export default function Page() {
   return (
-    <div>
-      <div>
-        <div
-          className={css({
-            backgroundColor: "rgba(255, 255, 255, 0.9)",
-            maxWidth: 740,
-            marginInline: "auto",
-            marginBlock: "24px",
-            marginBlockEnd: "88px",
-            paddingBlockEnd: "88px",
-            paddingBlockStart: "24px",
-            paddingInline: "min(48px, 4vw)",
-            borderRadius: "16px",
-            color: "#424242",
-          })}
-        >
-          <Heading1>切り抜きガイドライン</Heading1>
-          <div
-            className={css({
-              display: "flex",
-              justifyContent: "flex-end",
-            })}
-          >
-            <Paragraph>
-              更新日： <time>2023年7月1日</time>
-            </Paragraph>
-          </div>
-          <Paragraph>{description}</Paragraph>
+    <div className={styles.root}>
+      <h1>切り抜きガイドライン</h1>
+      <p>
+        更新日： <time>2023年7月1日</time>
+      </p>
+      <p>{description}</p>
 
-          <Heading2>切り抜きに利用できる素材について</Heading2>
+      <h2>切り抜きに利用できる素材について</h2>
 
-          <Paragraph>
-            望月のあが各プラットフォームで全体公開している動画、配信アーカイブ、ショートに加えてYouTubeのコミュニティやTwitterでツイートされた文章コンテンツも利用できます。
-          </Paragraph>
-          <Heading3>注意事項</Heading3>
-          <List>
-            <li>
-              ライブ配信終了から24時間経過していない配信アーカイブは利用できません。
-            </li>
-            <li>
-              望月のあが著作権その他権利を保有しないコンテンツが含まれる場合は、当該コンテンツ権利者の利用規約に従ってください。
-              <List>
-                <li>例：歌配信、ゲーム配信など</li>
-              </List>
-            </li>
-            <li>歌配信の切り抜きは、上記項目により原則禁止です。</li>
-            <li>
-              メンバーシップ限定動画やFANBOX限定配信などの有料コンテンツについては禁止です。
-            </li>
-            <li>配信中の画面を独自に録画した映像は利用できません。</li>
-            <li>
-              YouTubeのコミュニティやTwitterで共有された画像や動画は利用できません。
-            </li>
-          </List>
+      <p>
+        望月のあが各プラットフォームで全体公開している動画、配信アーカイブ、ショートに加えてYouTubeのコミュニティやTwitterでツイートされた文章コンテンツも利用できます。
+      </p>
+      <h3>注意事項</h3>
+      <ul>
+        <li>
+          ライブ配信終了から24時間経過していない配信アーカイブは利用できません。
+        </li>
+        <li>
+          望月のあが著作権その他権利を保有しないコンテンツが含まれる場合は、当該コンテンツ権利者の利用規約に従ってください。
+          <ul>
+            <li>例：歌配信、ゲーム配信など</li>
+          </ul>
+        </li>
+        <li>歌配信の切り抜きは、上記項目により原則禁止です。</li>
+        <li>
+          メンバーシップ限定動画やFANBOX限定配信などの有料コンテンツについては禁止です。
+        </li>
+        <li>配信中の画面を独自に録画した映像は利用できません。</li>
+        <li>
+          YouTubeのコミュニティやTwitterで共有された画像や動画は利用できません。
+        </li>
+      </ul>
 
-          <Heading2>動画内容</Heading2>
+      <h2>動画内容</h2>
 
-          <Paragraph>
-            配信や動画、ショートなどのコンテンツをほぼそのまま切り抜きにする行為は禁止です。
-          </Paragraph>
+      <p>
+        配信や動画、ショートなどのコンテンツをほぼそのまま切り抜きにする行為は禁止です。
+      </p>
 
-          <Paragraph>
-            元の動画及び配信内容などと大きく異なる印象を与える内容や、誤解を与えるような内容は禁止です。
-          </Paragraph>
+      <p>
+        元の動画及び配信内容などと大きく異なる印象を与える内容や、誤解を与えるような内容は禁止です。
+      </p>
 
-          <Heading2>概要欄</Heading2>
+      <h2>概要欄</h2>
 
-          <Paragraph>
-            切り抜きに利用した動画などのURLを概要欄に必ず記載してください。
-          </Paragraph>
+      <p>切り抜きに利用した動画などのURLを概要欄に必ず記載してください。</p>
 
-          <Heading2>サムネイル及びタイトルについて</Heading2>
+      <h2>サムネイル及びタイトルについて</h2>
 
-          <Paragraph>
-            元の動画及び配信内容などと大きく異なる印象を与えるサムネイルや、タイトルの利用を禁止します。
-            <br />
-            切り抜きと分かるタイトルやサムネイルまたは動画チャンネル名を付けてください。
-          </Paragraph>
+      <p>
+        元の動画及び配信内容などと大きく異なる印象を与えるサムネイルや、タイトルの利用を禁止します。
+        <br />
+        切り抜きと分かるタイトルやサムネイルまたは動画チャンネル名を付けてください。
+      </p>
 
-          <Heading2>収益化について</Heading2>
-          <Paragraph>
-            各プラットフォームの利用規約及び当ガイドラインに従っていることを前提に、収益化の利用を許諾します。
-          </Paragraph>
+      <h2>収益化について</h2>
+      <p>
+        各プラットフォームの利用規約及び当ガイドラインに従っていることを前提に、収益化の利用を許諾します。
+      </p>
 
-          <Heading2>切り抜きチャンネル登録</Heading2>
+      <h2>切り抜きチャンネル登録</h2>
 
-          <Paragraph>登録は必須ではありません。</Paragraph>
+      <p>登録は必須ではありません。</p>
 
-          <Paragraph>
-            下記フォームから切り抜きチャンネルと連絡先を共有していただいている場合、ガイドラインに違反していると思われる切り抜き動画に対し、こちらで削除手続きをする前に、登録していただいた連絡先に削除連絡を行います。これにより各プラットフォームによるペナルティを回避することが可能になります。
-          </Paragraph>
+      <p>
+        下記フォームから切り抜きチャンネルと連絡先を共有していただいている場合、ガイドラインに違反していると思われる切り抜き動画に対し、こちらで削除手続きをする前に、登録していただいた連絡先に削除連絡を行います。これにより各プラットフォームによるペナルティを回避することが可能になります。
+      </p>
 
-          <Paragraph>
-            <a
-              className={css({
-                color: "#3f51b5",
-                textDecoration: "underline",
-              })}
-              href="https://forms.gle/f8fcqJG6sCzhSrTd8"
-            >
-              切り抜きチャンネル登録フォーム
-            </a>
-          </Paragraph>
+      <p>
+        <a href="https://forms.gle/f8fcqJG6sCzhSrTd8">
+          切り抜きチャンネル登録フォーム
+        </a>
+      </p>
 
-          <Paragraph>
-            しかし、削除依頼に即時同意していただけない場合や1週間経過しても削除が確認できない場合、動画内容によっては登録をしていただいている場合でも、こちらで削除手続きを行う場合があります。
-          </Paragraph>
+      <p>
+        しかし、削除依頼に即時同意していただけない場合や1週間経過しても削除が確認できない場合、動画内容によっては登録をしていただいている場合でも、こちらで削除手続きを行う場合があります。
+      </p>
 
-          <Heading2>その他</Heading2>
-          <Paragraph>
-            このガイドラインについて望月のあに直接確認をされても原則お答えできません。
-          </Paragraph>
-        </div>
-      </div>
+      <h2>その他</h2>
+      <p>
+        このガイドラインについて望月のあに直接確認をされても原則お答えできません。
+      </p>
     </div>
   );
 }

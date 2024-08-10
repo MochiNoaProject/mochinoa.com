@@ -1,6 +1,6 @@
-import { css } from "../styled-system/css";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "./AppHeader.module.css";
 
 interface AppHeaderProps {
   backgroundColor?: string;
@@ -9,12 +9,7 @@ interface AppHeaderProps {
 export const AppHeader = (props: AppHeaderProps) => {
   return (
     <header
-      className={css({
-        paddingInline: "4vw",
-        paddingBlock: "8px",
-        backgroundColor: "#f8b186",
-        boxShadow: "token(shadows.md)",
-      })}
+      className={styles.container}
       style={{
         backgroundColor: props.backgroundColor,
       }}

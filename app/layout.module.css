@@ -1,0 +1,5 @@
+.root {
+  font-smooth: antialiased;
+  scroll-behavior: smooth;
+  line-height: 1.8;
+}
