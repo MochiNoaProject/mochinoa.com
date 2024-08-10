@@ -2,9 +2,9 @@ import "./global.css";
 import "./index.css";
 import { Metadata, Viewport } from "next";
 import { ZenMaruGothic } from "../styles/font";
-import { css } from "../styled-system/css";
 import GoogleAnalytics from "./GoogleAnalytics";
 import clsx from "clsx";
+import styles from "./layout.module.css";
 
 const title = "望月のあ公式サイト";
 const description = `歌とお絵描きが好き!全て自作のVTuber望月のあの公式サイトです。活動実績や各種SNSのリンクなどを掲載しています。今すぐアクセスして魅力的な配信や活躍をチェックしてください!`;
@@ -48,17 +48,7 @@ export default function RootLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <html
-      lang="ja"
-      className={clsx(
-        ZenMaruGothic.className,
-        css({
-          fontSmoothing: "antialiased",
-          scrollBehavior: "smooth",
-          lineHeight: 1.8,
-        }),
-      )}
-    >
+    <html lang="ja" className={clsx(ZenMaruGothic.className, styles.root)}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
