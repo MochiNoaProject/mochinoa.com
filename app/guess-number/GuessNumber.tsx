@@ -1,6 +1,6 @@
 "use client";
 import { GuessNumberDialog } from "./GuessNumberDialog";
-import { playVoice } from "./voice";
+import { VoiceText, playVoice } from "./voice";
 import { useReducer, useRef, useState } from "react";
 import styles from "./GuessNumber.module.css";
 
@@ -16,6 +16,11 @@ export const GuessNumber = () => {
   const [resetKey, updateResetKey] = useReducer((prev: number) => prev + 1, 0);
   const [serif, setSerif] = useState<string>("あそぶ？❤");
   const [count, setCount] = useState(0);
+  const audio = useRef(typeof Audio !== "undefined" ? new Audio() : null);
+
+  const play = (text: VoiceText) => {
+    playVoice(audio?.current, text);
+  };
 
   return (
     <div className={styles.root}>
@@ -47,7 +52,7 @@ export const GuessNumber = () => {
             setTime(0);
             setCount(0);
             setCorrectNumber(
-              numbers[Math.floor(Math.random() * numbers.length)]
+              numbers[Math.floor(Math.random() * numbers.length)],
             );
             updateResetKey();
             setSerif("数字をえらんで❤");
@@ -91,16 +96,16 @@ export const GuessNumber = () => {
                     setIsStarted(false);
                     if (time < 5) {
                       setSerif("すっご～い❤");
-                      playVoice("すっごーい");
+                      play("すっごーい");
                     } else if (time < 8) {
                       setSerif("がんばれ❤がんばれ❤");
-                      playVoice("がんばれがんばれ");
+                      play("がんばれがんばれ");
                     } else if (time < 20) {
                       setSerif("ざぁこ❤");
-                      playVoice("ざあこ");
+                      play("ざあこ");
                     } else {
                       setSerif("なっさけな〜い❤");
-                      playVoice("なっさけない");
+                      play("なっさけない");
                     }
                   } else {
                     if (correctNumber === undefined) {
@@ -108,17 +113,17 @@ export const GuessNumber = () => {
                     }
                     if (count > 2) {
                       setSerif("ざぁこ❤ざぁこ❤");
-                      playVoice("ざあこざあこ");
+                      play("ざあこざあこ");
                       setIsStarted(false);
                       if (timer.current !== null) {
                         window.clearInterval(timer.current);
                       }
                     } else if (number < correctNumber) {
                       setSerif("ちっさ❤");
-                      playVoice("ちっさ");
+                      play("ちっさ");
                     } else {
                       setSerif("でっか❤");
-                      playVoice("でっか");
+                      play("でっか");
                     }
                     setCount((prev) => prev + 1);
                   }
