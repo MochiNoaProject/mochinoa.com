@@ -2,7 +2,6 @@
 import { useReducer, useRef, useState } from "react";
 import styles from "./GuessNumber.module.css";
 
-// 1~20
 const numbers = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
 ];
@@ -29,14 +28,21 @@ export const GuessNumber = () => {
   const [serif, setSerif] = useState<string>("あそぶ？❤");
   const [count, setCount] = useState(0);
 
-  const play = async (text: VoiceText) => {
+  const prevAudio = useRef<HTMLAudioElement | null>(null);
+
+  const play = (text: VoiceText) => {
     const audio = document.getElementById(`audio-${text}`) as HTMLAudioElement;
-    // iOSなどで連続再生が出来なくなるため、再生中であれば一度停止させる
-    if (!audio.paused) {
-      audio.pause();
+    /**
+     * iOSで、他のaudioが再生されている最中に別のaudioを再生しようとすると、それ以降そのaudioが生成されなくなるような挙動をする。
+     * 詳しい原因は不明。
+     */
+    if (prevAudio.current !== null) {
+      prevAudio.current.pause();
     }
+    prevAudio.current = audio;
+
     audio.currentTime = 0;
-    await audio.play();
+    void audio.play();
 
     return audio;
   };
@@ -47,7 +53,7 @@ export const GuessNumber = () => {
     <div className={styles.root}>
       <div>
         {voiceList.map(({ src, text }) => {
-          return <audio key={src} src={src} id={`audio-${text}`} />;
+          return <audio key={src} src={src} id={`audio-${text}`} controls />;
         })}
       </div>
       <dialog
@@ -80,8 +86,8 @@ export const GuessNumber = () => {
         <button
           type="button"
           className={styles.OverlayButton}
-          onClick={async () => {
-            const audio = await play("タイトルコール");
+          onClick={() => {
+            const audio = play("タイトルコール");
 
             audio.onended = () => {
               dialogRef.current?.close();
@@ -121,7 +127,7 @@ export const GuessNumber = () => {
             setTime(0);
             setCount(0);
             setCorrectNumber(
-              numbers[Math.floor(Math.random() * numbers.length)],
+              numbers[Math.floor(Math.random() * numbers.length)]
             );
             updateResetKey();
             setSerif("数字をえらんで❤");
@@ -157,7 +163,7 @@ export const GuessNumber = () => {
                 key={resetKey}
                 value={number}
                 disabled={isStarted === false}
-                onChange={async () => {
+                onChange={() => {
                   if (number === correctNumber) {
                     if (timer.current !== null) {
                       window.clearInterval(timer.current);
@@ -165,16 +171,16 @@ export const GuessNumber = () => {
                     setIsStarted(false);
                     if (time < 5) {
                       setSerif("すっご～い❤");
-                      await play("すっごーい");
+                      play("すっごーい");
                     } else if (time < 8) {
                       setSerif("がんばれ❤がんばれ❤");
-                      await play("がんばれがんばれ");
+                      play("がんばれがんばれ");
                     } else if (time < 20) {
                       setSerif("ざぁこ❤");
-                      await play("ざあこ");
+                      play("ざあこ");
                     } else {
                       setSerif("なっさけな〜い❤");
-                      await play("なっさけない");
+                      play("なっさけない");
                     }
                   } else {
                     if (correctNumber === undefined) {
@@ -182,17 +188,17 @@ export const GuessNumber = () => {
                     }
                     if (count > 2) {
                       setSerif("ざぁこ❤ざぁこ❤");
-                      await play("ざあこざあこ");
+                      play("ざあこざあこ");
                       setIsStarted(false);
                       if (timer.current !== null) {
                         window.clearInterval(timer.current);
                       }
                     } else if (number < correctNumber) {
                       setSerif("ちっさ❤");
-                      await play("ちっさ");
+                      play("ちっさ");
                     } else {
                       setSerif("でっか❤");
-                      await play("でっか");
+                      play("でっか");
                     }
                     setCount((prev) => prev + 1);
                   }
