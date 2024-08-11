@@ -158,3 +158,54 @@
   background-color: #0f172a;
   color: white;
 }
+
+.Overlay {
+  display: none;
+}
+
+.Overlay:modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  height: 90vh;
+  width: 90vw;
+  z-index: 3200;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  gap: 16px;
+  box-shadow: var(--shadow-level-2);
+}
+.Overlay::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.LargeIcon {
+  width: 48px;
+  height: 48px;
+}
+
+.OverlayButton {
+  border-radius: 24px;
+  padding: 8px 20px;
+  font-size: 16px;
+  line-height: 2;
+  background-color: transparent;
+  border: 2px solid #f59e0b;
+  color: #f59e0b;
+  font-weight: bold;
+  position: relative;
+  transition: 0.3s;
+}
+
+.OverlayButton:hover {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.OverlayCaption {
+  font-size: 12px;
+}
