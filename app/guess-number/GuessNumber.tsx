@@ -18,8 +18,17 @@ export const GuessNumber = () => {
 
   return (
     <div className={styles.root}>
+      <div>
+        <a
+          className={styles.ShareButton}
+          href={`https://twitter.com/intent/tweet?text=望月のあちゃん（メスガキモード）の数当てゲームでスコア「${serif}」を獲得したよ！&url=https://mochizukinoa.com/guess-number`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          結果をXで共有する
+        </a>
+      </div>
       <div className={styles.Timer}>{time.toFixed(1)}s</div>
-
       <button
         className={styles.StartButton}
         type="button"
@@ -36,7 +45,7 @@ export const GuessNumber = () => {
             setTime(0);
             setCount(0);
             setCorrectNumber(
-              numbers[Math.floor(Math.random() * numbers.length)],
+              numbers[Math.floor(Math.random() * numbers.length)]
             );
             updateResetKey();
             setSerif("数字をえらんで❤");
@@ -48,18 +57,11 @@ export const GuessNumber = () => {
       >
         {serif}
       </button>
-      <a
-        href={`https://twitter.com/intent/tweet?text=望月のあちゃん（メスガキモード）の数当てゲームでスコア「${serif}」を獲得したよ！&url=https://mochizukinoa.com/guess-number`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        結果をXで共有する
-      </a>
       <div>
         <img
           src="/mesugaki/dummy.webp"
           alt="望月のあ"
-          width="300px"
+          height="200px"
           className={styles.Avatar}
         />
       </div>
@@ -99,7 +101,7 @@ export const GuessNumber = () => {
                       throw new Error("correctNumber is undefined");
                     }
                     if (count > 2) {
-                      setSerif("もうあきた❤");
+                      setSerif("あきちゃった❤");
                       setIsStarted(false);
                       if (timer.current !== null) {
                         window.clearInterval(timer.current);
