@@ -31,6 +31,10 @@ export const GuessNumber = () => {
 
   const play = async (text: VoiceText) => {
     const audio = document.getElementById(`audio-${text}`) as HTMLAudioElement;
+    // iOSなどで連続再生が出来なくなるため、再生中であれば一度停止させる
+    if (!audio.paused) {
+      audio.pause();
+    }
     audio.currentTime = 0;
     await audio.play();
 
