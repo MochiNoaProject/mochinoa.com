@@ -180,6 +180,12 @@ export default function Page() {
                   color: "#EE9B44",
                 },
                 {
+                  title: "数当てゲーム",
+                  description: "望月のあが考えている数を当てよう",
+                  href: "/guess-number",
+                  color: "#ee6644",
+                },
+                {
                   title: "ガチャアプリ",
                   description: "望月のあ自作キャラクターを集めよう",
                   href: "/gacha",
