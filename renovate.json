@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "timezone": "Asia/Tokyo",
+  "reviewers": ["hrdtbs"],
+  "npm": {
+    "extends": [
+      ":automergePatch",
+      ":noUnscheduledUpdates",
+      ":pinAllExceptPeerDependencies",
+      "helpers:disableTypesNodeMajor"
+    ],
+    "rangeStrategy": "bump"
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 9am on the first day of the month"]
+  }
+}
