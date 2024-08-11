@@ -1,6 +1,6 @@
 "use client";
 import { GuessNumberDialog } from "./GuessNumberDialog";
-import { VoiceText, playVoice, voiceList } from "./voice";
+import { playVoice } from "./voice";
 import { useReducer, useRef, useState } from "react";
 import styles from "./GuessNumber.module.css";
 
@@ -17,27 +17,8 @@ export const GuessNumber = () => {
   const [serif, setSerif] = useState<string>("あそぶ？❤");
   const [count, setCount] = useState(0);
 
-  const prevAudio = useRef<HTMLAudioElement | null>(null);
-
-  const play = (text: VoiceText) => {
-    /**
-     * iOSで、他のaudioが再生されている最中に別のaudioを再生しようとすると、それ以降そのaudioが生成されなくなるような挙動をする。
-     * 詳しい原因は不明。
-     */
-    if (prevAudio.current !== null) {
-      prevAudio.current.pause();
-    }
-    const audio = playVoice(text);
-    prevAudio.current = audio;
-  };
-
   return (
     <div className={styles.root}>
-      <div>
-        {voiceList.map(({ src, text }) => {
-          return <audio key={src} src={src} id={`audio-${text}`} />;
-        })}
-      </div>
       <GuessNumberDialog />
       <div>
         <a
@@ -66,7 +47,7 @@ export const GuessNumber = () => {
             setTime(0);
             setCount(0);
             setCorrectNumber(
-              numbers[Math.floor(Math.random() * numbers.length)],
+              numbers[Math.floor(Math.random() * numbers.length)]
             );
             updateResetKey();
             setSerif("数字をえらんで❤");
@@ -110,16 +91,16 @@ export const GuessNumber = () => {
                     setIsStarted(false);
                     if (time < 5) {
                       setSerif("すっご～い❤");
-                      play("すっごーい");
+                      playVoice("すっごーい");
                     } else if (time < 8) {
                       setSerif("がんばれ❤がんばれ❤");
-                      play("がんばれがんばれ");
+                      playVoice("がんばれがんばれ");
                     } else if (time < 20) {
                       setSerif("ざぁこ❤");
-                      play("ざあこ");
+                      playVoice("ざあこ");
                     } else {
                       setSerif("なっさけな〜い❤");
-                      play("なっさけない");
+                      playVoice("なっさけない");
                     }
                   } else {
                     if (correctNumber === undefined) {
@@ -127,17 +108,17 @@ export const GuessNumber = () => {
                     }
                     if (count > 2) {
                       setSerif("ざぁこ❤ざぁこ❤");
-                      play("ざあこざあこ");
+                      playVoice("ざあこざあこ");
                       setIsStarted(false);
                       if (timer.current !== null) {
                         window.clearInterval(timer.current);
                       }
                     } else if (number < correctNumber) {
                       setSerif("ちっさ❤");
-                      play("ちっさ");
+                      playVoice("ちっさ");
                     } else {
                       setSerif("でっか❤");
-                      play("でっか");
+                      playVoice("でっか");
                     }
                     setCount((prev) => prev + 1);
                   }

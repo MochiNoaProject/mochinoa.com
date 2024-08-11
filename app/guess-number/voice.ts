@@ -1,4 +1,4 @@
-export const voiceList = [
+const voiceList = [
   { src: "/mesugaki/title.mp3", text: "タイトルコール" },
   { src: "/mesugaki/がんばれがんばれ.mp3", text: "がんばれがんばれ" },
   { src: "/mesugaki/ざあこ.mp3", text: "ざあこ" },
@@ -9,12 +9,13 @@ export const voiceList = [
   { src: "/mesugaki/なっさけない.mp3", text: "なっさけない" },
 ] as const;
 
-export type VoiceText = (typeof voiceList)[number]["text"];
+type VoiceText = (typeof voiceList)[number]["text"];
+
+const audio = new Audio();
 
 export const playVoice = (text: VoiceText) => {
-  const audio = document.getElementById(`audio-${text}`) as HTMLAudioElement;
+  audio.src = voiceList.find((voice) => voice.text === text)?.src ?? "";
 
-  audio.currentTime = 0;
   void audio.play();
 
   return audio;
