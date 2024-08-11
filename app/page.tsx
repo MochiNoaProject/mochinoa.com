@@ -174,16 +174,22 @@ export default function Page() {
             <ul className={styles.HobbyList}>
               {[
                 {
-                  title: "結婚アプリ",
-                  description: "望月のあと結婚したいあなたへ",
-                  href: "/marry",
-                  color: "#EE9B44",
-                },
-                {
                   title: "数当てゲーム",
                   description: "望月のあが考えている数を当てよう",
                   href: "/guess-number",
                   color: "#ee6644",
+                },
+                {
+                  title: "のあぼいす",
+                  href: "https://noavoice.vercel.app/",
+                  description: "望月のあの声をたくさん聞こう",
+                  color: "#44b8ee",
+                },
+                {
+                  title: "結婚アプリ",
+                  description: "望月のあと結婚したいあなたへ",
+                  href: "/marry",
+                  color: "#EE9B44",
                 },
                 {
                   title: "ガチャアプリ",
