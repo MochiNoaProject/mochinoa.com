@@ -20,9 +20,12 @@ export default function Page() {
   return (
     <div>
       <AppHeader />
-      <div className={styles.container}>
+      <div className={styles.Main}>
         <header>
-          <h1>数当てゲーム（メスガキ）</h1>
+          <h1>
+            数当てゲーム
+            <span className={styles.Caption}>（メスガキ）</span>
+          </h1>
           <p>
             望月のあちゃん（メスガキモード）が思い浮かべている数字をなるべく早く当てよう！
             4回以内に当てられなかったら負け!
