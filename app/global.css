@@ -28,6 +28,10 @@ button {
   cursor: pointer;
 }
 
+button:focus-visible {
+  outline: none;
+}
+
 body:has(dialog:modal) {
   touch-action: none;
   overflow: hidden;
