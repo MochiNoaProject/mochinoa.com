@@ -66,7 +66,7 @@ export const GuessNumber = () => {
             setTime(0);
             setCount(0);
             setCorrectNumber(
-              numbers[Math.floor(Math.random() * numbers.length)]
+              numbers[Math.floor(Math.random() * numbers.length)],
             );
             updateResetKey();
             setSerif("数字をえらんで❤");
