@@ -28,7 +28,7 @@ export const GuessNumber = () => {
       <div>
         <a
           className={styles.ShareButton}
-          href={`https://twitter.com/intent/tweet?text=望月のあちゃん（メスガキモード）の数当てゲームでスコア「${serif}」を獲得したよ！&url=https://mochizukinoa.com/guess-number`}
+          href={`https://twitter.com/intent/tweet?text=望月のあちゃん（メスガキモード）の数当てゲームでスコア「${serif}」を獲得したよ！&url=https://mochinoa.com/guess-number`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -52,7 +52,7 @@ export const GuessNumber = () => {
             setTime(0);
             setCount(0);
             setCorrectNumber(
-              numbers[Math.floor(Math.random() * numbers.length)],
+              numbers[Math.floor(Math.random() * numbers.length)]
             );
             updateResetKey();
             setSerif("数字をえらんで❤");
