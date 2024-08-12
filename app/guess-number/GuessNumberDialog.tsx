@@ -41,7 +41,8 @@ export const GuessNumberDialog = () => {
         className={styles.OverlayButton}
         onClick={() => {
           setIsPlaying(true);
-          const audio = playVoice("タイトルコール");
+          const audio = new Audio();
+          playVoice(audio, "タイトルコール");
 
           audio.onended = () => {
             dialogRef.current?.close();

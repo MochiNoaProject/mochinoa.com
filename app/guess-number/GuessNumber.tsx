@@ -1,6 +1,6 @@
 "use client";
 import { GuessNumberDialog } from "./GuessNumberDialog";
-import { VoiceText, playVoice, voiceList } from "./voice";
+import { VoiceText, playVoice } from "./voice";
 import { useReducer, useRef, useState } from "react";
 import styles from "./GuessNumber.module.css";
 
@@ -16,28 +16,14 @@ export const GuessNumber = () => {
   const [resetKey, updateResetKey] = useReducer((prev: number) => prev + 1, 0);
   const [serif, setSerif] = useState<string>("あそぶ？❤");
   const [count, setCount] = useState(0);
-
-  const prevAudio = useRef<HTMLAudioElement | null>(null);
+  const audio = useRef(typeof Audio !== "undefined" ? new Audio() : null);
 
   const play = (text: VoiceText) => {
-    /**
-     * iOSで、他のaudioが再生されている最中に別のaudioを再生しようとすると、それ以降そのaudioが生成されなくなるような挙動をする。
-     * 詳しい原因は不明。
-     */
-    if (prevAudio.current !== null) {
-      prevAudio.current.pause();
-    }
-    const audio = playVoice(text);
-    prevAudio.current = audio;
+    playVoice(audio?.current, text);
   };
 
   return (
     <div className={styles.root}>
-      <div>
-        {voiceList.map(({ src, text }) => {
-          return <audio key={src} src={src} id={`audio-${text}`} />;
-        })}
-      </div>
       <GuessNumberDialog />
       <div>
         <a
