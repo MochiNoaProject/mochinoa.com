@@ -1,7 +1,7 @@
 import "./global.css";
 import "./index.css";
 import { Metadata, Viewport } from "next";
-import { ZenMaruGothic } from "../styles/font";
+import { ZenKakuGothic } from "../styles/font";
 import GoogleAnalytics from "./GoogleAnalytics";
 import clsx from "clsx";
 import styles from "./layout.module.css";
@@ -48,7 +48,7 @@ export default function RootLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <html lang="ja" className={clsx(ZenMaruGothic.className, styles.root)}>
+    <html lang="ja" className={clsx(ZenKakuGothic.className, styles.root)}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

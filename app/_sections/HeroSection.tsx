@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+import clsx from "clsx";
 import styles from "./HeroSection.module.css";
 
 export default function HeroSection() {
   return (
     <section className={styles.root}>
       <div className={styles.Background__root}>
-        <div className={styles.Background__sign}>
+        <div>
           <Image
+            className={styles.Background__sign}
             src="/img/sign.png"
             alt="望月のあ"
             width={300}
@@ -24,7 +26,7 @@ export default function HeroSection() {
           <Image fill loading="lazy" src="/img/background-effect.png" alt="" />
         </div>
       </div>
-      <div>
+      <div className={styles.Contents}>
         <div className={styles.Card}>
           <h2 className={styles.Title}>About 望月のあ</h2>
           <ul className={styles.SnsList}>
@@ -38,11 +40,6 @@ export default function HeroSection() {
                 name: "Twitter",
                 url: "https://twitter.com/_noach",
                 icon: "/img/icon_twitter.png",
-              },
-              {
-                name: "pixivFANBOX",
-                url: "https://mochizukinoa.fanbox.cc/",
-                icon: "/img/icon_pixiv.png",
               },
               {
                 name: "BOOTH",
@@ -77,10 +74,10 @@ export default function HeroSection() {
           <div>
             <Link
               href="#contact"
-              className={styles.CtaButton}
+              className={clsx(styles.CtaButton, styles.ripple)}
               style={{ float: "right" }}
             >
-              お仕事、コラボなどのご相談はこちら
+              お仕事のご相談はこちら
             </Link>
           </div>
         </div>

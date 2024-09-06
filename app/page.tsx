@@ -4,6 +4,12 @@ export default function Page() {
   return (
     <main>
       <HeroSection />
+      <section
+        style={{
+          height: 800,
+          backgroundColor: "rgb(25 25 25)",
+        }}
+      />
 
       {/*
         <section>
