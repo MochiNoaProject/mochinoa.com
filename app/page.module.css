@@ -26,20 +26,6 @@
   }
 }
 
-.ActivityList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2px;
-}
-
-.ActivityItem__title {
-  font-size: 16px;
-}
-
-.ActivityItem__description {
-  font-size: 12px;
-}
-
 .TwitterLink {
   text-decoration: underline wavy #f59e0b;
 }

@@ -1,35 +1,14 @@
+import ActivitiesSection from "./_sections/ActivitiesSection";
 import HeroSection from "./_sections/HeroSection";
 
 export default function Page() {
   return (
     <main>
       <HeroSection />
-      <section
-        style={{
-          height: 800,
-          backgroundColor: "rgb(25 25 25)",
-        }}
-      />
+
+      <ActivitiesSection />
 
       {/*
-        <section>
-          <Card style={{ maxWidth: "none" }}>
-            <SectionHeading>今までの活動</SectionHeading>
-            <div className={styles.ActivityList}>
-              {activities.map(({ title, description }) => {
-                return (
-                  <Card key={title}>
-                    <h3 className={styles.ActivityItem__title}>{title}</h3>
-                    <p className={styles.ActivityList__description}>
-                      {description}
-                    </p>
-                  </Card>
-                );
-              })}
-            </div>
-          </Card>
-        </section>
-
         <section id="contact">
           <Card>
             <SectionHeading>お仕事の依頼、コラボなどのご相談</SectionHeading>
