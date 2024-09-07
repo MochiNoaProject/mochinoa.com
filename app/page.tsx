@@ -20,7 +20,7 @@ export default function Page() {
             },
             {
               href: "#contact",
-              label: "お問い合わせ",
+              label: "ご依頼",
             },
             {
               href: "#app",
