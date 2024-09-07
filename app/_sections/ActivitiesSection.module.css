@@ -16,3 +16,8 @@
 .ActivityItem__description {
   font-size: 12px;
 }
+
+.Title {
+  font-size: 32px;
+  line-height: 1.8;
+}

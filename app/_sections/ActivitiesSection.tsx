@@ -4,7 +4,7 @@ import styles from "./ActivitiesSection.module.css";
 export default function ActivitiesSection() {
   return (
     <section className={styles.root}>
-      <h2>今までの活動</h2>
+      <h2 className={styles.Title}>今までの活動</h2>
 
       <div className={styles.ActivityList}>
         {activities.map(({ title, description }) => {
