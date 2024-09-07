@@ -1,6 +1,6 @@
 .root {
   background-color: #fcf8ec;
-  padding: 48px 48px 96px;
+  padding: 48px clamp(24px, 4vw, 48px) 96px;
   display: grid;
   gap: 24px;
 }
