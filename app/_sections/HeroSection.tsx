@@ -6,7 +6,7 @@ import styles from "./HeroSection.module.css";
 export default function HeroSection() {
   return (
     <section className={styles.root}>
-      <div className={styles.Background__root}>
+      <div>
         <div className={styles.Background__sign}>
           <Image
             src="/img/sign.png"

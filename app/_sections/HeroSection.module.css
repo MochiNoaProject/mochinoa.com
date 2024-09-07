@@ -1,5 +1,6 @@
 .root {
   min-height: calc(100vh - 160px);
+  position: relative;
 }
 @keyframes rumble {
   from {
@@ -8,11 +9,6 @@
   to {
     rotate: "-2deg";
   }
-}
-
-.Background__root {
-  position: relative;
-  z-index: -1;
 }
 
 @keyframes bounce {
@@ -67,18 +63,43 @@
   }
 }
 
+@keyframes swing2 {
+  20% {
+    rotate: 0 0 1 15deg;
+  }
+
+  40% {
+    rotate: 0 0 1 -10deg;
+  }
+
+  60% {
+    rotate: 0 0 1 5deg;
+  }
+
+  80% {
+    rotate: 0 0 1 -5deg;
+  }
+
+  to {
+    rotate: 0 0 1 0deg;
+  }
+}
+
 .Background__sign {
-  position: fixed;
+  position: absolute;
   top: 8px;
   right: 8px;
   animation:
     bounce 1s ease-in,
     swing 1s linear 2s;
   transform-origin: center bottom;
+  &:hover {
+    animation: swing2 1s linear;
+  }
 }
 
 .Background__cover {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -89,27 +110,29 @@
 
 .Background__cover img {
   object-fit: cover;
+  object-position: top center;
 }
 
 .Background__avatar {
-  position: fixed;
+  position: absolute;
   z-index: -1;
   display: flex;
   width: 900px;
   height: auto;
   aspect-ratio: 1920/1080;
-  bottom: 0;
-  right: -50px;
+  bottom: 0px;
+  right: -60px;
 }
 
 @media screen and (min-width: 48rem) {
   .Background__avatar {
-    width: 1200px;
+    width: 1100px;
+    right: 0px;
   }
 }
 
 .Background__effect {
-  position: fixed;
+  position: absolute;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -206,7 +229,7 @@
 }
 
 .Contents {
-  margin-top: 48px;
+  padding-top: 48px;
 }
 
 .Card {
