@@ -7,9 +7,8 @@ export default function HeroSection() {
   return (
     <section className={styles.root}>
       <div className={styles.Background__root}>
-        <div>
+        <div className={styles.Background__sign}>
           <Image
-            className={styles.Background__sign}
             src="/img/sign.png"
             alt="望月のあ"
             width={300}
