@@ -1,9 +1,8 @@
 .root {
-  background-color: #fbebb5;
+  background-color: rgb(251, 235, 181, 0.8);
   padding: 32px clamp(24px, 4vw, 48px) 96px;
   display: grid;
   gap: 24px;
-  border-top: 16px solid #f3d51f;
 }
 
 .Title {
