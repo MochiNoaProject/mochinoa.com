@@ -2,9 +2,9 @@ import styles from "./ContactSection.module.css";
 
 export default function ContactSection() {
   return (
-    <section id="contact">
+    <section id="contact" className={styles.root}>
+      <h2 className={styles.Title}>お仕事の依頼、コラボなどのご相談</h2>
       <div>
-        <h2>お仕事の依頼、コラボなどのご相談</h2>
         <p>
           <a
             href="https://twitter.com/_noach"
