@@ -17,5 +17,7 @@
 .Contents {
   display: grid;
   gap: 8px;
+  font-size: 18px;
+  line-height: 1.8;
   color: rgb(255 255 255 / 0.92);
 }

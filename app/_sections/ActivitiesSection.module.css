@@ -1,5 +1,5 @@
 .root {
-  background-color: rgb(252, 248, 236, 0.8);
+  background-color: rgb(252, 248, 236, 1);
   padding: 32px clamp(24px, 4vw, 48px) 96px;
   display: grid;
   gap: 24px;
