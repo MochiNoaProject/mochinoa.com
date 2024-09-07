@@ -86,14 +86,10 @@
   }
 }
 
-.Background__root {
-  position: relative;
-}
-
 .Background__sign {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  bottom: 16px;
+  right: 16px;
   animation:
     bounce 1s ease-in,
     swing 1s linear 2s;

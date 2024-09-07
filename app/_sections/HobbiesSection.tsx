@@ -3,7 +3,7 @@ import styles from "./HobbiesSection.module.css";
 
 export default function HobbiesSection() {
   return (
-    <section className={styles.root}>
+    <section className={styles.root} id="app">
       <h2 className={styles.Title}>Noa&apos;s Apps</h2>
       <ul className={styles.HobbyList}>
         {[

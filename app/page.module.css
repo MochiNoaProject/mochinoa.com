@@ -1,3 +1,30 @@
+.AppMenu {
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+}
+.AppMenu__list {
+  float: right;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.43);
+  padding: 0px 16px;
+  margin: 8px 0px;
+  border-radius: 999px;
+}
+.AppMenu li a {
+  display: flex;
+  padding: 16px 24px;
+  font-weight: bold;
+  font-size: 18px;
+  color: rgb(255 255 255 / 0.92);
+}
+
+@media (max-width: 48rem) {
+  .AppMenu__list {
+    display: none;
+  }
+}
+
 .Footer {
   background-color: #111827;
   color: white;
