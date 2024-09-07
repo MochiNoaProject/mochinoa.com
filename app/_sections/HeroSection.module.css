@@ -125,13 +125,13 @@
   width: 900px;
   height: auto;
   aspect-ratio: 1920/1080;
-  bottom: 120px;
+  bottom: 0px;
   right: -60px;
 }
 
 @media screen and (min-width: 48rem) {
   .Background__avatar {
-    width: 1100px;
+    width: 1200px;
     right: 0px;
   }
 }

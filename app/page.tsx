@@ -1,4 +1,5 @@
 import ActivitiesSection from "./_sections/ActivitiesSection";
+import ContactSection from "./_sections/ContactSection";
 import HeroSection from "./_sections/HeroSection";
 import styles from "./page.module.css";
 
@@ -6,34 +7,9 @@ export default function Page() {
   return (
     <main>
       <HeroSection />
-
       <ActivitiesSection />
-
+      <ContactSection />
       {/*
-        <section id="contact">
-          <Card>
-            <SectionHeading>お仕事の依頼、コラボなどのご相談</SectionHeading>
-            <p>
-              <a
-                href="https://twitter.com/_noach"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.TwitterLink}
-              >
-                TwitterのDM
-              </a>
-              までよろしくお願いします。
-            </p>
-            <p>
-              案件や企画などは詳細を最初に共有させていただけると助かります。
-              特に支障がなければ、2,3日以内に返信させていただきます。
-            </p>
-            <p>
-              Twitterをご利用でない場合や、メールでのご相談を希望される場合は、以下のメールアドレスにご連絡ください。
-            </p>
-            <p>連絡先 : mochizuki.noa.project@gmail.com</p>
-          </Card>
-        </section>
         <section>
           <Card>
             <SectionHeading>おもちゃ</SectionHeading>
