@@ -1,4 +1,7 @@
 .root {
+  position: relative;
+}
+.Card {
   padding: 48px clamp(24px, 4vw, 48px) 96px;
   display: grid;
   gap: 24px;

@@ -1,3 +1,4 @@
+import Chibi from "../../components/Chibi";
 import Link from "next/link";
 import styles from "./HobbiesSection.module.css";
 
@@ -54,6 +55,7 @@ export default function HobbiesSection() {
           );
         })}
       </ul>
+      <Chibi variant="緑ショート" position="right" />
     </section>
   );
 }

@@ -1,3 +1,4 @@
+import Chibi from "../../components/Chibi";
 import activities from "../../data/activities.json";
 import styles from "./ActivitiesSection.module.css";
 
@@ -16,6 +17,8 @@ export default function ActivitiesSection() {
           );
         })}
       </div>
+
+      <Chibi variant="セーラーショート" position="right" />
     </section>
   );
 }

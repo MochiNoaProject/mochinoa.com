@@ -1,15 +1,11 @@
 .root {
+  position: relative;
+}
+
+.root__inner {
   min-height: calc(100vh - 80px);
   overflow: hidden;
   position: relative;
-}
-@keyframes rumble {
-  from {
-    rotate: "2deg";
-  }
-  to {
-    rotate: "-2deg";
-  }
 }
 
 @keyframes bounce {
