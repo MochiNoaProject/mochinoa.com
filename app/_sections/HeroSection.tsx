@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
+import data from "../../data/introduction.json";
 import styles from "./HeroSection.module.css";
 
 export default function HeroSection() {
@@ -68,12 +69,9 @@ export default function HeroSection() {
                 );
               })}
             </ul>
-            <p>
-              歌とお絵描きが好きなVTuber!得意のお絵描きとLive2Dのちからで自分自身を錬成し、全て自作で活動中!
-            </p>
-            <p>
-              これまでに受けたお仕事を実績としてまとめているので、望月のあに依頼したい案件などありましたらご相談ください!食べ物のPR系や歌唱依頼、リアルイベント、その他わくわくするお仕事をたくさんできると嬉しいです！
-            </p>
+            {data.description.map((line, i) => {
+              return <p key={i}>{line}</p>;
+            })}
           </div>
 
           <div>
