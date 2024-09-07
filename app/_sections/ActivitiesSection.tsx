@@ -9,9 +9,9 @@ export default function ActivitiesSection() {
       <div className={styles.ActivityList}>
         {activities.map(({ title, description }) => {
           return (
-            <div key={title}>
+            <div className={styles.ActivityItem} key={title}>
               <h3 className={styles.ActivityItem__title}>{title}</h3>
-              <p className={styles.ActivityList__description}>{description}</p>
+              <p className={styles.ActivityItem__description}>{description}</p>
             </div>
           );
         })}
