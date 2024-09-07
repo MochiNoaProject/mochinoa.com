@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import animate from "../../styles/animate.module.css";
 import clsx from "clsx";
 import data from "../../data/introduction.json";
 import styles from "./HeroSection.module.css";
@@ -27,7 +28,7 @@ export default function HeroSection() {
         </div>
       </div>
       <div className={styles.Contents}>
-        <div className={styles.Card}>
+        <div className={clsx(styles.Card, animate.fadeInLeft)}>
           <h2 className={styles.Title}>About 望月のあ</h2>
           <div className={styles.Card__content}>
             <ul className={styles.SnsList}>
