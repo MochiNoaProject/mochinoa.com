@@ -4,7 +4,7 @@ export default function ContactSection() {
   return (
     <section id="contact" className={styles.root}>
       <h2 className={styles.Title}>お仕事の依頼、コラボなどのご相談</h2>
-      <div>
+      <div className={styles.Contents}>
         <p>
           <a
             href="https://twitter.com/_noach"
