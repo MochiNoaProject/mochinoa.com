@@ -1,7 +1,7 @@
 .root {
   min-height: calc(100vh - 160px);
-  position: relative;
   overflow: hidden;
+  position: relative;
 }
 @keyframes rumble {
   from {
@@ -86,6 +86,10 @@
   }
 }
 
+.Background__root {
+  position: relative;
+}
+
 .Background__sign {
   position: absolute;
   top: 8px;
@@ -100,7 +104,7 @@
 }
 
 .Background__cover {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -115,13 +119,13 @@
 }
 
 .Background__avatar {
-  position: absolute;
+  position: fixed;
   z-index: -1;
   display: flex;
   width: 900px;
   height: auto;
   aspect-ratio: 1920/1080;
-  bottom: 0px;
+  bottom: 120px;
   right: -60px;
 }
 
@@ -133,7 +137,7 @@
 }
 
 .Background__effect {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -230,14 +234,14 @@
 }
 
 .Contents {
-  padding-top: 48px;
+  padding: 48px 0px;
 }
 
 .Card {
   border-radius: 24px 96px 24px 24px;
   padding: 48px;
   display: grid;
-  gap: 16px;
+  gap: 24px;
   background-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   transform: translateZ(0);
@@ -248,6 +252,11 @@
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -2px rgba(0, 0, 0, 0.1);
   color: white;
+}
+
+.Card__content {
+  display: grid;
+  gap: 16px;
 }
 
 .SnsList {
