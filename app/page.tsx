@@ -1,5 +1,6 @@
 import ActivitiesSection from "./_sections/ActivitiesSection";
 import HeroSection from "./_sections/HeroSection";
+import styles from "./page.module.css";
 
 export default function Page() {
   return (
@@ -87,13 +88,12 @@ export default function Page() {
             </ul>
           </Card>
         </section>
-
+ */}
       <footer className={styles.Footer}>
         <small className={styles.Footer__copyright}>
           &copy; 2023 もちもちクリエイト
         </small>
       </footer>
-              */}
     </main>
   );
 }
