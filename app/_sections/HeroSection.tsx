@@ -4,6 +4,7 @@ import Link from "next/link";
 import animate from "../../styles/animate.module.css";
 import clsx from "clsx";
 import data from "../../data/introduction.json";
+import links from "../../data/links.json";
 import styles from "./HeroSection.module.css";
 
 export default function HeroSection() {
@@ -39,23 +40,7 @@ export default function HeroSection() {
             <h2 className={styles.Title}>About 望月のあ</h2>
             <div className={styles.Card__content}>
               <ul className={styles.SnsList}>
-                {[
-                  {
-                    name: "YouTube",
-                    url: "https://www.youtube.com/@MochizukiNoa",
-                    icon: "/img/icon_youtube.png",
-                  },
-                  {
-                    name: "Twitter",
-                    url: "https://twitter.com/_noach",
-                    icon: "/img/icon_twitter.png",
-                  },
-                  {
-                    name: "BOOTH",
-                    url: "https://mochinoa.booth.pm/",
-                    icon: "/img/icon_booth.png",
-                  },
-                ].map((item) => {
+                {links.map((item) => {
                   return (
                     <li key={item.name}>
                       <a
