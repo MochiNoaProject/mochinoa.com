@@ -1,6 +1,6 @@
-import { Zen_Maru_Gothic } from "next/font/google";
+import { Zen_Kaku_Gothic_New } from "next/font/google";
 
-export const ZenMaruGothic = Zen_Maru_Gothic({
+export const ZenKakuGothic = Zen_Kaku_Gothic_New({
   weight: "400",
   style: ["normal"],
   display: "swap",

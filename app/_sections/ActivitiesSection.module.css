@@ -1,0 +1,59 @@
+.root {
+  background-color: rgb(252, 248, 236, 1);
+  padding: 32px clamp(24px, 4vw, 48px) 96px;
+  display: grid;
+  gap: 24px;
+  position: relative;
+}
+
+.ActivityList {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px 16px;
+}
+
+@media (max-width: 48em) {
+  .ActivityList {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.ActivityItem {
+  display: contents;
+  .ActivityItem__date {
+    font-size: 18px;
+  }
+}
+
+.ActivityItem__content {
+  display: grid;
+  gap: 8px;
+  color: rgb(0 0 0 / 0.8);
+  background-color: rgb(251, 235, 181);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  padding: 16px 16px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: rgb(248, 221, 130);
+  }
+}
+
+.ActivityItem__title {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.6;
+  text-decoration: underline wavy #f59e0b;
+}
+
+.ActivityItem__description {
+  font-size: 14px;
+}
+
+.Title {
+  font-size: 32px;
+  line-height: 1.8;
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "YouTube",
+    "url": "https://www.youtube.com/@MochizukiNoa",
+    "icon": "/img/icon_youtube.png"
+  },
+  {
+    "name": "Twitter",
+    "url": "https://twitter.com/_noach",
+    "icon": "/img/icon_twitter.png"
+  },
+  {
+    "name": "Ci-en",
+    "url": "https://ci-en.net/creator/22003",
+    "icon": "/img/icon_ci-en.jpg"
+  },
+  {
+    "name": "BOOTH",
+    "url": "https://mochinoa.booth.pm/",
+    "icon": "/img/icon_booth.png"
+  }
+]
