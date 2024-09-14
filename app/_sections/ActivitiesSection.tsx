@@ -12,13 +12,7 @@ export default function ActivitiesSection() {
           const date = new Date(item.date);
           const dateHidden = items[index - 1]?.date === item.date;
           return (
-            <a
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.ActivityItem}
-              key={item.title}
-            >
+            <div className={styles.ActivityItem} key={item.title}>
               <div>
                 {dateHidden ? null : (
                   <time
@@ -31,12 +25,16 @@ export default function ActivitiesSection() {
                 )}
               </div>
               <div className={styles.ActivityItem__content}>
-                <h3 className={styles.ActivityItem__title}>{item.title}</h3>
+                <h3 className={styles.ActivityItem__title}>
+                  <a href={item.link} target="_blank" rel="noopener noreferrer">
+                    {item.title}
+                  </a>
+                </h3>
                 <p className={styles.ActivityItem__description}>
                   {item.description}
                 </p>
               </div>
-            </a>
+            </div>
           );
         })}
       </div>

@@ -2,7 +2,7 @@
   position: relative;
 }
 .Card {
-  padding: 48px clamp(24px, 4vw, 48px) 96px;
+  padding: 48px clamp(24px, 4vw, 48px) 120px;
   display: grid;
   gap: 24px;
   background-color: rgba(0, 0, 0, 0.2);

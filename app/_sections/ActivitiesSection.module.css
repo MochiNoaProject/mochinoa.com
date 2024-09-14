@@ -31,6 +31,12 @@
         font-size: 18px;
         font-weight: bolder;
         line-height: 1.6;
+        transition: 0.1s ease-in text-decoration-color;
+        text-decoration: wavy underline hsl(38, 92%, 50%, 0.6);
+        text-underline-offset: 2px;
+        &:hover {
+          text-decoration-color: hsl(38, 92%, 50%);
+        }
       }
       .ActivityItem__description {
         font-size: 14px;
