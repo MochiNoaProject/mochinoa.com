@@ -19,13 +19,14 @@ export default function ActivitiesSection() {
               className={styles.ActivityItem}
               key={item.title}
             >
-              <div className={styles.ActivityItem__date}>
+              <div>
                 {dateHidden ? null : (
-                  <time dateTime={date.toISOString()}>
-                    {date.toLocaleDateString("ja", {
-                      year: "numeric",
-                      month: "long",
-                    })}
+                  <time
+                    dateTime={date.toISOString()}
+                    className={styles.ActivityItem__date}
+                  >
+                    {date.getFullYear()}年
+                    {`${date.getMonth() + 1}`.padStart(2, "0")}月
                   </time>
                 )}
               </div>
