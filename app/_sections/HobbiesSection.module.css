@@ -24,6 +24,10 @@
   border-radius: 8px;
   box-shadow: var(--shadow-level-2);
   color: rgb(255 255 255 / 0.92);
+  transition: 0.1s ease-in opacity;
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .HobbyItem__title {
