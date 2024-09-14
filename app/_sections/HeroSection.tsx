@@ -1,7 +1,6 @@
 import Chibi from "../../components/Chibi";
 import Image from "next/image";
 import Link from "next/link";
-import animate from "../../styles/animate.module.css";
 import clsx from "clsx";
 import data from "../../data/introduction.json";
 import links from "../../data/links.json";
@@ -36,7 +35,7 @@ export default function HeroSection() {
           </div>
         </div>
         <div className={styles.Contents}>
-          <div className={clsx(styles.Card, animate.fadeInLeft)}>
+          <div className={styles.Card}>
             <h2 className={styles.Title}>About 望月のあ</h2>
             <div className={styles.Card__content}>
               <ul className={styles.SnsList}>
