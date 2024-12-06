@@ -2,7 +2,7 @@
 import { useCallback, useRef } from "react";
 import styles from "./useModal.module.css";
 
-export const useModal = (Content: () => JSX.Element) => {
+export const useModal = (Content: () => React.ReactNode) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const Modal = useCallback(() => {
     return (
