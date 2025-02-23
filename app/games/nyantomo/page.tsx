@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { Metadata } from "next";
 
 const title = "にゃんとも不思議な同居生活";
-const description = `にゃんとも不思議な同居生活 ～猫耳少女との甘くて不思議な物語～ の公式サイトです。あらすじやキャラクター設定などを公開しています。`;
+const description = `にゃんとも不思議な同居生活 ～猫耳少女との甘くて不思議な物語～ の公式サイトです。あらすじやキャラクター設定などを公開しています。ダウンロードして無料でプレイできます。`;
 
 export const metadata = {
   title,
@@ -123,7 +123,7 @@ function Page() {
           </a>
         </div>
         <div className={styles.downloadInfo}>
-          <p>価格: 無料（アプリ内課金なし）</p>
+          <p>価格: にゃんと無料！</p>
         </div>
       </section>
 
