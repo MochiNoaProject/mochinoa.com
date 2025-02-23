@@ -3,6 +3,32 @@ import { Cat, Download } from "lucide-react";
 import styles from "./page.module.css";
 import Image from "next/image";
 import clsx from "clsx";
+import { Metadata } from "next";
+
+const title = "にゃんとも不思議な同居生活";
+const description = `にゃんとも不思議な同居生活 ～猫耳少女との甘くて不思議な物語～ の公式サイトです。あらすじやキャラクター設定などを公開しています。`;
+
+export const metadata = {
+  title,
+  description,
+  icons: {
+    icon: "/favicon.png",
+  },
+  twitter: {
+    site: "@_noach",
+    creator: "@_noach",
+    card: "summary_large_image",
+    images: "https://www.mochinoa.com/nyantomo/heroImage.jpg",
+  },
+  openGraph: {
+    type: "website",
+    title,
+    siteName: title,
+    url: "https://www.mochinoa.com/games/nyantomo",
+    images: "https://www.mochinoa.com/nyantomo/heroImage.jpg",
+    description,
+  },
+} satisfies Metadata;
 
 function Page() {
   return (
