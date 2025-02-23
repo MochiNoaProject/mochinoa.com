@@ -19,20 +19,30 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: package.json
-      - name: Cache node_modules
-        id: node_modules_cache_id
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        id: cache
         uses: actions/cache@v4
         with:
-          key: node-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-          path: |
-            node_modules
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       - name: Install dependencies
-        run: yarn install
-        env:
-          CI: true
+        shell: bash
+        run: pnpm install --frozen-lockfile --prefer-offline
       - name: Lint
-        run: yarn lint
+        run: pnpm run lint
       - name: Typecheck
-        run: yarn typecheck
-        env:
-          CI: true
+        run: pnpm run typecheck
