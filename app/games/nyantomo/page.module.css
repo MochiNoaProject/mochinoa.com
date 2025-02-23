@@ -90,6 +90,12 @@
   aspect-ratio: 1280/720;
   height: auto;
   object-fit: contain;
+  opacity: 1;
+  transition: 1s;
+
+  @starting-style {
+    opacity: 0;
+  }
 }
 
 /* Story section */
