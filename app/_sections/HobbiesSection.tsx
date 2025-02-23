@@ -9,6 +9,12 @@ export default function HobbiesSection() {
       <ul className={styles.HobbyList}>
         {[
           {
+            href: "/games/nyantomo",
+            title: "にゃんとも不思議な同居生活",
+            description: "猫耳少女との甘くて不思議な物語をすごそう",
+            color: "#EE9B44",
+          },
+          {
             title: "数当てゲーム",
             description: "望月のあが考えている数を当てよう",
             href: "/guess-number",
@@ -18,7 +24,7 @@ export default function HobbiesSection() {
             title: "のあぼいす",
             href: "https://noavoice.vercel.app/",
             description: "望月のあの声をたくさん聞こう",
-            color: "#44b8ee",
+            color: "#FFC200",
           },
           {
             title: "結婚アプリ",
@@ -36,7 +42,7 @@ export default function HobbiesSection() {
             title: "合成音声アプリ",
             description: "誰でも望月のあの声になれる",
             href: "https://huggingface.co/spaces/hrdtbs/rvc-mochinoa",
-            color: "#5b44ee",
+            color: "#ee6644",
           },
         ].map((item) => {
           return (
@@ -49,7 +55,9 @@ export default function HobbiesSection() {
                 className={styles.HobbyItem}
               >
                 <h3 className={styles.HobbyItem__title}>{item.title}</h3>
-                <p>{item.description}</p>
+                <p className={styles.HobbyItem__description}>
+                  {item.description}
+                </p>
               </Link>
             </li>
           );
