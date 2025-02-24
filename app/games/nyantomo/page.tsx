@@ -117,7 +117,10 @@ function Page() {
         <h2 className={styles.sectionTitle}>ダウンロード</h2>
         <p>ダウンロードは次のボタンから</p>
         <div className={styles.downloadButtons}>
-          <a href="#booth" className={styles.downloadButton}>
+          <a
+            href="https://mochinoa.booth.pm/items/6634280"
+            className={styles.downloadButton}
+          >
             <Download />
             BOOTH
           </a>
