@@ -18,9 +18,9 @@
 }
 
 .HobbyItem {
-  display: block;
-  gap: 8px;
-  padding: 8px 16px;
+  display: grid;
+  gap: 4px;
+  padding: 16px 32px;
   border-radius: 8px;
   box-shadow: var(--shadow-level-2);
   color: rgb(255 255 255 / 0.92);
@@ -31,5 +31,9 @@
 }
 
 .HobbyItem__title {
+  font-size: 24px;
+}
+
+.HobbyItem__description {
   font-size: 18px;
 }
