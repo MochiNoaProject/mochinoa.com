@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './GameBoard.module.css';
 
 export default function GameBoard() {
+  const router = useRouter();
   const [board, setBoard] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
@@ -59,25 +61,37 @@ export default function GameBoard() {
 
   // タイルを移動
   const moveTile = (index: number) => {
+    if (isComplete) return;
+    
     const emptyIndex = board.indexOf(8);
     const movableIndices = getMovableIndices(emptyIndex);
 
     if (movableIndices.includes(index)) {
-      setBoard(prevBoard => {
-        const newBoard = [...prevBoard];
-        [newBoard[emptyIndex], newBoard[index]] = [newBoard[index], newBoard[emptyIndex]];
-        console.log('現在の配列:', newBoard);
-        return newBoard;
-      });
+      const newBoard = [...board];
+      [newBoard[emptyIndex], newBoard[index]] = [newBoard[index], newBoard[emptyIndex]];
+      setBoard(newBoard);
       setMoves(prev => prev + 1);
-      checkCompletion();
+      
+      // 状態更新後に完成チェックを実行
+      const isCompleted = newBoard.every((value, idx) => value === idx);
+      if (isCompleted) {
+        setIsComplete(true);
+        setTimeout(() => {
+          router.push('/games/slide-puzzle/complete');
+        }, 500);
+      }
     }
   };
 
   // パズルが完成したかチェック
   const checkCompletion = () => {
     const isCompleted = board.every((value, index) => value === index);
-    setIsComplete(isCompleted);
+    if (isCompleted) {
+      setIsComplete(true);
+      setTimeout(() => {
+        router.push('/games/slide-puzzle/complete');
+      }, 500);
+    }
   };
 
   // シャッフルボタンのクリックハンドラ
@@ -92,7 +106,7 @@ export default function GameBoard() {
         {board.map((value, index) => (
           <div
             key={index}
-            className={`${styles.tile} ${value === 8 ? styles.empty : ''}`}
+            className={`${styles.tile} ${value === 8 ? styles.empty : ''} ${isComplete ? styles.complete : ''}`}
             style={
               value !== 8
                 ? {
@@ -113,13 +127,10 @@ export default function GameBoard() {
       </div>
       <div className={styles.controls}>
         <p>移動回数: {moves}</p>
-        <button onClick={handleShuffle}>シャッフル</button>
+        {!isComplete && (
+          <button onClick={handleShuffle}>シャッフル</button>
+        )}
       </div>
-      {isComplete && (
-        <div className={styles.complete}>
-          <div className={styles.completeMessage}>完成！</div>
-        </div>
-      )}
     </div>
   );
 } 

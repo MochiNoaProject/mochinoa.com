@@ -120,6 +120,22 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.completeButton {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  animation: pulse 2s infinite;
+}
+
+.completeButton:hover {
+  background-color: #45a049;
+}
+
 @keyframes pop {
   0% {
     transform: scale(0.8);
@@ -128,5 +144,17 @@
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
   }
 } 
