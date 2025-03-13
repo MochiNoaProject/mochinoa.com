@@ -2,9 +2,6 @@
 
 import Link from 'next/link';
 import styles from './page.module.css';
-import { slidePuzzleMetadata } from '../metadata';
-
-export const metadata = slidePuzzleMetadata;
 
 export default function CompletePage() {
   return (
