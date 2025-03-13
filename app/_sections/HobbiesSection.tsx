@@ -39,9 +39,9 @@ export default function HobbiesSection() {
             color: "#FFC200",
           },
           {
-            title: "合成音声アプリ",
-            description: "誰でも望月のあの声になれる",
-            href: "https://huggingface.co/spaces/hrdtbs/rvc-mochinoa",
+            title: "スライドパズル",
+            description: "お手軽に遊べるスライドパズルゲーム",
+            href: "/games/slide-puzzle",
             color: "#ee6644",
           },
         ].map((item) => {
