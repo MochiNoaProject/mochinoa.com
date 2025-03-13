@@ -10,7 +10,6 @@ export default function GameBoard() {
   const [moves, setMoves] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null);
-  const [clearTime, setClearTime] = useState<number | null>(null);
 
   // 移動可能なマスのインデックスを取得
   const getMovableIndices = useCallback((emptyIndex: number) => {
@@ -55,7 +54,6 @@ export default function GameBoard() {
     setMoves(0);
     setIsComplete(false);
     setStartTime(Date.now());
-    setClearTime(null);
   }, [shuffleBoard]);
 
   // 初期化
@@ -81,7 +79,6 @@ export default function GameBoard() {
       if (isCompleted) {
         const finalTime = Date.now() - (startTime ?? 0);
         setIsComplete(true);
-        setClearTime(finalTime);
         setTimeout(() => {
           router.push(`/games/slide-puzzle/complete?time=${finalTime}&moves=${moves + 1}`);
         }, 500);
