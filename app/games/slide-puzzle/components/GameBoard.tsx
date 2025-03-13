@@ -12,41 +12,8 @@ export default function GameBoard() {
   const [startTime, setStartTime] = useState<number | null>(null);
   const [clearTime, setClearTime] = useState<number | null>(null);
 
-  // ボードの初期化
-  const initializeBoard = useCallback(() => {
-    const initialBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    setBoard(shuffleBoard(initialBoard));
-    setMoves(0);
-    setIsComplete(false);
-    setStartTime(Date.now());
-    setClearTime(null);
-  }, []);
-
-  // 初期化
-  useEffect(() => {
-    initializeBoard();
-  }, [initializeBoard]);
-
-  // ボードをシャッフル
-  const shuffleBoard = (boardToShuffle: number[]) => {
-    const shuffled = [...boardToShuffle];
-    let emptyIndex = shuffled.indexOf(8);
-
-    for (let i = 0; i < 100; i++) {
-      const movableIndices = getMovableIndices(emptyIndex);
-      if (movableIndices.length > 0) {
-        const randomIndex = movableIndices[Math.floor(Math.random() * movableIndices.length)];
-        // 空マスと移動可能なマスを入れ替え
-        [shuffled[emptyIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[emptyIndex]];
-        emptyIndex = randomIndex;
-      }
-    }
-
-    return shuffled;
-  };
-
   // 移動可能なマスのインデックスを取得
-  const getMovableIndices = (emptyIndex: number) => {
+  const getMovableIndices = useCallback((emptyIndex: number) => {
     const row = Math.floor(emptyIndex / 3);
     const col = emptyIndex % 3;
     const movableIndices: number[] = [];
@@ -61,7 +28,40 @@ export default function GameBoard() {
     if (col < 2) movableIndices.push(emptyIndex + 1);
 
     return movableIndices;
-  };
+  }, []);
+
+  // ボードをシャッフル
+  const shuffleBoard = useCallback((boardToShuffle: number[]) => {
+    const shuffled = [...boardToShuffle];
+    let emptyIndex = shuffled.indexOf(8);
+
+    for (let i = 0; i < 100; i++) {
+      const movableIndices = getMovableIndices(emptyIndex);
+      if (movableIndices.length > 0) {
+        const randomIndex = movableIndices[Math.floor(Math.random() * movableIndices.length)];
+        // 空マスと移動可能なマスを入れ替え
+        [shuffled[emptyIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[emptyIndex]];
+        emptyIndex = randomIndex;
+      }
+    }
+
+    return shuffled;
+  }, [getMovableIndices]);
+
+  // ボードの初期化
+  const initializeBoard = useCallback(() => {
+    const initialBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    setBoard(shuffleBoard(initialBoard));
+    setMoves(0);
+    setIsComplete(false);
+    setStartTime(Date.now());
+    setClearTime(null);
+  }, [shuffleBoard]);
+
+  // 初期化
+  useEffect(() => {
+    initializeBoard();
+  }, [initializeBoard]);
 
   // タイルを移動
   const moveTile = (index: number) => {
@@ -80,7 +80,7 @@ export default function GameBoard() {
       const isCompleted = newBoard.every((value, idx) => value === idx);
       if (isCompleted) {
         setIsComplete(true);
-        setClearTime(Date.now() - (startTime || 0));
+        setClearTime(Date.now() - (startTime ?? 0));
         setTimeout(() => {
           router.push(`/games/slide-puzzle/complete?time=${clearTime}&moves=${moves + 1}`);
         }, 500);

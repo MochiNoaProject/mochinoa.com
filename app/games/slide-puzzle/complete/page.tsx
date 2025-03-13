@@ -1,9 +1,10 @@
 "use client";
 
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import styles from './page.module.css';
 
-export default function CompletePage() {
+function CompleteContent() {
   const searchParams = useSearchParams();
   const clearTime = searchParams.get('time');
   const moves = searchParams.get('moves');
@@ -58,5 +59,13 @@ export default function CompletePage() {
         </a>
       </div>
     </div>
+  );
+}
+
+export default function CompletePage() {
+  return (
+    <Suspense fallback={<div className={styles.container}>読み込み中...</div>}>
+      <CompleteContent />
+    </Suspense>
   );
 } 
