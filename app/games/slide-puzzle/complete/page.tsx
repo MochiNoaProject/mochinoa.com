@@ -1,13 +1,13 @@
 "use client";
 
-import { useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
-import styles from './page.module.css';
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import styles from "./page.module.css";
 
 function CompleteContent() {
   const searchParams = useSearchParams();
-  const clearTime = searchParams.get('time');
-  const moves = searchParams.get('moves');
+  const clearTime = searchParams.get("time");
+  const moves = searchParams.get("moves");
 
   const formatTime = (ms: number) => {
     const seconds = Math.floor(ms / 1000);
@@ -16,7 +16,7 @@ function CompleteContent() {
     return `${minutes}分${remainingSeconds}秒`;
   };
 
-  const gameUrl = 'https://mochinoa.com/games/slide-puzzle';
+  const gameUrl = "https://mochinoa.com/games/slide-puzzle";
   const shareText = `もちのあスライドパズルをクリアしました！\nクリア時間: ${formatTime(Number(clearTime))}\n移動回数: ${moves}回\n\n${gameUrl}\n\n#もちのあスライドパズル`;
   const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
 
@@ -25,16 +25,18 @@ function CompleteContent() {
       <h1 className={styles.title}>おめでとうございます！</h1>
       <div className={styles.content}>
         <div className={styles.imageContainer}>
-          <img 
-            src="/images/puzzle/puzzle1.jpg" 
-            alt="完成したパズル" 
+          <img
+            src="/images/puzzle/puzzle1.jpg"
+            alt="完成したパズル"
             className={styles.completeImage}
           />
         </div>
         <div className={styles.scoreContainer}>
           <div className={styles.scoreItem}>
             <span className={styles.label}>クリア時間</span>
-            <span className={styles.value}>{formatTime(Number(clearTime))}</span>
+            <span className={styles.value}>
+              {formatTime(Number(clearTime))}
+            </span>
           </div>
           <div className={styles.scoreItem}>
             <span className={styles.label}>移動回数</span>
@@ -43,10 +45,7 @@ function CompleteContent() {
         </div>
       </div>
       <div className={styles.buttonContainer}>
-        <a
-          href="/games/slide-puzzle"
-          className={styles.button}
-        >
+        <a href="/games/slide-puzzle" className={styles.button}>
           もう一度プレイ
         </a>
         <a
@@ -68,4 +67,4 @@ export default function CompletePage() {
       <CompleteContent />
     </Suspense>
   );
-} 
+}

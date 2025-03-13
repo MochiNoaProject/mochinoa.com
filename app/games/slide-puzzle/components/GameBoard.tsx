@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import styles from './GameBoard.module.css';
+import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import styles from "./GameBoard.module.css";
 
 export default function GameBoard() {
   const router = useRouter();
@@ -31,22 +31,29 @@ export default function GameBoard() {
   }, []);
 
   // ボードをシャッフル
-  const shuffleBoard = useCallback((boardToShuffle: number[]) => {
-    const shuffled = [...boardToShuffle];
-    let emptyIndex = shuffled.indexOf(8);
+  const shuffleBoard = useCallback(
+    (boardToShuffle: number[]) => {
+      const shuffled = [...boardToShuffle];
+      let emptyIndex = shuffled.indexOf(8);
 
-    for (let i = 0; i < 100; i++) {
-      const movableIndices = getMovableIndices(emptyIndex);
-      if (movableIndices.length > 0) {
-        const randomIndex = movableIndices[Math.floor(Math.random() * movableIndices.length)];
-        // 空マスと移動可能なマスを入れ替え
-        [shuffled[emptyIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[emptyIndex]];
-        emptyIndex = randomIndex;
+      for (let i = 0; i < 100; i++) {
+        const movableIndices = getMovableIndices(emptyIndex);
+        if (movableIndices.length > 0) {
+          const randomIndex =
+            movableIndices[Math.floor(Math.random() * movableIndices.length)];
+          // 空マスと移動可能なマスを入れ替え
+          [shuffled[emptyIndex], shuffled[randomIndex]] = [
+            shuffled[randomIndex],
+            shuffled[emptyIndex],
+          ];
+          emptyIndex = randomIndex;
+        }
       }
-    }
 
-    return shuffled;
-  }, [getMovableIndices]);
+      return shuffled;
+    },
+    [getMovableIndices],
+  );
 
   // ボードの初期化
   const initializeBoard = useCallback(() => {
@@ -66,23 +73,28 @@ export default function GameBoard() {
   // タイルを移動
   const moveTile = (index: number) => {
     if (isComplete) return;
-    
+
     const emptyIndex = board.indexOf(8);
     const movableIndices = getMovableIndices(emptyIndex);
 
     if (movableIndices.includes(index)) {
       const newBoard = [...board];
-      [newBoard[emptyIndex], newBoard[index]] = [newBoard[index], newBoard[emptyIndex]];
+      [newBoard[emptyIndex], newBoard[index]] = [
+        newBoard[index],
+        newBoard[emptyIndex],
+      ];
       setBoard(newBoard);
-      setMoves(prev => prev + 1);
-      
+      setMoves((prev) => prev + 1);
+
       // 状態更新後に完成チェックを実行
       const isCompleted = newBoard.every((value, idx) => value === idx);
       if (isCompleted) {
         setIsComplete(true);
         setClearTime(Date.now() - (startTime ?? 0));
         setTimeout(() => {
-          router.push(`/games/slide-puzzle/complete?time=${clearTime}&moves=${moves + 1}`);
+          router.push(
+            `/games/slide-puzzle/complete?time=${clearTime}&moves=${moves + 1}`,
+          );
         }, 500);
       }
     }
@@ -99,17 +111,17 @@ export default function GameBoard() {
         {board.map((value, index) => (
           <button
             key={index}
-            className={`${styles.tile} ${value === 8 ? styles.empty : ''} ${isComplete ? styles.complete : ''}`}
+            className={`${styles.tile} ${value === 8 ? styles.empty : ""} ${isComplete ? styles.complete : ""}`}
             style={
               value !== 8
                 ? {
                     backgroundImage: `url(/images/puzzle/puzzle1.jpg)`,
-                    backgroundSize: '300% 300%',
+                    backgroundSize: "300% 300%",
                     backgroundPosition: `${-(value % 3) * 100}% ${-Math.floor(value / 3) * 100}%`,
-                    transform: `translate(${(index % 3) * 100}%, ${Math.floor(index / 3) * 100}%)`
+                    transform: `translate(${(index % 3) * 100}%, ${Math.floor(index / 3) * 100}%)`,
                   }
                 : {
-                    transform: `translate(${(index % 3) * 100}%, ${Math.floor(index / 3) * 100}%)`
+                    transform: `translate(${(index % 3) * 100}%, ${Math.floor(index / 3) * 100}%)`,
                   }
             }
             onClick={() => value !== 8 && moveTile(index)}
@@ -118,10 +130,8 @@ export default function GameBoard() {
       </div>
       <div className={styles.controls}>
         <p>移動回数: {moves}</p>
-        {!isComplete && (
-          <button onClick={handleShuffle}>シャッフル</button>
-        )}
+        {!isComplete && <button onClick={handleShuffle}>シャッフル</button>}
       </div>
     </div>
   );
-} 
+}
