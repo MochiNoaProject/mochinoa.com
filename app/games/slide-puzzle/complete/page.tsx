@@ -1,31 +1,12 @@
 "use client";
 
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Metadata } from 'next';
 import styles from './page.module.css';
+import { slidePuzzleMetadata } from '../metadata';
 
-export const metadata: Metadata = {
-  title: 'もちのあスライドパズル',
-  description: 'もちのあのスライドパズルで遊ぼう！シンプルで楽しいパズルゲームです。',
-  openGraph: {
-    title: 'もちのあスライドパズル',
-    description: 'もちのあのスライドパズルで遊ぼう！シンプルで楽しいパズルゲームです。',
-    images: ['/images/puzzle/puzzle1.jpg'],
-    url: 'https://mochinoa.com/games/slide-puzzle',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'もちのあスライドパズル',
-    description: 'もちのあのスライドパズルで遊ぼう！シンプルで楽しいパズルゲームです。',
-    images: ['/images/puzzle/puzzle1.jpg'],
-  },
-};
+export const metadata = slidePuzzleMetadata;
 
 export default function CompletePage() {
-  const router = useRouter();
-
   return (
     <div className={styles.container}>
       <div className={styles.content}>

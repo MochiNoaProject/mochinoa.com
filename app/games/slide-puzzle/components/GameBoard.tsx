@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './GameBoard.module.css';
 
@@ -10,18 +10,18 @@ export default function GameBoard() {
   const [moves, setMoves] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
 
-  // 初期化
-  useEffect(() => {
-    initializeBoard();
-  }, []);
-
   // ボードの初期化
-  const initializeBoard = () => {
+  const initializeBoard = useCallback(() => {
     const initialBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     setBoard(shuffleBoard(initialBoard));
     setMoves(0);
     setIsComplete(false);
-  };
+  }, []);
+
+  // 初期化
+  useEffect(() => {
+    initializeBoard();
+  }, [initializeBoard]);
 
   // ボードをシャッフル
   const shuffleBoard = (boardToShuffle: number[]) => {
@@ -83,28 +83,16 @@ export default function GameBoard() {
     }
   };
 
-  // パズルが完成したかチェック
-  const checkCompletion = () => {
-    const isCompleted = board.every((value, index) => value === index);
-    if (isCompleted) {
-      setIsComplete(true);
-      setTimeout(() => {
-        router.push('/games/slide-puzzle/complete');
-      }, 500);
-    }
-  };
-
   // シャッフルボタンのクリックハンドラ
   const handleShuffle = () => {
     initializeBoard();
-    console.log('シャッフル後の配列:', board);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.grid}>
         {board.map((value, index) => (
-          <div
+          <button
             key={index}
             className={`${styles.tile} ${value === 8 ? styles.empty : ''} ${isComplete ? styles.complete : ''}`}
             style={
@@ -122,7 +110,7 @@ export default function GameBoard() {
             onClick={() => value !== 8 && moveTile(index)}
           >
             {value !== 8 && value}
-          </div>
+          </button>
         ))}
       </div>
       <div className={styles.controls}>

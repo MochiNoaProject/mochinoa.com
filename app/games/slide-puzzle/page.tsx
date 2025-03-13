@@ -1,5 +1,8 @@
 import GameBoard from './components/GameBoard';
+import { slidePuzzleMetadata } from './metadata';
 import styles from './page.module.css';
+
+export const metadata = slidePuzzleMetadata;
 
 export default function SlidePuzzlePage() {
   return (
