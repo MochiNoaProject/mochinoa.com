@@ -6,6 +6,29 @@
   padding: 2rem;
 }
 
+.modeSelector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modeSelector button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modeSelector button.active {
+  background: #4a90e2;
+  color: white;
+  border-color: #4a90e2;
+}
+
 .grid {
   position: relative;
   width: 300px;
@@ -13,28 +36,45 @@
   background: #f0f0f0;
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .tile {
   position: absolute;
   width: 33.333%;
   height: 33.333%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #4a90e2;
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 2px solid #fff;
   border-radius: 4px;
   user-select: none;
+  will-change: transform;
+  z-index: 1;
 }
 
 .tile:hover {
-  background: #357abd;
+  opacity: 0.9;
+  z-index: 2;
+}
+
+.movable {
+  cursor: pointer;
+}
+
+.movable:hover {
+  transform: scale(1.02);
+}
+
+.empty {
+  background: #e0e0e0;
+  border: 2px dashed #ccc;
+  cursor: default;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.empty:hover {
+  opacity: 1;
 }
 
 .controls {
@@ -59,10 +99,25 @@
 }
 
 .complete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  animation: pop 0.3s ease;
+}
+
+.completeMessage {
   font-size: 1.5rem;
   color: #4caf50;
   font-weight: bold;
-  animation: pop 0.3s ease;
+}
+
+.completeTile {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  border: 2px solid #4caf50;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes pop {

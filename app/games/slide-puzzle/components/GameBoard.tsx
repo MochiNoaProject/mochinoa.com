@@ -3,105 +3,123 @@
 import { useState, useEffect } from 'react';
 import styles from './GameBoard.module.css';
 
-type Tile = {
-  value: number;
-  position: number;
-};
-
 export default function GameBoard() {
-  const [tiles, setTiles] = useState<Tile[]>([]);
+  const [board, setBoard] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
 
-  // パズルの初期化
+  // 初期化
   useEffect(() => {
-    initializePuzzle();
+    initializeBoard();
   }, []);
 
-  // パズルの初期化関数
-  const initializePuzzle = () => {
-    const initialTiles = Array.from({ length: 8 }, (_, i) => ({
-      value: i + 1,
-      position: i
-    }));
-    setTiles(initialTiles);
+  // ボードの初期化
+  const initializeBoard = () => {
+    const initialBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    setBoard(shuffleBoard(initialBoard));
     setMoves(0);
     setIsComplete(false);
   };
 
-  // タイルが移動可能かチェック
-  const isMovable = (tilePosition: number, emptyPosition: number) => {
-    const row = Math.floor(tilePosition / 3);
-    const col = tilePosition % 3;
-    const emptyRow = Math.floor(emptyPosition / 3);
-    const emptyCol = emptyPosition % 3;
+  // ボードをシャッフル
+  const shuffleBoard = (boardToShuffle: number[]) => {
+    const shuffled = [...boardToShuffle];
+    let emptyIndex = shuffled.indexOf(8);
 
-    return (
-      (Math.abs(row - emptyRow) === 1 && col === emptyCol) ||
-      (Math.abs(col - emptyCol) === 1 && row === emptyRow)
-    );
+    for (let i = 0; i < 100; i++) {
+      const movableIndices = getMovableIndices(emptyIndex);
+      if (movableIndices.length > 0) {
+        const randomIndex = movableIndices[Math.floor(Math.random() * movableIndices.length)];
+        // 空マスと移動可能なマスを入れ替え
+        [shuffled[emptyIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[emptyIndex]];
+        emptyIndex = randomIndex;
+      }
+    }
+
+    return shuffled;
+  };
+
+  // 移動可能なマスのインデックスを取得
+  const getMovableIndices = (emptyIndex: number) => {
+    const row = Math.floor(emptyIndex / 3);
+    const col = emptyIndex % 3;
+    const movableIndices: number[] = [];
+
+    // 上
+    if (row > 0) movableIndices.push(emptyIndex - 3);
+    // 下
+    if (row < 2) movableIndices.push(emptyIndex + 3);
+    // 左
+    if (col > 0) movableIndices.push(emptyIndex - 1);
+    // 右
+    if (col < 2) movableIndices.push(emptyIndex + 1);
+
+    return movableIndices;
   };
 
   // タイルを移動
-  const moveTile = (tilePosition: number) => {
-    const emptyPosition = 8;
-    if (!isMovable(tilePosition, emptyPosition)) return;
+  const moveTile = (index: number) => {
+    const emptyIndex = board.indexOf(8);
+    const movableIndices = getMovableIndices(emptyIndex);
 
-    setTiles(prevTiles => {
-      const newTiles = prevTiles.map(tile => {
-        if (tile.position === tilePosition) {
-          return { ...tile, position: emptyPosition };
-        }
-        return tile;
+    if (movableIndices.includes(index)) {
+      setBoard(prevBoard => {
+        const newBoard = [...prevBoard];
+        [newBoard[emptyIndex], newBoard[index]] = [newBoard[index], newBoard[emptyIndex]];
+        console.log('現在の配列:', newBoard);
+        return newBoard;
       });
-      return newTiles;
-    });
-    setMoves(prev => prev + 1);
-    checkCompletion();
+      setMoves(prev => prev + 1);
+      checkCompletion();
+    }
   };
 
   // パズルが完成したかチェック
   const checkCompletion = () => {
-    const isCompleted = tiles.every(tile => tile.value === tile.position + 1);
+    const isCompleted = board.every((value, index) => value === index);
     setIsComplete(isCompleted);
   };
 
-  // パズルをシャッフル
-  const shufflePuzzle = () => {
-    const shuffledTiles = [...tiles];
-    for (let i = shuffledTiles.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = shuffledTiles[i].position;
-      shuffledTiles[i].position = shuffledTiles[j].position;
-      shuffledTiles[j].position = temp;
-    }
-    setTiles(shuffledTiles);
-    setMoves(0);
-    setIsComplete(false);
+  // シャッフルボタンのクリックハンドラ
+  const handleShuffle = () => {
+    initializeBoard();
+    console.log('シャッフル後の配列:', board);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.grid}>
-        {tiles.map(tile => (
+        {board.map((value, index) => (
           <div
-            key={tile.value}
-            className={styles.tile}
-            style={{
-              transform: `translate(${(tile.position % 3) * 100}%, ${Math.floor(tile.position / 3) * 100}%)`
-            }}
-            onClick={() => moveTile(tile.position)}
+            key={index}
+            className={`${styles.tile} ${value === 8 ? styles.empty : ''}`}
+            style={
+              value !== 8
+                ? {
+                    backgroundImage: `url(/images/puzzle/puzzle1.jpg)`,
+                    backgroundSize: '300% 300%',
+                    backgroundPosition: `${-(value % 3) * 100}% ${-Math.floor(value / 3) * 100}%`,
+                    transform: `translate(${(index % 3) * 100}%, ${Math.floor(index / 3) * 100}%)`
+                  }
+                : {
+                    transform: `translate(${(index % 3) * 100}%, ${Math.floor(index / 3) * 100}%)`
+                  }
+            }
+            onClick={() => value !== 8 && moveTile(index)}
           >
-            {tile.value}
+            {value !== 8 && value}
           </div>
         ))}
       </div>
       <div className={styles.controls}>
         <p>移動回数: {moves}</p>
-        <button onClick={shufflePuzzle}>シャッフル</button>
-        <button onClick={initializePuzzle}>リセット</button>
+        <button onClick={handleShuffle}>シャッフル</button>
       </div>
-      {isComplete && <div className={styles.complete}>完成！</div>}
+      {isComplete && (
+        <div className={styles.complete}>
+          <div className={styles.completeMessage}>完成！</div>
+        </div>
+      )}
     </div>
   );
 } 
