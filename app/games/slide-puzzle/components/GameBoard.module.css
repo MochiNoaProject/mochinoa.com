@@ -41,20 +41,20 @@
 
 .tile {
   position: absolute;
-  width: 33.333%;
-  height: 33.333%;
-  cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100px;
+  height: 100px;
+  background-color: #4a90e2;
   border: 2px solid #fff;
-  border-radius: 4px;
-  user-select: none;
-  will-change: transform;
-  z-index: 1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background-size: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tile:hover {
-  opacity: 0.9;
-  z-index: 2;
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .movable {
@@ -66,15 +66,14 @@
 }
 
 .empty {
-  background: #e0e0e0;
-  border: 2px dashed #ccc;
+  background-color: transparent;
+  border: none;
   cursor: default;
-  z-index: 0;
-  pointer-events: none;
 }
 
 .empty:hover {
-  opacity: 1;
+  transform: none;
+  box-shadow: none;
 }
 
 .controls {
@@ -103,7 +102,7 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  animation: pop 0.3s ease;
+  animation: pulse 1s infinite;
 }
 
 .completeMessage {
@@ -134,17 +133,6 @@
 
 .completeButton:hover {
   background-color: #45a049;
-}
-
-@keyframes pop {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
 }
 
 @keyframes pulse {

@@ -9,6 +9,8 @@ export default function GameBoard() {
   const [board, setBoard] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [clearTime, setClearTime] = useState<number | null>(null);
 
   // ボードの初期化
   const initializeBoard = useCallback(() => {
@@ -16,6 +18,8 @@ export default function GameBoard() {
     setBoard(shuffleBoard(initialBoard));
     setMoves(0);
     setIsComplete(false);
+    setStartTime(Date.now());
+    setClearTime(null);
   }, []);
 
   // 初期化
@@ -76,8 +80,9 @@ export default function GameBoard() {
       const isCompleted = newBoard.every((value, idx) => value === idx);
       if (isCompleted) {
         setIsComplete(true);
+        setClearTime(Date.now() - (startTime || 0));
         setTimeout(() => {
-          router.push('/games/slide-puzzle/complete');
+          router.push(`/games/slide-puzzle/complete?time=${clearTime}&moves=${moves + 1}`);
         }, 500);
       }
     }
@@ -108,9 +113,7 @@ export default function GameBoard() {
                   }
             }
             onClick={() => value !== 8 && moveTile(index)}
-          >
-            {value !== 8 && value}
-          </button>
+          />
         ))}
       </div>
       <div className={styles.controls}>
