@@ -185,12 +185,12 @@ export default function TypingGame() {
   };
 
   const getResultMessage = (chars: number): ResultMessage => {
-    if (chars >= 360) {
+    if (chars >= 200) {
       return {
         message: "ふ〜んすごいじゃん",
         image: "/images/sugoi.jpg",
       };
-    } else if (chars >= 240) {
+    } else if (chars >= 120) {
       return {
         message: "まあまあがんばったね〜",
         image: "/images/maamaa.jpg",
