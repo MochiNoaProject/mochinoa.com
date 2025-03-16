@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@types/wanakana':
-        specifier: ^5.3.0
+        specifier: 5.3.0
         version: 5.3.0
       clsx:
         specifier: 2.1.1
@@ -27,7 +27,7 @@ importers:
         specifier: 19.0.0
         version: 19.0.0(react@19.0.0)
       wanakana:
-        specifier: ^5.3.1
+        specifier: 5.3.1
         version: 5.3.1
     devDependencies:
       '@types/node':
