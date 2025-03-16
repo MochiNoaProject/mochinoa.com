@@ -90,6 +90,17 @@ export default function TypingGame() {
     setText(words[Math.floor(Math.random() * words.length)]);
   }, []);
 
+  const resetGame = useCallback(() => {
+    setIsPlaying(false);
+    setGameOver(false);
+    setTimeLeft(60);
+    setTotalChars(0);
+    setCorrectWords(0);
+    setMissCount(0);
+    setInput("");
+    setText("");
+  }, []);
+
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (isPlaying && timeLeft > 0) {
@@ -188,7 +199,7 @@ export default function TypingGame() {
                 <div className={styles.resultMessage}>
                   <p>{getResultMessage(totalChars).message}</p>
                 </div>
-                <button onClick={startGame} className={styles.startButton}>
+                <button onClick={resetGame} className={styles.startButton}>
                   もう一度チャレンジ
                 </button>
                 <button onClick={handleShare} className={styles.shareButton}>
