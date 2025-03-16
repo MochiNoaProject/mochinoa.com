@@ -44,6 +44,12 @@ export default function HobbiesSection() {
             href: "/games/slide-puzzle",
             color: "#ee6644",
           },
+          {
+            title: "タイピング",
+            description: "かわいい単語を入力するゲーム",
+            href: "/games/typing",
+            color: "#EE9B44",
+          },
         ].map((item) => {
           return (
             <li key={item.title}>
