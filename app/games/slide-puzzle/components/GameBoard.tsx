@@ -10,30 +10,32 @@ export default function GameBoard() {
   const [moves, setMoves] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null);
+  const [difficulty, setDifficulty] = useState<"easy" | "hard">("easy");
 
   // 移動可能なマスのインデックスを取得
   const getMovableIndices = useCallback((emptyIndex: number) => {
-    const row = Math.floor(emptyIndex / 3);
-    const col = emptyIndex % 3;
+    const size = difficulty === "easy" ? 3 : 4;
+    const row = Math.floor(emptyIndex / size);
+    const col = emptyIndex % size;
     const movableIndices: number[] = [];
 
     // 上
-    if (row > 0) movableIndices.push(emptyIndex - 3);
+    if (row > 0) movableIndices.push(emptyIndex - size);
     // 下
-    if (row < 2) movableIndices.push(emptyIndex + 3);
+    if (row < size - 1) movableIndices.push(emptyIndex + size);
     // 左
     if (col > 0) movableIndices.push(emptyIndex - 1);
     // 右
-    if (col < 2) movableIndices.push(emptyIndex + 1);
+    if (col < size - 1) movableIndices.push(emptyIndex + 1);
 
     return movableIndices;
-  }, []);
+  }, [difficulty]);
 
   // ボードをシャッフル
   const shuffleBoard = useCallback(
     (boardToShuffle: number[]) => {
       const shuffled = [...boardToShuffle];
-      let emptyIndex = shuffled.indexOf(8);
+      let emptyIndex = shuffled.indexOf(difficulty === "easy" ? 8 : 15);
 
       for (let i = 0; i < 100; i++) {
         const movableIndices = getMovableIndices(emptyIndex);
@@ -51,17 +53,18 @@ export default function GameBoard() {
 
       return shuffled;
     },
-    [getMovableIndices],
+    [getMovableIndices, difficulty],
   );
 
   // ボードの初期化
   const initializeBoard = useCallback(() => {
-    const initialBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    const size = difficulty === "easy" ? 9 : 16;
+    const initialBoard = Array.from({ length: size }, (_, i) => i);
     setBoard(shuffleBoard(initialBoard));
     setMoves(0);
     setIsComplete(false);
     setStartTime(Date.now());
-  }, [shuffleBoard]);
+  }, [shuffleBoard, difficulty]);
 
   // 初期化
   useEffect(() => {
@@ -72,7 +75,7 @@ export default function GameBoard() {
   const moveTile = (index: number) => {
     if (isComplete) return;
 
-    const emptyIndex = board.indexOf(8);
+    const emptyIndex = board.indexOf(difficulty === "easy" ? 8 : 15);
     const movableIndices = getMovableIndices(emptyIndex);
 
     if (movableIndices.includes(index)) {
@@ -91,7 +94,7 @@ export default function GameBoard() {
         setIsComplete(true);
         setTimeout(() => {
           router.push(
-            `/games/slide-puzzle/complete?time=${finalTime}&moves=${moves + 1}`,
+            `/games/slide-puzzle/complete?time=${finalTime}&moves=${moves + 1}&difficulty=${difficulty}`,
           );
         }, 500);
       }
@@ -103,26 +106,36 @@ export default function GameBoard() {
     initializeBoard();
   };
 
+  // 難易度切り替え
+  const toggleDifficulty = () => {
+    setDifficulty((prev) => (prev === "easy" ? "hard" : "easy"));
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.grid}>
+      <div className={styles.controls}>
+        <button onClick={toggleDifficulty}>
+          {difficulty === "easy" ? "難易度: 初級" : "難易度: 上級"}
+        </button>
+      </div>
+      <div className={`${styles.grid} ${difficulty === "hard" ? styles.hard : ""}`}>
         {board.map((value, index) => (
           <button
             key={index}
-            className={`${styles.tile} ${value === 8 ? styles.empty : ""} ${isComplete ? styles.complete : ""}`}
+            className={`${styles.tile} ${value === (difficulty === "easy" ? 8 : 15) ? styles.empty : ""} ${isComplete ? styles.complete : ""}`}
             style={
-              value !== 8
+              value !== (difficulty === "easy" ? 8 : 15)
                 ? {
-                    backgroundImage: `url(/images/puzzle/puzzle1.jpg)`,
-                    backgroundSize: "300% 300%",
-                    backgroundPosition: `${-(value % 3) * 100}% ${-Math.floor(value / 3) * 100}%`,
-                    transform: `translate(${(index % 3) * 100}%, ${Math.floor(index / 3) * 100}%)`,
+                    backgroundImage: `url(/images/puzzle/${difficulty === "easy" ? "puzzle1" : "puzzle2"}.jpg)`,
+                    backgroundSize: `${difficulty === "easy" ? "300% 300%" : "400% 400%"}`,
+                    backgroundPosition: `${-(value % (difficulty === "easy" ? 3 : 4)) * 100}% ${-Math.floor(value / (difficulty === "easy" ? 3 : 4)) * 100}%`,
+                    transform: `translate(${(index % (difficulty === "easy" ? 3 : 4)) * 100}%, ${Math.floor(index / (difficulty === "easy" ? 3 : 4)) * 100}%)`,
                   }
                 : {
-                    transform: `translate(${(index % 3) * 100}%, ${Math.floor(index / 3) * 100}%)`,
+                    transform: `translate(${(index % (difficulty === "easy" ? 3 : 4)) * 100}%, ${Math.floor(index / (difficulty === "easy" ? 3 : 4)) * 100}%)`,
                   }
             }
-            onClick={() => value !== 8 && moveTile(index)}
+            onClick={() => value !== (difficulty === "easy" ? 8 : 15) && moveTile(index)}
           />
         ))}
       </div>
