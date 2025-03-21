@@ -13,23 +13,26 @@ export default function GameBoard() {
   const [difficulty, setDifficulty] = useState<"easy" | "hard">("easy");
 
   // 移動可能なマスのインデックスを取得
-  const getMovableIndices = useCallback((emptyIndex: number) => {
-    const size = difficulty === "easy" ? 3 : 4;
-    const row = Math.floor(emptyIndex / size);
-    const col = emptyIndex % size;
-    const movableIndices: number[] = [];
+  const getMovableIndices = useCallback(
+    (emptyIndex: number) => {
+      const size = difficulty === "easy" ? 3 : 4;
+      const row = Math.floor(emptyIndex / size);
+      const col = emptyIndex % size;
+      const movableIndices: number[] = [];
 
-    // 上
-    if (row > 0) movableIndices.push(emptyIndex - size);
-    // 下
-    if (row < size - 1) movableIndices.push(emptyIndex + size);
-    // 左
-    if (col > 0) movableIndices.push(emptyIndex - 1);
-    // 右
-    if (col < size - 1) movableIndices.push(emptyIndex + 1);
+      // 上
+      if (row > 0) movableIndices.push(emptyIndex - size);
+      // 下
+      if (row < size - 1) movableIndices.push(emptyIndex + size);
+      // 左
+      if (col > 0) movableIndices.push(emptyIndex - 1);
+      // 右
+      if (col < size - 1) movableIndices.push(emptyIndex + 1);
 
-    return movableIndices;
-  }, [difficulty]);
+      return movableIndices;
+    },
+    [difficulty],
+  );
 
   // ボードをシャッフル
   const shuffleBoard = useCallback(
@@ -118,7 +121,9 @@ export default function GameBoard() {
           {difficulty === "easy" ? "難易度: 初級" : "難易度: 上級"}
         </button>
       </div>
-      <div className={`${styles.grid} ${difficulty === "hard" ? styles.hard : ""}`}>
+      <div
+        className={`${styles.grid} ${difficulty === "hard" ? styles.hard : ""}`}
+      >
         {board.map((value, index) => (
           <button
             key={index}
@@ -135,7 +140,9 @@ export default function GameBoard() {
                     transform: `translate(${(index % (difficulty === "easy" ? 3 : 4)) * 100}%, ${Math.floor(index / (difficulty === "easy" ? 3 : 4)) * 100}%)`,
                   }
             }
-            onClick={() => value !== (difficulty === "easy" ? 8 : 15) && moveTile(index)}
+            onClick={() =>
+              value !== (difficulty === "easy" ? 8 : 15) && moveTile(index)
+            }
           />
         ))}
       </div>

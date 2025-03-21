@@ -8,8 +8,10 @@ import styles from "./page.module.css";
 
 function CompleteContent() {
   const searchParams = useSearchParams();
-  const time = Number(searchParams.get("time")) ?? 0;
-  const moves = Number(searchParams.get("moves")) ?? 0;
+  const timeParam = searchParams.get("time");
+  const movesParam = searchParams.get("moves");
+  const time = timeParam !== null ? Number(timeParam) : 0;
+  const moves = movesParam !== null ? Number(movesParam) : 0;
   const difficulty = searchParams.get("difficulty") ?? "easy";
 
   const formatTime = (ms: number) => {
