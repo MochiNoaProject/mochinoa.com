@@ -131,7 +131,7 @@ export default function GameBoard() {
             style={
               value !== (difficulty === "easy" ? 8 : 15)
                 ? {
-                    backgroundImage: `url(/images/puzzle/${difficulty === "easy" ? "puzzle1" : "puzzle2"}.jpg)`,
+                    backgroundImage: `url(/images/slide-puzzle/${difficulty === "easy" ? "puzzle1" : "puzzle2"}.jpg)`,
                     backgroundSize: `${difficulty === "easy" ? "300% 300%" : "400% 400%"}`,
                     backgroundPosition: `${-(value % (difficulty === "easy" ? 3 : 4)) * 100}% ${-Math.floor(value / (difficulty === "easy" ? 3 : 4)) * 100}%`,
                     transform: `translate(${(index % (difficulty === "easy" ? 3 : 4)) * 100}%, ${Math.floor(index / (difficulty === "easy" ? 3 : 4)) * 100}%)`,
