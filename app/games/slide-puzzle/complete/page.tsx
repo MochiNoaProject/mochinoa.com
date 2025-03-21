@@ -1,13 +1,18 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
 import { Suspense } from "react";
 import styles from "./page.module.css";
 
 function CompleteContent() {
   const searchParams = useSearchParams();
-  const clearTime = searchParams.get("time");
-  const moves = searchParams.get("moves");
+  const timeParam = searchParams.get("time");
+  const movesParam = searchParams.get("moves");
+  const time = timeParam !== null ? Number(timeParam) : 0;
+  const moves = movesParam !== null ? Number(movesParam) : 0;
+  const difficulty = searchParams.get("difficulty") ?? "easy";
 
   const formatTime = (ms: number) => {
     const seconds = Math.floor(ms / 1000);
@@ -17,37 +22,35 @@ function CompleteContent() {
   };
 
   const gameUrl = "https://mochinoa.com/games/slide-puzzle";
-  const shareText = `もちのあスライドパズルをクリアしました！\nクリア時間: ${formatTime(Number(clearTime))}\n移動回数: ${moves}回\n\n${gameUrl}\n\n#もちのあスライドパズル`;
+  const shareText = `もちのあスライドパズルをクリアしました！\nクリア時間: ${formatTime(time)}\n移動回数: ${moves}回\n\n${gameUrl}\n\n#もちのあスライドパズル`;
   const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>おめでとうございます！</h1>
-      <div className={styles.content}>
-        <div className={styles.imageContainer}>
-          <img
-            src="/images/puzzle/puzzle1.jpg"
-            alt="完成したパズル"
-            className={styles.completeImage}
-          />
-        </div>
-        <div className={styles.scoreContainer}>
-          <div className={styles.scoreItem}>
-            <span className={styles.label}>クリア時間</span>
-            <span className={styles.value}>
-              {formatTime(Number(clearTime))}
-            </span>
-          </div>
-          <div className={styles.scoreItem}>
-            <span className={styles.label}>移動回数</span>
-            <span className={styles.value}>{moves}回</span>
-          </div>
-        </div>
+      <div className={styles.imageContainer}>
+        <Image
+          src={`/images/slide-puzzle/${difficulty === "easy" ? "puzzle1" : "puzzle2"}.jpg`}
+          alt="完成したパズル"
+          width={300}
+          height={300}
+          className={styles.completedImage}
+        />
+      </div>
+      <div className={styles.stats}>
+        <p>難易度: {difficulty === "easy" ? "初級" : "上級"}</p>
+        <p>クリア時間: {formatTime(time)}</p>
+        <p>移動回数: {moves}回</p>
+      </div>
+      <div className={styles.buttons}>
+        <Link href="/games/slide-puzzle" className={styles.button}>
+          もう一度プレイ
+        </Link>
+        <Link href="/games/slide-puzzle" className={styles.button}>
+          他の難易度へ
+        </Link>
       </div>
       <div className={styles.buttonContainer}>
-        <a href="/games/slide-puzzle" className={styles.button}>
-          もう一度プレイ
-        </a>
         <a
           href={shareUrl}
           target="_blank"
@@ -63,7 +66,7 @@ function CompleteContent() {
 
 export default function CompletePage() {
   return (
-    <Suspense fallback={<div className={styles.container}>読み込み中...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       <CompleteContent />
     </Suspense>
   );

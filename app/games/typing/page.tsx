@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
-import { toRomaji } from "wanakana";
+import { toHiragana, toRomaji } from "wanakana";
 import Image from "next/image";
 import styles from "./page.module.css";
 
@@ -244,39 +244,35 @@ export default function TypingGame() {
                   Xでシェア
                 </button>
               </div>
-              {getResultMessage(totalChars).image !== null &&
-                getResultMessage(totalChars).image !== "" && (
-                  <div className={styles.resultImage}>
-                    <Image
-                      src={getResultMessage(totalChars).image ?? ""}
-                      alt="結果の画像"
-                      width={500}
-                      height={500}
-                      style={{ objectFit: "contain" }}
-                    />
-                  </div>
-                )}
+              {getResultMessage(totalChars).image && (
+                <div className={styles.resultImage}>
+                  <Image
+                    src={getResultMessage(totalChars).image!}
+                    alt="結果画像"
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              )}
             </div>
           </div>
         ) : (
-          <>
-            <div className={styles.status}>
-              <div className={styles.timer}>残り時間: {timeLeft}秒</div>
-              <div>入力文字数: {totalChars}文字</div>
-              <div>正解単語数: {correctWords}語</div>
-              <div>ミス回数: {missCount}回</div>
+          <div className={styles.playArea}>
+            <div className={styles.stats}>
+              <p>残り時間: {timeLeft}秒</p>
+              <p>入力文字数: {totalChars}文字</p>
+              <p>正解単語数: {correctWords}語</p>
+              <p>ミス回数: {missCount}回</p>
             </div>
-            <div className={styles.text}>{text}</div>
-            <div className={styles.romaji}>({toRomaji(text)})</div>
+            <div className={styles.wordDisplay}>{text}</div>
             <input
               type="text"
               value={input}
               onChange={handleInput}
               className={styles.input}
               autoFocus
-              placeholder="ローマ字で入力"
             />
-          </>
+          </div>
         )}
       </div>
     </div>
