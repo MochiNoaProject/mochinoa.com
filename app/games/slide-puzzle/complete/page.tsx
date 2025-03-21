@@ -3,9 +3,10 @@
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { Suspense } from "react";
 import styles from "./page.module.css";
 
-export default function CompletePage() {
+function CompleteContent() {
   const searchParams = useSearchParams();
   const time = Number(searchParams.get("time")) ?? 0;
   const moves = Number(searchParams.get("moves")) ?? 0;
@@ -58,5 +59,13 @@ export default function CompletePage() {
         </a>
       </div>
     </div>
+  );
+}
+
+export default function CompletePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CompleteContent />
+    </Suspense>
   );
 }
