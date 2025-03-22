@@ -252,8 +252,8 @@ export default function TypingGame() {
                       "/images/default.jpg"
                     }
                     alt="結果画像"
-                    width={300}
-                    height={300}
+                    width={600}
+                    height={400}
                     className={styles.resultImage}
                   />
                 </div>
@@ -268,7 +268,7 @@ export default function TypingGame() {
               <p>正解単語数: {correctWords}語</p>
               <p>ミス回数: {missCount}回</p>
             </div>
-            <div className={styles.wordDisplay}>{text}</div>
+            <div className={styles.text}>{text}</div>
             <input
               type="text"
               value={input}
