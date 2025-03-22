@@ -1,161 +1,161 @@
 .root {
-  display: grid;
-  gap: 16px;
-  padding-bottom: 120px;
+	display: grid;
+	gap: 16px;
+	padding-bottom: 120px;
 }
 
 .StartButton {
-  border-radius: 24px;
-  padding: 8px 16px;
-  font-size: 16px;
-  line-height: 2;
-  background-color: transparent;
-  border: 2px solid #f59e0b;
-  color: #f59e0b;
-  font-weight: bold;
-  position: relative;
-  transition: 0.3s;
+	border-radius: 24px;
+	padding: 8px 16px;
+	font-size: 16px;
+	line-height: 2;
+	background-color: transparent;
+	border: 2px solid #f59e0b;
+	color: #f59e0b;
+	font-weight: bold;
+	position: relative;
+	transition: 0.3s;
 }
 .StartButton::before,
 .StartButton::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  bottom: -15px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  border-left: 16px solid transparent;
-  border-right: 16px solid transparent;
-  border-top: 16px solid white;
-  transition: 0.3s;
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	bottom: -15px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	border-left: 16px solid transparent;
+	border-right: 16px solid transparent;
+	border-top: 16px solid white;
+	transition: 0.3s;
 }
 
 .StartButton::before {
-  bottom: -18px;
-  border-top-color: #f59e0b;
+	bottom: -18px;
+	border-top-color: #f59e0b;
 }
 
 .StartButton:hover {
-  background-color: #f59e0b;
-  color: white;
+	background-color: #f59e0b;
+	color: white;
 }
 .StartButton:hover::after {
-  border-top-color: #f59e0b;
+	border-top-color: #f59e0b;
 }
 
 .Timer {
-  font-size: 32px;
-  font-family: monospace, monospace;
-  text-align: right;
+	font-size: 32px;
+	font-family: monospace, monospace;
+	text-align: right;
 }
 
 .NumbersGroup {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	justify-content: center;
 }
 
 .Number {
-  width: 56px;
-  height: 56px;
-  font-size: 24px;
-  cursor: pointer;
-  position: relative;
+	width: 56px;
+	height: 56px;
+	font-size: 24px;
+	cursor: pointer;
+	position: relative;
 }
 
 @media (min-width: 768px) {
-  .Number {
-    width: 64px;
-    height: 64px;
-  }
+	.Number {
+		width: 64px;
+		height: 64px;
+	}
 }
 
 .Number input {
-  display: none;
+	display: none;
 }
 
 .Number__back,
 .Number__front {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  border: 2px solid #f59e0b;
-  transition: 0.3s;
-  box-shadow: var(--shadow-level-2);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 4px;
+	border: 2px solid #f59e0b;
+	transition: 0.3s;
+	box-shadow: var(--shadow-level-2);
 }
 
 .Number__back {
-  rotate: y 180deg;
+	rotate: y 180deg;
 }
 .Number__back[data-correct="false"]::after,
 .Number__back[data-correct="false"]::before {
-  content: "";
-  position: absolute;
-  width: 95%;
-  height: 5px;
-  background-color: #f59e0b;
-  rotate: 45deg;
+	content: "";
+	position: absolute;
+	width: 95%;
+	height: 5px;
+	background-color: #f59e0b;
+	rotate: 45deg;
 }
 .Number__back[data-correct="false"]::after {
-  rotate: -45deg;
+	rotate: -45deg;
 }
 
 .Number__back[data-correct="true"]::after {
-  content: "";
-  position: absolute;
-  width: 80%;
-  height: 80%;
-  inset: 0;
-  margin: auto;
-  border: 4px solid #f59e0b;
-  border-radius: 999px;
+	content: "";
+	position: absolute;
+	width: 80%;
+	height: 80%;
+	inset: 0;
+	margin: auto;
+	border: 4px solid #f59e0b;
+	border-radius: 999px;
 }
 
 .Number__front {
-  background-color: white;
+	background-color: white;
 }
 
 .Number:has(input:disabled) .Number__front {
-  background-color: #e2e2e2;
-  border-color: #e2e2e2;
+	background-color: #e2e2e2;
+	border-color: #e2e2e2;
 }
 .Number:has(input:checked) .Number__front {
-  rotate: y -180deg;
+	rotate: y -180deg;
 }
 .Number:has(input:checked) .Number__back {
-  rotate: y 0deg;
+	rotate: y 0deg;
 }
 
 .Avatar {
-  display: block;
-  object-fit: contain;
-  margin-inline: auto;
+	display: block;
+	object-fit: contain;
+	margin-inline: auto;
 }
 
 .ShareButton {
-  padding: 4px 16px;
-  font-size: 16px;
-  line-height: 2;
-  background-color: transparent;
-  border: 2px dashed #f59e0b;
-  color: #f59e0b;
-  position: relative;
-  transition: 0.3s;
-  display: inline-flex;
-  font-weight: bold;
-  align-items: center;
-  float: right;
+	padding: 4px 16px;
+	font-size: 16px;
+	line-height: 2;
+	background-color: transparent;
+	border: 2px dashed #f59e0b;
+	color: #f59e0b;
+	position: relative;
+	transition: 0.3s;
+	display: inline-flex;
+	font-weight: bold;
+	align-items: center;
+	float: right;
 }
 
 .ShareButton:hover {
-  background-color: #f59e0b;
-  color: white;
+	background-color: #f59e0b;
+	color: white;
 }

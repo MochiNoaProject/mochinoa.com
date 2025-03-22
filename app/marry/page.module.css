@@ -1,35 +1,35 @@
 .container {
-  padding: 48px 24px;
-  max-width: 820px;
-  margin: auto;
+	padding: 48px 24px;
+	max-width: 820px;
+	margin: auto;
 }
 
 .score {
-  margin-bottom: 32px;
-  font-size: 16px;
+	margin-bottom: 32px;
+	font-size: 16px;
 }
 
 .download_box {
-  box-shadow: var(--shadow-level-2);
-  border-radius: 16px;
-  overflow: hidden;
+	box-shadow: var(--shadow-level-2);
+	border-radius: 16px;
+	overflow: hidden;
 }
 
 .download_button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 16px;
-  background-color: #f8b186;
-  color: white;
-  font-size: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 12px 16px;
+	background-color: #f8b186;
+	color: white;
+	font-size: 24px;
 }
 
 .preview {
-  display: flex;
-  width: 100%;
-  height: auto;
-  max-height: 60vh;
-  object-fit: contain;
-  border: 10px solid #f8b186;
+	display: flex;
+	width: 100%;
+	height: auto;
+	max-height: 60vh;
+	object-fit: contain;
+	border: 10px solid #f8b186;
 }

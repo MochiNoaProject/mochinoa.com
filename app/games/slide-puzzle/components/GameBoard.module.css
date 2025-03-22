@@ -1,150 +1,150 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem;
 }
 
 .modeSelector {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 1rem;
 }
 
 .modeSelector button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  background: #f0f0f0;
-  color: #333;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s;
+	padding: 0.5rem 1rem;
+	font-size: 1rem;
+	background: #f0f0f0;
+	color: #333;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.2s;
 }
 
 .modeSelector button.active {
-  background: #4a90e2;
-  color: white;
-  border-color: #4a90e2;
+	background: #4a90e2;
+	color: white;
+	border-color: #4a90e2;
 }
 
 .grid {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  overflow: hidden;
+	position: relative;
+	width: 300px;
+	height: 300px;
+	background-color: #f0f0f0;
+	border-radius: 8px;
+	overflow: hidden;
 }
 
 .grid.hard {
-  width: 400px;
-  height: 400px;
+	width: 400px;
+	height: 400px;
 }
 
 .tile {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border: 1px solid #ccc;
-  background-color: white;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	border: 1px solid #ccc;
+	background-color: white;
+	cursor: pointer;
+	transition: transform 0.2s ease;
 }
 
 .grid.hard .tile {
-  width: 100px;
-  height: 100px;
+	width: 100px;
+	height: 100px;
 }
 
 .tile.empty {
-  background-color: transparent;
-  border: none;
+	background-color: transparent;
+	border: none;
 }
 
 .tile.complete {
-  animation: complete 0.5s ease;
+	animation: complete 0.5s ease;
 }
 
 @keyframes complete {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.1);
+	}
+	100% {
+		transform: scale(1);
+	}
 }
 
 .controls {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+	display: flex;
+	gap: 1rem;
+	align-items: center;
 }
 
 .controls button {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  background-color: #0070f3;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 4px;
+	background-color: #0070f3;
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
 }
 
 .controls button:hover {
-  background-color: #0051b3;
+	background-color: #0051b3;
 }
 
 .complete {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  animation: pulse 1s infinite;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	animation: pulse 1s infinite;
 }
 
 .completeMessage {
-  font-size: 1.5rem;
-  color: #4caf50;
-  font-weight: bold;
+	font-size: 1.5rem;
+	color: #4caf50;
+	font-weight: bold;
 }
 
 .completeTile {
-  width: 100px;
-  height: 100px;
-  border-radius: 8px;
-  border: 2px solid #4caf50;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	width: 100px;
+	height: 100px;
+	border-radius: 8px;
+	border: 2px solid #4caf50;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .completeButton {
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  animation: pulse 2s infinite;
+	padding: 1rem 2rem;
+	font-size: 1.2rem;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	animation: pulse 2s infinite;
 }
 
 .completeButton:hover {
-  background-color: #45a049;
+	background-color: #45a049;
 }
 
 @keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.05);
+	}
+	100% {
+		transform: scale(1);
+	}
 }
