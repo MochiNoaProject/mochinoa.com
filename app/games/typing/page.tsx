@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
-import { toHiragana, toRomaji } from "wanakana";
+import { toRomaji } from "wanakana";
 import Image from "next/image";
 import styles from "./page.module.css";
 
