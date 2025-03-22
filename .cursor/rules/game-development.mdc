@@ -1,6 +1,6 @@
 ---
-description: ゲーム開発する際の規則
-globs: **/*.*
+description: 
+globs: app/**
 alwaysApply: false
 ---
 # ゲーム開発ルール
@@ -62,3 +62,5 @@ alwaysApply: false
 - 既存のコードベースの変更は禁止
 - `/app/games` 以外のディレクトリへの変更は禁止
 - 共通コンポーネントの新規作成は禁止 
+
+

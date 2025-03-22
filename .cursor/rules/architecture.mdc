@@ -1,7 +1,7 @@
 ---
-description: このリポジトリの構成
-globs: **/*.*
-alwaysApply: false
+description: 
+globs: 
+alwaysApply: true
 ---
 # アーキテクチャルール
 
@@ -25,7 +25,6 @@ alwaysApply: false
 
 ## 4. 型定義
 - TypeScriptの型定義は厳密に行う
-- 共通の型定義は`types/`ディレクトリに配置
 - コンポーネント固有の型は同じファイル内で定義
 
 ## 5. ルーティング
@@ -47,3 +46,4 @@ alwaysApply: false
 - 環境変数は`.env`ファイルで管理
 - APIキーなどの機密情報は公開リポジトリにコミットしない
 - 適切なCSRF対策とXSS対策
+
