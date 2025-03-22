@@ -1,42 +1,42 @@
 .AppMenu {
-  position: fixed;
-  width: 100%;
-  z-index: 999;
+	position: fixed;
+	width: 100%;
+	z-index: 999;
 }
 .AppMenu__list {
-  float: right;
-  display: inline-flex;
-  background-color: rgba(0, 0, 0, 0.43);
-  padding: 0px 16px;
-  margin: 8px 0px;
-  border-radius: 999px;
+	float: right;
+	display: inline-flex;
+	background-color: rgba(0, 0, 0, 0.43);
+	padding: 0px 16px;
+	margin: 8px 0px;
+	border-radius: 999px;
 }
 .AppMenu__list li a {
-  display: flex;
-  padding: 16px 24px;
-  font-weight: bold;
-  font-size: 18px;
-  color: rgb(255 255 255 / 0.92);
-  white-space: nowrap;
-  &:hover {
-    text-shadow: 1px 1px 2px #f59e0b;
-  }
+	display: flex;
+	padding: 16px 24px;
+	font-weight: bold;
+	font-size: 18px;
+	color: rgb(255 255 255 / 0.92);
+	white-space: nowrap;
+	&:hover {
+		text-shadow: 1px 1px 2px #f59e0b;
+	}
 }
 
 @media (max-width: 48rem) {
-  .AppMenu {
-    display: none;
-  }
+	.AppMenu {
+		display: none;
+	}
 }
 
 .Footer {
-  background-color: #111827;
-  color: white;
-  padding: 80px 24px 16px;
+	background-color: #111827;
+	color: white;
+	padding: 80px 24px 16px;
 }
 
 .Footer__copyright {
-  display: block;
-  text-align: right;
-  font-size: 16px;
+	display: block;
+	text-align: right;
+	font-size: 16px;
 }

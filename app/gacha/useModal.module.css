@@ -1,13 +1,13 @@
 dialog.container {
-  border-radius: 24px;
-  box-shadow: var(--shadow-level-2);
-  margin: auto;
-  width: min(100%, 720px);
-  border: none;
+	border-radius: 24px;
+	box-shadow: var(--shadow-level-2);
+	margin: auto;
+	width: min(100%, 720px);
+	border: none;
 }
 
 dialog.container::backdrop {
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  background-color: rgba(0, 0, 0, 0.2);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	background-color: rgba(0, 0, 0, 0.2);
 }

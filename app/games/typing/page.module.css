@@ -1,227 +1,224 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 2rem;
-  background-color: #fff5f5;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 2rem;
+	background-color: #fff5f5;
 }
 
 .title {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #ff6b6b;
-  text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+	font-size: 2.5rem;
+	margin-bottom: 2rem;
+	color: #ff6b6b;
+	text-align: center;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .game {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  padding: 2rem;
-  background-color: white;
-  border-radius: 1.5rem;
-  box-shadow: 0 8px 16px rgba(255, 107, 107, 0.1);
-  min-width: 300px;
-  border: 2px solid #ffd8d8;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+	padding: 2rem;
+	background-color: white;
+	border-radius: 1.5rem;
+	box-shadow: 0 8px 16px rgba(255, 107, 107, 0.1);
+	min-width: 300px;
+	border: 2px solid #ffd8d8;
 }
 
 .description {
-  font-size: 1.2rem;
-  color: #666;
-  text-align: center;
-  margin-bottom: 0.5rem;
+	font-size: 1.2rem;
+	color: #666;
+	text-align: center;
+	margin-bottom: 0.5rem;
 }
 
 .status {
-  display: flex;
-  gap: 2rem;
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 1rem;
+	display: flex;
+	gap: 2rem;
+	font-size: 1.2rem;
+	color: #666;
+	margin-bottom: 1rem;
 }
 
 .timer {
-  color: #ff6b6b;
-  font-weight: bold;
+	color: #ff6b6b;
+	font-weight: bold;
 }
 
 .text {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #ff6b6b;
-  text-align: center;
-  margin: 1rem 0 0.5rem;
-  padding: 1rem;
-  background-color: #fff5f5;
-  border-radius: 1rem;
-  width: 100%;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-  animation: bounce 2s infinite;
-  font-family:
-    "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", Meiryo, "メイリオ",
-    sans-serif;
+	font-size: 3rem;
+	font-weight: bold;
+	color: #ff6b6b;
+	text-align: center;
+	margin: 1rem 0 0.5rem;
+	padding: 1rem;
+	background-color: #fff5f5;
+	border-radius: 1rem;
+	width: 100%;
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+	animation: bounce 2s infinite;
+	font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", Meiryo,
+		"メイリオ", sans-serif;
 }
 
 .romaji {
-  font-size: 1.5rem;
-  color: #666;
-  text-align: center;
-  margin-bottom: 1rem;
-  font-style: italic;
-  font-family:
-    "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", Meiryo, "メイリオ",
-    sans-serif;
+	font-size: 1.5rem;
+	color: #666;
+	text-align: center;
+	margin-bottom: 1rem;
+	font-style: italic;
+	font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", Meiryo,
+		"メイリオ", sans-serif;
 }
 
 .input {
-  font-size: 1.5rem;
-  padding: 0.8rem 1.5rem;
-  border: 2px solid #ffd8d8;
-  border-radius: 1rem;
-  width: 100%;
-  text-align: center;
-  transition: all 0.3s ease;
-  background-color: #fff5f5;
-  font-family:
-    "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", Meiryo, "メイリオ",
-    sans-serif;
+	font-size: 1.5rem;
+	padding: 0.8rem 1.5rem;
+	border: 2px solid #ffd8d8;
+	border-radius: 1rem;
+	width: 100%;
+	text-align: center;
+	transition: all 0.3s ease;
+	background-color: #fff5f5;
+	font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", Meiryo,
+		"メイリオ", sans-serif;
 }
 
 .input::placeholder {
-  color: #ffb3b3;
-  font-size: 1.2rem;
+	color: #ffb3b3;
+	font-size: 1.2rem;
 }
 
 .input:focus {
-  outline: none;
-  border-color: #ff6b6b;
-  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+	outline: none;
+	border-color: #ff6b6b;
+	box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
 }
 
 .startButton {
-  font-size: 1.5rem;
-  padding: 1rem 2.5rem;
-  color: white;
-  border: none;
-  border-radius: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(255, 107, 107, 0.2);
-  margin-top: 1rem;
-  display: block;
-  width: 100%;
-  background-color: #ff6b6b;
+	font-size: 1.5rem;
+	padding: 1rem 2.5rem;
+	color: white;
+	border: none;
+	border-radius: 1rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 6px rgba(255, 107, 107, 0.2);
+	margin-top: 1rem;
+	display: block;
+	width: 100%;
+	background-color: #ff6b6b;
 }
 
 .startButton:hover {
-  background-color: #ff5252;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(255, 107, 107, 0.3);
+	background-color: #ff5252;
+	transform: translateY(-2px);
+	box-shadow: 0 6px 8px rgba(255, 107, 107, 0.3);
 }
 
 .startButton:active {
-  transform: translateY(0);
+	transform: translateY(0);
 }
 
 .result {
-  text-align: center;
-  padding: 2rem;
+	text-align: center;
+	padding: 2rem;
 }
 
 .resultContent {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 2rem;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
 .resultText {
-  flex: 1;
-  text-align: left;
+	flex: 1;
+	text-align: left;
 }
 
 .resultText h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
+	font-size: 2rem;
+	margin-bottom: 1.5rem;
+	text-align: center;
 }
 
 .resultText p {
-  font-size: 1.2rem;
-  margin: 0.8rem 0;
+	font-size: 1.2rem;
+	margin: 0.8rem 0;
 }
 
 .resultMessage {
-  margin: 2rem 0;
+	margin: 2rem 0;
 }
 
 .resultMessage p {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #4a4a4a;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #4a4a4a;
 }
 
 .resultImage {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  max-width: 600px;
-  width: 100%;
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	max-width: 600px;
+	width: 100%;
 }
 
 .resultImage img {
-  width: 100%;
-  height: auto;
-  border-radius: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	height: auto;
+	border-radius: 1rem;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .score {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #4a90e2;
-  text-align: center;
-  margin-top: 1rem;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #4a90e2;
+	text-align: center;
+	margin-top: 1rem;
 }
 
 @keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-5px);
+	}
 }
 
 .shareButton {
-  font-size: 1.5rem;
-  padding: 1rem 2.5rem;
-  background-color: #000;
-  color: white;
-  border: none;
-  border-radius: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  margin-top: 1rem;
-  display: block;
-  width: 100%;
+	font-size: 1.5rem;
+	padding: 1rem 2.5rem;
+	background-color: #000;
+	color: white;
+	border: none;
+	border-radius: 1rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+	margin-top: 1rem;
+	display: block;
+	width: 100%;
 }
 
 .shareButton:hover {
-  background-color: #333;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+	background-color: #333;
+	transform: translateY(-2px);
+	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
 }
 
 .shareButton:active {
-  transform: translateY(0);
+	transform: translateY(0);
 }

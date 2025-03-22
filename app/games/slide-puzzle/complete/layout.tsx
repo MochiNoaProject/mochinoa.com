@@ -4,5 +4,5 @@ import CompletePage from "./page";
 export const metadata = slidePuzzleMetadata;
 
 export default function CompleteLayout() {
-  return <CompletePage />;
+	return <CompletePage />;
 }

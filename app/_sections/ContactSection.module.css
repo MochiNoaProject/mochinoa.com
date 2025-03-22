@@ -1,26 +1,26 @@
 .root {
-  position: relative;
+	position: relative;
 }
 .Card {
-  padding: 48px clamp(24px, 4vw, 48px) 120px;
-  display: grid;
-  gap: 24px;
-  background-color: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(5px);
+	padding: 48px clamp(24px, 4vw, 48px) 120px;
+	display: grid;
+	gap: 24px;
+	background-color: rgba(0, 0, 0, 0.2);
+	backdrop-filter: blur(5px);
 }
 .TwitterLink {
-  text-decoration: underline wavy #f59e0b;
+	text-decoration: underline wavy #f59e0b;
 }
 .Title {
-  font-size: 32px;
-  color: rgb(255 255 255 / 0.92);
-  line-height: 1.8;
+	font-size: 32px;
+	color: rgb(255 255 255 / 0.92);
+	line-height: 1.8;
 }
 
 .Contents {
-  display: grid;
-  gap: 8px;
-  font-size: 18px;
-  line-height: 1.8;
-  color: rgb(255 255 255 / 0.92);
+	display: grid;
+	gap: 8px;
+	font-size: 18px;
+	line-height: 1.8;
+	color: rgb(255 255 255 / 0.92);
 }

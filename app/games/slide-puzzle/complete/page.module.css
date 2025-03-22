@@ -1,129 +1,129 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 2rem;
-  text-align: center;
-  background-color: #f5f5f5;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 2rem;
+	text-align: center;
+	background-color: #f5f5f5;
 }
 
 .imageContainer {
-  margin-bottom: 2rem;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	margin-bottom: 2rem;
+	border-radius: 1rem;
+	overflow: hidden;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .completedImage {
-  object-fit: cover;
-  border-radius: 1rem;
+	object-fit: cover;
+	border-radius: 1rem;
 }
 
 .title {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 2rem;
+	font-size: 2.5rem;
+	color: #333;
+	margin-bottom: 2rem;
 }
 
 .stats {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
+	background-color: white;
+	padding: 2rem;
+	border-radius: 1rem;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-bottom: 2rem;
 }
 
 .stats p {
-  margin: 0.5rem 0;
-  font-size: 1.2rem;
-  color: #666;
+	margin: 0.5rem 0;
+	font-size: 1.2rem;
+	color: #666;
 }
 
 .buttons {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 2rem;
 }
 
 .button {
-  display: inline-block;
-  padding: 0.8rem 1.5rem;
-  background-color: #4a90e2;
-  color: white;
-  text-decoration: none;
-  border-radius: 0.5rem;
-  font-size: 1.1rem;
-  transition: background-color 0.2s;
+	display: inline-block;
+	padding: 0.8rem 1.5rem;
+	background-color: #4a90e2;
+	color: white;
+	text-decoration: none;
+	border-radius: 0.5rem;
+	font-size: 1.1rem;
+	transition: background-color 0.2s;
 }
 
 .button:hover {
-  background-color: #357abd;
+	background-color: #357abd;
 }
 
 .buttonContainer {
-  margin-top: 1rem;
+	margin-top: 1rem;
 }
 
 .shareButton {
-  background-color: #1da1f2;
+	background-color: #1da1f2;
 }
 
 .shareButton:hover {
-  background-color: #1a8cd8;
+	background-color: #1a8cd8;
 }
 
 .content {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-  margin-bottom: 2rem;
-  width: 100%;
-  max-width: 800px;
+	display: flex;
+	gap: 2rem;
+	align-items: flex-start;
+	margin-bottom: 2rem;
+	width: 100%;
+	max-width: 800px;
 }
 
 .scoreContainer {
-  flex: 1;
-  background: white;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
+	flex: 1;
+	background: white;
+	padding: 2rem;
+	border-radius: 1rem;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	max-width: 400px;
 }
 
 .scoreItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  border-bottom: 1px solid #eee;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 0;
+	border-bottom: 1px solid #eee;
 }
 
 .scoreItem:last-child {
-  border-bottom: none;
+	border-bottom: none;
 }
 
 .label {
-  font-size: 1.2rem;
-  color: #666;
+	font-size: 1.2rem;
+	color: #666;
 }
 
 .value {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #2c3e50;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #2c3e50;
 }
 
 @media (max-width: 768px) {
-  .content {
-    flex-direction: column;
-    align-items: center;
-  }
+	.content {
+		flex-direction: column;
+		align-items: center;
+	}
 
-  .imageContainer,
-  .scoreContainer {
-    width: 100%;
-    max-width: 100%;
-  }
+	.imageContainer,
+	.scoreContainer {
+		width: 100%;
+		max-width: 100%;
+	}
 }

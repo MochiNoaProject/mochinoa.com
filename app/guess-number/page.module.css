@@ -1,11 +1,11 @@
 .Main {
-  padding: 48px 24px;
-  max-width: 820px;
-  margin: auto;
-  display: grid;
-  gap: 16px;
+	padding: 48px 24px;
+	max-width: 820px;
+	margin: auto;
+	display: grid;
+	gap: 16px;
 }
 
 .Caption {
-  font-size: 16px;
+	font-size: 16px;
 }

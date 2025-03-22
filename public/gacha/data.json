@@ -1,100 +1,100 @@
 [
-  {
-    "name": "おもちくん",
-    "rare": 1,
-    "description": "なんでも食べちゃうおもち。食べたものの姿になる。",
-    "image": "/gacha/omochi.png"
-  },
-  {
-    "name": "うさぎ",
-    "rare": 1,
-    "description": "牧場出身。さみしいと死んでしまう。",
-    "image": "/gacha/usagi.png"
-  },
-  {
-    "name": "どんぐり",
-    "rare": 1,
-    "description": "どんぐりぼうや。たまに虫に食われそうになる。",
-    "image": "/gacha/donguri.png"
-  },
-  {
-    "name": "ひつじ",
-    "rare": 1,
-    "description": "アフロヘアがチャームポイント！どこでも寝る。",
-    "image": "/gacha/hituzi.png"
-  },
-  {
-    "name": "とり",
-    "rare": 1,
-    "description": "仲間と電線にとまっている。空を飛べる。",
-    "image": "/gacha/tori.png"
-  },
-  {
-    "name": "ちゅーりっぷ",
-    "rare": 1,
-    "description": "小学生が花壇に植えたチューリップ。紫色に憧れている。",
-    "image": "/gacha/tulip.png"
-  },
-  {
-    "name": "りす",
-    "rare": 1,
-    "description": "森で暮らすリス。くるみが大好物。",
-    "image": "/gacha/risu.png"
-  },
-  {
-    "name": "きのこ",
-    "rare": 1,
-    "description": "森にたくさん生えているキノコ。多分毒はない。",
-    "image": "/gacha/kinoko.png"
-  },
-  {
-    "name": "はんばーがー",
-    "rare": 2,
-    "description": "アメリカンな味。分厚いお肉が挟まっている。",
-    "image": "/gacha/hamburger.png"
-  },
-  {
-    "name": "くらげ",
-    "rare": 2,
-    "description": "海をふわふわ漂う。うっかり触ると痺れる。",
-    "image": "/gacha/kurage.png"
-  },
-  {
-    "name": "えびふらい",
-    "rare": 2,
-    "description": "高温注意！さっくさくのコロモに包まれている。",
-    "image": "/gacha/ebifurai.png"
-  },
-  {
-    "name": "ぽてと",
-    "rare": 2,
-    "description": "中毒性のある味。ハンバーガーとセット。",
-    "image": "/gacha/potato.png"
-  },
+	{
+		"name": "おもちくん",
+		"rare": 1,
+		"description": "なんでも食べちゃうおもち。食べたものの姿になる。",
+		"image": "/gacha/omochi.png"
+	},
+	{
+		"name": "うさぎ",
+		"rare": 1,
+		"description": "牧場出身。さみしいと死んでしまう。",
+		"image": "/gacha/usagi.png"
+	},
+	{
+		"name": "どんぐり",
+		"rare": 1,
+		"description": "どんぐりぼうや。たまに虫に食われそうになる。",
+		"image": "/gacha/donguri.png"
+	},
+	{
+		"name": "ひつじ",
+		"rare": 1,
+		"description": "アフロヘアがチャームポイント！どこでも寝る。",
+		"image": "/gacha/hituzi.png"
+	},
+	{
+		"name": "とり",
+		"rare": 1,
+		"description": "仲間と電線にとまっている。空を飛べる。",
+		"image": "/gacha/tori.png"
+	},
+	{
+		"name": "ちゅーりっぷ",
+		"rare": 1,
+		"description": "小学生が花壇に植えたチューリップ。紫色に憧れている。",
+		"image": "/gacha/tulip.png"
+	},
+	{
+		"name": "りす",
+		"rare": 1,
+		"description": "森で暮らすリス。くるみが大好物。",
+		"image": "/gacha/risu.png"
+	},
+	{
+		"name": "きのこ",
+		"rare": 1,
+		"description": "森にたくさん生えているキノコ。多分毒はない。",
+		"image": "/gacha/kinoko.png"
+	},
+	{
+		"name": "はんばーがー",
+		"rare": 2,
+		"description": "アメリカンな味。分厚いお肉が挟まっている。",
+		"image": "/gacha/hamburger.png"
+	},
+	{
+		"name": "くらげ",
+		"rare": 2,
+		"description": "海をふわふわ漂う。うっかり触ると痺れる。",
+		"image": "/gacha/kurage.png"
+	},
+	{
+		"name": "えびふらい",
+		"rare": 2,
+		"description": "高温注意！さっくさくのコロモに包まれている。",
+		"image": "/gacha/ebifurai.png"
+	},
+	{
+		"name": "ぽてと",
+		"rare": 2,
+		"description": "中毒性のある味。ハンバーガーとセット。",
+		"image": "/gacha/potato.png"
+	},
 
-  {
-    "name": "さめ",
-    "rare": 2,
-    "description": "海で一番つよいサメ。人は襲わない。",
-    "image": "/gacha/same.png"
-  },
-  {
-    "name": "しろいるか",
-    "rare": 2,
-    "description": "海で穏やかに過ごすイルカ。頭がつるつる。",
-    "image": "/gacha/siroiruka.png"
-  },
+	{
+		"name": "さめ",
+		"rare": 2,
+		"description": "海で一番つよいサメ。人は襲わない。",
+		"image": "/gacha/same.png"
+	},
+	{
+		"name": "しろいるか",
+		"rare": 2,
+		"description": "海で穏やかに過ごすイルカ。頭がつるつる。",
+		"image": "/gacha/siroiruka.png"
+	},
 
-  {
-    "name": "ゆにこーん",
-    "rare": 3,
-    "description": "まぼろしの生き物。ちっちゃなツノが生えている。",
-    "image": "/gacha/unicorn.png"
-  },
-  {
-    "name": "きょうりゅう",
-    "rare": 3,
-    "description": "昔々の生き残り。こころ優しい恐竜。",
-    "image": "/gacha/kyoryu.png"
-  }
+	{
+		"name": "ゆにこーん",
+		"rare": 3,
+		"description": "まぼろしの生き物。ちっちゃなツノが生えている。",
+		"image": "/gacha/unicorn.png"
+	},
+	{
+		"name": "きょうりゅう",
+		"rare": 3,
+		"description": "昔々の生き残り。こころ優しい恐竜。",
+		"image": "/gacha/kyoryu.png"
+	}
 ]

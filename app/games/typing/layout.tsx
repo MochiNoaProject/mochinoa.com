@@ -3,9 +3,9 @@ import metadata from "./metadata";
 export { metadata };
 
 export default function TypingGameLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  return <>{children}</>;
+	return <>{children}</>;
 }

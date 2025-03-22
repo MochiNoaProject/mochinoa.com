@@ -1,117 +1,117 @@
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .frame {
-  border: 4px solid #000;
-  width: 320px;
-  height: 90%;
-  max-height: 500px;
-  display: flex;
-  flex-direction: column;
-  padding: 8px 4px;
+	border: 4px solid #000;
+	width: 320px;
+	height: 90%;
+	max-height: 500px;
+	display: flex;
+	flex-direction: column;
+	padding: 8px 4px;
 }
 
 .frame_active {
-  animation: draw 0.5s;
+	animation: draw 0.5s;
 }
 
 @keyframes draw {
-  0% {
-    transform: scale(0) rotate(0deg);
-  }
-  100% {
-    transform: scale(1) rotate(360deg);
-  }
+	0% {
+		transform: scale(0) rotate(0deg);
+	}
+	100% {
+		transform: scale(1) rotate(360deg);
+	}
 }
 
 .frame header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0px 4px;
-  padding: 8px;
-  border: 2px solid #000;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0px 4px;
+	padding: 8px;
+	border: 2px solid #000;
 }
 .frame header h2 {
-  font-size: 16px;
+	font-size: 16px;
 }
 
 .frame header .mark {
-  border: 2px solid #000;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	border: 2px solid #000;
+	border-radius: 50%;
+	width: 28px;
+	height: 28px;
+	font-size: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .rareGroup {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 4px 20px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin: 4px 20px;
 }
 
 .charaImage {
-  object-fit: contain;
-  display: flex;
-  margin: auto;
-  border: 2px solid #000;
-  background-color: #ededed;
-  padding: 8px;
-  width: calc(100% - 16px);
-  margin: 0px 8px;
+	object-fit: contain;
+	display: flex;
+	margin: auto;
+	border: 2px solid #000;
+	background-color: #ededed;
+	padding: 8px;
+	width: calc(100% - 16px);
+	margin: 0px 8px;
 }
 
 .note {
-  flex: 1;
-  border: 2px solid #000;
-  border-top: none;
-  font-size: 12px;
-  margin: 0px 8px;
-  padding: 8px;
+	flex: 1;
+	border: 2px solid #000;
+	border-top: none;
+	font-size: 12px;
+	margin: 0px 8px;
+	padding: 8px;
 }
 
 @keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 .octagram {
-  margin-top: 15%;
-  position: relative;
-  width: 300px;
-  height: 300px;
-  border: 8px double #000;
-  border-radius: 50%;
-  animation: rotate 10s infinite linear;
+	margin-top: 15%;
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border: 8px double #000;
+	border-radius: 50%;
+	animation: rotate 10s infinite linear;
 }
 
 .octagram::before,
 .octagram::after {
-  content: "";
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  margin: auto;
-  width: 203px;
-  height: 203px;
-  border: inherit;
-  transform: rotate(45deg);
-  overflow: hidden;
+	content: "";
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	margin: auto;
+	width: 203px;
+	height: 203px;
+	border: inherit;
+	transform: rotate(45deg);
+	overflow: hidden;
 }
 
 .octagram::after {
-  transform: rotate(90deg);
+	transform: rotate(90deg);
 }

@@ -1,30 +1,30 @@
 .container {
-  height: 80vh;
+	height: 80vh;
 }
 .container header {
-  position: sticky;
-  top: 0;
-  padding: 16px 24px;
-  background-color: #f8b186;
-  box-shadow: var(--shadow-level-2);
-  display: flex;
-  justify-content: space-between;
+	position: sticky;
+	top: 0;
+	padding: 16px 24px;
+	background-color: #f8b186;
+	box-shadow: var(--shadow-level-2);
+	display: flex;
+	justify-content: space-between;
 }
 .container header h3 {
-  font-weight: normal;
+	font-weight: normal;
 }
 
 .container article {
-  padding: 24px 24px;
+	padding: 24px 24px;
 }
 
 .container article p {
-  margin-bottom: 16px;
+	margin-bottom: 16px;
 }
 
 .container article ul {
-  padding-left: 16px;
+	padding-left: 16px;
 }
 .container article ul li {
-  padding: 8px 0px;
+	padding: 8px 0px;
 }
