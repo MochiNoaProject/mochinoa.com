@@ -6,7 +6,8 @@ import React from "react";
 import styles from "./page.module.css";
 
 const title = "にゃんとも不思議な同居生活";
-const description = `にゃんとも不思議な同居生活 ～猫耳少女との甘くて不思議な物語～ の公式サイトです。あらすじやキャラクター設定などを公開しています。ダウンロードして無料でプレイできます。`;
+const description =
+	"にゃんとも不思議な同居生活 ～猫耳少女との甘くて不思議な物語～ の公式サイトです。あらすじやキャラクター設定などを公開しています。ダウンロードして無料でプレイできます。";
 
 export const metadata = {
 	title,

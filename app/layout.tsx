@@ -7,7 +7,8 @@ import GoogleAnalytics from "./GoogleAnalytics";
 import styles from "./layout.module.css";
 
 const title = "望月のあ公式サイト";
-const description = `歌とお絵描きが好き!全て自作のVTuber望月のあの公式サイトです。活動実績や各種SNSのリンクなどを掲載しています。今すぐアクセスして魅力的な配信や活躍をチェックしてください!`;
+const description =
+	"歌とお絵描きが好き!全て自作のVTuber望月のあの公式サイトです。活動実績や各種SNSのリンクなどを掲載しています。今すぐアクセスして魅力的な配信や活躍をチェックしてください!";
 
 export const viewport: Viewport = {
 	width: "device-width",

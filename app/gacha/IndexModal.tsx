@@ -12,14 +12,14 @@ export const IndexModal = () => {
 					図鑑
 					<span>（達成率：{(collection.size / data.length) * 100}%）</span>
 				</h3>
-				<button>閉じる</button>
+				<button type="button">閉じる</button>
 			</header>
 			<article>
 				{Array.from({ length: data.length }).map((_, index) => {
 					const count = collection.get(index) ?? 0;
 					const chara = count ? data[index] : null;
 					return (
-						<div key={index} className={styles.chara}>
+						<div key={`chara-${index}-${count}`} className={styles.chara}>
 							<p className={styles.chara_rare}>
 								{chara ? Array.from({ length: chara?.rare }, () => "☆") : "..."}
 							</p>

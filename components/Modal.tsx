@@ -29,7 +29,7 @@ export default function Modal({ children }: { children: React.ReactNode }) {
 	}, [onKeyDown]);
 
 	return (
-		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+		// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 		<dialog
 			ref={(node) => {
 				node?.showModal();

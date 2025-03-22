@@ -13,7 +13,7 @@ export const TicketModal = () => {
 					チケット
 					<span>（残り：{ticket.amount}）</span>
 				</h3>
-				<button>閉じる</button>
+				<button type="button">閉じる</button>
 			</header>
 
 			<article>

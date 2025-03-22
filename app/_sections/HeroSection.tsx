@@ -62,7 +62,7 @@ export default function HeroSection() {
 								})}
 							</ul>
 							{data.description.map((line, i) => {
-								return <p key={i}>{line}</p>;
+								return <p key={`description-${i}-${line}`}>{line}</p>;
 							})}
 						</div>
 

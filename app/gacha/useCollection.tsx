@@ -97,7 +97,7 @@ export const CollectionProvider = ({ children }: CollectionProviderProps) => {
 				number,
 			][],
 		);
-		setTickets(Number.parseInt(localStorage.getItem(TICKET_KEY) ?? `0`, 10));
+		setTickets(Number.parseInt(localStorage.getItem(TICKET_KEY) ?? "0", 10));
 		setTicketLogs(
 			JSON.parse(localStorage.getItem(TICKEY_LOG_KEY) ?? "[]") as TicketLog[],
 		);

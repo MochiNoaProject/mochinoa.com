@@ -22,9 +22,9 @@ export const Content = () => {
 			const img = new Image();
 			img.src = url;
 		};
-		data.forEach((chara) => {
+		for (const chara of data) {
 			preloadImage(chara.image);
-		});
+		}
 	}, []);
 
 	return (
@@ -34,7 +34,7 @@ export const Content = () => {
 			<Modal />
 			<Result chara={chara} key={ticket.amount} />
 			<footer className={styles.footer}>
-				<button className={styles.button} onClick={open}>
+				<button className={styles.button} type="button" onClick={open}>
 					図鑑
 				</button>
 

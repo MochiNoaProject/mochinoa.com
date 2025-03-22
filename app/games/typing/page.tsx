@@ -44,22 +44,19 @@ export default function TypingGame() {
 	const generateAllPatterns = (romaji: string): string[] => {
 		const patterns = [romaji.toLowerCase()];
 
-		Object.entries(romajiVariants).forEach(([standard, variants]) => {
-			variants.forEach((variant) => {
+		for (const [standard, variants] of Object.entries(romajiVariants)) {
+			for (const variant of variants) {
 				// 現在のパターンすべてに対して置換を試みる
 				const currentPatterns = [...patterns];
-				currentPatterns.forEach((pattern) => {
+				for (const pattern of currentPatterns) {
 					// 標準形を異体字に置換
-					if (pattern.includes(standard)) {
-						patterns.push(pattern.replace(new RegExp(standard, "g"), variant));
+					const newPattern = pattern.replace(standard, variant);
+					if (newPattern !== pattern) {
+						patterns.push(newPattern);
 					}
-					// 異体字を標準形に置換
-					if (pattern.includes(variant)) {
-						patterns.push(pattern.replace(new RegExp(variant, "g"), standard));
-					}
-				});
-			});
-		});
+				}
+			}
+		}
 
 		return [...new Set(patterns)]; // 重複を除去
 	};
@@ -187,20 +184,20 @@ export default function TypingGame() {
 	const getResultMessage = (chars: number): ResultMessage => {
 		if (chars >= 200) {
 			return {
-				message: "ふ〜んすごいじゃん",
+				message: "すごい！もちのあちゃんが感動してるよ！",
 				image: "/images/sugoi.jpg",
 			};
-		} else if (chars >= 120) {
+		}
+		if (chars >= 120) {
 			return {
-				message: "まあまあがんばったね〜",
+				message: "まあまあ！もちのあちゃんが褒めてるよ！",
 				image: "/images/maamaa.jpg",
 			};
-		} else {
-			return {
-				message: "もっと頑張るともちのあちゃんが褒めてくれるよ",
-				image: null,
-			};
 		}
+		return {
+			message: "もっと頑張るともちのあちゃんが褒めてくれるよ",
+			image: null,
+		};
 	};
 
 	const handleShare = () => {
@@ -221,7 +218,11 @@ export default function TypingGame() {
 							1分間でかわいい単語をたくさん入力しよう！
 						</p>
 						<p className={styles.description}>ローマ字で入力してください</p>
-						<button onClick={startGame} className={styles.startButton}>
+						<button
+							type="button"
+							onClick={startGame}
+							className={styles.startButton}
+						>
 							スタート
 						</button>
 					</>
@@ -237,10 +238,18 @@ export default function TypingGame() {
 								<div className={styles.resultMessage}>
 									<p>{getResultMessage(totalChars).message}</p>
 								</div>
-								<button onClick={resetGame} className={styles.startButton}>
+								<button
+									type="button"
+									onClick={resetGame}
+									className={styles.startButton}
+								>
 									もう一度チャレンジ
 								</button>
-								<button onClick={handleShare} className={styles.shareButton}>
+								<button
+									type="button"
+									onClick={handleShare}
+									className={styles.shareButton}
+								>
 									Xでシェア
 								</button>
 							</div>
@@ -275,7 +284,6 @@ export default function TypingGame() {
 							onChange={handleInput}
 							placeholder="ローマ字で入力してください"
 							className={styles.input}
-							autoFocus
 						/>
 					</div>
 				)}

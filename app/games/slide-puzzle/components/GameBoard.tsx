@@ -97,7 +97,9 @@ export default function GameBoard() {
 				setIsComplete(true);
 				setTimeout(() => {
 					router.push(
-						`/games/slide-puzzle/complete?time=${finalTime}&moves=${moves + 1}&difficulty=${difficulty}`,
+						`/games/slide-puzzle/complete?time=${finalTime}&moves=${
+							moves + 1
+						}&difficulty=${difficulty}`,
 					);
 				}, 500);
 			}
@@ -117,7 +119,7 @@ export default function GameBoard() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.controls}>
-				<button onClick={toggleDifficulty}>
+				<button type="button" onClick={toggleDifficulty}>
 					{difficulty === "easy" ? "難易度: 初級" : "難易度: 上級"}
 				</button>
 			</div>
@@ -126,18 +128,37 @@ export default function GameBoard() {
 			>
 				{board.map((value, index) => (
 					<button
-						key={index}
-						className={`${styles.tile} ${value === (difficulty === "easy" ? 8 : 15) ? styles.empty : ""} ${isComplete ? styles.complete : ""}`}
+						key={`tile-${index}-${value}`}
+						type="button"
+						className={`${styles.tile} ${
+							value === (difficulty === "easy" ? 8 : 15) ? styles.empty : ""
+						} ${isComplete ? styles.complete : ""}`}
 						style={
 							value !== (difficulty === "easy" ? 8 : 15)
 								? {
-										backgroundImage: `url(/images/slide-puzzle/${difficulty === "easy" ? "puzzle1" : "puzzle2"}.jpg)`,
-										backgroundSize: `${difficulty === "easy" ? "300% 300%" : "400% 400%"}`,
-										backgroundPosition: `${-(value % (difficulty === "easy" ? 3 : 4)) * 100}% ${-Math.floor(value / (difficulty === "easy" ? 3 : 4)) * 100}%`,
-										transform: `translate(${(index % (difficulty === "easy" ? 3 : 4)) * 100}%, ${Math.floor(index / (difficulty === "easy" ? 3 : 4)) * 100}%)`,
+										backgroundImage: `url(/images/slide-puzzle/${
+											difficulty === "easy" ? "puzzle1" : "puzzle2"
+										}.jpg)`,
+										backgroundSize: `${
+											difficulty === "easy" ? "300% 300%" : "400% 400%"
+										}`,
+										backgroundPosition: `${
+											-(value % (difficulty === "easy" ? 3 : 4)) * 100
+										}% ${
+											-Math.floor(value / (difficulty === "easy" ? 3 : 4)) * 100
+										}%`,
+										transform: `translate(${
+											(index % (difficulty === "easy" ? 3 : 4)) * 100
+										}%, ${
+											Math.floor(index / (difficulty === "easy" ? 3 : 4)) * 100
+										}%)`,
 									}
 								: {
-										transform: `translate(${(index % (difficulty === "easy" ? 3 : 4)) * 100}%, ${Math.floor(index / (difficulty === "easy" ? 3 : 4)) * 100}%)`,
+										transform: `translate(${
+											(index % (difficulty === "easy" ? 3 : 4)) * 100
+										}%, ${
+											Math.floor(index / (difficulty === "easy" ? 3 : 4)) * 100
+										}%)`,
 									}
 						}
 						onClick={() =>
@@ -148,7 +169,11 @@ export default function GameBoard() {
 			</div>
 			<div className={styles.controls}>
 				<p>移動回数: {moves}</p>
-				{!isComplete && <button onClick={handleShuffle}>シャッフル</button>}
+				{!isComplete && (
+					<button type="button" onClick={handleShuffle}>
+						シャッフル
+					</button>
+				)}
 			</div>
 		</div>
 	);
