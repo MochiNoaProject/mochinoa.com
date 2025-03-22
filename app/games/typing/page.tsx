@@ -278,6 +278,7 @@ export default function TypingGame() {
 							<p>ミス回数: {missCount}回</p>
 						</div>
 						<div className={styles.text}>{text}</div>
+						<div className={styles.romaji}>{toRomaji(text)}</div>
 						<input
 							type="text"
 							value={input}
