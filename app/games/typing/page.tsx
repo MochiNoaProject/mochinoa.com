@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
-import { toRomaji } from "wanakana";
+import { toHiragana, toRomaji } from "wanakana";
 import Image from "next/image";
 import styles from "./page.module.css";
 
@@ -261,13 +261,14 @@ export default function TypingGame() {
             </div>
           </div>
         ) : (
-          <>
-            <div className={styles.status}>
-              <span>残り時間: {timeLeft}秒</span>
-              <span>ミス: {missCount}回</span>
+          <div className={styles.playArea}>
+            <div className={styles.stats}>
+              <p>残り時間: {timeLeft}秒</p>
+              <p>入力文字数: {totalChars}文字</p>
+              <p>正解単語数: {correctWords}語</p>
+              <p>ミス回数: {missCount}回</p>
             </div>
-            <div className={styles.text}>{text}</div>
-            <div className={styles.romaji}>{toRomaji(text)}</div>
+            <div className={styles.wordDisplay}>{text}</div>
             <input
               type="text"
               value={input}
@@ -276,7 +277,7 @@ export default function TypingGame() {
               className={styles.input}
               autoFocus
             />
-          </>
+          </div>
         )}
       </div>
     </div>
