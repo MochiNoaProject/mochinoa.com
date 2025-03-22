@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
-import { toHiragana, toRomaji } from "wanakana";
+import { toRomaji } from "wanakana";
 import Image from "next/image";
 import styles from "./page.module.css";
 
@@ -244,13 +244,17 @@ export default function TypingGame() {
                   Xでシェア
                 </button>
               </div>
-              {getResultMessage(totalChars).image && (
+              {getResultMessage(totalChars).image !== null && (
                 <div className={styles.resultImage}>
                   <Image
-                    src={getResultMessage(totalChars).image!}
+                    src={
+                      getResultMessage(totalChars).image ??
+                      "/images/default.jpg"
+                    }
                     alt="結果画像"
                     width={300}
                     height={300}
+                    className={styles.resultImage}
                   />
                 </div>
               )}
@@ -269,6 +273,7 @@ export default function TypingGame() {
               type="text"
               value={input}
               onChange={handleInput}
+              placeholder="ローマ字で入力してください"
               className={styles.input}
               autoFocus
             />
