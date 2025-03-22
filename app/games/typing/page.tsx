@@ -251,28 +251,29 @@ export default function TypingGame() {
                     alt="結果画像"
                     width={300}
                     height={300}
+                    className={styles.resultImage}
                   />
                 </div>
               )}
             </div>
           </div>
         ) : (
-          <div className={styles.playArea}>
-            <div className={styles.stats}>
-              <p>残り時間: {timeLeft}秒</p>
-              <p>入力文字数: {totalChars}文字</p>
-              <p>正解単語数: {correctWords}語</p>
-              <p>ミス回数: {missCount}回</p>
+          <>
+            <div className={styles.status}>
+              <span>残り時間: {timeLeft}秒</span>
+              <span>ミス: {missCount}回</span>
             </div>
-            <div className={styles.wordDisplay}>{text}</div>
+            <div className={styles.text}>{text}</div>
+            <div className={styles.romaji}>{toRomaji(text)}</div>
             <input
               type="text"
               value={input}
               onChange={handleInput}
+              placeholder="ローマ字で入力してください"
               className={styles.input}
               autoFocus
             />
-          </div>
+          </>
         )}
       </div>
     </div>
