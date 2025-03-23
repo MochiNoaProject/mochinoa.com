@@ -20,6 +20,7 @@ export default function TypingGame() {
 	const [gameOver, setGameOver] = useState(false);
 	const [missCount, setMissCount] = useState(0);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
+	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	// ローマ字の異体字マッピング
 	const romajiVariants: Record<string, string[]> = {
@@ -120,7 +121,24 @@ export default function TypingGame() {
 		setMissCount(0);
 		setInput("");
 		setText(words[Math.floor(Math.random() * words.length)]);
+		// 入力フィールドにフォーカスを設定
+		setTimeout(() => {
+			inputRef.current?.focus();
+		}, 0);
 	}, [words]);
+
+	// キーボードイベントのハンドラー
+	useEffect(() => {
+		const handleKeyPress = (e: KeyboardEvent) => {
+			if (!isPlaying && !gameOver && e.code === "Space") {
+				e.preventDefault();
+				startGame();
+			}
+		};
+
+		window.addEventListener("keydown", handleKeyPress);
+		return () => window.removeEventListener("keydown", handleKeyPress);
+	}, [isPlaying, gameOver, startGame]);
 
 	const resetGame = useCallback(() => {
 		setIsPlaying(false);
@@ -225,6 +243,7 @@ export default function TypingGame() {
 						>
 							スタート
 						</button>
+						<p className={styles.keyHint}>スペースキーでもスタートできます</p>
 					</>
 				) : gameOver ? (
 					<div className={styles.result}>
@@ -280,6 +299,7 @@ export default function TypingGame() {
 						<div className={styles.text}>{text}</div>
 						<div className={styles.romaji}>{toRomaji(text)}</div>
 						<input
+							ref={inputRef}
 							type="text"
 							value={input}
 							onChange={handleInput}
