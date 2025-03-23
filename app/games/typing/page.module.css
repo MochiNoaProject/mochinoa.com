@@ -222,3 +222,11 @@
 .shareButton:active {
 	transform: translateY(0);
 }
+
+.keyHint {
+	font-size: 1rem;
+	color: #999;
+	text-align: center;
+	margin-top: 0.5rem;
+	font-style: italic;
+}
