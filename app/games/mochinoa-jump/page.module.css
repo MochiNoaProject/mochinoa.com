@@ -1,0 +1,120 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #fff5f5;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #ff6b6b;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gameContainer {
+  position: relative;
+  width: 800px;
+  height: 400px;
+  background-color: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 16px rgba(255, 107, 107, 0.1);
+  border: 2px solid #ffd8d8;
+  overflow: hidden;
+}
+
+.score, .highScore {
+  position: absolute;
+  top: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff6b6b;
+  z-index: 1;
+}
+
+.score {
+  left: 1rem;
+}
+
+.highScore {
+  right: 1rem;
+}
+
+.game {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.player {
+  position: absolute;
+  bottom: 20px;
+  left: 100px;
+  width: 50px;
+  height: 50px;
+  transition: transform 0.5s ease;
+}
+
+.playerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.obstacle {
+  position: absolute;
+  bottom: 0;
+  background-color: #ffd8d8;
+  border-radius: 4px;
+}
+
+.small {
+  background-color: #ffb3b3;
+}
+
+.medium {
+  background-color: #ff9999;
+  border-radius: 50%;
+}
+
+.large {
+  background-color: #ff8080;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #ffd8d8;
+}
+
+.startMessage, .gameOver {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.startMessage p, .gameOver p {
+  font-size: 1.5rem;
+  color: #ff6b6b;
+  margin: 0.5rem 0;
+}
+
+.gameOver p:first-child {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+} 
