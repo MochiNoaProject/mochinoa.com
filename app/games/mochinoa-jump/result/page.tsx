@@ -1,9 +1,9 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import styles from "./page.module.css";
+import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import styles from "./page.module.css";
 
 export default function ResultPage() {
 	return (
@@ -34,7 +34,11 @@ function ResultContent() {
 					<Link href="/games/mochinoa-jump" className={styles.retryButton}>
 						もう一度プレイ
 					</Link>
-					<button onClick={shareOnX} className={styles.shareButton}>
+					<button
+						type="button"
+						onClick={shareOnX}
+						className={styles.shareButton}
+					>
 						Xで共有
 					</button>
 				</div>

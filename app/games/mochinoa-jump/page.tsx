@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
+import styles from "./page.module.css";
 
 interface Obstacle {
 	x: number;
@@ -41,7 +41,7 @@ export default function MochinoaJump() {
 	};
 
 	// ジャンプの処理
-	const jump = () => {
+	const jump = useCallback(() => {
 		if (!isJumping && isPlaying && !gameOver) {
 			setIsJumping(true);
 			const player = playerRef.current;
@@ -53,7 +53,25 @@ export default function MochinoaJump() {
 				}, JUMP_DURATION);
 			}
 		}
-	};
+	}, [isJumping, isPlaying, gameOver]);
+
+	// ゲームの開始
+	const startGame = useCallback(() => {
+		setIsPlaying(true);
+		setGameOver(false);
+		setScore(0);
+		obstaclesRef.current = [];
+		lastObstacleTimeRef.current = 0;
+		if (playerRef.current) {
+			playerRef.current.style.transform = "translateY(0)";
+		}
+		setIsJumping(false);
+	}, []);
+
+	// ゲームのリセット
+	const resetGame = useCallback(() => {
+		startGame();
+	}, [startGame]);
 
 	// キーボードイベントの処理
 	useEffect(() => {
@@ -71,28 +89,10 @@ export default function MochinoaJump() {
 
 		window.addEventListener("keydown", handleKeyPress);
 		return () => window.removeEventListener("keydown", handleKeyPress);
-	}, [isPlaying, gameOver]);
-
-	// ゲームの開始
-	const startGame = () => {
-		setIsPlaying(true);
-		setGameOver(false);
-		setScore(0);
-		obstaclesRef.current = [];
-		lastObstacleTimeRef.current = 0;
-		if (playerRef.current) {
-			playerRef.current.style.transform = "translateY(0)";
-		}
-		setIsJumping(false);
-	};
-
-	// ゲームのリセット
-	const resetGame = () => {
-		startGame();
-	};
+	}, [isPlaying, gameOver, jump, startGame, resetGame]);
 
 	// スコアに基づいて障害物の間隔を計算
-	const getObstacleInterval = () => {
+	const getObstacleInterval = useCallback(() => {
 		// スコアに応じて基本間隔を減少
 		const baseInterval = BASE_INTERVAL - score * SPEED_INCREASE;
 
@@ -109,10 +109,10 @@ export default function MochinoaJump() {
 		const randomFactor = (random1 + random2) / 2; // より自然な分布を生成
 
 		return minInterval + (maxInterval - minInterval) * randomFactor;
-	};
+	}, [score]);
 
 	// 障害物の生成
-	const createObstacle = () => {
+	const createObstacle = useCallback(() => {
 		const now = Date.now();
 		const interval = getObstacleInterval();
 		if (now - lastObstacleTimeRef.current >= interval) {
@@ -132,10 +132,10 @@ export default function MochinoaJump() {
 				type: randomType,
 			});
 		}
-	};
+	}, [getObstacleInterval]);
 
 	// 衝突判定
-	const checkCollision = (player: DOMRect, obstacle: Obstacle) => {
+	const checkCollision = useCallback((player: DOMRect, obstacle: Obstacle) => {
 		// プレイヤーの位置を取得
 		const playerLeft = player.left;
 		const playerRight = player.right;
@@ -177,10 +177,10 @@ export default function MochinoaJump() {
 		}
 
 		return hasCollision;
-	};
+	}, []);
 
 	// ゲームオーバー処理
-	const handleGameOver = () => {
+	const handleGameOver = useCallback(() => {
 		if (!gameOver) {
 			const finalScore = score;
 			setIsPlaying(false);
@@ -191,7 +191,7 @@ export default function MochinoaJump() {
 				router.push(`/games/mochinoa-jump/result?score=${finalScore}`);
 			}, 0);
 		}
-	};
+	}, [gameOver, score, router]);
 
 	// ゲームループ
 	useEffect(() => {
@@ -237,7 +237,14 @@ export default function MochinoaJump() {
 				cancelAnimationFrame(animationFrameRef.current);
 			}
 		};
-	}, [isPlaying, gameOver, score]);
+	}, [
+		isPlaying,
+		gameOver,
+		score,
+		createObstacle,
+		checkCollision,
+		handleGameOver,
+	]);
 
 	return (
 		<div className={styles.container}>
@@ -254,9 +261,9 @@ export default function MochinoaJump() {
 							className={styles.playerImage}
 						/>
 					</div>
-					{obstaclesRef.current.map((obstacle, index) => (
+					{obstaclesRef.current.map((obstacle) => (
 						<div
-							key={index}
+							key={`${obstacle.x}-${obstacle.type}`}
 							className={`${styles.obstacle} ${styles[obstacle.type]}`}
 							style={{
 								left: `${obstacle.x}px`,
