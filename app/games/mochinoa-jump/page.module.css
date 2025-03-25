@@ -55,7 +55,7 @@
 .player {
 	position: absolute;
 	left: 50px;
-	bottom: 20px;
+	bottom: 5px;
 	width: 70px;
 	height: 70px;
 	transition: transform 0.3s ease-out;
