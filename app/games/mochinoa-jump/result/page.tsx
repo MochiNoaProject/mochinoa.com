@@ -3,10 +3,20 @@
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import styles from "./page.module.css";
+import { Suspense } from "react";
 
-export default function Result() {
+export default function ResultPage() {
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<ResultContent />
+		</Suspense>
+	);
+}
+
+function ResultContent() {
 	const searchParams = useSearchParams();
-	const score = searchParams.get("score");
+	const score = searchParams.get("score") || "0";
+	const highScore = searchParams.get("highScore") || "0";
 
 	const shareOnX = () => {
 		const text = `もちのあジャンプで${score}点獲得しました！ #もちのあジャンプ`;

@@ -21,7 +21,7 @@ export default function MochinoaJump() {
 	const gameRef = useRef<HTMLDivElement>(null);
 	const playerRef = useRef<HTMLDivElement>(null);
 	const obstaclesRef = useRef<Obstacle[]>([]);
-	const animationFrameRef = useRef<number>();
+	const animationFrameRef = useRef<number | undefined>(undefined);
 	const lastObstacleTimeRef = useRef<number>(0);
 
 	// ゲームの設定
