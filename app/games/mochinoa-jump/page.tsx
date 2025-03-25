@@ -81,7 +81,7 @@ export default function MochinoaJump() {
 					startGame();
 				} else if (gameOver) {
 					resetGame();
-				} else {
+				} else if (!isJumping) {  // ジャンプ中でない場合のみジャンプを実行
 					jump();
 				}
 			}
@@ -89,7 +89,7 @@ export default function MochinoaJump() {
 
 		window.addEventListener("keydown", handleKeyPress);
 		return () => window.removeEventListener("keydown", handleKeyPress);
-	}, [isPlaying, gameOver, jump, startGame, resetGame]);
+	}, [isPlaying, gameOver, jump, startGame, resetGame, isJumping]);
 
 	// スコアに基づいて障害物の間隔を計算
 	const getObstacleInterval = useCallback(() => {
