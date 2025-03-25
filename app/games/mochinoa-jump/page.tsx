@@ -18,7 +18,6 @@ export default function MochinoaJump() {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
-  const [highScore, setHighScore] = useState(0);
   const gameRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<HTMLDivElement>(null);
   const obstaclesRef = useRef<Obstacle[]>([]);
@@ -30,9 +29,9 @@ export default function MochinoaJump() {
   const JUMP_HEIGHT = 150;     // 180から150に戻す
   const JUMP_DURATION = 300;   // 400から300にさらに短縮
   const BASE_INTERVAL = 1500;  // 基本間隔を1.5秒に短縮
-  const MIN_INTERVAL = 600;    // 最小間隔を0.6秒に短縮
+  const MIN_INTERVAL = 400;    // 最小間隔を0.4秒に短縮
   const SPEED_INCREASE = 0.003; // スコアに応じた速度増加率
-  const RANDOM_FACTOR = 0.5;   // ランダム性の強さ（0.5 = ±50%）
+  const RANDOM_FACTOR = 0.8;   // ランダム性を0.8（±80%）に増加
 
   // 障害物の設定
   const OBSTACLE_TYPES = {
@@ -89,18 +88,24 @@ export default function MochinoaJump() {
 
   // ゲームのリセット
   const resetGame = () => {
-    if (score > highScore) {
-      setHighScore(score);
-    }
     startGame();
   };
 
   // スコアに基づいて障害物の間隔を計算
   const getObstacleInterval = () => {
+    // スコアに応じて基本間隔を減少
     const baseInterval = BASE_INTERVAL - (score * SPEED_INCREASE);
+    
+    // ランダム性を加味した最小・最大間隔の計算
     const minInterval = Math.max(baseInterval * (1 - RANDOM_FACTOR), MIN_INTERVAL);
     const maxInterval = baseInterval * (1 + RANDOM_FACTOR);
-    return Math.random() * (maxInterval - minInterval) + minInterval;
+    
+    // よりランダムな分布を実現するために二つの乱数を組み合わせる
+    const random1 = Math.random();
+    const random2 = Math.random();
+    const randomFactor = (random1 + random2) / 2; // より自然な分布を生成
+    
+    return minInterval + (maxInterval - minInterval) * randomFactor;
   };
 
   // 障害物の生成
@@ -135,25 +140,52 @@ export default function MochinoaJump() {
     // 障害物の位置を取得
     const obstacleLeft = obstacle.x;
     const obstacleRight = obstacle.x + obstacle.width;
-    const obstacleTop = 0;
-    const obstacleBottom = obstacle.height;
+    const groundLine = gameRef.current?.getBoundingClientRect().bottom || 0;
+    const obstacleBottom = groundLine;
+    const obstacleTop = groundLine - obstacle.height;
 
-    // 衝突判定
-    return (
+    // 位置情報を出力
+    console.log('プレイヤー位置:', {
+      left: playerLeft,
+      right: playerRight,
+      top: playerTop,
+      bottom: playerBottom
+    });
+    console.log('障害物位置:', {
+      left: obstacleLeft,
+      right: obstacleRight,
+      top: obstacleTop,
+      bottom: obstacleBottom,
+      groundLine: groundLine,
+      type: obstacle.type
+    });
+
+    // 衝突判定（左右と上下）
+    const hasCollision = (
       playerLeft < obstacleRight &&
       playerRight > obstacleLeft &&
-      playerTop < obstacleBottom &&
-      playerBottom > obstacleTop
+      playerBottom > obstacleTop &&
+      playerTop < obstacleBottom
     );
+
+    if (hasCollision) {
+      console.log('衝突発生！');
+    }
+
+    return hasCollision;
   };
 
   // ゲームオーバー処理
   const handleGameOver = () => {
     if (!gameOver) {
+      const finalScore = score;
       setIsPlaying(false);
       setGameOver(true);
+
       // 結果ページに遷移
-      router.push(`/games/mochinoa-jump/result?score=${score}&highScore=${highScore}`);
+      setTimeout(() => {
+        router.push(`/games/mochinoa-jump/result?score=${finalScore}`);
+      }, 0);
     }
   };
 
@@ -166,8 +198,9 @@ export default function MochinoaJump() {
       const game = gameRef.current;
       if (!player || !game) return;
 
-      // スコアの更新
-      setScore((prev) => prev + 1);
+      // スコアの更新（状態の更新を同期的に行う）
+      const newScore = score + 1;
+      setScore(newScore);
 
       // 障害物の生成
       createObstacle();
@@ -200,14 +233,13 @@ export default function MochinoaJump() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isPlaying, gameOver]);
+  }, [isPlaying, gameOver, score]);
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>もちのあジャンプ</h1>
       <div className={styles.gameContainer}>
         <div className={styles.score}>スコア: {score}</div>
-        <div className={styles.highScore}>ハイスコア: {highScore}</div>
         <div ref={gameRef} className={styles.game}>
           <div ref={playerRef} className={styles.player}>
             <Image

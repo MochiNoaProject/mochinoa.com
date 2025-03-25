@@ -2,34 +2,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 100vh;
-  padding: 2rem;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
   background-color: #fff5f5;
 }
 
 .title {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #ff6b6b;
   text-align: center;
+  margin: 1rem 0;
+  color: #ff6b6b;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .gameContainer {
+  width: 100%;
+  height: calc(100vh - 100px);
   position: relative;
-  width: 800px;
-  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: white;
-  border-radius: 1.5rem;
-  box-shadow: 0 8px 16px rgba(255, 107, 107, 0.1);
-  border: 2px solid #ffd8d8;
-  overflow: hidden;
 }
 
 .score, .highScore {
   position: absolute;
-  top: 1rem;
+  top: 20px;
   font-size: 1.5rem;
   font-weight: bold;
   color: #ff6b6b;
@@ -37,27 +36,28 @@
 }
 
 .score {
-  left: 1rem;
+  left: 20px;
 }
 
 .highScore {
-  right: 1rem;
+  right: 20px;
 }
 
 .game {
-  position: relative;
   width: 100%;
   height: 100%;
+  position: relative;
   overflow: hidden;
+  background-color: white;
 }
 
 .player {
   position: absolute;
-  bottom: 20px;
-  left: 100px;
+  left: 50px;
+  bottom: 0;
   width: 50px;
   height: 50px;
-  transition: transform 0.5s ease;
+  transition: transform 0.3s ease-out;
 }
 
 .playerImage {
@@ -95,7 +95,21 @@
   background-color: #ffd8d8;
 }
 
-.startMessage, .gameOver {
+.startMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: #ff6b6b;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gameOver {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -107,14 +121,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.startMessage p, .gameOver p {
-  font-size: 1.5rem;
+.gameOverText {
+  font-size: 2rem;
   color: #ff6b6b;
   margin: 0.5rem 0;
-}
-
-.gameOver p:first-child {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
 } 
