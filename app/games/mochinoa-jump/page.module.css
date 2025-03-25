@@ -1,0 +1,129 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+	width: 100vw;
+	padding: 0;
+	margin: 0;
+	background-color: #fff5f5;
+}
+
+.title {
+	text-align: center;
+	margin: 1rem 0;
+	color: #ff6b6b;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gameContainer {
+	width: 100%;
+	height: calc(100vh - 100px);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: white;
+}
+
+.score,
+.highScore {
+	position: absolute;
+	top: 20px;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #ff6b6b;
+	z-index: 1;
+}
+
+.score {
+	left: 20px;
+}
+
+.highScore {
+	right: 20px;
+}
+
+.game {
+	width: 100%;
+	height: 70%;
+	position: relative;
+	overflow: hidden;
+	background-color: white;
+}
+
+.player {
+	position: absolute;
+	left: 50px;
+	bottom: 5px;
+	width: 70px;
+	height: 70px;
+	transition: transform 0.3s ease-out;
+}
+
+.playerImage {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.obstacle {
+	position: absolute;
+	bottom: 0;
+	background-color: #ffd8d8;
+	border-radius: 4px;
+}
+
+.small {
+	background-color: #ffb3b3;
+}
+
+.medium {
+	background-color: #ff9999;
+	border-radius: 50%;
+}
+
+.large {
+	background-color: #ff8080;
+	clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.ground {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 4px;
+	background-color: #ffd8d8;
+}
+
+.startMessage {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 2rem;
+	color: #ff6b6b;
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.9);
+	padding: 2rem;
+	border-radius: 1rem;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gameOver {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.9);
+	padding: 2rem;
+	border-radius: 1rem;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gameOverText {
+	font-size: 2rem;
+	color: #ff6b6b;
+	margin: 0.5rem 0;
+}
