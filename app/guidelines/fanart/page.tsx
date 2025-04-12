@@ -26,7 +26,7 @@ export default function FanartGuidelines() {
           <h3 className={styles.guidelineTitle}>🚫 NGなこと</h3>
           <ul className={styles.list}>
             <li>商用利用（グッズ化・有償依頼での使用など）</li>
-            <li>自作発言、トレース、無断転載（ファンアート含む）</li>
+            <li>トレースや無断転載（ファンアート含む）の自作発言または誤認される発言</li>
             <li>公序良俗に反する内容（政治・宗教・過激表現など）</li>
             <li>AI画像を公式の画像かのように投稿・誤認させる行為</li>
           </ul>
