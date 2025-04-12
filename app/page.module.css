@@ -35,6 +35,23 @@
 	padding: 80px 24px 16px;
 }
 
+.Footer__links {
+	display: flex;
+	gap: 24px;
+	margin-bottom: 16px;
+}
+
+.Footer__links a {
+	color: white;
+	text-decoration: none;
+	opacity: 0.8;
+	transition: opacity 0.2s;
+}
+
+.Footer__links a:hover {
+	opacity: 1;
+}
+
 .Footer__copyright {
 	display: block;
 	text-align: right;
