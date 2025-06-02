@@ -1,75 +1,121 @@
-@keyframes bounce {
-	from,
-	20%,
-	53%,
-	to {
-		animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-		transform: translate3d(0, 0, 0);
+/*
+  New float animation: Gentle up-and-down movement.
+  Applied as the default animation for .root
+*/
+@keyframes float {
+	0% {
+		transform: translateY(0px);
+		animation-timing-function: ease-in-out;
 	}
-
-	40%,
-	43% {
-		animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-		transform: translate3d(0, -30px, 0) scaleY(1.1);
+	50% {
+		transform: translateY(-10px); /* Gentle float height */
+		animation-timing-function: ease-in-out;
 	}
-
-	70% {
-		animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-		transform: translate3d(0, -15px, 0) scaleY(1.05);
-	}
-
-	80% {
-		transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-		transform: translate3d(0, 0, 0) scaleY(0.95);
-	}
-
-	90% {
-		transform: translate3d(0, -4px, 0) scaleY(1.02);
+	100% {
+		transform: translateY(0px);
+		animation-timing-function: ease-in-out;
 	}
 }
 
+/*
+  Refined swing animation: Smoother and gentler.
+  Triggered on hover for .root
+*/
 @keyframes swing {
-	20% {
-		rotate: 0 0 1 15deg;
+	0% {
+		transform: rotate(0deg);
 	}
-
-	40% {
-		rotate: 0 0 1 -10deg;
+	25% {
+		transform: rotate(5deg); /* Gentle angle */
 	}
-
-	60% {
-		rotate: 0 0 1 5deg;
+	75% {
+		transform: rotate(-5deg); /* Gentle angle */
 	}
-
-	80% {
-		rotate: 0 0 1 -5deg;
+	100% {
+		transform: rotate(0deg);
 	}
+}
 
-	to {
-		rotate: 0 0 1 0deg;
+/*
+  Refined bounce animation: Simpler, smoother, less deformation.
+  Currently not applied to .root or .root:hover by default after these changes.
+  Refined as per subtask request.
+*/
+@keyframes bounce {
+	0%,
+	100%,
+	50% { /* Mid-point also returns to base for a double bounce feel if iteration > 1 */
+		transform: translateY(0);
+		animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); /* Smoother ease-in and out */
+	}
+	25% {
+		transform: translateY(-15px); /* Reduced height, first bounce peak */
+		animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+	}
+	75% {
+		transform: translateY(-10px); /* Reduced height, second bounce peak */
+		animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
 	}
 }
 
 .root {
-	animation: swing 4s linear 1s infinite;
+	/* Default animation is now 'float' */
+	animation: float 3.5s ease-in-out infinite;
 	object-fit: contain;
-	&:hover {
-		animation: bounce 1s linear;
+	transform-origin: bottom center; /* Good for swing and float */
+}
+
+.root:hover {
+	/* Swing animation on hover, replacing bounce */
+	animation: swing 1.2s cubic-bezier(0.455, 0.030, 0.515, 0.955); /* Smoother swing, finite duration */
+}
+
+/* Positional Styles - unchanged */
+.root[data-position] {
+	position: absolute;
+	z-index: 1;
+	bottom: -42px;
+}
+.root[data-position="right"] {
+	right: 24px;
+}
+.root[data-position="left"] {
+	left: 24px;
+}
+.root[data-position="center"] {
+	left: 24px;
+	right: 24px;
+	margin: auto;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 48rem) {
+	.root {
+		/* Scale down the Chibi characters on smaller screens */
+		/* Note: The actual width/height are controlled by props on the Image component in Chibi.tsx */
+		/* This scale will affect the visual size and animations proportionally. */
+		transform: scale(0.8);
 	}
-	&[data-position] {
-		position: absolute;
-		z-index: 1;
-		bottom: -42px;
+
+	.root:hover {
+		/* If scaling down, hover animations might also need adjustment or could be removed if too busy */
+		/* For now, keep swing but it will be smaller due to the root scale */
 	}
-	&[data-position="right"] {
-		right: 24px;
+
+	/* Adjust float animation if needed due to scaling, or adjust base translateY in @keyframes float */
+  /* The current float will be -8px visually (0.8 * -10px) which is fine. */
+
+	.root[data-position] {
+		bottom: -30px; /* Adjust bottom position for scaled Chibi */
 	}
-	&[data-position="left"] {
-		left: 24px;
+
+	.root[data-position="right"] {
+		right: 12px; /* Adjust side position if needed */
 	}
-	&[data-position="center"] {
-		left: 24px;
-		right: 24px;
-		margin: auto;
+
+	.root[data-position="left"] {
+		left: 12px; /* Adjust side position if needed */
 	}
+
+	/* For center, existing rules should still work with auto margins */
 }

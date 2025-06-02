@@ -1,7 +1,59 @@
 .container {
-	padding-inline: 4vw;
-	padding-block: 8px;
-	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px
-		rgba(0, 0, 0, 0.1);
-	background-color: #f8b186;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2rem; /* Increased padding */
+	background-color: var(--primary-color); /* New primary color */
+	border-bottom: 3px solid var(--accent-color); /* Accent color border */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* More subtle box shadow */
+}
+
+.logoLink {
+	display: flex; /* Helps with alignment if Image component behaves unusually */
+	align-items: center;
+}
+
+.navLinks {
+	display: flex;
+	gap: 1.5rem; /* Space between links */
+	list-style: none; /* Remove default list styling */
+	margin: 0;
+	padding: 0;
+}
+
+.navLink a { /* Target the anchor tag inside list items if Link component renders one */
+	font-family: 'Poppins', sans-serif; /* Playful font for navigation */
+	color: white; /* Text color for good contrast on primary color */
+	text-decoration: none;
+	font-size: 1.1rem;
+	font-weight: bold;
+	padding: 0.5rem;
+	border-radius: 4px; /* Subtle rounded corners for links on hover/focus */
+	transition: background-color 0.2s ease-in-out;
+}
+
+.navLink a:hover,
+.navLink a:focus {
+	background-color: rgba(255, 255, 255, 0.1); /* Subtle background highlight on hover/focus */
+	outline: none;
+}
+
+.navLink a:focus-visible {
+	outline: 2px solid var(--accent-color); /* Accessibility outline */
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 48rem) {
+	.container {
+		padding: 1rem 1.5rem; /* Reduced padding */
+	}
+
+	.navLinks {
+		gap: 1rem; /* Reduced gap */
+	}
+
+	.navLink a {
+		font-size: 1rem; /* Reduced font size */
+		padding: 0.4rem; /* Reduced padding */
+	}
 }

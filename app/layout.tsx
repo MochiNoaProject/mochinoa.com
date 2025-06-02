@@ -2,11 +2,12 @@ import "./global.css";
 import "./index.css";
 import clsx from "clsx";
 import type { Metadata, Viewport } from "next";
-import { ZenKakuGothic } from "../styles/font";
+// Removed ZenKakuGothic import
 import GoogleAnalytics from "./GoogleAnalytics";
 import styles from "./layout.module.css";
 
-const title = "望月のあ公式サイト";
+const baseTitle = "Mochinoa's VTuber Hub"; // Updated site title
+const title = `${baseTitle} | Official Site`;
 const description =
 	"歌とお絵描きが好き!全て自作のVTuber望月のあの公式サイトです。活動実績や各種SNSのリンクなどを掲載しています。今すぐアクセスして魅力的な配信や活躍をチェックしてください!";
 
@@ -17,8 +18,8 @@ export const viewport: Viewport = {
 
 export const metadata = {
 	title: {
-		default: title,
-		template: `%s | ${title}`,
+		default: baseTitle, // Use base title for default
+		template: `%s | ${baseTitle}`, // Use base title in template
 	},
 	description,
 	icons: {
@@ -33,8 +34,8 @@ export const metadata = {
 	},
 	openGraph: {
 		type: "website",
-		title,
-		siteName: title,
+		title: baseTitle, // Use base title for OpenGraph
+		siteName: baseTitle, // Use base title for OpenGraph siteName
 		url: "https://www.mochinoa.com",
 		images: "https://www.mochinoa.com/img/ogp.jpg",
 		description,
@@ -49,18 +50,11 @@ export default function RootLayout({
 	modal: React.ReactNode;
 }) {
 	return (
-		<html lang="ja" className={clsx(ZenKakuGothic.className, styles.root)}>
+		// Removed ZenKakuGothic.className from html tag
+		<html lang="ja" className={clsx(styles.root)}>
 			<head>
-				<link rel="preconnect" href="https://fonts.googleapis.com" />
-				<link
-					rel="preconnect"
-					href="https://fonts.gstatic.com"
-					crossOrigin="anonymous"
-				/>
-				<link
-					href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400&display=swap"
-					rel="stylesheet"
-				/>
+				{/* Removed manual Google Font links for Zen Maru Gothic,
+				    Roboto and Poppins are now imported in global.css */}
 				<GoogleAnalytics />
 			</head>
 

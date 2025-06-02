@@ -1,26 +1,81 @@
 .root {
 	position: relative;
+	background-color: var(--secondary-color); /* Deep purple background */
+	padding: 4rem 0; /* Vertical padding for the section */
 }
+
 .Card {
-	padding: 48px clamp(24px, 4vw, 48px) 120px;
+	padding: 3rem clamp(24px, 4vw, 48px) 3rem; /* Adjusted padding */
 	display: grid;
-	gap: 24px;
-	background-color: rgba(0, 0, 0, 0.2);
-	backdrop-filter: blur(5px);
+	gap: 1.5rem; /* Adjusted gap */
+	background-color: rgba(0, 0, 0, 0.15); /* Subtle dark overlay on secondary color */
+	backdrop-filter: blur(8px); /* Slightly more blur */
+	max-width: 800px; /* Max width for the card */
+	margin: 0 auto; /* Center the card */
+	border-radius: 12px; /* Rounded corners for the card */
+	box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+	text-align: center; /* Center text content within the card */
 }
-.TwitterLink {
-	text-decoration: underline wavy #f59e0b;
-}
+
 .Title {
-	font-size: 32px;
-	color: rgb(255 255 255 / 0.92);
-	line-height: 1.8;
+	/* Should inherit Poppins font, var(--text-color-heading) is not suitable for dark bg */
+	font-size: 2.2rem; /* Adjusted size */
+	color: var(--text-color-inverted); /* White text */
+	line-height: 1.4;
+	margin-bottom: 0.5rem; /* Space after title */
 }
 
 .Contents {
 	display: grid;
-	gap: 8px;
-	font-size: 18px;
-	line-height: 1.8;
-	color: rgb(255 255 255 / 0.92);
+	gap: 1rem; /* Space between paragraphs */
+	font-size: 1.1rem; /* ~17.6px */
+	line-height: 1.7;
+	color: var(--text-color-inverted-body); /* Off-white text */
+}
+
+.Contents p {
+	margin-bottom: 0.5rem; /* Ensure spacing between paragraphs if not gapped enough */
+}
+
+.TwitterLink {
+	color: var(--accent-color); /* Bright Pink */
+	text-decoration: none;
+	border-bottom: 2px solid var(--accent-color);
+	padding-bottom: 2px;
+	text-underline-offset: 4px; /* Not strictly needed if using border-bottom */
+	transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+}
+
+.TwitterLink:hover,
+.TwitterLink:focus {
+	color: var(--primary-color); /* Teal */
+	border-bottom-color: var(--primary-color);
+	text-decoration: none;
+}
+
+.TwitterLink:focus-visible {
+	outline: 2px solid var(--accent-color);
+	outline-offset: 2px;
+	border-bottom-color: transparent; /* Hide border if outline is present */
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 48rem) {
+	.root {
+		padding: 3rem 0; /* Slightly reduce vertical padding for the section */
+	}
+
+	.Card {
+		padding: 2rem clamp(16px, 4vw, 32px); /* Adjusted padding for mobile */
+		gap: 1rem; /* Reduce gap in card */
+	}
+
+	.Title {
+		font-size: 1.8rem; /* Reduced title font size */
+	}
+
+	.Contents {
+		font-size: 1rem; /* Reduced content font size */
+		gap: 0.75rem; /* Reduce gap in contents */
+	}
 }

@@ -1,7 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+:root {
+  --primary-color: #00A0A0; /* Vibrant Teal */
+  --secondary-color: #5000A0; /* Deep Purple */
+  --accent-color: #FF4081; /* Bright Pink */
+  --text-color-body: #333333; /* Dark Gray */
+  --text-color-heading: #000000; /* Black */
+  --text-color-inverted: #FFFFFF; /* White for dark backgrounds */
+  --text-color-inverted-body: #FAFAFA; /* Off-white for body on dark backgrounds */
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-color-body);
+  background: linear-gradient(to bottom, #f0f0f0, #ffffff);
+  min-height: 100vh;
+}
+
+body:has(dialog:modal) {
+	touch-action: none;
+	overflow: hidden;
+	overscroll-behavior: none;
 }
 
 a {
@@ -15,7 +40,10 @@ h3,
 h4,
 h5,
 h6 {
-	font-weight: normal;
+  font-family: 'Poppins', sans-serif;
+	font-weight: 700; /* Typically headings are bolder */
+  color: var(--text-color-heading);
+  margin-bottom: 0.5em; /* Add some spacing below headings */
 }
 
 ul {
@@ -32,8 +60,17 @@ button:focus-visible {
 	outline: none;
 }
 
-body:has(dialog:modal) {
-	touch-action: none;
-	overflow: hidden;
-	overscroll-behavior: none;
+/* Mobile Responsiveness for Global Styles */
+@media screen and (max-width: 48rem) {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin-bottom: 0.3em; /* Reduced bottom margin for headings on smaller screens */
+	}
+
+	/* Optional: Slightly reduce base body font size if needed, e.g., 15px from 16px */
+	/* body { font-size: 15px; } */
 }

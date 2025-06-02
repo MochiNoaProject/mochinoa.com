@@ -168,55 +168,61 @@
 }
 
 .Title {
-	font-size: 32px;
-	color: rgba(255, 255, 255, 0.92);
+	font-size: 32px; /* Assuming Poppins is inherited from global h2 styles */
+	color: var(--text-color-inverted); /* White text for dark background */
 	line-height: 1.8;
 }
 
 .CtaButton {
 	border-radius: 999px;
 	padding: 16px 28px;
-	font-size: 20px;
+	font-size: 20px; /* Roboto bold or Poppins would be good here, ensure it's readable */
+	font-weight: bold;
 	line-height: 1.6;
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
-	background-color: transparent;
-	box-shadow: 0 0px 6px 0px #f59e0b, 0 0px 4px 0px #f59e0b inset;
+	background-color: var(--accent-color); /* Accent color background */
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); /* Subtle dark shadow */
 	position: relative;
-	color: rgba(255, 255, 255, 0.92);
-	border: 1px solid white;
-	background-color: rgba(0, 0, 0, 0.2);
-	text-shadow: 1px 1px 2px #f59e0b;
-	&:hover {
-		margin: -1px;
-		border-width: 2px;
-	}
+	color: var(--text-color-inverted); /* White text on accent background */
+	border: 1px solid var(--accent-color); /* Accent color border, or slightly darker like #E03070 */
+	/* text-shadow: none; */ /* Removed orange text shadow */
+	transition: filter 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.CtaButton:hover {
+	filter: brightness(110%);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.CtaButton:focus-visible {
+	outline: 3px solid var(--primary-color); /* Clear focus indicator using primary color */
+	outline-offset: 2px;
 }
 
 .ripple {
 	position: relative;
 	overflow: hidden;
-	&:before {
-		border-radius: 50%;
-		background-color: rgba(255, 255, 255, 0.4);
-		content: "";
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 0;
-		height: 0;
-	}
-	&:focus {
-		&::before {
-			transition: all 0.4s ease-out;
-			opacity: 0;
-			width: 320px;
-			height: 320px;
-			margin-top: -160px;
-			margin-left: -160px;
-		}
-	}
+}
+.ripple:before { /* Ripple effect color - white on accent is fine */
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.4);
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	transition: all 0.4s ease-out; /* Moved transition here for activation */
+	opacity: 0; /* Start transparent */
+}
+.ripple:focus:not(:focus-visible):before { /* Only show ripple on click, not just keyboard focus */
+	opacity: 1;
+	width: 320px;
+	height: 320px;
+	margin-top: -160px;
+	margin-left: -160px;
 }
 
 .Contents {
@@ -228,15 +234,14 @@
 	padding: 48px clamp(24px, 4vw, 48px);
 	display: grid;
 	gap: 16px;
-	background-color: rgba(0, 0, 0, 0.1);
+	background-color: rgba(0, 0, 0, 0.3); /* Slightly more opaque dark background */
 	backdrop-filter: blur(5px);
-	transform: translateZ(0);
+	transform: translateZ(0); /* For stacking context with fixed elements */
 	max-width: 720px;
-	font-size: 16px;
+	font-size: 16px; /* Roboto regular, from body */
 	line-height: 1.8;
-	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px
-		rgba(0, 0, 0, 0.1);
-	color: white;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slightly enhanced shadow for the card */
+	color: var(--text-color-inverted-body); /* Off-white text for card body */
 }
 
 .Card__content {
@@ -255,5 +260,66 @@
 	display: flex;
 	align-items: center;
 	gap: 4px;
-	color: rgba(255, 255, 255, 0.92);
+	color: var(--text-color-inverted-body); /* Off-white for SNS links */
+	text-decoration: none;
+	transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
+}
+
+.SnsList a:hover,
+.SnsList a:focus {
+	color: var(--accent-color); /* Accent color on hover/focus */
+	text-decoration: underline;
+}
+
+.SnsList a:focus-visible {
+	outline: 2px solid var(--accent-color);
+	outline-offset: 2px;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 48rem) {
+	.root__inner {
+		min-height: calc(100vh - 70px); /* Adjust if header height changes on mobile */
+	}
+
+	.Background__avatar {
+		width: 100%; /* Allow avatar to be smaller, adjust positioning if needed */
+		max-width: 400px; /* Max size for mobile avatar */
+		right: -30px; /* Adjust position */
+		bottom: -20px;
+	}
+
+	.Background__sign {
+		transform: scale(0.75); /* Scale down the sign */
+		bottom: 8px;
+		right: 8px;
+	}
+
+	.Contents {
+		padding: 2rem 0; /* Reduce padding for Contents area */
+	}
+
+	.Card {
+		padding: 2rem clamp(16px, 4vw, 32px); /* Reduced padding */
+		border-radius: 16px 48px 16px 16px; /* Adjust border radius if desired */
+		gap: 12px; /* Reduce gap in card */
+	}
+
+	.Title {
+		font-size: 1.8rem; /* Reduced title font size */
+		line-height: 1.5;
+	}
+
+	.CtaButton {
+		font-size: 1rem; /* Reduced font size */
+		padding: 12px 20px; /* Reduced padding */
+	}
+
+	.SnsList {
+		gap: 12px; /* Reduce gap for SNS icons */
+	}
+
+	.SnsList a {
+		font-size: 0.9rem; /* Adjust if text in SNS links is too large */
+	}
 }
