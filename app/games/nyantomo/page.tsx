@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { Cat, Download } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import React from "react";
 import styles from "./page.module.css";
 
 const title = "にゃんとも不思議な同居生活";

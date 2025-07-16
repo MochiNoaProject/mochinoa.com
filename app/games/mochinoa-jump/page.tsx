@@ -23,13 +23,13 @@ export default function MochinoaJump() {
 	const obstaclesRef = useRef<Obstacle[]>([]);
 	const animationFrameRef = useRef<number | undefined>(undefined);
 	const lastObstacleTimeRef = useRef<number>(0);
-	const lastJumpTimeRef = useRef<number>(0);  // 最後のジャンプ時間を記録
+	const lastJumpTimeRef = useRef<number>(0); // 最後のジャンプ時間を記録
 
 	// ゲームの設定
 	const GAME_SPEED = 12;
 	const JUMP_HEIGHT = 150; // 180から150に戻す
 	const JUMP_DURATION = 300; // 400から300にさらに短縮
-	const JUMP_COOLDOWN = 600;  // ジャンプのクールダウン時間（ミリ秒）
+	const JUMP_COOLDOWN = 600; // ジャンプのクールダウン時間（ミリ秒）
 	const BASE_INTERVAL = 1500; // 基本間隔を1.5秒に短縮
 	const MIN_INTERVAL = 400; // 最小間隔を0.4秒に短縮
 	const SPEED_INCREASE = 0.003; // スコアに応じた速度増加率
@@ -45,9 +45,14 @@ export default function MochinoaJump() {
 	// ジャンプの処理
 	const jump = useCallback(() => {
 		const now = Date.now();
-		if (!isJumping && isPlaying && !gameOver && now - lastJumpTimeRef.current >= JUMP_COOLDOWN) {
+		if (
+			!isJumping &&
+			isPlaying &&
+			!gameOver &&
+			now - lastJumpTimeRef.current >= JUMP_COOLDOWN
+		) {
 			setIsJumping(true);
-			lastJumpTimeRef.current = now;  // ジャンプ時間を記録
+			lastJumpTimeRef.current = now; // ジャンプ時間を記録
 			const player = playerRef.current;
 			if (player) {
 				player.style.transform = `translateY(-${JUMP_HEIGHT}px)`;
@@ -66,7 +71,7 @@ export default function MochinoaJump() {
 		setScore(0);
 		obstaclesRef.current = [];
 		lastObstacleTimeRef.current = 0;
-		lastJumpTimeRef.current = 0;  // ジャンプ時間をリセット
+		lastJumpTimeRef.current = 0; // ジャンプ時間をリセット
 		if (playerRef.current) {
 			playerRef.current.style.transform = "translateY(0)";
 		}
@@ -86,7 +91,8 @@ export default function MochinoaJump() {
 					startGame();
 				} else if (gameOver) {
 					resetGame();
-				} else if (!isJumping) {  // ジャンプ中でない場合のみジャンプを実行
+				} else if (!isJumping) {
+					// ジャンプ中でない場合のみジャンプを実行
 					jump();
 				}
 			}

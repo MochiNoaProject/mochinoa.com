@@ -16,7 +16,7 @@ export default function ResultPage() {
 function ResultContent() {
 	const searchParams = useSearchParams();
 	const score = searchParams.get("score") || "0";
-	const highScore = searchParams.get("highScore") || "0";
+	const _highScore = searchParams.get("highScore") || "0";
 
 	const shareOnX = () => {
 		const text = `もちのあジャンプで${score}点獲得しました！ #もちのあジャンプ`;
