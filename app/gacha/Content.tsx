@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import data from "../../public/gacha/data.json";
 import { AppHeader } from "../AppHeader";
 import { IndexModal } from "./IndexModal";
+import styles from "./page.module.css";
 import { Result } from "./Result";
 import { TicketModal } from "./TicketModal";
-import styles from "./page.module.css";
 import { useDispatchCollection, useTicket } from "./useCollection";
 import { useModal } from "./useModal";
 

@@ -9,7 +9,7 @@ export const MarryOff = ({ className }: { className?: string }) => {
 		if (fired.current) {
 			return;
 		}
-		const start = new Date().getTime();
+		const start = Date.now();
 		fired.current = true;
 
 		let flag = true;
@@ -18,7 +18,7 @@ export const MarryOff = ({ className }: { className?: string }) => {
 			if (ok) {
 				window.alert("いい子");
 				flag = false;
-				const end = new Date().getTime();
+				const end = Date.now();
 				setScore((end - start) / 1000);
 			} else {
 				window.alert("は？");

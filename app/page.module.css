@@ -11,6 +11,17 @@
 	margin: 8px 0px;
 	border-radius: 999px;
 }
+.Footer__links a {
+	color: white;
+	text-decoration: none;
+	opacity: 0.8;
+	transition: opacity 0.2s;
+}
+
+.Footer__links a:hover {
+	opacity: 1;
+}
+
 .AppMenu__list li a {
 	display: flex;
 	padding: 16px 24px;
@@ -46,6 +57,10 @@
 	text-decoration: none;
 	opacity: 0.8;
 	transition: opacity 0.2s;
+}
+
+.Footer__links a:hover {
+	opacity: 1;
 }
 
 .Footer__links a:hover {

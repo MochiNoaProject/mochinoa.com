@@ -2,7 +2,7 @@
 import { useReducer, useRef, useState } from "react";
 import styles from "./GuessNumber.module.css";
 import { GuessNumberDialog } from "./GuessNumberDialog";
-import { type VoiceText, playVoice } from "./voice";
+import { playVoice, type VoiceText } from "./voice";
 
 const numbers = [
 	1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,

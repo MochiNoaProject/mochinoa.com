@@ -29,7 +29,7 @@ export default function Modal({ children }: { children: React.ReactNode }) {
 	}, [onKeyDown]);
 
 	return (
-		// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+		// biome-ignore lint/a11y/useKeyWithClickEvents: The dialog is closed by pressing the Escape key.
 		<dialog
 			ref={(node) => {
 				node?.showModal();

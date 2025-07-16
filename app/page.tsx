@@ -1,9 +1,9 @@
+import Link from "next/link";
 import ActivitiesSection from "./_sections/ActivitiesSection";
 import ContactSection from "./_sections/ContactSection";
 import HeroSection from "./_sections/HeroSection";
 import HobbiesSection from "./_sections/HobbiesSection";
 import styles from "./page.module.css";
-import Link from "next/link";
 
 export default function Page() {
 	return (
@@ -43,7 +43,9 @@ export default function Page() {
 			<footer className={styles.Footer}>
 				<div className={styles.Footer__links}>
 					<Link href="/guidelines/streaming">配信ガイドライン</Link>
-					<Link href="/guidelines/fanart">ファンアート・著作物ガイドライン</Link>
+					<Link href="/guidelines/fanart">
+						ファンアート・著作物ガイドライン
+					</Link>
 				</div>
 				<small className={styles.Footer__copyright}>
 					&copy; 2023 もちもちクリエイト

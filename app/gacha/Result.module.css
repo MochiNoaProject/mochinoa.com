@@ -60,7 +60,6 @@
 .charaImage {
 	object-fit: contain;
 	display: flex;
-	margin: auto;
 	border: 2px solid #000;
 	background-color: #ededed;
 	padding: 8px;

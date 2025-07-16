@@ -1,63 +1,63 @@
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  color: #333;
-  background-color: #fff8f0;
-  min-height: 100vh;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 2rem;
+	color: #333;
+	background-color: #fff8f0;
+	min-height: 100vh;
 }
 
 .title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #ff8c00;
-  margin-bottom: 2rem;
-  text-align: center;
+	font-size: 2rem;
+	font-weight: bold;
+	color: #ff8c00;
+	margin-bottom: 2rem;
+	text-align: center;
 }
 
 .section {
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-bottom: 2rem;
+	padding: 1.5rem;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .text {
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  text-align: center;
+	margin-bottom: 1rem;
+	line-height: 1.6;
+	text-align: center;
 }
 
 .list {
-  list-style-type: none;
-  padding-left: 1.5rem;
+	list-style-type: none;
+	padding-left: 1.5rem;
 }
 
 .list li {
-  position: relative;
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  padding-left: 1.5rem;
+	position: relative;
+	margin-bottom: 1rem;
+	line-height: 1.6;
+	padding-left: 1.5rem;
 }
 
 .list li::before {
-  content: "•";
-  color: #ff8c00;
-  position: absolute;
-  left: 0;
+	content: "•";
+	color: #ff8c00;
+	position: absolute;
+	left: 0;
 }
 
 .guidelineSection {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: #fffaf0;
-  border-radius: 6px;
+	margin-top: 1.5rem;
+	padding: 1rem;
+	background-color: #fffaf0;
+	border-radius: 6px;
 }
 
 .guidelineTitle {
-  font-size: 1.2rem;
-  color: #ff8c00;
-  margin-bottom: 1rem;
-  text-align: center;
-} 
+	font-size: 1.2rem;
+	color: #ff8c00;
+	margin-bottom: 1rem;
+	text-align: center;
+}
