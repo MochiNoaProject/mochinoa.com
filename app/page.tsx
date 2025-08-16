@@ -38,6 +38,20 @@ export default function Page() {
 					</div>
 				</nav>
 			</header>
+			<div className={styles.HeroSection}>
+				<div>
+					<video className={styles.HeroMovie} src="/hero-movie.mp4" autoPlay loop muted playsInline />
+				</div>
+				<div className={styles.HeroMessage}>
+					<p className={styles.Title}>
+						Welcome to Mochinoa's World
+					</p>
+					<p>
+						誰かのこころに寄り添える存在になりたい！<br />
+						猫耳がチャームポイントの、ちょっぴりおっとりな女の子！
+					</p>
+				</div>
+			</div>
 		</div>
 	);
 }

@@ -6,6 +6,9 @@
   align-items: baseline;
   border-bottom: 1px solid #e5e8eb;
   padding: 12px 40px;
+  @media (max-width: 768px) {
+    padding: 12px 20px;
+  }
   .Title {
     font-size: 18px;
     font-weight: bold;
@@ -16,6 +19,9 @@
   .Menu {
     display: flex;
     gap: 16px;
+    @media (max-width: 768px) {
+      display: none;
+    }
     ul {
       display: flex;
       a {
@@ -44,6 +50,40 @@
     transition: background-color 0.2s ease;
     &:hover {
       background-color: var(--link-btn-color-hovered);
+    }
+  }
+}
+
+.HeroSection {
+  position: relative;
+  max-width: 928px;
+  overflow: hidden;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  .HeroMovie {
+    width: 100%;
+    min-width: 928px;
+    height: auto;
+    margin-left: -1px;
+  }
+  .HeroMessage {
+    position: absolute;
+    bottom: 48px;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    line-height: 24px;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);
+
+    .Title {
+      font-family: "Work Sans";
+      font-size: 40px;
+      line-height: 60px;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+      text-shadow: 0 8px 8px rgba(0, 0, 0, 0.2), 0 0 8px rgba(0, 0, 0, 0.2),
+        0 2px 4px rgba(255, 255, 255, 0.4);
     }
   }
 }
