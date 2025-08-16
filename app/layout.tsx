@@ -29,14 +29,14 @@ export const metadata = {
 		site: "@_noach",
 		creator: "@_noach",
 		card: "summary_large_image",
-		images: "https://www.mochinoa.com/img/ogp.jpg",
+		images: "https://www.mochinoa.com/img/ogp-2025jpg",
 	},
 	openGraph: {
 		type: "website",
 		title,
 		siteName: title,
 		url: "https://www.mochinoa.com",
-		images: "https://www.mochinoa.com/img/ogp.jpg",
+		images: "https://www.mochinoa.com/img/ogp-2025.jpg",
 		description,
 	},
 } satisfies Metadata;
