@@ -1,74 +1,49 @@
-.AppMenu {
-	position: fixed;
-	width: 100%;
-	z-index: 999;
-}
-.AppMenu__list {
-	float: right;
-	display: inline-flex;
-	background-color: rgba(0, 0, 0, 0.43);
-	padding: 0px 16px;
-	margin: 8px 0px;
-	border-radius: 999px;
-}
-.Footer__links a {
-	color: white;
-	text-decoration: none;
-	opacity: 0.8;
-	transition: opacity 0.2s;
-}
-
-.Footer__links a:hover {
-	opacity: 1;
-}
-
-.AppMenu__list li a {
-	display: flex;
-	padding: 16px 24px;
-	font-weight: bold;
-	font-size: 18px;
-	color: rgb(255 255 255 / 0.92);
-	white-space: nowrap;
-	&:hover {
-		text-shadow: 1px 1px 2px #f59e0b;
-	}
-}
-
-@media (max-width: 48rem) {
-	.AppMenu {
-		display: none;
-	}
-}
-
-.Footer {
-	background-color: #111827;
-	color: white;
-	padding: 80px 24px 16px;
-}
-
-.Footer__links {
-	display: flex;
-	gap: 24px;
-	margin-bottom: 16px;
-}
-
-.Footer__links a {
-	color: white;
-	text-decoration: none;
-	opacity: 0.8;
-	transition: opacity 0.2s;
-}
-
-.Footer__links a:hover {
-	opacity: 1;
-}
-
-.Footer__links a:hover {
-	opacity: 1;
-}
-
-.Footer__copyright {
-	display: block;
-	text-align: right;
-	font-size: 16px;
+.AppHeader {
+  --link-btn-color: #cce1d4;
+  --link-btn-color-hovered: #b3d9c1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid #e5e8eb;
+  padding: 12px 40px;
+  .Title {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .Menu {
+    display: flex;
+    gap: 16px;
+    ul {
+      display: flex;
+      a {
+        display: block;
+        font-weight: bold;
+        font-size: 14px;
+        padding: 0.5rem 1.5rem;
+        border-radius: 12px;
+        &:hover {
+          background-color: #e5e8eb;
+        }
+      }
+    }
+  }
+  .Socials {
+    display: flex;
+    gap: 8px;
+  }
+  .LinkButton {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-content: center;
+    border-radius: 12px;
+    background-color: var(--link-btn-color);
+    transition: background-color 0.2s ease;
+    &:hover {
+      background-color: var(--link-btn-color-hovered);
+    }
+  }
 }
