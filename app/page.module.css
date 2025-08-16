@@ -144,7 +144,11 @@
 		display: flex;
 		gap: 8px;
 		justify-content: center;
+		flex-wrap: wrap;
 		font-size: 14px;
+		a {
+			white-space: nowrap;
+		}
 	}
 	.FooterSocial {
 		display: flex;
