@@ -199,13 +199,34 @@ const GamesAppsSection = () => {
 
 export default function Page() {
 	return (
-		<div className={styles.Root}>
+		<div>
 			<AppHeader/>
 			<HeroSection/>
 			<AboutSection/>
 			<LatestActivities/>
 			<ContactSection/>
 			<GamesAppsSection/>
+			<footer className={styles.Footer}>
+
+				<nav className={styles.FooterSocial}>
+					<Link className={styles.LinkButton}  href={siteConfig.twitter.url} target="_blank" rel="noopener noreferrer">
+						<Image src={twitterIcon} alt="Twitter" width={twitterIcon.width} height={twitterIcon.height} />
+					</Link>
+					<Link className={styles.LinkButton} href={siteConfig.youtube.url} target="_blank" rel="noopener noreferrer">
+						<Image src={youtubeIcon} alt="YouTube" width={youtubeIcon.width} height={youtubeIcon.height} />
+					</Link>
+				</nav>
+				<nav className={styles.FooterNav}>
+					<Link href="/guidelines/streaming">配信ガイドライン</Link>
+					/
+					<Link href="/guidelines/fanart">
+						ファンアート・著作物ガイドライン
+					</Link>
+				</nav>
+				<small className={styles.Copyright}>
+					&copy; 2025 もちもちクリエイト
+				</small>
+			</footer>
 		</div>
 	);
 }

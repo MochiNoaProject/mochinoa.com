@@ -1,6 +1,3 @@
-.Root {
-  margin-bottom: 120px;
-}
 .AppHeader {
   --link-btn-color: #cce1d4;
   --link-btn-color-hovered: #b3d9c1;
@@ -94,7 +91,10 @@
   max-width: 928px;
   margin: auto;
   font-size: 16px;
-  padding: 16px 16px;
+  padding: 16px 48px;
+  @media (max-width: 768px) {
+    padding: 16px 24px;
+  }
   margin-bottom: 16px;
   display: grid;
   gap: 16px;
@@ -132,6 +132,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 24px 16px;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
   .Item {
     position: relative;
     border-radius: 12px;
@@ -178,5 +181,37 @@
         scale: 1.1;
       }
     }
+  }
+}
+
+.Footer {
+  color: #63826e;
+  background-color: #fafafa;
+  padding: 32px 48px 48px;
+  @media (max-width: 768px) {
+    padding: 32px 24px 48px;
+  }
+  display: grid;
+  gap: 16px;
+  .FooterNav {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .FooterSocial {
+    display: flex;
+    justify-content: center;
+    .LinkButton {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-content: center;
+      border-radius: 12px;
+    }
+  }
+  .Copyright {
+    display: block;
+    text-align: center;
   }
 }
