@@ -16,40 +16,7 @@ import nyantomoThumbnail from "./_assets/apps/nyantomo.png";
 import puzzleThumbnail from "./_assets/apps/puzzle.png";
 import typingThumbnail from "./_assets/apps/typing.png";
 import voiceThumbnail from "./_assets/apps/voice.png";
-
-const AppHeader = () => {
-	return (
-			<header className={styles.AppHeader}>
-				<h1>
-					<Link href="/" className={styles.Title}>
-						<Image src={nikukyu} alt="肉球のマーク" width={16} height={14} />
-						Mochinoa's Official Site
-					</Link>
-				</h1>
-				<nav className={styles.Menu}>
-					<ul>
-						<li>
-							<Link href="#about">About</Link>
-						</li>
-						<li>
-							<Link href="#works">Works</Link>
-						</li>
-						<li>
-							<Link href="#contact">Contact</Link>
-						</li>
-					</ul>
-					<div className={styles.Socials}>
-						<Link className={styles.LinkButton}  href={siteConfig.twitter.url} target="_blank" rel="noopener noreferrer">
-							<Image src={twitterIcon} alt="Twitter" width={twitterIcon.width} height={twitterIcon.height} />
-						</Link>
-						<Link className={styles.LinkButton} href={siteConfig.youtube.url} target="_blank" rel="noopener noreferrer">
-							<Image src={youtubeIcon} alt="YouTube" width={youtubeIcon.width} height={youtubeIcon.height} />
-						</Link>
-					</div>
-				</nav>
-			</header>
-	)
-}
+import { AppHeader } from "./AppHeader";
 
 const HeroSection = () => {
 	return (
@@ -144,17 +111,17 @@ const GamesAppsSection = () => {
 					{
 						title: "にゃんとも不思議な同居生活",
 						thumbnail: nyantomoThumbnail,
-						link: "https://www.mochinoa.com/games/nyantomo"
+						link: "/games/nyantomo"
 					},
 					{
 						title: "数当てゲーム",
 						thumbnail: kazuateThumbnail,
-						link: "https://www.mochinoa.com/guess-number"
+						link: "/guess-number"
 					},
 					{
 						title: "結婚アプリ",
 						thumbnail: kekkonThumbnail,
-						link: "https://www.mochinoa.com/marry",
+						link: "/marry",
 
 					},
 					{
