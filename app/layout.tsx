@@ -58,7 +58,7 @@ export default function RootLayout({
 					crossOrigin="anonymous"
 				/>
 				<link
-					href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400&display=swap"
+					href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400&family=Work+Sans:wght@900&display=swap"
 					rel="stylesheet"
 				/>
 				<GoogleAnalytics />
