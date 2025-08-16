@@ -147,7 +147,7 @@ const GamesAppsSection = () => {
 					{
 						title: "心の形診断",
 						thumbnail: kokoroThumbnail,
-						link: "/games/kokoro"
+						link: "https://kokoro-shindan.mochinoa.com/"
 					}
 				].map(item => {
 					return (
