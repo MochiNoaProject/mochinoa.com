@@ -8,6 +8,14 @@ import activityThumbnail01 from "./_assets/activities/001.jpg"
 import activityThumbnail02 from "./_assets/activities/002.jpg"
 import activityThumbnail03 from "./_assets/activities/003.jpg"
 import { siteConfig } from "./_site.config";
+import gachaThumbnail from "./_assets/apps/gacha.png";
+import kazuateThumbnail from "./_assets/apps/kazuate.png";
+import kekkonThumbnail from "./_assets/apps/kekkon.png";
+import kokoroThumbnail from "./_assets/apps/kokoro.png";
+import nyantomoThumbnail from "./_assets/apps/nyantomo.png";
+import puzzleThumbnail from "./_assets/apps/puzzle.png";
+import typingThumbnail from "./_assets/apps/typing.png";
+import voiceThumbnail from "./_assets/apps/voice.png";
 
 const AppHeader = () => {
 	return (
@@ -129,9 +137,62 @@ const GamesAppsSection = () => {
 	return (
 		<section className={styles.SectionCommon}>
 			<h2>Games & Apps</h2>
-			<p>
-				現在開発中のゲームやアプリについての情報をお届けします。
-			</p>
+			
+			<div className={styles.GameGallery}>
+							{
+				[
+					{
+						title: "にゃんとも不思議な同居生活",
+						thumbnail: nyantomoThumbnail,
+						link: "https://www.mochinoa.com/games/nyantomo"
+					},
+					{
+						title: "数当てゲーム",
+						thumbnail: kazuateThumbnail,
+						link: "https://www.mochinoa.com/guess-number"
+					},
+					{
+						title: "結婚アプリ",
+						thumbnail: kekkonThumbnail,
+						link: "https://www.mochinoa.com/marry",
+
+					},
+					{
+						title:"のあぼいす",
+						thumbnail: voiceThumbnail,
+						link: "https://noavoice.vercel.app/"
+					},
+					{
+						title: "ガチャアプリ",
+						thumbnail: gachaThumbnail,
+						link: "/gacha"	
+					},
+					{
+						title: "スライドパズル",
+						thumbnail: puzzleThumbnail,
+						link: "/games/slide-puzzle"
+					},
+					{
+						title: "タイピング",
+						thumbnail: typingThumbnail,
+						link: "/games/typing"
+					},
+					{
+						title: "心の形診断",
+						thumbnail: kokoroThumbnail,
+						link: "/games/kokoro"
+					}
+				].map(item => {
+					return (
+						<Link className={styles.Item} href={item.link} key={item.title}>
+							<Image src={item.thumbnail} alt={item.title} width={200} height={200} />
+							<h3 className={styles.Title}>{item.title}</h3>
+						</Link>
+					)
+
+				})
+			}
+			</div>
 		</section>
 	)
 }
