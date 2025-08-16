@@ -6,9 +6,8 @@ import youtubeIcon from "./_assets/youtube-icon.png";
 import twitterIcon from "./_assets/twitter-icon.png";
 import { siteConfig } from "./_site.config";
 
-export default function Page() {
+const AppHeader = () => {
 	return (
-		<div>
 			<header className={styles.AppHeader}>
 				<h1>
 					<Link href="/" className={styles.Title}>
@@ -38,6 +37,11 @@ export default function Page() {
 					</div>
 				</nav>
 			</header>
+	)
+}
+
+const HeroSection = () => {
+	return (
 			<div className={styles.HeroSection}>
 				<div>
 					<video className={styles.HeroMovie} src="/hero-movie.mp4" autoPlay loop muted playsInline />
@@ -52,6 +56,27 @@ export default function Page() {
 					</p>
 				</div>
 			</div>
+	)
+}
+
+const AboutSection = () => {
+	return (
+		<section className={styles.SectionCommon}>
+			<h2>About Mochizuki Noa</h2>
+			<p>
+				満月みたいに、あなたの夜をやさしく照らせますように。
+				声優、イラストレーター、Live2Dデザイナー、ゲームクリエイターなど、マルチに活動しています。
+			</p>
+		</section>
+	)
+}
+
+export default function Page() {
+	return (
+		<div>
+			<AppHeader/>
+			<HeroSection/>
+			<AboutSection/>
 		</div>
 	);
 }

@@ -1,12 +1,12 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 a {
-	text-decoration: none;
-	color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 h1,
@@ -15,25 +15,25 @@ h3,
 h4,
 h5,
 h6 {
-	font-weight: normal;
+  font-weight: normal;
 }
 
 ul {
-	list-style: none;
+  list-style: none;
 }
 
 button {
-	background: none;
-	border: none;
-	cursor: pointer;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 button:focus-visible {
-	outline: none;
+  outline: none;
 }
 
 body:has(dialog:modal) {
-	touch-action: none;
-	overflow: hidden;
-	overscroll-behavior: none;
+  touch-action: none;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
