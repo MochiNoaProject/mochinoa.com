@@ -44,7 +44,7 @@ const HeroSection = () => {
 
 const AboutSection = () => {
 	return (
-		<section className={styles.SectionCommon}>
+		<section className={styles.SectionCommon} id="about">
 			<h2>About Mochizuki Noa</h2>
 			<p>満月みたいに、あなたの夜をやさしく照らせますように。</p>
 			<p>
@@ -56,7 +56,7 @@ const AboutSection = () => {
 
 const LatestActivities = () => {
 	return (
-		<section className={styles.SectionCommon}>
+		<section className={styles.SectionCommon} id="works">
 			<h2>Latest Activities</h2>
 			<ul className={styles.Gallery}>
 				{[
@@ -99,7 +99,7 @@ const LatestActivities = () => {
 
 const ContactSection = () => {
 	return (
-		<section className={styles.SectionCommon}>
+		<section className={styles.SectionCommon} id="contact">
 			<h2>Contact</h2>
 			<p>
 				お仕事に関するお問い合わせやコラボのお誘いについては、XのDMまたは下記のメールアドレスまでご連絡ください。案件や企画などは詳細を最初に共有していただけるとやり取りがスムーズに進むので助かります。特に支障がなければ2,3日以内に返信させていただきます。

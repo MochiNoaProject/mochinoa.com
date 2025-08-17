@@ -18,13 +18,13 @@ export const AppHeader = () => {
 			<nav className={styles.Menu}>
 				<ul>
 					<li>
-						<Link href="#about">About</Link>
+						<Link href="/#about">About</Link>
 					</li>
 					<li>
-						<Link href="#works">Works</Link>
+						<Link href="/#works">Works</Link>
 					</li>
 					<li>
-						<Link href="#contact">Contact</Link>
+						<Link href="/#contact">Contact</Link>
 					</li>
 				</ul>
 				<div className={styles.Socials}>
