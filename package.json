@@ -25,7 +25,7 @@
 		"wanakana": "5.3.1"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.2.2",
+		"@biomejs/biome": "2.2.3",
 		"@types/node": "22.18.1",
 		"@types/react": "19.1.12",
 		"@types/react-dom": "19.1.9",
