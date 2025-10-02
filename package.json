@@ -20,15 +20,15 @@
 		"clsx": "2.1.1",
 		"lucide-react": "0.544.0",
 		"next": "15.5.4",
-		"react": "19.1.1",
-		"react-dom": "19.1.1",
+		"react": "19.2.0",
+		"react-dom": "19.2.0",
 		"wanakana": "5.3.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.4",
 		"@types/node": "22.18.8",
-		"@types/react": "19.1.17",
-		"@types/react-dom": "19.1.11",
+		"@types/react": "19.2.0",
+		"@types/react-dom": "19.2.0",
 		"typescript": "5.9.3"
 	}
 }
