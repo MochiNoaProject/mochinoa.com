@@ -294,10 +294,10 @@ detect-libc@^2.1.0:
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-2.1.1.tgz#9f1e511ace6bb525efea4651345beac424dac7b9"
   integrity sha512-ecqj/sy1jcK1uWrwpR67UhYrIFQ+5WlGxth34WquCbamhFA6hkkwiu37o6J5xCHdo1oixJRfVRw+ywV+Hq/0Aw==
 
-lucide-react@0.546.0:
-  version "0.546.0"
-  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.546.0.tgz#d9fdc232b47fe652e06401b7ee846bf82b4f7de8"
-  integrity sha512-Z94u6fKT43lKeYHiVyvyR8fT7pwCzDu7RyMPpTvh054+xahSgj4HFQ+NmflvzdXsoAjYGdCguGaFKYuvq0ThCQ==
+lucide-react@0.548.0:
+  version "0.548.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.548.0.tgz#14db954aea4d6e5c0ae9cbb107cdeb86197922e6"
+  integrity sha512-63b16z63jM9yc1MwxajHeuu0FRZFsDtljtDjYm26Kd86UQ5HQzu9ksEtoUUw4RBuewodw/tGFmvipePvRsKeDA==
 
 nanoid@^3.3.6:
   version "3.3.11"
