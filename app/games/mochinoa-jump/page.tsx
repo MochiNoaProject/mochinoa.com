@@ -12,6 +12,23 @@ interface Obstacle {
 	type: "small" | "medium" | "large";
 }
 
+// ゲームの設定
+const GAME_SPEED = 12;
+const JUMP_HEIGHT = 150; // 180から150に戻す
+const JUMP_DURATION = 300; // 400から300にさらに短縮
+const JUMP_COOLDOWN = 600; // ジャンプのクールダウン時間（ミリ秒）
+const BASE_INTERVAL = 1500; // 基本間隔を1.5秒に短縮
+const MIN_INTERVAL = 400; // 最小間隔を0.4秒に短縮
+const SPEED_INCREASE = 0.003; // スコアに応じた速度増加率
+const RANDOM_FACTOR = 0.8; // ランダム性を0.8（±80%）に増加
+
+// 障害物の設定
+const OBSTACLE_TYPES = {
+	small: { width: 20, height: 30, shape: "square" },
+	medium: { width: 30, height: 50, shape: "circle" },
+	large: { width: 40, height: 70, shape: "triangle" },
+};
+
 export default function MochinoaJump() {
 	const router = useRouter();
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -24,23 +41,6 @@ export default function MochinoaJump() {
 	const animationFrameRef = useRef<number | undefined>(undefined);
 	const lastObstacleTimeRef = useRef<number>(0);
 	const lastJumpTimeRef = useRef<number>(0); // 最後のジャンプ時間を記録
-
-	// ゲームの設定
-	const GAME_SPEED = 12;
-	const JUMP_HEIGHT = 150; // 180から150に戻す
-	const JUMP_DURATION = 300; // 400から300にさらに短縮
-	const JUMP_COOLDOWN = 600; // ジャンプのクールダウン時間（ミリ秒）
-	const BASE_INTERVAL = 1500; // 基本間隔を1.5秒に短縮
-	const MIN_INTERVAL = 400; // 最小間隔を0.4秒に短縮
-	const SPEED_INCREASE = 0.003; // スコアに応じた速度増加率
-	const RANDOM_FACTOR = 0.8; // ランダム性を0.8（±80%）に増加
-
-	// 障害物の設定
-	const OBSTACLE_TYPES = {
-		small: { width: 20, height: 30, shape: "square" },
-		medium: { width: 30, height: 50, shape: "circle" },
-		large: { width: 40, height: 70, shape: "triangle" },
-	};
 
 	// ジャンプの処理
 	const jump = useCallback(() => {
