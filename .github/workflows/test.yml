@@ -12,11 +12,11 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Use Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
           node-version-file: package.json
       - name: Setup pnpm
@@ -32,7 +32,7 @@ jobs:
 
       - name: Setup pnpm cache
         id: cache
-        uses: actions/cache@v5
+        uses: actions/cache@v4
         with:
           path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -43,6 +43,6 @@ jobs:
         shell: bash
         run: pnpm install --frozen-lockfile --prefer-offline
       - name: Lint
-        run: pnpm run lint
+        run: pnpm biome ci
       - name: Typecheck
         run: pnpm run typecheck
