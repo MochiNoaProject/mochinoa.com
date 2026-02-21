@@ -8,6 +8,49 @@ import portraitImg from "./_assets/images/momomochi-portrait.jpg";
 import peachIconSvg from "./_assets/images/peach-icon.svg";
 import styles from "./page.module.css";
 
+const WAVE_W = 1000;
+const WAVE_ARC_DEPTH = 60;
+const WAVE_SCALLOP_COUNT = 14;
+const WAVE_SCALLOP_FLATNESS = 0.75;
+
+function buildScallopedArcPath() {
+	const R =
+		(WAVE_W * WAVE_W + 4 * WAVE_ARC_DEPTH * WAVE_ARC_DEPTH) /
+		(8 * WAVE_ARC_DEPTH);
+	const halfAngle = Math.asin(WAVE_W / (2 * R));
+
+	const points: [number, number][] = [];
+	for (let i = 0; i <= WAVE_SCALLOP_COUNT; i++) {
+		const theta =
+			-halfAngle + (2 * halfAngle * i) / WAVE_SCALLOP_COUNT;
+		points.push([
+			WAVE_W / 2 + R * Math.sin(theta),
+			WAVE_ARC_DEPTH - R * (1 - Math.cos(theta)),
+		]);
+	}
+
+	let d = `M 0 0 L ${WAVE_W} 0`;
+	let maxY = 0;
+
+	for (let i = WAVE_SCALLOP_COUNT; i > 0; i--) {
+		const [px, py] = points[i];
+		const [tx, ty] = points[i - 1];
+		const dx = tx - px;
+		const dy = ty - py;
+		const dist = Math.sqrt(dx * dx + dy * dy);
+		const r = dist * WAVE_SCALLOP_FLATNESS;
+		const bulge = r - Math.sqrt(r * r - (dist / 2) ** 2);
+		const midY = (py + ty) / 2 + bulge;
+		if (midY > maxY) maxY = midY;
+		d += ` A ${r.toFixed(2)} ${r.toFixed(2)} 0 0 1 ${tx.toFixed(2)} ${ty.toFixed(2)}`;
+	}
+
+	d += " Z";
+	return { d, height: Math.ceil(maxY) };
+}
+
+const wavePath = buildScallopedArcPath();
+
 const divider = (
 	<div className={styles.Divider}>
 		<div className={styles.DividerDot} />
@@ -24,7 +67,13 @@ export default function Page() {
 			{/* Fixed background: pink + teal sky with scallop wave */}
 			<div className={styles.fixedBackground}>
 				<div className={styles.skyArea}>
-					<div className={styles.wave} />
+					<svg
+						className={styles.wave}
+						viewBox={`0 0 ${WAVE_W} ${wavePath.height}`}
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path d={wavePath.d} fill="#63bac7" />
+					</svg>
 				</div>
 			</div>
 
