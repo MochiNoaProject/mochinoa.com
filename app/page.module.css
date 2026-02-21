@@ -1,168 +1,387 @@
-.HeroSection {
+.PageContainer {
+	--color-paper: #f7f5e8;
+	--color-pink: #f9d4e1;
+	--color-teal: #63bac7;
+
 	position: relative;
-	max-width: 928px;
-	overflow: hidden;
-	margin: auto;
+	width: 100%;
+	min-height: 100vh;
 	display: flex;
 	justify-content: center;
-	.HeroMovie {
-		width: 100%;
-		min-width: 928px;
-		height: auto;
-		margin-left: -1px;
-	}
-	.HeroMessage {
-		position: absolute;
-		bottom: 48px;
-		text-align: center;
-		color: white;
-		font-size: 16px;
-		text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);
-		padding: 0 8px;
-
-		.Title {
-			font-family: "Work Sans", sans-serif;
-			font-size: 40px;
-			font-weight: 900;
-			letter-spacing: -0.2px;
-			line-height: 1.2;
-			text-shadow:
-				0 8px 8px rgba(0, 0, 0, 0.2),
-				0 0 8px rgba(0, 0, 0, 0.2),
-				0 2px 4px rgba(255, 255, 255, 0.4);
-		}
-	}
 }
 
-.SectionCommon {
-	max-width: 928px;
-	margin: auto;
+/* ===== Fixed Background ===== */
+
+.fixedBackground {
+	position: fixed;
+	background-color: var(--color-pink);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: -1;
+	pointer-events: none;
+}
+
+.skyArea {
+	background-color: var(--color-teal);
+	width: 100%;
+	height: 250px;
+	position: relative;
+}
+
+.wave {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	transform: translateY(100%);
+	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 40'%3E%3Cellipse cx='40' cy='0' rx='40' ry='40' fill='%2363bac7'/%3E%3C/svg%3E")
+		repeat-x;
+	background-size: 80px 40px;
+}
+
+/* ===== Left Fixed Area ===== */
+
+.FixedLeftArea {
+	position: fixed;
+	top: 40px;
+	left: 40px;
+	width: 200px;
+	z-index: 2;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	font-family: "Zen Maru Gothic", sans-serif;
+	font-size: 13px;
+}
+
+.PortraitWrapper {
+	position: relative;
+	width: 120px;
+	height: 120px;
+}
+
+.Portrait {
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.PeachIcon {
+	position: absolute;
+	top: -4px;
+	right: -8px;
+	width: 32px;
+	height: 32px;
+}
+
+/* ===== Right Fixed Area ===== */
+
+.FixedRightArea {
+	position: fixed;
+	top: 40px;
+	right: 40px;
+	width: 260px;
+	z-index: 2;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	text-align: right;
+	gap: 6px;
+	font-size: 13px;
+}
+
+.FixedRightArea a:hover {
+	text-decoration: underline;
+}
+
+.Copyright {
+	margin-top: 16px;
+	font-size: 12px;
+	opacity: 0.85;
+}
+
+/* ===== Center Scroll Area ===== */
+
+.CenterScrollArea {
+	width: 100%;
+	max-width: 640px;
+	min-height: 100vh;
+	background-color: var(--color-paper);
+	background-image:
+		linear-gradient(rgba(180, 200, 180, 0.3) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(180, 200, 180, 0.3) 1px, transparent 1px);
+	background-size: 20px 20px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+	z-index: 1;
+	padding-bottom: 80px;
+}
+
+/* ===== Hero Area ===== */
+
+.HeroArea {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 24px 20px 40px;
+	gap: 16px;
+}
+
+.Logo {
+	width: 180px;
+	height: auto;
+}
+
+.TopImage {
+	width: 260px;
+	height: auto;
+}
+
+.HeroLinks {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+
+.HeroLinkImage {
+	width: 40px;
+	height: 40px;
+	object-fit: contain;
+	transition: opacity 0.2s;
+}
+
+.HeroLinkImage:hover {
+	opacity: 0.75;
+}
+
+/* ===== Profile Section ===== */
+
+.ProfileSection {
+	text-align: center;
+	padding: 0 40px;
+	margin-bottom: 40px;
+}
+
+.ProfileName {
+	font-size: 24px;
+	font-weight: bold;
+	color: var(--color-teal);
+	font-family: "Zen Maru Gothic", sans-serif;
+	letter-spacing: 0.15em;
+}
+
+.ProfileTitle {
+	font-size: 12px;
+	color: #999;
+	margin-top: 4px;
+}
+
+.ProfileDescription {
+	margin-top: 20px;
+	color: #666;
+	line-height: 2;
+	font-size: 14px;
+}
+
+/* ===== Music Gallery (featured area in page) ===== */
+
+.MusicGallerySection {
+	margin: 40px 0 60px;
+}
+
+/* ===== Divider ===== */
+
+.Divider {
+	display: flex;
+	justify-content: center;
+	gap: 12px;
+	margin: 60px 0;
+}
+
+.DividerDot {
+	width: 20px;
+	height: 20px;
+	background-color: #333;
+	border-radius: 50%;
+}
+
+/* ===== Shop Section ===== */
+
+.ShopSection {
+	padding: 0 24px;
+	margin-bottom: 20px;
+}
+
+.ShopTitle {
+	font-family: "Zen Maru Gothic", sans-serif;
 	font-size: 16px;
-	padding: 16px 48px;
-	@media (max-width: 768px) {
-		padding: 16px 24px;
-	}
-	margin-bottom: 16px;
-	display: grid;
-	gap: 16px;
-	h2 {
-		font-size: 24px;
-		font-weight: bold;
-	}
+	color: #7cb5a0;
+	text-align: center;
+	margin-bottom: 32px;
+	letter-spacing: 0.08em;
 }
 
-.Gallery {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+.ProductCard {
+	position: relative;
+	display: flex;
+	align-items: center;
 	gap: 16px;
-	padding: 8px 0px;
-	@media (max-width: 768px) {
-		grid-template-columns: 1fr;
-	}
-	img {
-		width: 100%;
-		height: auto;
-		border-radius: 8px;
-		object-fit: cover;
-	}
-	h3 {
-		font-size: 16px;
-		font-weight: bold;
-	}
-	p {
-		color: #63826e;
-		font-size: 14px;
-	}
+	margin-bottom: 36px;
+	padding: 12px;
 }
 
-.GameGallery {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	gap: 24px 16px;
-	@media (max-width: 768px) {
-		grid-template-columns: 1fr 1fr;
-	}
-	.Item {
-		position: relative;
-		border-radius: 12px;
-		overflow: hidden;
-		aspect-ratio: 1;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		&::before {
-			content: "";
-			display: block;
-			position: absolute;
-			background-color: rgba(0, 0, 0, 0.2);
-			width: 100%;
-			height: 100%;
-			z-index: 1;
-			transition: 0.3s;
-		}
-		img {
-			display: block;
-			width: 100%;
-			height: auto;
-			aspect-ratio: 1;
-			transition: 0.3s;
-		}
-		.Title {
-			color: #fafafa;
-			position: absolute;
-			width: 100%;
-			bottom: 16px;
-			font-size: 14px;
-			text-align: center;
-			transition: 0.3s;
-			z-index: 2;
-		}
-		&:hover {
-			&::before {
-				background-color: rgba(0, 0, 0, 0.3);
-			}
-			img {
-				scale: 1.2;
-			}
-			.Title {
-				scale: 1.1;
-			}
-		}
-	}
+.ProductCard:nth-child(odd) {
+	flex-direction: row;
 }
 
-.Footer {
-	color: #63826e;
-	background-color: #fafafa;
-	padding: 32px 48px 48px;
-	@media (max-width: 768px) {
-		padding: 32px 24px 48px;
-	}
-	display: grid;
-	gap: 16px;
-	.FooterNav {
-		display: flex;
-		gap: 8px;
-		justify-content: center;
-		flex-wrap: wrap;
-		font-size: 14px;
-		a {
-			white-space: nowrap;
-		}
-	}
-	.FooterSocial {
-		display: flex;
-		justify-content: center;
-		.LinkButton {
-			width: 40px;
-			height: 40px;
-			display: grid;
-			place-content: center;
-			border-radius: 12px;
-		}
-	}
-	.Copyright {
-		display: block;
-		text-align: center;
-	}
+.ProductCard:nth-child(even) {
+	flex-direction: row-reverse;
+}
+
+.ProductImageWrapper {
+	position: relative;
+	flex-shrink: 0;
+	width: 180px;
+}
+
+.ProductImage {
+	width: 180px;
+	height: auto;
+	border-radius: 4px;
+	transform: rotate(-3deg);
+}
+
+.ProductCard:nth-child(even) .ProductImage {
+	transform: rotate(3deg);
+}
+
+.TapeTopLeft {
+	position: absolute;
+	width: 60px;
+	height: 20px;
+	background-color: rgba(99, 186, 199, 0.35);
+	border-radius: 2px;
+	top: -6px;
+	left: 8px;
+	transform: rotate(-25deg);
+}
+
+.TapeTopRight {
+	position: absolute;
+	width: 60px;
+	height: 20px;
+	background-color: rgba(99, 186, 199, 0.35);
+	border-radius: 2px;
+	top: -6px;
+	right: 8px;
+	transform: rotate(20deg);
+}
+
+.TapeBottomRight {
+	position: absolute;
+	width: 60px;
+	height: 20px;
+	background-color: rgba(99, 186, 199, 0.35);
+	border-radius: 2px;
+	bottom: -6px;
+	right: 8px;
+	transform: rotate(-15deg);
+}
+
+.ProductInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	flex: 1;
+}
+
+.ProductLabel {
+	font-family: "Zen Maru Gothic", sans-serif;
+	font-size: 14px;
+	color: #666;
+}
+
+.ProductTag {
+	width: 100px;
+	height: auto;
+}
+
+/* ===== Banner Section ===== */
+
+.BannerCard {
+	display: block;
+	margin: 0 24px 24px;
+	border-radius: 6px;
+	overflow: hidden;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	transition: transform 0.2s, box-shadow 0.2s;
+	position: relative;
+}
+
+.BannerCard:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.BannerImage {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.BannerTapeLeft {
+	position: absolute;
+	width: 60px;
+	height: 20px;
+	background-color: rgba(99, 186, 199, 0.35);
+	border-radius: 2px;
+	top: 8px;
+	left: -8px;
+	transform: rotate(-30deg);
+}
+
+.BannerTapeRight {
+	position: absolute;
+	width: 60px;
+	height: 20px;
+	background-color: rgba(99, 186, 199, 0.35);
+	border-radius: 2px;
+	bottom: 8px;
+	right: -8px;
+	transform: rotate(25deg);
+}
+
+/* ===== Contact Section ===== */
+
+.ContactSection {
+	margin-top: 60px;
+	padding: 0 32px 40px;
+	text-align: center;
+}
+
+.ContactTitle {
+	font-family: "Zen Maru Gothic", sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	color: var(--color-teal);
+	margin-bottom: 20px;
+}
+
+.ContactBody {
+	font-size: 13px;
+	color: #555;
+	line-height: 2;
+	margin-bottom: 24px;
+}
+
+.ContactEmail {
+	font-size: 13px;
+	color: #555;
 }

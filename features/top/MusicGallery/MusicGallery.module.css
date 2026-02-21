@@ -1,0 +1,74 @@
+.MusicGallery {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.Featured {
+	position: relative;
+	margin: 0 24px;
+	border-radius: 8px;
+	overflow: hidden;
+	aspect-ratio: 16 / 9;
+}
+
+.FeaturedImage {
+	object-fit: cover;
+}
+
+.FeaturedTapeTopLeft {
+	position: absolute;
+	top: -4px;
+	left: 12px;
+	width: 56px;
+	height: 18px;
+	background-color: rgba(99, 186, 199, 0.4);
+	border-radius: 2px;
+	transform: rotate(-20deg);
+	z-index: 1;
+}
+
+.FeaturedTapeBottomRight {
+	position: absolute;
+	bottom: -4px;
+	right: 12px;
+	width: 56px;
+	height: 18px;
+	background-color: rgba(249, 212, 225, 0.5);
+	border-radius: 2px;
+	transform: rotate(15deg);
+	z-index: 1;
+}
+
+.Track {
+	display: flex;
+	gap: 12px;
+	overflow-x: auto;
+	padding: 8px 24px;
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none;
+}
+
+.Track::-webkit-scrollbar {
+	display: none;
+}
+
+.ThumbnailLink {
+	flex-shrink: 0;
+	display: block;
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	overflow: hidden;
+	scroll-snap-align: center;
+	transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ThumbnailLink:hover {
+	transform: scale(1.1);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.Thumbnail {
+	object-fit: cover;
+}

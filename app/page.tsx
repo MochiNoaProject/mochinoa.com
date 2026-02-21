@@ -1,232 +1,221 @@
 import Image from "next/image";
 import Link from "next/link";
-import activityThumbnail01 from "./_assets/activities/001.jpg";
-import activityThumbnail02 from "./_assets/activities/002.jpg";
-import activityThumbnail03 from "./_assets/activities/003.jpg";
-import gachaThumbnail from "./_assets/apps/gacha.png";
-import kazuateThumbnail from "./_assets/apps/kazuate.png";
-import kekkonThumbnail from "./_assets/apps/kekkon.png";
-import kokoroThumbnail from "./_assets/apps/kokoro.png";
-import nyantomoThumbnail from "./_assets/apps/nyantomo.png";
-import puzzleThumbnail from "./_assets/apps/puzzle.png";
-import typingThumbnail from "./_assets/apps/typing.png";
-import voiceThumbnail from "./_assets/apps/voice.png";
-import twitterIcon from "./_assets/twitter-icon.png";
-import youtubeIcon from "./_assets/youtube-icon.png";
+import { MusicGallery } from "../features/top/MusicGallery/MusicGallery";
 import { siteConfig } from "./_site.config";
-import { AppHeader } from "./AppHeader";
+import logoImg from "./_assets/images/mochilogo.png";
+import topImg from "./_assets/images/トップ画像.png";
+import portraitImg from "./_assets/images/momomochi-portrait.jpg";
+import peachIconSvg from "./_assets/images/peach-icon.svg";
 import styles from "./page.module.css";
 
-const HeroSection = () => {
-	return (
-		<div className={styles.HeroSection}>
-			<div>
-				<video
-					className={styles.HeroMovie}
-					src="/hero-movie.mp4"
-					autoPlay
-					loop
-					muted
-					playsInline
-				/>
-			</div>
-			<div className={styles.HeroMessage}>
-				<p className={styles.Title}>Welcome to Mochinoa's World</p>
-				<p>
-					誰かのこころに寄り添える存在になりたい！
-					<br />
-					猫耳がチャームポイントの、ちょっぴりおっとりな女の子！
-				</p>
-			</div>
-		</div>
-	);
-};
-
-const AboutSection = () => {
-	return (
-		<section className={styles.SectionCommon} id="about">
-			<h2>About Mochizuki Noa</h2>
-			<p>満月みたいに、あなたの夜をやさしく照らせますように。</p>
-			<p>
-				声優、イラストレーター、Live2Dデザイナー、ゲームクリエイターなど、マルチに活動しています。
-			</p>
-		</section>
-	);
-};
-
-const LatestActivities = () => {
-	return (
-		<section className={styles.SectionCommon} id="works">
-			<h2>Latest Activities</h2>
-			<ul className={styles.Gallery}>
-				{[
-					{
-						title: "ワンマンイベント開催",
-						description:
-							"オンラインのワンマントークイベントを開催。ファンのみんなとお話したり、企画やオリジナルグッズのガチャを実施。",
-						thumbnail: activityThumbnail01,
-					},
-					{
-						title: "marurucafe コラボカフェ実施",
-						description:
-							"marurucafeさんにてコラボカフェの実施し、コラボメニューの販売やトークイベントへの出演をしました。",
-						thumbnail: activityThumbnail02,
-					},
-					{
-						title: "推しカード販売",
-						description:
-							"スマホをかざすと情報が表示される新しい推しを布教できるNFCカード、推しカードを販売しました。",
-						thumbnail: activityThumbnail03,
-					},
-				].map((item) => {
-					return (
-						<li key={item.title}>
-							<Image
-								src={item.thumbnail}
-								alt={item.title}
-								width={200}
-								height={150}
-							/>
-							<h3>{item.title}</h3>
-							<p>{item.description}</p>
-						</li>
-					);
-				})}
-			</ul>
-		</section>
-	);
-};
-
-const ContactSection = () => {
-	return (
-		<section className={styles.SectionCommon} id="contact">
-			<h2>Contact</h2>
-			<p>
-				お仕事に関するお問い合わせやコラボのお誘いについては、XのDMまたは下記のメールアドレスまでご連絡ください。案件や企画などは詳細を最初に共有していただけるとやり取りがスムーズに進むので助かります。特に支障がなければ2,3日以内に返信させていただきます。
-			</p>
-			<p>
-				連絡先：
-				<a href="mailto:mochizuki.noa.project@gmail.com">
-					mochizuki.noa.project@gmail.com
-				</a>
-			</p>
-		</section>
-	);
-};
-
-const GamesAppsSection = () => {
-	return (
-		<section className={styles.SectionCommon}>
-			<h2>Games & Apps</h2>
-
-			<div className={styles.GameGallery}>
-				{[
-					{
-						title: "にゃんとも不思議な同居生活",
-						thumbnail: nyantomoThumbnail,
-						link: "/games/nyantomo",
-					},
-					{
-						title: "数当てゲーム",
-						thumbnail: kazuateThumbnail,
-						link: "/guess-number",
-					},
-					{
-						title: "結婚アプリ",
-						thumbnail: kekkonThumbnail,
-						link: "/marry",
-					},
-					{
-						title: "のあぼいす",
-						thumbnail: voiceThumbnail,
-						link: "https://noavoice.vercel.app/",
-					},
-					{
-						title: "ガチャアプリ",
-						thumbnail: gachaThumbnail,
-						link: "/gacha",
-					},
-					{
-						title: "スライドパズル",
-						thumbnail: puzzleThumbnail,
-						link: "/games/slide-puzzle",
-					},
-					{
-						title: "タイピング",
-						thumbnail: typingThumbnail,
-						link: "/games/typing",
-					},
-					{
-						title: "心の形診断",
-						thumbnail: kokoroThumbnail,
-						link: "https://kokoro-shindan.mochinoa.com/",
-					},
-				].map((item) => {
-					return (
-						<Link className={styles.Item} href={item.link} key={item.title}>
-							<Image
-								src={item.thumbnail}
-								alt={item.title}
-								width={200}
-								height={200}
-							/>
-							<h3 className={styles.Title}>{item.title}</h3>
-						</Link>
-					);
-				})}
-			</div>
-		</section>
-	);
-};
+const divider = (
+	<div className={styles.Divider}>
+		<div className={styles.DividerDot} />
+		<div className={styles.DividerDot} />
+		<div className={styles.DividerDot} />
+		<div className={styles.DividerDot} />
+		<div className={styles.DividerDot} />
+	</div>
+);
 
 export default function Page() {
 	return (
-		<div>
-			<AppHeader />
-			<HeroSection />
-			<AboutSection />
-			<LatestActivities />
-			<ContactSection />
-			<GamesAppsSection />
-			<footer className={styles.Footer}>
-				<nav className={styles.FooterSocial}>
-					<Link
-						className={styles.LinkButton}
-						href={siteConfig.twitter.url}
+		<div className={styles.PageContainer}>
+			{/* Fixed background: pink + teal sky with scallop wave */}
+			<div className={styles.fixedBackground}>
+				<div className={styles.skyArea}>
+					<div className={styles.wave} />
+				</div>
+			</div>
+
+			{/* Left fixed area */}
+			<div className={styles.FixedLeftArea}>
+				<div className={styles.PortraitWrapper}>
+					<Image
+						src={portraitImg}
+						alt="望月のあ"
+						width={120}
+						height={120}
+						className={styles.Portrait}
+					/>
+					<Image
+						src={peachIconSvg}
+						alt=""
+						width={32}
+						height={32}
+						className={styles.PeachIcon}
+					/>
+				</div>
+				<span>声優もももち公式サイト</span>
+			</div>
+
+			{/* Center scroll area */}
+			<div className={styles.CenterScrollArea}>
+				{/* Hero */}
+				<div className={styles.HeroArea}>
+					<Image
+						src={logoImg}
+						alt="mochi"
+						className={styles.Logo}
+						priority
+					/>
+					<Image
+						src={topImg}
+						alt="望月のあ"
+						className={styles.TopImage}
+						priority
+					/>
+					<div className={styles.HeroLinks}>
+						<a
+							href={siteConfig.links.twitter.url}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<Image
+								src={siteConfig.links.twitter.image}
+								alt="Twitter"
+								className={styles.HeroLinkImage}
+							/>
+						</a>
+						<a
+							href={siteConfig.links.youtube.url}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<Image
+								src={siteConfig.links.youtube.image}
+								alt="YouTube"
+								className={styles.HeroLinkImage}
+							/>
+						</a>
+					</div>
+				</div>
+
+				{/* Profile */}
+				<div className={styles.ProfileSection}>
+					<h2 className={styles.ProfileName}>望月 のあ</h2>
+					<p className={styles.ProfileTitle}>コンテンツクリエイター</p>
+					<p className={styles.ProfileDescription}>
+						誰かのこころに
+						<br />
+						寄り添える存在になりたい！
+						<br />
+						猫耳がチャームポイントの、
+						<br />
+						ちょっぴりおっとりな女の子！
+					</p>
+				</div>
+
+				{/* Music Gallery */}
+				<div className={styles.MusicGallerySection}>
+					<MusicGallery songs={siteConfig.songs} />
+				</div>
+
+				{/* Shop */}
+				<div className={styles.ShopSection}>
+					<p className={styles.ShopTitle}>もちのあちゃんのおみせ</p>
+					{siteConfig.shop.items.map((item, i) => (
+						<div key={item.name} className={styles.ProductCard}>
+							<div className={styles.ProductImageWrapper}>
+								<div className={styles.TapeTopLeft} />
+								<Image
+									src={item.image}
+									alt={item.name}
+									className={styles.ProductImage}
+								/>
+								{i === 0 ? (
+									<div className={styles.TapeBottomRight} />
+								) : (
+									<div className={styles.TapeTopRight} />
+								)}
+							</div>
+							<div className={styles.ProductInfo}>
+								<span className={styles.ProductLabel}>
+									{item.name}
+								</span>
+								<a
+									href={item.url}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<Image
+										src={item.tag}
+										alt="詳細はこちら"
+										className={styles.ProductTag}
+									/>
+								</a>
+							</div>
+						</div>
+					))}
+				</div>
+
+				{divider}
+
+				{/* Banners */}
+				{siteConfig.banners.map((banner) => (
+					<a
+						key={banner.alt}
+						href={banner.url}
 						target="_blank"
 						rel="noopener noreferrer"
+						className={styles.BannerCard}
 					>
+						<div className={styles.BannerTapeLeft} />
 						<Image
-							src={twitterIcon}
-							alt="Twitter"
-							width={twitterIcon.width}
-							height={twitterIcon.height}
+							src={banner.image}
+							alt={banner.alt}
+							className={styles.BannerImage}
 						/>
-					</Link>
-					<Link
-						className={styles.LinkButton}
-						href={siteConfig.youtube.url}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<Image
-							src={youtubeIcon}
-							alt="YouTube"
-							width={youtubeIcon.width}
-							height={youtubeIcon.height}
-						/>
-					</Link>
-				</nav>
-				<nav className={styles.FooterNav}>
-					<Link href="/guidelines/streaming">配信ガイドライン</Link>/
-					<Link href="/guidelines/fanart">
-						ファンアート・著作物ガイドライン
-					</Link>
-				</nav>
-				<small className={styles.Copyright}>
+						<div className={styles.BannerTapeRight} />
+					</a>
+				))}
+
+				{divider}
+
+				{/* Contact */}
+				<div className={styles.ContactSection}>
+					<p className={styles.ContactTitle}>
+						お仕事に関するお問い合わせ
+					</p>
+					<p className={styles.ContactBody}>
+						お仕事に関するお問い合わせや
+						<br />
+						コラボのお誘いについては、Xの
+						<br />
+						DMまたは下記のメールアドレス
+						<br />
+						までご連絡ください。案件や企
+						<br />
+						画などは詳細を最初に共有して
+						<br />
+						いただけるとやり取りがスムー
+						<br />
+						ズに進むので助かります。特に
+						<br />
+						支障がなければ2,3日以内に返信
+						<br />
+						させていただきます。
+					</p>
+					<p className={styles.ContactEmail}>
+						連絡先： {siteConfig.contact.email}
+					</p>
+				</div>
+			</div>
+
+			{/* Right fixed area */}
+			<div className={styles.FixedRightArea}>
+				<p>{siteConfig.contact.email}</p>
+				<p>Twitter : @_noach</p>
+				<Link href={siteConfig.guidelines.streaming}>
+					配信ガイドライン
+				</Link>
+				<Link href={siteConfig.guidelines.fanart}>
+					著作物ガイドライン
+				</Link>
+				<p className={styles.Copyright}>
 					&copy; 2025 もちもちクリエイト
-				</small>
-			</footer>
+				</p>
+			</div>
 		</div>
 	);
 }
