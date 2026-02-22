@@ -154,7 +154,8 @@ export function MusicGallery({ songs }: Props) {
 									src={selected.thumbnail}
 									alt={selected.title}
 									fill
-									sizes="200px"
+									sizes="400px"
+									quality={100}
 									className={styles.FeaturedImage}
 								/>
 							</motion.div>
@@ -208,13 +209,14 @@ export function MusicGallery({ songs }: Props) {
 										borderRadius: THUMB_BLOBS[idx % THUMB_BLOBS.length],
 									}}
 								>
-									<Image
-										src={song.thumbnail}
-										alt={song.title}
-										width={64}
-										height={64}
-										className={styles.Thumbnail}
-									/>
+								<Image
+									src={song.thumbnail}
+									alt={song.title}
+									width={128}
+									height={128}
+									quality={100}
+									className={styles.Thumbnail}
+								/>
 								</div>
 							</button>
 						);
