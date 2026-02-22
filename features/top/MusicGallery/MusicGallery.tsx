@@ -209,14 +209,14 @@ export function MusicGallery({ songs }: Props) {
 										borderRadius: THUMB_BLOBS[idx % THUMB_BLOBS.length],
 									}}
 								>
-								<Image
-									src={song.thumbnail}
-									alt={song.title}
-									width={128}
-									height={128}
-									quality={100}
-									className={styles.Thumbnail}
-								/>
+									<Image
+										src={song.thumbnail}
+										alt={song.title}
+										width={128}
+										height={128}
+										quality={100}
+										className={styles.Thumbnail}
+									/>
 								</div>
 							</button>
 						);
