@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { WavyTitle } from "../components/WavyTitle/WavyTitle";
 import { MusicGallery } from "../features/top/MusicGallery/MusicGallery";
 import logoImg from "./_assets/images/mochilogo.png";
 import portraitImg from "./_assets/images/momomochi-portrait.jpg";
@@ -50,23 +51,6 @@ function buildScallopedArcPath() {
 }
 
 const wavePath = buildScallopedArcPath();
-
-const SHOP_TITLE = "もちのあちゃんのおみせ";
-const SHOP_TITLE_WAVE_AMP = 6;
-const SHOP_UNDERLINE_W = 200;
-const SHOP_UNDERLINE_H = SHOP_TITLE_WAVE_AMP * 2;
-
-const shopUnderlinePath = (() => {
-	const steps = 100;
-	const cy = SHOP_TITLE_WAVE_AMP + 2;
-	let d = "";
-	for (let i = 0; i <= steps; i++) {
-		const x = (i / steps) * SHOP_UNDERLINE_W;
-		const y = cy - Math.sin((i / steps) * Math.PI * 2) * SHOP_TITLE_WAVE_AMP;
-		d += `${i === 0 ? "M" : " L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
-	}
-	return d;
-})();
 
 const divider = (
 	<div className={styles.Divider}>
@@ -273,39 +257,10 @@ export default function Page() {
 
 					{/* Shop */}
 					<div className={styles.ShopSection}>
-						<p className={styles.ShopTitle}>
-							<span className={styles.ShopTitleWave}>
-								{SHOP_TITLE.split("").map((char, i, arr) => {
-									const key = `${char}-${i}`;
-									return (
-										<span
-											key={key}
-											className={styles.ShopTitleChar}
-											style={{
-												transform: `translateY(${-Math.sin((i / (arr.length - 1)) * Math.PI * 2) * SHOP_TITLE_WAVE_AMP}px)`,
-											}}
-										>
-											{char}
-										</span>
-									)
-								})}
-								<svg
-									className={styles.ShopTitleUnderline}
-									style={{ height: SHOP_UNDERLINE_H }}
-									viewBox={`0 0 ${SHOP_UNDERLINE_W} ${SHOP_UNDERLINE_H}`}
-									preserveAspectRatio="none"
-									aria-label="underline"
-								>
-									<path
-										d={shopUnderlinePath}
-										stroke="currentColor"
-										fill="none"
-										strokeDasharray="3 3"
-										vectorEffect="non-scaling-stroke"
-									/>
-								</svg>
-							</span>
-						</p>
+						<WavyTitle
+							text="もちのあちゃんのおみせ"
+							className={styles.ShopTitle}
+						/>
 						{siteConfig.shop.items.map((item, i) => (
 							<div key={item.name} className={styles.ProductCard}>
 								<div className={styles.ProductImageWrapper}>
@@ -360,7 +315,10 @@ export default function Page() {
 
 					{/* Contact */}
 					<div className={styles.ContactSection}>
-						<p className={styles.ContactTitle}>お仕事に関するお問い合わせ</p>
+						<WavyTitle
+							text="お仕事に関するお問い合わせ"
+							className={styles.ContactTitle}
+						/>
 						<p className={styles.ContactBody}>
 							お仕事に関するお問い合わせや
 							<br />
