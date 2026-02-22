@@ -1,11 +1,3 @@
-.Root {
-	--color-paper: #f7f5e8;
-	--color-pink: #f9d4e1;
-	--color-teal: #63bac7;
-}
-
-/* ===== Fixed Background ===== */
-
 .fixedBackground {
 	position: fixed;
 	background-color: var(--color-pink);

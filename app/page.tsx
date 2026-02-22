@@ -6,6 +6,7 @@ import portraitImg from "./_assets/images/momomochi-portrait.jpg";
 import peachIconSvg from "./_assets/images/peach-icon.svg";
 import topImg from "./_assets/images/トップ画像.png";
 import { siteConfig } from "./_site.config";
+import "./page.global.css"
 import styles from "./page.module.css";
 
 const WAVE_W = 1000;
@@ -45,7 +46,7 @@ function buildScallopedArcPath() {
 	}
 
 	d += " Z";
-	return { d, height: Math.ceil(maxY) };
+	return { d, height: Math.ceil(maxY) - 2 };
 }
 
 const wavePath = buildScallopedArcPath();
