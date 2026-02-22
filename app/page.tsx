@@ -52,9 +52,9 @@ function buildScallopedArcPath() {
 const wavePath = buildScallopedArcPath();
 
 const SHOP_TITLE = "もちのあちゃんのおみせ";
-const SHOP_TITLE_WAVE_AMP = 3;
+const SHOP_TITLE_WAVE_AMP = 6;
 const SHOP_UNDERLINE_W = 200;
-const SHOP_UNDERLINE_H = SHOP_TITLE_WAVE_AMP * 2 + 4;
+const SHOP_UNDERLINE_H = SHOP_TITLE_WAVE_AMP * 2;
 
 const shopUnderlinePath = (() => {
 	const steps = 100;
@@ -62,7 +62,7 @@ const shopUnderlinePath = (() => {
 	let d = "";
 	for (let i = 0; i <= steps; i++) {
 		const x = (i / steps) * SHOP_UNDERLINE_W;
-		const y = cy + Math.sin((i / steps) * Math.PI * 2) * SHOP_TITLE_WAVE_AMP;
+		const y = cy - Math.sin((i / steps) * Math.PI * 2) * SHOP_TITLE_WAVE_AMP;
 		d += `${i === 0 ? "M" : " L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
 	}
 	return d;
@@ -282,7 +282,7 @@ export default function Page() {
 											key={key}
 											className={styles.ShopTitleChar}
 											style={{
-												transform: `translateY(${Math.sin((i / (arr.length - 1)) * Math.PI * 2) * SHOP_TITLE_WAVE_AMP}px)`,
+												transform: `translateY(${-Math.sin((i / (arr.length - 1)) * Math.PI * 2) * SHOP_TITLE_WAVE_AMP}px)`,
 											}}
 										>
 											{char}
@@ -291,6 +291,7 @@ export default function Page() {
 								})}
 								<svg
 									className={styles.ShopTitleUnderline}
+									style={{ height: SHOP_UNDERLINE_H }}
 									viewBox={`0 0 ${SHOP_UNDERLINE_W} ${SHOP_UNDERLINE_H}`}
 									preserveAspectRatio="none"
 									aria-label="underline"
