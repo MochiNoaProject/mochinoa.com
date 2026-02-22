@@ -108,6 +108,24 @@
 	letter-spacing: 0.08em;
 }
 
+.ShopTitleWave {
+	position: relative;
+	display: inline-block;
+}
+
+.ShopTitleChar {
+	display: inline-block;
+}
+
+.ShopTitleUnderline {
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 100%;
+	height: 10px;
+	overflow: visible;
+}
+
 .ProductCard {
 	position: relative;
 	display: flex;

@@ -51,6 +51,23 @@ function buildScallopedArcPath() {
 
 const wavePath = buildScallopedArcPath();
 
+const SHOP_TITLE = "もちのあちゃんのおみせ";
+const SHOP_TITLE_WAVE_AMP = 3;
+const SHOP_UNDERLINE_W = 200;
+const SHOP_UNDERLINE_H = SHOP_TITLE_WAVE_AMP * 2 + 4;
+
+const shopUnderlinePath = (() => {
+	const steps = 100;
+	const cy = SHOP_TITLE_WAVE_AMP + 2;
+	let d = "";
+	for (let i = 0; i <= steps; i++) {
+		const x = (i / steps) * SHOP_UNDERLINE_W;
+		const y = cy + Math.sin((i / steps) * Math.PI * 2) * SHOP_TITLE_WAVE_AMP;
+		d += `${i === 0 ? "M" : " L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
+	}
+	return d;
+})();
+
 const divider = (
 	<div className={styles.Divider}>
 		<div className={styles.DividerDot} />
@@ -256,7 +273,38 @@ export default function Page() {
 
 					{/* Shop */}
 					<div className={styles.ShopSection}>
-						<p className={styles.ShopTitle}>もちのあちゃんのおみせ</p>
+						<p className={styles.ShopTitle}>
+							<span className={styles.ShopTitleWave}>
+								{SHOP_TITLE.split("").map((char, i, arr) => {
+									const key = `${char}-${i}`;
+									return (
+										<span
+											key={key}
+											className={styles.ShopTitleChar}
+											style={{
+												transform: `translateY(${Math.sin((i / (arr.length - 1)) * Math.PI * 2) * SHOP_TITLE_WAVE_AMP}px)`,
+											}}
+										>
+											{char}
+										</span>
+									)
+								})}
+								<svg
+									className={styles.ShopTitleUnderline}
+									viewBox={`0 0 ${SHOP_UNDERLINE_W} ${SHOP_UNDERLINE_H}`}
+									preserveAspectRatio="none"
+									aria-label="underline"
+								>
+									<path
+										d={shopUnderlinePath}
+										stroke="currentColor"
+										fill="none"
+										strokeDasharray="3 3"
+										vectorEffect="non-scaling-stroke"
+									/>
+								</svg>
+							</span>
+						</p>
 						{siteConfig.shop.items.map((item, i) => (
 							<div key={item.name} className={styles.ProductCard}>
 								<div className={styles.ProductImageWrapper}>
