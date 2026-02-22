@@ -130,10 +130,22 @@ export function MusicGallery({ songs }: Props) {
 					}}>
 						<Image
 							src={tag1Img}
-							alt="タグ1"
+							alt=""
 							width={80}
 							height={(tag1Img.height / tag1Img.width) * 80}						
 						/>
+						<AnimatePresence mode="wait">
+							<motion.span
+								key={selectedIndex}
+								className={styles.TagTitle}
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 0.3 }}
+							>
+								{selected.title}
+							</motion.span>
+						</AnimatePresence>
 					</div>
 				</a>
 			</div>
