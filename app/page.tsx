@@ -317,31 +317,47 @@ export default function Page() {
 					</div>
 
 					{/* Banners */}
-					{siteConfig.banners.map((banner) => (
-						<a
+					{siteConfig.banners.map((banner, i) => (
+						<div
 							key={banner.alt}
-							href={banner.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							className={styles.BannerCard}
+							style={{
+								paddingInline: 24,
+								display: "grid",
+								gap: 16,
+							}}
 						>
-							<div className={styles.BannerTapeLeft} />
-							<Image
-								src={banner.image}
-								alt={banner.alt}
-								className={styles.BannerImage}
+							<WavyTitle
+								text={banner.label}
+								style={{
+									color: "var(--color-teal)",
+									fontSize: 16,
+									textAlign: i % 2 === 0 ? "right" : "left",
+								}}
 							/>
-							<div className={styles.BannerTapeRight} />
-						</a>
+							<a
+								href={banner.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								style={{ display: "block" }}
+							>
+								<Image
+									src={banner.image}
+									alt={banner.alt}
+									style={{
+										width: "100%",
+										height: "auto",
+									}}
+								/>
+							</a>
+						</div>
 					))}
 
 					{/* Contact */}
-					<div className={styles.ContactSection}>
+					<div>
 						<WavyTitle
 							text="お仕事に関するお問い合わせ"
-							className={styles.ContactTitle}
 						/>
-						<p className={styles.ContactBody}>
+						<p>
 							お仕事に関するお問い合わせや
 							<br />
 							コラボのお誘いについては、Xの
@@ -360,7 +376,7 @@ export default function Page() {
 							<br />
 							させていただきます。
 						</p>
-						<p className={styles.ContactEmail}>
+						<p>
 							連絡先： {siteConfig.contact.email}
 						</p>
 					</div>

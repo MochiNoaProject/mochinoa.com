@@ -39,6 +39,7 @@ export type Banner = {
 	url: string;
 	image: StaticImageData;
 	alt: string;
+	label: string;
 };
 
 export type LinkWithImage = {
@@ -87,11 +88,13 @@ export const siteConfig = {
 			url: "https://www.youtube.com/@MochizukiNoa",
 			image: ytBannerImg,
 			alt: "望月のあ YouTube",
+			label: "実写配信etc.",
 		},
 		{
 			url: "https://store.line.me/stickershop/product/31995151/ja",
 			image: lineBannerImg,
 			alt: "LINEスタンプ",
+			label: "LINEスタンプ販売中",
 		},
 	] satisfies Banner[],
 	songs: [

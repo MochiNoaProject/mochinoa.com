@@ -71,33 +71,6 @@
 }
 
 
-/* ===== Contact Section ===== */
-
-.ContactSection {
-	margin-top: 60px;
-	padding: 0 32px 40px;
-	text-align: center;
-}
-
-.ContactTitle {
-	font-size: 15px;
-	font-weight: bold;
-	color: var(--color-teal);
-	margin-bottom: 20px;
-}
-
-.ContactBody {
-	font-size: 13px;
-	color: #555;
-	line-height: 2;
-	margin-bottom: 24px;
-}
-
-.ContactEmail {
-	font-size: 13px;
-	color: #555;
-}
-
 /* ===== Responsive: narrow screens ===== */
 
 @media (max-width: 780px) {
