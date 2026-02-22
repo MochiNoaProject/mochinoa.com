@@ -4,6 +4,7 @@ type WavyTitleProps = {
 	text: string;
 	amp?: number;
 	className?: string;
+	style?: React.CSSProperties;
 };
 
 const UNDERLINE_W = 200;
@@ -21,12 +22,12 @@ function buildUnderlinePath(amp: number) {
 	return { d, h };
 }
 
-export function WavyTitle({ text, amp = 6, className }: WavyTitleProps) {
+export function WavyTitle({ text, amp = 6, className, style }: WavyTitleProps) {
 	const chars = [...text];
 	const underline = buildUnderlinePath(amp);
 
 	return (
-		<p className={className}>
+		<p className={className} style={style}>
 			<span className={styles.Root}>
 				{chars.map((char, i) => {
 					const key = `${char}-${i}`;

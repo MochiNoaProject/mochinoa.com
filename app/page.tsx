@@ -8,6 +8,8 @@ import peachIconSvg from "./_assets/images/peach-icon.svg";
 import topImg from "./_assets/images/トップ画像.png";
 import { siteConfig } from "./_site.config";
 import "./page.global.css";
+import tag1Img from "./_assets/images/タグ1.png";
+import tag2Img from "./_assets/images/タグ2.png";
 import styles from "./page.module.css";
 
 const WAVE_W = 1000;
@@ -256,33 +258,34 @@ export default function Page() {
 					</div>
 
 					{/* Shop */}
-					<div className={styles.ShopSection}>
+					<div style={{
+						paddingInline: 16
+					}}>
 						<WavyTitle
 							text="もちのあちゃんのおみせ"
-							className={styles.ShopTitle}
+							style={{
+								color: "var(--color-teal)",
+								fontSize: 16
+							}}
 						/>
 						{siteConfig.shop.items.map((item, i) => (
-							<div key={item.name} className={styles.ProductCard}>
-								<div className={styles.ProductImageWrapper}>
-									<div className={styles.TapeTopLeft} />
+							<div key={item.name}>
+								<a href={item.url} target="_blank" rel="noopener noreferrer">
 									<Image
 										src={item.image}
 										alt={item.name}
-										className={styles.ProductImage}
+										width={200}
+										height={(item.image.height / item.image.width) * 200}
 									/>
-									{i === 0 ? (
-										<div className={styles.TapeBottomRight} />
-									) : (
-										<div className={styles.TapeTopRight} />
-									)}
-								</div>
-								<div className={styles.ProductInfo}>
-									<span className={styles.ProductLabel}>{item.name}</span>
+								</a>
+								<div>
+									<span>{item.name}</span>
 									<a href={item.url} target="_blank" rel="noopener noreferrer">
 										<Image
-											src={item.tag}
+											src={i === 0 ? tag2Img:  tag1Img}
 											alt="詳細はこちら"
-											className={styles.ProductTag}
+											width={80}
+											height={(tag2Img.height / tag2Img.width) * 80}
 										/>
 									</a>
 								</div>

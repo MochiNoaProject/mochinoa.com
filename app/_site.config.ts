@@ -1,7 +1,7 @@
 import type { StaticImageData } from "next/image";
 import lineBannerImg from "./_assets/images/LINEスタンプバナー.png";
 import twitterLinkImg from "./_assets/images/TwitterLink.png";
-import tshirtImg from "./_assets/images/Tシャツ.jpg";
+import tshirtImg from "./_assets/images/Tシャツ.png";
 import youtubeLinkImg from "./_assets/images/YouTubeLink.png";
 import thumbDaisyCrown from "./_assets/images/youtube-thumbnails/DaisyCrown.webp";
 import thumbEvilBubble from "./_assets/images/youtube-thumbnails/EvilBubble.webp";
@@ -20,8 +20,6 @@ import thumbShayo from "./_assets/images/youtube-thumbnails/斜陽.jpg";
 import thumbTadashiku from "./_assets/images/youtube-thumbnails/正しくなれない.webp";
 import thumbShizuku from "./_assets/images/youtube-thumbnails/雫.webp";
 import thumbKakumei from "./_assets/images/youtube-thumbnails/革命道中.jpg";
-import tag1Img from "./_assets/images/タグ1.png";
-import tag2Img from "./_assets/images/タグ2.png";
 import glassesImg from "./_assets/images/メガネ吹き.png";
 import ytBannerImg from "./_assets/images/望月のあYouTubeバナー.jpg";
 
@@ -35,7 +33,6 @@ export type ShopItem = {
 	name: string;
 	url: string;
 	image: StaticImageData;
-	tag: StaticImageData;
 };
 
 export type Banner = {
@@ -77,13 +74,11 @@ export const siteConfig = {
 				name: "Tシャツ",
 				url: "https://mochinoa.booth.pm/items/7339358",
 				image: tshirtImg,
-				tag: tag1Img,
 			},
 			{
 				name: "メガネ拭き",
 				url: "https://mochinoa.booth.pm/items/3203325",
 				image: glassesImg,
-				tag: tag2Img,
 			},
 		] satisfies ShopItem[],
 	},
