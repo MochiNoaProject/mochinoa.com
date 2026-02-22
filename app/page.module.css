@@ -33,35 +33,6 @@
 	display: block;
 }
 
-/* ===== Profile Section ===== */
-
-.ProfileSection {
-	text-align: center;
-	padding: 0 40px;
-	margin-bottom: 40px;
-}
-
-.ProfileName {
-	font-size: 24px;
-	font-weight: bold;
-	color: var(--color-teal);
-	font-family: "Zen Maru Gothic", sans-serif;
-	letter-spacing: 0.15em;
-}
-
-.ProfileTitle {
-	font-size: 12px;
-	color: #999;
-	margin-top: 4px;
-}
-
-.ProfileDescription {
-	margin-top: 20px;
-	color: #666;
-	line-height: 2;
-	font-size: 14px;
-}
-
 /* ===== Music Gallery (featured area in page) ===== */
 
 .MusicGallerySection {

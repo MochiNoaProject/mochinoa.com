@@ -119,6 +119,9 @@ export default function Page() {
 						backgroundImage: `linear-gradient(var(--color-pink) 1px, transparent 1px),
 						linear-gradient(90deg, var(--color-pink) 1px, transparent 1px)`,
 						backgroundSize: "40px 40px",
+						display: "flex",
+						flexDirection: "column",
+						gap: 32,
 					}}
 				>
 					{/* Hero */}
@@ -182,18 +185,35 @@ export default function Page() {
 					</div>
 
 					{/* Profile */}
-					<div className={styles.ProfileSection}>
-						<h2 className={styles.ProfileName}>望月 のあ</h2>
-						<p className={styles.ProfileTitle}>コンテンツクリエイター</p>
-						<p className={styles.ProfileDescription}>
-							誰かのこころに
-							<br />
-							寄り添える存在になりたい！
-							<br />
-							猫耳がチャームポイントの、
-							<br />
-							ちょっぴりおっとりな女の子！
-						</p>
+					<div>
+						<div style={{
+							paddingBlock: 16,
+							marginInline: 32,
+							borderTop: `4px dotted var(--color-teal)`,
+							borderBottom: `4px dotted var(--color-teal)`,	
+							textAlign: "center",
+							color: `var(--color-teal)`,
+							display: "grid",
+							gap: 16,
+						}}>
+							<div style={{
+								lineHeight: 1.6,
+							}}>
+								<h2>望月 のあ</h2>
+								<p>コンテンツクリエイター</p>
+							</div>
+							<p style={{
+								lineHeight: 1.6,
+							}}>
+								誰かのこころに
+								<br />
+								寄り添える存在になりたい！
+								<br />
+								猫耳がチャームポイントの、
+								<br />
+								ちょっぴりおっとりな女の子！
+							</p>
+						</div>
 					</div>
 
 					{/* Music Gallery */}
