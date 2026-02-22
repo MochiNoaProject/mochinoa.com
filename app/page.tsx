@@ -92,25 +92,64 @@ export default function Page() {
 						height: "80vh",
 					}}
 				>
-					<div>
-						<div>
+					<a style={{
+						display: "grid",
+						gap: 16,
+					}} href={siteConfig.links.momomochi} target="_blank" rel="noopener noreferrer">
+						<div style={{
+							position: "relative",
+						}}>
 							<Image
 								src={portraitImg}
 								alt="望月のあ"
-								width={120}
-								height={120}
-								className={styles.Portrait}
+								width={200}
+								height={200}
+								style={{
+									borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%",
+									border: "4px solid #fef9d7",
+									boxShadow: "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+								}}
 							/>
-							<Image
-								src={peachIconSvg}
-								alt=""
-								width={32}
-								height={32}
-								className={styles.PeachIcon}
-							/>
+							<div style={{
+								position: "absolute",
+								backgroundColor: "white",
+								borderRadius: "50%",
+								padding: 4,
+								display: "grid",
+								top: 0,
+								right: 0,
+								boxShadow: "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+							}}>
+								<Image
+									src={peachIconSvg}
+									alt=""
+									width={30}
+									height={30}
+									
+								/>
+							</div>
+							<div style={{
+								color: "rgb(139, 195, 74)",
+								backgroundColor: "white",
+								position: "absolute",
+								bottom:16,
+								left: 0,
+								fontWeight: "bold",
+								lineHeight: 1,
+								fontSize: 10,
+								padding: "8px 4px",
+								borderRadius: 4,
+								rotate: "-10deg",
+								boxShadow: "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+							}}>
+								Healing Voice!
+							</div>
 						</div>
-						<span>声優もももち公式サイト</span>
-					</div>
+						<p style={{
+							color: "white",
+							textAlign: "center",
+						}}>声優もももち公式サイト</p>
+					</a>
 				</div>
 				<div
 					style={{
