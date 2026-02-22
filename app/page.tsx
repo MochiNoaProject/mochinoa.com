@@ -6,7 +6,7 @@ import portraitImg from "./_assets/images/momomochi-portrait.jpg";
 import peachIconSvg from "./_assets/images/peach-icon.svg";
 import topImg from "./_assets/images/トップ画像.png";
 import { siteConfig } from "./_site.config";
-import "./page.global.css"
+import "./page.global.css";
 import styles from "./page.module.css";
 
 const WAVE_W = 1000;
@@ -93,13 +93,20 @@ export default function Page() {
 						height: "80vh",
 					}}
 				>
-					<a style={{
-						display: "grid",
-						gap: 16,
-					}} href={siteConfig.links.momomochi} target="_blank" rel="noopener noreferrer">
-						<div style={{
-							position: "relative",
-						}}>
+					<a
+						style={{
+							display: "grid",
+							gap: 16,
+						}}
+						href={siteConfig.links.momomochi}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div
+							style={{
+								position: "relative",
+							}}
+						>
 							<Image
 								src={portraitImg}
 								alt="望月のあ"
@@ -108,48 +115,53 @@ export default function Page() {
 								style={{
 									borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%",
 									border: "4px solid #fef9d7",
-									boxShadow: "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+									boxShadow:
+										"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
 								}}
 							/>
-							<div style={{
-								position: "absolute",
-								backgroundColor: "white",
-								borderRadius: "50%",
-								padding: 4,
-								display: "grid",
-								top: 0,
-								right: 0,
-								boxShadow: "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
-							}}>
-								<Image
-									src={peachIconSvg}
-									alt=""
-									width={30}
-									height={30}
-									
-								/>
+							<div
+								style={{
+									position: "absolute",
+									backgroundColor: "white",
+									borderRadius: "50%",
+									padding: 4,
+									display: "grid",
+									top: 0,
+									right: 0,
+									boxShadow:
+										"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+								}}
+							>
+								<Image src={peachIconSvg} alt="" width={30} height={30} />
 							</div>
-							<div style={{
-								color: "rgb(139, 195, 74)",
-								backgroundColor: "white",
-								position: "absolute",
-								bottom:16,
-								left: 0,
-								fontWeight: "bold",
-								lineHeight: 1,
-								fontSize: 10,
-								padding: "8px 4px",
-								borderRadius: 4,
-								rotate: "-10deg",
-								boxShadow: "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
-							}}>
+							<div
+								style={{
+									color: "rgb(139, 195, 74)",
+									backgroundColor: "white",
+									position: "absolute",
+									bottom: 16,
+									left: 0,
+									fontWeight: "bold",
+									lineHeight: 1,
+									fontSize: 10,
+									padding: "8px 4px",
+									borderRadius: 4,
+									rotate: "-10deg",
+									boxShadow:
+										"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+								}}
+							>
 								Healing Voice!
 							</div>
 						</div>
-						<p style={{
-							color: "white",
-							textAlign: "center",
-						}}>声優もももち公式サイト</p>
+						<p
+							style={{
+								color: "white",
+								textAlign: "center",
+							}}
+						>
+							声優もももち公式サイト
+						</p>
 					</a>
 				</div>
 				<div
@@ -226,25 +238,31 @@ export default function Page() {
 
 					{/* Profile */}
 					<div>
-						<div style={{
-							paddingBlock: 16,
-							marginInline: 32,
-							borderTop: `4px dotted var(--color-teal)`,
-							borderBottom: `4px dotted var(--color-teal)`,	
-							textAlign: "center",
-							color: `var(--color-teal)`,
-							display: "grid",
-							gap: 16,
-						}}>
-							<div style={{
-								lineHeight: 1.6,
-							}}>
+						<div
+							style={{
+								paddingBlock: 16,
+								marginInline: 32,
+								borderTop: `4px dotted var(--color-teal)`,
+								borderBottom: `4px dotted var(--color-teal)`,
+								textAlign: "center",
+								color: `var(--color-teal)`,
+								display: "grid",
+								gap: 16,
+							}}
+						>
+							<div
+								style={{
+									lineHeight: 1.6,
+								}}
+							>
 								<h2>望月 のあ</h2>
 								<p>コンテンツクリエイター</p>
 							</div>
-							<p style={{
-								lineHeight: 1.6,
-							}}>
+							<p
+								style={{
+									lineHeight: 1.6,
+								}}
+							>
 								誰かのこころに
 								<br />
 								寄り添える存在になりたい！
@@ -257,9 +275,11 @@ export default function Page() {
 					</div>
 
 					{/* Music Gallery */}
-					<div style={{
-						paddingBlock: 40,
-					}}>
+					<div
+						style={{
+							paddingBlock: 40,
+						}}
+					>
 						<MusicGallery songs={siteConfig.songs} />
 					</div>
 

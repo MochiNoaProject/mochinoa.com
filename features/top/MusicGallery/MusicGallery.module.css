@@ -4,73 +4,89 @@
 	gap: 24px;
 }
 
-.Featured {
+
+.FeaturedLink {
+	display: block;
+}
+
+.FeaturedBlob {
 	position: relative;
-	margin: 0 24px;
-	border-radius: 8px;
+	width: 240px;
+	height: 180px;
 	overflow: hidden;
-	aspect-ratio: 16 / 9;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+	animation: blobMorph 16s linear infinite;
+}
+
+@keyframes blobMorph {
+	0%,
+	100% {
+		border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+	}
+	25% {
+		border-radius: 30% 70% 55% 45% / 50% 60% 30% 50%;
+	}
+	50% {
+		border-radius: 45% 55% 70% 30% / 35% 65% 40% 60%;
+	}
+	75% {
+		border-radius: 70% 30% 40% 60% / 55% 35% 65% 45%;
+	}
+}
+
+.FeaturedImageWrapper {
+	position: absolute;
+	inset: 0;
 }
 
 .FeaturedImage {
 	object-fit: cover;
 }
 
-.FeaturedTapeTopLeft {
-	position: absolute;
-	top: -4px;
-	left: 12px;
-	width: 56px;
-	height: 18px;
-	background-color: rgba(99, 186, 199, 0.4);
-	border-radius: 2px;
-	transform: rotate(-20deg);
-	z-index: 1;
-}
-
-.FeaturedTapeBottomRight {
-	position: absolute;
-	bottom: -4px;
-	right: 12px;
-	width: 56px;
-	height: 18px;
-	background-color: rgba(249, 212, 225, 0.5);
-	border-radius: 2px;
-	transform: rotate(15deg);
-	z-index: 1;
+.TrackContainer {
+	overflow: hidden;
+	padding: 8px 0;
 }
 
 .Track {
 	display: flex;
 	gap: 12px;
-	overflow-x: auto;
-	padding: 8px 24px;
-	scroll-snap-type: x mandatory;
-	scrollbar-width: none;
+	width: max-content;
 }
 
-.Track::-webkit-scrollbar {
-	display: none;
-}
-
-.ThumbnailLink {
+.ThumbnailButton {
 	flex-shrink: 0;
-	display: block;
+	border: none;
+	background: none;
+	padding: 0;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.ThumbnailButton:hover {
+	transform: scale(1.15);
+}
+
+.ThumbnailActive {
+	transform: scale(1.15);
+}
+
+.ThumbnailActive:hover {
+	transform: scale(1.2);
+}
+
+.ThumbnailBlob {
 	width: 64px;
 	height: 64px;
-	border-radius: 50%;
 	overflow: hidden;
-	scroll-snap-align: center;
-	transition:
-		transform 0.2s,
-		box-shadow 0.2s;
 }
 
-.ThumbnailLink:hover {
-	transform: scale(1.1);
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+.ThumbnailActive .ThumbnailBlob {
+	box-shadow: 0 0 0 3px rgba(99, 186, 199, 0.6);
 }
 
 .Thumbnail {
+	width: 100%;
+	height: 100%;
 	object-fit: cover;
 }

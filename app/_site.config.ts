@@ -7,7 +7,7 @@ import thumbDaisyCrown from "./_assets/images/youtube-thumbnails/DaisyCrown.webp
 import thumbEvilBubble from "./_assets/images/youtube-thumbnails/EvilBubble.webp";
 import thumbInternetOverdose from "./_assets/images/youtube-thumbnails/INTERNET OVERDOSE.webp";
 import thumbZutto from "./_assets/images/youtube-thumbnails/ずうっといっしょ！.jpg";
-import thumbTadaKoe from "./_assets/images/youtube-thumbnails/ただ声一つ.webp";
+import thumbTadaKoe from "./_assets/images/youtube-thumbnails/ただ声一つ.jpg";
 import thumbDakishimeru from "./_assets/images/youtube-thumbnails/だきしめるまで。.webp";
 import thumbDameNingen from "./_assets/images/youtube-thumbnails/だめにんげんだ！.webp";
 import thumbTotemoSuteki from "./_assets/images/youtube-thumbnails/とても素敵な六月でした.webp";
