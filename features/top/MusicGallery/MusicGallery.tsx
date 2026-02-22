@@ -143,7 +143,18 @@ export function MusicGallery({ songs }: Props) {
 								exit={{ opacity: 0 }}
 								transition={{ duration: 0.3 }}
 							>
-								{selected.title}
+								<span className={styles.TagTitleInner}>
+									{
+										[0,1,2,3].map((i) => (
+											<span key={i}>
+											<span  style={{
+												minWidth: 80,
+												display: "inline-block"
+											}}>{selected.title}</span>
+											</span>
+										))
+									}									
+								</span>
 							</motion.span>
 						</AnimatePresence>
 					</div>

@@ -48,13 +48,27 @@
 	inset: 0;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	overflow: hidden;
+	white-space: nowrap;
 	font-size: 12px;
+	margin-right: 8px;
 	font-weight: bold;
 	text-align: center;
-	line-height: 1.2;
-	padding: 0 12px;
 	pointer-events: none;
+}
+
+.TagTitleInner {
+	display: inline-block;
+	animation: tagScroll 8s 1s linear infinite;
+}
+
+@keyframes tagScroll {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
 }
 
 .TrackContainer {
