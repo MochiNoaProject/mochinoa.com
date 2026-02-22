@@ -271,7 +271,7 @@
 
 /* ===== Responsive: narrow screens ===== */
 
-@media (max-width: 768px) {
+@media (max-width: 780px) {
 	.MainContent {
 		grid-template-columns: 1fr;
 		grid-template-areas:
@@ -320,5 +320,11 @@
 		width: 100%;
 		max-width: none;
 		justify-items: center;
+	}
+
+	.CenterColumn {
+		max-width: none;
+		width: 100%;
+		overflow: hidden;
 	}
 }
