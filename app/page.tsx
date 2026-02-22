@@ -144,9 +144,7 @@ export default function Page() {
 								Healing Voice!
 							</div>
 						</div>
-						<p className={styles.LeftColumnLabel}>
-							声優もももち公式サイト
-						</p>
+						<p className={styles.LeftColumnLabel}>声優もももち公式サイト</p>
 					</a>
 				</div>
 				<div className={styles.CenterColumn}>
@@ -258,19 +256,40 @@ export default function Page() {
 					</div>
 
 					{/* Shop */}
-					<div style={{
-						paddingInline: 16
-					}}>
+					<div
+						style={{
+							paddingInline: 24,
+							display: "grid",
+							gap: 24,
+						}}
+					>
 						<WavyTitle
 							text="もちのあちゃんのおみせ"
 							style={{
 								color: "var(--color-teal)",
-								fontSize: 16
+								fontSize: 16,
 							}}
 						/>
 						{siteConfig.shop.items.map((item, i) => (
-							<div key={item.name}>
-								<a href={item.url} target="_blank" rel="noopener noreferrer">
+							<div key={item.name} style={{
+								display: "grid",
+								paddingInline: 24,
+								gridTemplateAreas: i % 2 === 0 ?`
+									". item item"
+									"tag item item"
+									"tag . ."
+								` : `
+									"item item ."
+									"item item tag"
+									". . tag"
+								`,
+								gridTemplateColumns: "1fr 1fr 1fr",
+								gridTemplateRows: "1fr auto auto",
+							}}>
+								<a style={{ gridArea: "item", rotate: i % 2 === 0 ? "10deg" : "-10deg", 
+									display: "flex",
+									justifyContent: i % 2 === 0 ? "flex-end" : "flex-start",
+								}} href={item.url} target="_blank" rel="noopener noreferrer">
 									<Image
 										src={item.image}
 										alt={item.name}
@@ -278,17 +297,31 @@ export default function Page() {
 										height={(item.image.height / item.image.width) * 200}
 									/>
 								</a>
-								<div>
-									<span>{item.name}</span>
-									<a href={item.url} target="_blank" rel="noopener noreferrer">
-										<Image
-											src={i === 0 ? tag2Img:  tag1Img}
-											alt="詳細はこちら"
-											width={80}
-											height={(tag2Img.height / tag2Img.width) * 80}
-										/>
-									</a>
-								</div>
+								<a
+									style={{
+										gridArea: "tag",
+										position: "relative",
+										rotate: i % 2 === 0 ? "-10deg" : "10deg",
+									}}
+									href={item.url}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<span style={{
+										position: "absolute",										
+										bottom: 58,
+										textAlign: "center",
+										width: "100%",
+										fontSize: 12,
+										fontWeight: "bold",
+									}}>{item.name}</span>
+									<Image
+										src={i % 2 === 0 ? tag2Img : tag1Img}
+										alt="詳細はこちら"
+										width={80}
+										height={(tag2Img.height / tag2Img.width) * 80}
+									/>
+								</a>
 							</div>
 						))}
 					</div>

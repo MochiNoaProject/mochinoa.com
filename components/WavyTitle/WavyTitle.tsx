@@ -31,7 +31,8 @@ export function WavyTitle({ text, amp = 6, className, style }: WavyTitleProps) {
 			<span className={styles.Root}>
 				{chars.map((char, i) => {
 					const key = `${char}-${i}`;
-					const offset = -Math.sin((i / (chars.length - 1)) * Math.PI * 2) * amp;
+					const offset =
+						-Math.sin((i / (chars.length - 1)) * Math.PI * 2) * amp;
 					return (
 						<span
 							key={key}

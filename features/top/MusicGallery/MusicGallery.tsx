@@ -2,7 +2,13 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+	useCallback,
+	useEffect,
+	useLayoutEffect,
+	useRef,
+	useState,
+} from "react";
 import tag1Img from "../../../app/_assets/images/タグ1.png";
 import type { Song } from "../../../app/_site.config";
 import styles from "./MusicGallery.module.css";
@@ -154,17 +160,19 @@ export function MusicGallery({ songs }: Props) {
 							</motion.div>
 						</AnimatePresence>
 					</div>
-					<div style={{
-						position: "absolute",
-						bottom: -16,
-						right: 16,
-						rotate: "10deg",
-					}}>
+					<div
+						style={{
+							position: "absolute",
+							bottom: -16,
+							right: 16,
+							rotate: "10deg",
+						}}
+					>
 						<Image
 							src={tag1Img}
 							alt=""
 							width={80}
-							height={(tag1Img.height / tag1Img.width) * 80}						
+							height={(tag1Img.height / tag1Img.width) * 80}
 						/>
 						<AnimatePresence mode="wait">
 							<motion.div
