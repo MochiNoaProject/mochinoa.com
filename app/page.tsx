@@ -54,16 +54,6 @@ function buildScallopedArcPath() {
 
 const wavePath = buildScallopedArcPath();
 
-const divider = (
-	<div className={styles.Divider}>
-		<div className={styles.DividerDot} />
-		<div className={styles.DividerDot} />
-		<div className={styles.DividerDot} />
-		<div className={styles.DividerDot} />
-		<div className={styles.DividerDot} />
-	</div>
-);
-
 export default function Page() {
 	return (
 		<div className={styles.Root}>
@@ -326,8 +316,6 @@ export default function Page() {
 						))}
 					</div>
 
-					{divider}
-
 					{/* Banners */}
 					{siteConfig.banners.map((banner) => (
 						<a
@@ -346,8 +334,6 @@ export default function Page() {
 							<div className={styles.BannerTapeRight} />
 						</a>
 					))}
-
-					{divider}
 
 					{/* Contact */}
 					<div className={styles.ContactSection}>
