@@ -317,7 +317,6 @@ export default function Page() {
 											textAlign: "center",
 											width: "100%",
 											fontSize: 12,
-											fontWeight: "bold",
 										}}
 									>
 										{item.name}
