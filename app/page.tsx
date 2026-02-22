@@ -261,25 +261,38 @@ export default function Page() {
 							}}
 						/>
 						{siteConfig.shop.items.map((item, i) => (
-							<div key={item.name} style={{
-								display: "grid",
-								paddingInline: 24,
-								gridTemplateAreas: i % 2 === 0 ?`
+							<div
+								key={item.name}
+								style={{
+									display: "grid",
+									paddingInline: 24,
+									gridTemplateAreas:
+										i % 2 === 0
+											? `
 									". item item"
 									"tag item item"
 									"tag . ."
-								` : `
+								`
+											: `
 									"item item ."
 									"item item tag"
 									". . tag"
 								`,
-								gridTemplateColumns: "1fr 1fr 1fr",
-								gridTemplateRows: "1fr auto auto",
-							}}>
-								<a style={{ gridArea: "item", rotate: i % 2 === 0 ? "10deg" : "-10deg", 
-									display: "flex",
-									justifyContent: i % 2 === 0 ? "flex-end" : "flex-start",
-								}} href={item.url} target="_blank" rel="noopener noreferrer">
+									gridTemplateColumns: "1fr 1fr 1fr",
+									gridTemplateRows: "1fr auto auto",
+								}}
+							>
+								<a
+									style={{
+										gridArea: "item",
+										rotate: i % 2 === 0 ? "10deg" : "-10deg",
+										display: "flex",
+										justifyContent: i % 2 === 0 ? "flex-end" : "flex-start",
+									}}
+									href={item.url}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
 									<Image
 										src={item.image}
 										alt={item.name}
@@ -297,14 +310,18 @@ export default function Page() {
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									<span style={{
-										position: "absolute",										
-										bottom: 58,
-										textAlign: "center",
-										width: "100%",
-										fontSize: 12,
-										fontWeight: "bold",
-									}}>{item.name}</span>
+									<span
+										style={{
+											position: "absolute",
+											bottom: 58,
+											textAlign: "center",
+											width: "100%",
+											fontSize: 12,
+											fontWeight: "bold",
+										}}
+									>
+										{item.name}
+									</span>
 									<Image
 										src={i % 2 === 0 ? tag2Img : tag1Img}
 										alt="詳細はこちら"
@@ -374,14 +391,10 @@ export default function Page() {
 								lineHeight: 2,
 							}}
 						>
-							お仕事に関するお問い合わせや
-							コラボのお誘いについては、Xの
-							DMまたは下記のメールアドレス
-							までご連絡ください。案件や企
-							画などは詳細を最初に共有して
-							いただけるとやり取りがスムー
-							ズに進むので助かります。特に
-							支障がなければ2,3日以内に返信
+							お仕事に関するお問い合わせや コラボのお誘いについては、Xの
+							DMまたは下記のメールアドレス までご連絡ください。案件や企
+							画などは詳細を最初に共有して いただけるとやり取りがスムー
+							ズに進むので助かります。特に 支障がなければ2,3日以内に返信
 							させていただきます。
 						</div>
 						<p

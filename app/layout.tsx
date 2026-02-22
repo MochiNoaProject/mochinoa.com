@@ -49,7 +49,14 @@ export default function RootLayout({
 	modal: React.ReactNode;
 }) {
 	return (
-		<html lang="ja" className={clsx(irohamaruMikami.className, irohamaruMikami.variable, styles.root)}>
+		<html
+			lang="ja"
+			className={clsx(
+				irohamaruMikami.className,
+				irohamaruMikami.variable,
+				styles.root,
+			)}
+		>
 			<head>
 				<GoogleAnalytics />
 			</head>
