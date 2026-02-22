@@ -353,30 +353,43 @@ export default function Page() {
 					))}
 
 					{/* Contact */}
-					<div>
+					<div
+						style={{
+							paddingInline: 24,
+							display: "grid",
+							gap: 24,
+						}}
+					>
 						<WavyTitle
 							text="お仕事に関するお問い合わせ"
+							style={{
+								fontSize: 16,
+								color: "var(--color-teal)",
+								textAlign: "right",
+							}}
 						/>
-						<p>
+						<div
+							style={{
+								fontSize: 14,
+								lineHeight: 2,
+							}}
+						>
 							お仕事に関するお問い合わせや
-							<br />
 							コラボのお誘いについては、Xの
-							<br />
 							DMまたは下記のメールアドレス
-							<br />
 							までご連絡ください。案件や企
-							<br />
 							画などは詳細を最初に共有して
-							<br />
 							いただけるとやり取りがスムー
-							<br />
 							ズに進むので助かります。特に
-							<br />
 							支障がなければ2,3日以内に返信
-							<br />
 							させていただきます。
-						</p>
-						<p>
+						</div>
+						<p
+							style={{
+								fontSize: 14,
+								textAlign: "center",
+							}}
+						>
 							連絡先： {siteConfig.contact.email}
 						</p>
 					</div>
