@@ -278,12 +278,13 @@
 			"center"
 			"left"
 			"right";
-		max-width: 320px;
 		margin-inline: auto;
+		max-width: 320px;
 		background-color: var(--color-paper);
 		background-image: linear-gradient(var(--color-pink) 1px, transparent 1px),
 			linear-gradient(90deg, var(--color-pink) 1px, transparent 1px);
 		background-size: 40px 40px;
+		padding-bottom: 80px;
 	}
 
 	.LeftColumn {
@@ -293,21 +294,31 @@
 	}
 
 	.LeftColumnLabel {
-		color: var(--color-teal);
+		color: black;
 	}
 
 	.CenterColumn {
 		background: none;
+		padding-bottom: 0;
 	}
 
 	.RightColumn {
 		position: static;
 		height: auto;
-		color: var(--color-teal);
+		color: black;
 		padding-block: 40px;
 	}
 
 	.RightColumn a {
-		color: var(--color-teal);
+		color: black;
+	}
+}
+
+
+@media (max-width: 420px) {
+	.MainContent {
+		width: 100%;
+		max-width: none;
+		justify-items: center;
 	}
 }
