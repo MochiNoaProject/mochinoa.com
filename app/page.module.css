@@ -1,13 +1,7 @@
-.PageContainer {
+.Root {
 	--color-paper: #f7f5e8;
 	--color-pink: #f9d4e1;
 	--color-teal: #63bac7;
-
-	position: relative;
-	width: 100%;
-	min-height: 100vh;
-	display: flex;
-	justify-content: center;
 }
 
 /* ===== Fixed Background ===== */
@@ -25,8 +19,7 @@
 
 .skyArea {
 	background-color: var(--color-teal);
-	width: 100%;
-	height: 250px;
+	height: 80vh;
 	position: relative;
 }
 
@@ -38,124 +31,6 @@
 	height: auto;
 	transform: translateY(100%);
 	display: block;
-}
-
-/* ===== Left Fixed Area ===== */
-
-.FixedLeftArea {
-	position: fixed;
-	top: 40px;
-	left: 40px;
-	width: 200px;
-	z-index: 2;
-	color: white;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 12px;
-	font-family: "Zen Maru Gothic", sans-serif;
-	font-size: 13px;
-}
-
-.PortraitWrapper {
-	position: relative;
-	width: 120px;
-	height: 120px;
-}
-
-.Portrait {
-	width: 120px;
-	height: 120px;
-	border-radius: 50%;
-	object-fit: cover;
-}
-
-.PeachIcon {
-	position: absolute;
-	top: -4px;
-	right: -8px;
-	width: 32px;
-	height: 32px;
-}
-
-/* ===== Right Fixed Area ===== */
-
-.FixedRightArea {
-	position: fixed;
-	top: 40px;
-	right: 40px;
-	width: 260px;
-	z-index: 2;
-	color: white;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	text-align: right;
-	gap: 6px;
-	font-size: 13px;
-}
-
-.FixedRightArea a:hover {
-	text-decoration: underline;
-}
-
-.Copyright {
-	margin-top: 16px;
-	font-size: 12px;
-	opacity: 0.85;
-}
-
-/* ===== Center Scroll Area ===== */
-
-.CenterScrollArea {
-	width: 100%;
-	max-width: 640px;
-	min-height: 100vh;
-	background-color: var(--color-paper);
-	background-image:
-		linear-gradient(rgba(180, 200, 180, 0.3) 1px, transparent 1px),
-		linear-gradient(90deg, rgba(180, 200, 180, 0.3) 1px, transparent 1px);
-	background-size: 20px 20px;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
-	z-index: 1;
-	padding-bottom: 80px;
-}
-
-/* ===== Hero Area ===== */
-
-.HeroArea {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 24px 20px 40px;
-	gap: 16px;
-}
-
-.Logo {
-	width: 180px;
-	height: auto;
-}
-
-.TopImage {
-	width: 260px;
-	height: auto;
-}
-
-.HeroLinks {
-	display: flex;
-	gap: 12px;
-	align-items: center;
-}
-
-.HeroLinkImage {
-	width: 40px;
-	height: 40px;
-	object-fit: contain;
-	transition: opacity 0.2s;
-}
-
-.HeroLinkImage:hover {
-	opacity: 0.75;
 }
 
 /* ===== Profile Section ===== */
@@ -319,7 +194,9 @@
 	border-radius: 6px;
 	overflow: hidden;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-	transition: transform 0.2s, box-shadow 0.2s;
+	transition:
+		transform 0.2s,
+		box-shadow 0.2s;
 	position: relative;
 }
 
