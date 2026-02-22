@@ -257,7 +257,9 @@ export default function Page() {
 					</div>
 
 					{/* Music Gallery */}
-					<div className={styles.MusicGallerySection}>
+					<div style={{
+						paddingBlock: 40,
+					}}>
 						<MusicGallery songs={siteConfig.songs} />
 					</div>
 
