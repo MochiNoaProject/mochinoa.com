@@ -1,3 +1,13 @@
+.MainContent {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	grid-area: left main right;
+	@media (max-width: 720px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+
 .fixedBackground {
 	position: fixed;
 	background-color: var(--color-pink);

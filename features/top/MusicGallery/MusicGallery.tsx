@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import tag1Img from "../../../app/_assets/images/タグ1.png";
 import type { Song } from "../../../app/_site.config";
 import styles from "./MusicGallery.module.css";
@@ -22,6 +22,38 @@ const ITEM_SIZE = 64;
 const ITEM_GAP = 12;
 const ITEM_STEP = ITEM_SIZE + ITEM_GAP;
 const SCROLL_SPEED = 30;
+
+function TagTitleMarquee({ title }: { title: string }) {
+	const containerRef = useRef<HTMLSpanElement>(null);
+	const measureRef = useRef<HTMLSpanElement>(null);
+	const [overflows, setOverflows] = useState(false);
+
+	useLayoutEffect(() => {
+		const container = containerRef.current;
+		const measure = measureRef.current;
+		if (!container || !measure) return;
+		setOverflows(measure.scrollWidth > container.clientWidth);
+	});
+
+	return (
+		<span ref={containerRef} className={styles.TagTitle}>
+			<span ref={measureRef} className={styles.TagMeasure} aria-hidden="true">
+				{title}
+			</span>
+			{overflows ? (
+				<span className={styles.TagTitleInner}>
+					{[0, 1, 2, 3].map((i) => (
+						<span key={i} style={{ minWidth: 80, display: "inline-block" }}>
+							{title}
+						</span>
+					))}
+				</span>
+			) : (
+				<span className={styles.TagTitleStatic}>{title}</span>
+			)}
+		</span>
+	);
+}
 
 type Props = {
 	songs: readonly Song[];
@@ -135,27 +167,15 @@ export function MusicGallery({ songs }: Props) {
 							height={(tag1Img.height / tag1Img.width) * 80}						
 						/>
 						<AnimatePresence mode="wait">
-							<motion.span
+							<motion.div
 								key={selectedIndex}
-								className={styles.TagTitle}
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
 								transition={{ duration: 0.3 }}
 							>
-								<span className={styles.TagTitleInner}>
-									{
-										[0,1,2,3].map((i) => (
-											<span key={i}>
-											<span  style={{
-												minWidth: 80,
-												display: "inline-block"
-											}}>{selected.title}</span>
-											</span>
-										))
-									}									
-								</span>
-							</motion.span>
+								<TagTitleMarquee title={selected.title} />
+							</motion.div>
 						</AnimatePresence>
 					</div>
 				</a>

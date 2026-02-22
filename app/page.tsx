@@ -79,10 +79,7 @@ export default function Page() {
 			</div>
 
 			<div
-				style={{
-					display: "grid",
-					gridTemplateColumns: "1fr auto 1fr",
-				}}
+				className={styles.MainContent}
 			>
 				<div
 					style={{
