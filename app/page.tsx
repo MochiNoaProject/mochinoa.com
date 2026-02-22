@@ -78,18 +78,8 @@ export default function Page() {
 				</div>
 			</div>
 
-			<div
-				className={styles.MainContent}
-			>
-				<div
-					style={{
-						position: "sticky",
-						inset: "0",
-						display: "grid",
-						placeItems: "center",
-						height: "80vh",
-					}}
-				>
+			<div className={styles.MainContent}>
+				<div className={styles.LeftColumn}>
 					<a
 						style={{
 							display: "grid",
@@ -151,28 +141,12 @@ export default function Page() {
 								Healing Voice!
 							</div>
 						</div>
-						<p
-							style={{
-								color: "white",
-								textAlign: "center",
-							}}
-						>
+						<p className={styles.LeftColumnLabel}>
 							声優もももち公式サイト
 						</p>
 					</a>
 				</div>
-				<div
-					style={{
-						maxWidth: "320px",
-						backgroundColor: "var(--color-paper)",
-						backgroundImage: `linear-gradient(var(--color-pink) 1px, transparent 1px),
-						linear-gradient(90deg, var(--color-pink) 1px, transparent 1px)`,
-						backgroundSize: "40px 40px",
-						display: "flex",
-						flexDirection: "column",
-						gap: 32,
-					}}
-				>
+				<div className={styles.CenterColumn}>
 					{/* Hero */}
 					<div
 						style={{
@@ -362,17 +336,7 @@ export default function Page() {
 						</p>
 					</div>
 				</div>
-				<div
-					style={{
-						position: "sticky",
-						inset: 0,
-						textAlign: "center",
-						color: "white",
-						height: "80vh",
-						display: "grid",
-						placeItems: "center",
-					}}
-				>
+				<div className={styles.RightColumn}>
 					<div
 						style={{
 							display: "grid",

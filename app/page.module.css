@@ -1,6 +1,45 @@
 .MainContent {
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
+	grid-template-areas: "left center right";
+}
+
+.LeftColumn {
+	grid-area: left;
+	position: sticky;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	height: 80vh;
+}
+
+.LeftColumnLabel {
+	color: white;
+	text-align: center;
+}
+
+.CenterColumn {
+	grid-area: center;
+	max-width: 320px;
+	background-color: var(--color-paper);
+	background-image: linear-gradient(var(--color-pink) 1px, transparent 1px),
+		linear-gradient(90deg, var(--color-pink) 1px, transparent 1px);
+	background-size: 40px 40px;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+	padding-bottom: 80px;
+}
+
+.RightColumn {
+	grid-area: right;
+	position: sticky;
+	inset: 0;
+	text-align: center;
+	color: white;
+	height: 80vh;
+	display: grid;
+	place-items: center;
 }
 
 
@@ -228,4 +267,47 @@
 .ContactEmail {
 	font-size: 13px;
 	color: #555;
+}
+
+/* ===== Responsive: narrow screens ===== */
+
+@media (max-width: 768px) {
+	.MainContent {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"center"
+			"left"
+			"right";
+		max-width: 320px;
+		margin-inline: auto;
+		background-color: var(--color-paper);
+		background-image: linear-gradient(var(--color-pink) 1px, transparent 1px),
+			linear-gradient(90deg, var(--color-pink) 1px, transparent 1px);
+		background-size: 40px 40px;
+	}
+
+	.LeftColumn {
+		position: static;
+		height: auto;
+		padding-block: 40px;
+	}
+
+	.LeftColumnLabel {
+		color: var(--color-teal);
+	}
+
+	.CenterColumn {
+		background: none;
+	}
+
+	.RightColumn {
+		position: static;
+		height: auto;
+		color: var(--color-teal);
+		padding-block: 40px;
+	}
+
+	.RightColumn a {
+		color: var(--color-teal);
+	}
 }
