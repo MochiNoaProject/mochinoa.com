@@ -87,31 +87,33 @@ export default function Page() {
 								position: "relative",
 							}}
 						>
-							<Image
-								src={portraitImg}
-								alt="望月のあ"
-								width={200}
-								height={200}
-								style={{
-									borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%",
-									border: "4px solid #fef9d7",
-									boxShadow:
-										"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
-								}}
-							/>
-							<div
-								style={{
-									position: "absolute",
-									backgroundColor: "white",
-									borderRadius: "50%",
-									padding: 4,
-									display: "grid",
-									top: 0,
-									right: 0,
-									boxShadow:
-										"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
-								}}
-							>
+						<Image
+							src={portraitImg}
+							alt="望月のあ"
+							width={200}
+							height={200}
+							className={styles.floatingImage}
+							style={{
+								borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%",
+								border: "4px solid #fef9d7",
+								boxShadow:
+									"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+							}}
+						/>
+						<div
+							className={styles.floatingBadge}
+							style={{
+								position: "absolute",
+								backgroundColor: "white",
+								borderRadius: "50%",
+								padding: 4,
+								display: "grid",
+								top: 0,
+								right: 0,
+								boxShadow:
+									"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+							}}
+						>
 								<Image src={peachIconSvg} alt="" width={30} height={30} />
 							</div>
 							<div
@@ -314,8 +316,10 @@ export default function Page() {
 										style={{
 											position: "absolute",
 											bottom: 58,
+											left: i % 2 === 0 ? "auto" : 0,
+											right: i % 2 === 0 ? 0 : "auto",
 											textAlign: "center",
-											width: "100%",
+											width: 73,
 											fontSize: 12,
 										}}
 									>
