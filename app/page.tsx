@@ -316,6 +316,7 @@ export default function Page() {
 										gridArea: "tag",
 										position: "relative",
 										rotate: i % 2 === 0 ? "-10deg" : "10deg",
+										width: "fit-content",
 									}}
 									href={item.url}
 									target="_blank"
