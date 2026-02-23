@@ -33,6 +33,7 @@
 .TagLink {
 	grid-area: tag;
 	position: relative;
+	width: fit-content;
 }
 
 .TagName {
