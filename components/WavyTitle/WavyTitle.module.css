@@ -1,6 +1,7 @@
 .Root {
 	position: relative;
 	display: inline-block;
+	border-bottom: 2px solid transparent;
 }
 
 .Char {
