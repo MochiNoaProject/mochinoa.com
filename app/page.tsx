@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ClipReveal } from "../components/ClipReveal/ClipReveal";
+import { CursorSparkles } from "../components/CursorSparkles/CursorSparkles";
 import { WavyTitle } from "../components/WavyTitle/WavyTitle";
 import { MusicGallery } from "../features/top/MusicGallery/MusicGallery";
 import logoImg from "./_assets/images/mochilogo.png";
@@ -57,6 +59,7 @@ const wavePath = buildScallopedArcPath();
 export default function Page() {
 	return (
 		<div className={styles.Root}>
+			<CursorSparkles />
 			{/* Fixed background: pink + teal sky with scallop wave */}
 			<div className={styles.fixedBackground}>
 				<div className={styles.skyArea}>
@@ -257,6 +260,7 @@ export default function Page() {
 							gap: 24,
 						}}
 					>
+					<ClipReveal>
 						<WavyTitle
 							text="もちのあちゃんのおみせ"
 							style={{
@@ -264,6 +268,7 @@ export default function Page() {
 								fontSize: 16,
 							}}
 						/>
+					</ClipReveal>
 						{siteConfig.shop.items.map((item, i) => (
 							<div
 								key={item.name}
@@ -349,6 +354,7 @@ export default function Page() {
 								gap: 16,
 							}}
 						>
+						<ClipReveal>
 							<WavyTitle
 								text={banner.label}
 								style={{
@@ -357,6 +363,7 @@ export default function Page() {
 									textAlign: i % 2 === 0 ? "right" : "left",
 								}}
 							/>
+						</ClipReveal>
 							<a
 								href={banner.url}
 								target="_blank"
@@ -383,6 +390,7 @@ export default function Page() {
 							gap: 24,
 						}}
 					>
+					<ClipReveal>
 						<WavyTitle
 							text="お仕事に関するお問い合わせ"
 							style={{
@@ -391,6 +399,7 @@ export default function Page() {
 								textAlign: "right",
 							}}
 						/>
+					</ClipReveal>
 						<div
 							style={{
 								fontSize: 14,
