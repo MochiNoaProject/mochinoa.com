@@ -1,0 +1,14 @@
+.ProfileSection {
+	padding-block: 16px;
+	margin-inline: 32px;
+	border-top: 4px dotted var(--color-teal);
+	border-bottom: 4px dotted var(--color-teal);
+	text-align: center;
+	color: var(--color-teal);
+	display: grid;
+	gap: 16px;
+}
+
+.TextWrapper {
+	line-height: 1.6;
+}

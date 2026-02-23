@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import nikukyu from "./_assets/nikukyu.png";
-import twitterIcon from "./_assets/twitter-icon.png";
-import youtubeIcon from "./_assets/youtube-icon.png";
-import { siteConfig } from "./_site.config";
+import nikukyu from "../../app/_assets/nikukyu.png";
+import twitterIcon from "../../app/_assets/twitter-icon.png";
+import youtubeIcon from "../../app/_assets/youtube-icon.png";
+import { siteConfig } from "../../app/_site.config";
 import styles from "./AppHeader.module.css";
 
 export const AppHeader = () => {

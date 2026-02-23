@@ -1,9 +1,9 @@
-import "./global.css";
-import "./index.css";
 import clsx from "clsx";
 import type { Metadata, Viewport } from "next";
+import GoogleAnalytics from "../components/GoogleAnalytics";
 import { zenMaruGothic } from "../styles/font";
-import GoogleAnalytics from "./GoogleAnalytics";
+import "../styles/global.css";
+import "../styles/index.css";
 import styles from "./layout.module.css";
 
 const title = "望月のあ公式サイト";
