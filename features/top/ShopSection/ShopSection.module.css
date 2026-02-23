@@ -1,0 +1,63 @@
+.ShopSection {
+	padding-inline: 24px;
+	display: grid;
+	gap: 24px;
+}
+
+.ItemContainer {
+	display: grid;
+	padding-inline: 24px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr auto auto;
+}
+
+.ItemContainerLeft {
+	grid-template-areas:
+		". item item"
+		"tag item item"
+		"tag . .";
+}
+
+.ItemContainerRight {
+	grid-template-areas:
+		"item item ."
+		"item item tag"
+		". . tag";
+}
+
+.ItemLink {
+	grid-area: item;
+	display: flex;
+}
+
+.TagLink {
+	grid-area: tag;
+	position: relative;
+	width: fit-content;
+}
+
+.TagName {
+	position: absolute;
+	bottom: 58px;
+	text-align: center;
+	width: 73px;
+	font-size: 12px;
+}
+
+@keyframes tagSway {
+	0%,
+	100% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(6deg);
+	}
+	75% {
+		transform: rotate(-6deg);
+	}
+}
+
+.tagSway {
+	animation: tagSway 3s linear infinite;
+	transform-origin: center 30%;
+}

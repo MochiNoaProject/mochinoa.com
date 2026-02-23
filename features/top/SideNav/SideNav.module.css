@@ -1,0 +1,15 @@
+.Container {
+	display: grid;
+	gap: 32px;
+}
+
+.Nav {
+	display: grid;
+	align-items: center;
+	gap: 8px;
+	font-size: 16px;
+}
+
+.Copyright {
+	font-size: 16px;
+}
