@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AppHeader } from "../AppHeader";
+import { AppHeader } from "../../components/AppHeader/AppHeader";
 import { GuessNumber } from "./GuessNumber";
 import styles from "./page.module.css";
 

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import { AppHeader } from "../../components/AppHeader/AppHeader";
 import data from "../../public/gacha/data.json";
-import { AppHeader } from "../AppHeader";
 import { IndexModal } from "./IndexModal";
 import styles from "./page.module.css";
 import { Result } from "./Result";

@@ -1,0 +1,15 @@
+.ContactSection {
+	padding-inline: 24px;
+	display: grid;
+	gap: 24px;
+}
+
+.Description {
+	font-size: 14px;
+	line-height: 2;
+}
+
+.Email {
+	font-size: 14px;
+	text-align: center;
+}
