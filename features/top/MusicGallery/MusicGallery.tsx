@@ -49,7 +49,10 @@ function TagTitleMarquee({ title }: { title: string }) {
 			{overflows ? (
 				<span className={styles.TagTitleInner}>
 					{[0, 1, 2, 3].map((i) => (
-						<span key={i} style={{ minWidth: 80, display: "inline-block", paddingLeft: 8 }}>
+						<span
+							key={i}
+							style={{ minWidth: 80, display: "inline-block", paddingLeft: 8 }}
+						>
 							{title}
 						</span>
 					))}

@@ -4,6 +4,7 @@ import { ClipReveal } from "../components/ClipReveal/ClipReveal";
 import { CursorSparkles } from "../components/CursorSparkles/CursorSparkles";
 import { WavyTitle } from "../components/WavyTitle/WavyTitle";
 import { MusicGallery } from "../features/top/MusicGallery/MusicGallery";
+import { TapeDecoration } from "../features/top/TapeDecoration/TapeDecoration";
 import logoImg from "./_assets/images/mochilogo.png";
 import portraitImg from "./_assets/images/momomochi-portrait.jpg";
 import peachIconSvg from "./_assets/images/peach-icon.svg";
@@ -90,33 +91,33 @@ export default function Page() {
 								position: "relative",
 							}}
 						>
-						<Image
-							src={portraitImg}
-							alt="望月のあ"
-							width={200}
-							height={200}
-							className={styles.floatingImage}
-							style={{
-								borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%",
-								border: "4px solid #fef9d7",
-								boxShadow:
-									"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
-							}}
-						/>
-						<div
-							className={styles.floatingBadge}
-							style={{
-								position: "absolute",
-								backgroundColor: "white",
-								borderRadius: "50%",
-								padding: 4,
-								display: "grid",
-								top: 0,
-								right: 0,
-								boxShadow:
-									"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
-							}}
-						>
+							<Image
+								src={portraitImg}
+								alt="望月のあ"
+								width={200}
+								height={200}
+								className={styles.floatingImage}
+								style={{
+									borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%",
+									border: "4px solid #fef9d7",
+									boxShadow:
+										"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+								}}
+							/>
+							<div
+								className={styles.floatingBadge}
+								style={{
+									position: "absolute",
+									backgroundColor: "white",
+									borderRadius: "50%",
+									padding: 4,
+									display: "grid",
+									top: 0,
+									right: 0,
+									boxShadow:
+										"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+								}}
+							>
 								<Image src={peachIconSvg} alt="" width={30} height={30} />
 							</div>
 							<div
@@ -160,14 +161,14 @@ export default function Page() {
 							height={(logoImg.height / logoImg.width) * 120}
 							priority
 						/>
-					<Image
-						src={topImg}
-						alt="望月のあ"
-						width={300}
-						height={(topImg.height / topImg.width) * 300}
-						priority
-						className={styles.swayImage}
-					/>
+						<Image
+							src={topImg}
+							alt="望月のあ"
+							width={300}
+							height={(topImg.height / topImg.width) * 300}
+							priority
+							className={styles.swayImage}
+						/>
 						<div
 							style={{
 								display: "flex",
@@ -260,15 +261,15 @@ export default function Page() {
 							gap: 24,
 						}}
 					>
-					<ClipReveal>
-						<WavyTitle
-							text="もちのあちゃんのおみせ"
-							style={{
-								color: "var(--color-teal)",
-								fontSize: 16,
-							}}
-						/>
-					</ClipReveal>
+						<ClipReveal>
+							<WavyTitle
+								text="もちのあちゃんのおみせ"
+								style={{
+									color: "var(--color-teal)",
+									fontSize: 16,
+								}}
+							/>
+						</ClipReveal>
 						{siteConfig.shop.items.map((item, i) => (
 							<div
 								key={item.name}
@@ -354,30 +355,35 @@ export default function Page() {
 								gap: 16,
 							}}
 						>
-						<ClipReveal>
-							<WavyTitle
-								text={banner.label}
-								style={{
-									color: "var(--color-teal)",
-									fontSize: 16,
-									textAlign: i % 2 === 0 ? "right" : "left",
-								}}
-							/>
-						</ClipReveal>
+							<ClipReveal>
+								<WavyTitle
+									text={banner.label}
+									style={{
+										color: "var(--color-teal)",
+										fontSize: 16,
+										textAlign: i % 2 === 0 ? "right" : "left",
+									}}
+								/>
+							</ClipReveal>
 							<a
 								href={banner.url}
 								target="_blank"
 								rel="noopener noreferrer"
 								style={{ display: "block" }}
 							>
-								<Image
-									src={banner.image}
-									alt={banner.alt}
-									style={{
-										width: "100%",
-										height: "auto",
-									}}
-								/>
+								<TapeDecoration
+									position={i % 2 === 0 ? "topLeft" : "topRight"}
+									color={i % 2 === 0 ? "pink" : "teal"}
+								>
+									<Image
+										src={banner.image}
+										alt={banner.alt}
+										style={{
+											width: "100%",
+											height: "auto",
+										}}
+									/>
+								</TapeDecoration>
 							</a>
 						</div>
 					))}
@@ -390,16 +396,16 @@ export default function Page() {
 							gap: 24,
 						}}
 					>
-					<ClipReveal>
-						<WavyTitle
-							text="お仕事に関するお問い合わせ"
-							style={{
-								fontSize: 16,
-								color: "var(--color-teal)",
-								textAlign: "right",
-							}}
-						/>
-					</ClipReveal>
+						<ClipReveal>
+							<WavyTitle
+								text="お仕事に関するお問い合わせ"
+								style={{
+									fontSize: 16,
+									color: "var(--color-teal)",
+									textAlign: "right",
+								}}
+							/>
+						</ClipReveal>
 						<div
 							style={{
 								fontSize: 14,

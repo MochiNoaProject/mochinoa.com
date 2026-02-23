@@ -1,0 +1,54 @@
+.wrapper {
+	display: block;
+	position: relative;
+	overflow: visible;
+}
+
+.wrapper::before {
+	content: "";
+	display: block;
+	position: absolute;
+	z-index: 1;
+	width: 50px;
+	height: 24px;
+	background: var(--color-pink);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	opacity: 0.95;
+}
+
+/* 右上: 左上→右下に伸ばす。角が右上なので切れ端は左辺をギザギザに */
+.wrapper[data-position="topRight"]::before {
+	top: -6px;
+	right: 0px;
+	transform: rotate(24deg);
+	clip-path: polygon(
+		4% 0,
+		100% 0,
+		100% 100%,
+		4% 100%,
+		0 80%,
+		5% 60%,
+		0 40%,
+		4% 20%
+	);
+}
+
+/* 左上: 左下→右上に伸ばす。角が左上なので切れ端は右辺をギザギザに */
+.wrapper[data-position="topLeft"]::before {
+	top: -6px;
+	left: 0px;
+	transform: rotate(-24deg);
+	clip-path: polygon(
+		0 0,
+		96% 20%,
+		100% 40%,
+		95% 60%,
+		100% 80%,
+		96% 100%,
+		0 100%
+	);
+}
+
+.wrapper[data-color="teal"]::before {
+	background: var(--color-teal);
+}
