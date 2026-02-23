@@ -107,6 +107,32 @@
 	animation: sway 3s ease-in-out infinite;
 }
 
+.tagSway {
+	animation: tagSway 3s linear infinite;
+	transform-origin: center 30%;
+}
+
+@keyframes tagSway {
+	0%,
+	100% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(6deg);
+	}
+	75% {
+		transform: rotate(-6deg);
+	}
+}
+
+.socialLink {
+	transition: transform 0.2s ease;
+}
+
+.socialLink:hover {
+	transform: scale(1.2);
+}
+
 /* ===== Responsive: narrow screens ===== */
 
 @media (max-width: 780px) {

@@ -162,6 +162,7 @@ export function MusicGallery({ songs }: Props) {
 						</AnimatePresence>
 					</div>
 					<div
+						className={styles.TagSway}
 						style={{
 							position: "absolute",
 							bottom: -16,

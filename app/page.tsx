@@ -189,6 +189,7 @@ export default function Page() {
 									href={link.url}
 									target="_blank"
 									rel="noopener noreferrer"
+									className={styles.socialLink}
 								>
 									<Image
 										src={link.image}
@@ -304,6 +305,7 @@ export default function Page() {
 									/>
 								</a>
 								<a
+									className={styles.tagSway}
 									style={{
 										gridArea: "tag",
 										position: "relative",
