@@ -30,7 +30,7 @@ export const AppHeader = () => {
 				<div className={styles.Socials}>
 					<Link
 						className={styles.LinkButton}
-						href={siteConfig.twitter.url}
+						href={siteConfig.links.twitter.url}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -43,7 +43,7 @@ export const AppHeader = () => {
 					</Link>
 					<Link
 						className={styles.LinkButton}
-						href={siteConfig.youtube.url}
+						href={siteConfig.links.youtube.url}
 						target="_blank"
 						rel="noopener noreferrer"
 					>

@@ -1,232 +1,475 @@
 import Image from "next/image";
 import Link from "next/link";
-import activityThumbnail01 from "./_assets/activities/001.jpg";
-import activityThumbnail02 from "./_assets/activities/002.jpg";
-import activityThumbnail03 from "./_assets/activities/003.jpg";
-import gachaThumbnail from "./_assets/apps/gacha.png";
-import kazuateThumbnail from "./_assets/apps/kazuate.png";
-import kekkonThumbnail from "./_assets/apps/kekkon.png";
-import kokoroThumbnail from "./_assets/apps/kokoro.png";
-import nyantomoThumbnail from "./_assets/apps/nyantomo.png";
-import puzzleThumbnail from "./_assets/apps/puzzle.png";
-import typingThumbnail from "./_assets/apps/typing.png";
-import voiceThumbnail from "./_assets/apps/voice.png";
-import twitterIcon from "./_assets/twitter-icon.png";
-import youtubeIcon from "./_assets/youtube-icon.png";
+import { ClipReveal } from "../components/ClipReveal/ClipReveal";
+import { CursorSparkles } from "../components/CursorSparkles/CursorSparkles";
+import { WavyTitle } from "../components/WavyTitle/WavyTitle";
+import { MusicGallery } from "../features/top/MusicGallery/MusicGallery";
+import { TapeDecoration } from "../features/top/TapeDecoration/TapeDecoration";
+import logoImg from "./_assets/images/mochilogo.png";
+import portraitImg from "./_assets/images/momomochi-portrait.jpg";
+import peachIconSvg from "./_assets/images/peach-icon.svg";
+import topImg from "./_assets/images/トップ画像.png";
 import { siteConfig } from "./_site.config";
-import { AppHeader } from "./AppHeader";
+import "./page.global.css";
+import tag1Img from "./_assets/images/タグ1.png";
+import tag2Img from "./_assets/images/タグ2.png";
 import styles from "./page.module.css";
 
-const HeroSection = () => {
-	return (
-		<div className={styles.HeroSection}>
-			<div>
-				<video
-					className={styles.HeroMovie}
-					src="/hero-movie.mp4"
-					autoPlay
-					loop
-					muted
-					playsInline
-				/>
-			</div>
-			<div className={styles.HeroMessage}>
-				<p className={styles.Title}>Welcome to Mochinoa's World</p>
-				<p>
-					誰かのこころに寄り添える存在になりたい！
-					<br />
-					猫耳がチャームポイントの、ちょっぴりおっとりな女の子！
-				</p>
-			</div>
-		</div>
-	);
-};
+const WAVE_W = 1000;
+const WAVE_ARC_DEPTH = 60;
+const WAVE_SCALLOP_COUNT = 14;
+const WAVE_SCALLOP_FLATNESS = 0.75;
 
-const AboutSection = () => {
-	return (
-		<section className={styles.SectionCommon} id="about">
-			<h2>About Mochizuki Noa</h2>
-			<p>満月みたいに、あなたの夜をやさしく照らせますように。</p>
-			<p>
-				声優、イラストレーター、Live2Dデザイナー、ゲームクリエイターなど、マルチに活動しています。
-			</p>
-		</section>
-	);
-};
+function buildScallopedArcPath() {
+	const R =
+		(WAVE_W * WAVE_W + 4 * WAVE_ARC_DEPTH * WAVE_ARC_DEPTH) /
+		(8 * WAVE_ARC_DEPTH);
+	const halfAngle = Math.asin(WAVE_W / (2 * R));
 
-const LatestActivities = () => {
-	return (
-		<section className={styles.SectionCommon} id="works">
-			<h2>Latest Activities</h2>
-			<ul className={styles.Gallery}>
-				{[
-					{
-						title: "ワンマンイベント開催",
-						description:
-							"オンラインのワンマントークイベントを開催。ファンのみんなとお話したり、企画やオリジナルグッズのガチャを実施。",
-						thumbnail: activityThumbnail01,
-					},
-					{
-						title: "marurucafe コラボカフェ実施",
-						description:
-							"marurucafeさんにてコラボカフェの実施し、コラボメニューの販売やトークイベントへの出演をしました。",
-						thumbnail: activityThumbnail02,
-					},
-					{
-						title: "推しカード販売",
-						description:
-							"スマホをかざすと情報が表示される新しい推しを布教できるNFCカード、推しカードを販売しました。",
-						thumbnail: activityThumbnail03,
-					},
-				].map((item) => {
-					return (
-						<li key={item.title}>
-							<Image
-								src={item.thumbnail}
-								alt={item.title}
-								width={200}
-								height={150}
-							/>
-							<h3>{item.title}</h3>
-							<p>{item.description}</p>
-						</li>
-					);
-				})}
-			</ul>
-		</section>
-	);
-};
+	const points: [number, number][] = [];
+	for (let i = 0; i <= WAVE_SCALLOP_COUNT; i++) {
+		const theta = -halfAngle + (2 * halfAngle * i) / WAVE_SCALLOP_COUNT;
+		points.push([
+			WAVE_W / 2 + R * Math.sin(theta),
+			WAVE_ARC_DEPTH - R * (1 - Math.cos(theta)),
+		]);
+	}
 
-const ContactSection = () => {
-	return (
-		<section className={styles.SectionCommon} id="contact">
-			<h2>Contact</h2>
-			<p>
-				お仕事に関するお問い合わせやコラボのお誘いについては、XのDMまたは下記のメールアドレスまでご連絡ください。案件や企画などは詳細を最初に共有していただけるとやり取りがスムーズに進むので助かります。特に支障がなければ2,3日以内に返信させていただきます。
-			</p>
-			<p>
-				連絡先：
-				<a href="mailto:mochizuki.noa.project@gmail.com">
-					mochizuki.noa.project@gmail.com
-				</a>
-			</p>
-		</section>
-	);
-};
+	let d = `M 0 0 L ${WAVE_W} 0`;
+	let maxY = 0;
 
-const GamesAppsSection = () => {
-	return (
-		<section className={styles.SectionCommon}>
-			<h2>Games & Apps</h2>
+	for (let i = WAVE_SCALLOP_COUNT; i > 0; i--) {
+		const [px, py] = points[i];
+		const [tx, ty] = points[i - 1];
+		const dx = tx - px;
+		const dy = ty - py;
+		const dist = Math.sqrt(dx * dx + dy * dy);
+		const r = dist * WAVE_SCALLOP_FLATNESS;
+		const bulge = r - Math.sqrt(r * r - (dist / 2) ** 2);
+		const midY = (py + ty) / 2 + bulge;
+		if (midY > maxY) maxY = midY;
+		d += ` A ${r.toFixed(2)} ${r.toFixed(2)} 0 0 1 ${tx.toFixed(2)} ${ty.toFixed(2)}`;
+	}
 
-			<div className={styles.GameGallery}>
-				{[
-					{
-						title: "にゃんとも不思議な同居生活",
-						thumbnail: nyantomoThumbnail,
-						link: "/games/nyantomo",
-					},
-					{
-						title: "数当てゲーム",
-						thumbnail: kazuateThumbnail,
-						link: "/guess-number",
-					},
-					{
-						title: "結婚アプリ",
-						thumbnail: kekkonThumbnail,
-						link: "/marry",
-					},
-					{
-						title: "のあぼいす",
-						thumbnail: voiceThumbnail,
-						link: "https://noavoice.vercel.app/",
-					},
-					{
-						title: "ガチャアプリ",
-						thumbnail: gachaThumbnail,
-						link: "/gacha",
-					},
-					{
-						title: "スライドパズル",
-						thumbnail: puzzleThumbnail,
-						link: "/games/slide-puzzle",
-					},
-					{
-						title: "タイピング",
-						thumbnail: typingThumbnail,
-						link: "/games/typing",
-					},
-					{
-						title: "心の形診断",
-						thumbnail: kokoroThumbnail,
-						link: "https://kokoro-shindan.mochinoa.com/",
-					},
-				].map((item) => {
-					return (
-						<Link className={styles.Item} href={item.link} key={item.title}>
-							<Image
-								src={item.thumbnail}
-								alt={item.title}
-								width={200}
-								height={200}
-							/>
-							<h3 className={styles.Title}>{item.title}</h3>
-						</Link>
-					);
-				})}
-			</div>
-		</section>
-	);
-};
+	d += " Z";
+	return { d, height: Math.ceil(maxY) - 2 };
+}
+
+const wavePath = buildScallopedArcPath();
 
 export default function Page() {
 	return (
-		<div>
-			<AppHeader />
-			<HeroSection />
-			<AboutSection />
-			<LatestActivities />
-			<ContactSection />
-			<GamesAppsSection />
-			<footer className={styles.Footer}>
-				<nav className={styles.FooterSocial}>
-					<Link
-						className={styles.LinkButton}
-						href={siteConfig.twitter.url}
+		<div className={styles.Root}>
+			<CursorSparkles />
+			{/* Fixed background: pink + teal sky with scallop wave */}
+			<div className={styles.fixedBackground}>
+				<div className={styles.skyArea}>
+					<svg
+						className={styles.wave}
+						aria-label="wave"
+						viewBox={`0 0 ${WAVE_W} ${wavePath.height}`}
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path d={wavePath.d} fill="#63bac7" />
+					</svg>
+				</div>
+			</div>
+
+			<div className={styles.MainContent}>
+				<div className={styles.LeftColumn}>
+					<a
+						style={{
+							display: "grid",
+							gap: 16,
+						}}
+						href={siteConfig.links.momomochi}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						<Image
-							src={twitterIcon}
-							alt="Twitter"
-							width={twitterIcon.width}
-							height={twitterIcon.height}
-						/>
-					</Link>
-					<Link
-						className={styles.LinkButton}
-						href={siteConfig.youtube.url}
-						target="_blank"
-						rel="noopener noreferrer"
+						<div
+							style={{
+								position: "relative",
+							}}
+						>
+							<Image
+								src={portraitImg}
+								alt="望月のあ"
+								width={200}
+								height={200}
+								className={styles.floatingImage}
+								style={{
+									borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%",
+									border: "4px solid #fef9d7",
+									boxShadow:
+										"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+								}}
+							/>
+							<div
+								className={styles.floatingBadge}
+								style={{
+									position: "absolute",
+									backgroundColor: "white",
+									borderRadius: "50%",
+									padding: 4,
+									display: "grid",
+									top: 0,
+									right: 0,
+									boxShadow:
+										"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+								}}
+							>
+								<Image src={peachIconSvg} alt="" width={30} height={30} />
+							</div>
+							<div
+								style={{
+									color: "rgb(139, 195, 74)",
+									backgroundColor: "white",
+									position: "absolute",
+									bottom: 16,
+									left: 0,
+									fontWeight: "bold",
+									lineHeight: 1,
+									fontSize: 10,
+									padding: "8px 4px",
+									borderRadius: 4,
+									rotate: "-10deg",
+									boxShadow:
+										"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px",
+								}}
+							>
+								Healing Voice!
+							</div>
+						</div>
+						<p className={styles.LeftColumnLabel}>声優もももち公式サイト</p>
+					</a>
+				</div>
+				<div className={styles.CenterColumn}>
+					{/* Hero */}
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+							gap: 16,
+							paddingTop: 16,
+						}}
 					>
 						<Image
-							src={youtubeIcon}
-							alt="YouTube"
-							width={youtubeIcon.width}
-							height={youtubeIcon.height}
+							src={logoImg}
+							alt="mochi"
+							width={120}
+							height={(logoImg.height / logoImg.width) * 120}
+							priority
 						/>
-					</Link>
-				</nav>
-				<nav className={styles.FooterNav}>
-					<Link href="/guidelines/streaming">配信ガイドライン</Link>/
-					<Link href="/guidelines/fanart">
-						ファンアート・著作物ガイドライン
-					</Link>
-				</nav>
-				<small className={styles.Copyright}>
-					&copy; 2025 もちもちクリエイト
-				</small>
-			</footer>
+						<Image
+							src={topImg}
+							alt="望月のあ"
+							width={300}
+							height={(topImg.height / topImg.width) * 300}
+							priority
+							className={styles.swayImage}
+						/>
+						<div
+							style={{
+								display: "flex",
+								gap: 32,
+								alignItems: "center",
+							}}
+						>
+							{[
+								{
+									url: siteConfig.links.youtube.url,
+									image: siteConfig.links.youtube.image,
+									alt: "YouTube",
+								},
+								{
+									url: siteConfig.links.twitter.url,
+									image: siteConfig.links.twitter.image,
+									alt: "Twitter",
+								},
+							].map((link) => (
+								<a
+									key={link.url}
+									href={link.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									className={styles.socialLink}
+								>
+									<Image
+										src={link.image}
+										alt={link.alt}
+										width={42}
+										height={42}
+									/>
+								</a>
+							))}
+						</div>
+					</div>
+
+					{/* Profile */}
+					<div>
+						<div
+							style={{
+								paddingBlock: 16,
+								marginInline: 32,
+								borderTop: `4px dotted var(--color-teal)`,
+								borderBottom: `4px dotted var(--color-teal)`,
+								textAlign: "center",
+								color: `var(--color-teal)`,
+								display: "grid",
+								gap: 16,
+							}}
+						>
+							<div
+								style={{
+									lineHeight: 1.6,
+								}}
+							>
+								<h2>望月 のあ</h2>
+								<p>コンテンツクリエイター</p>
+							</div>
+							<p
+								style={{
+									lineHeight: 1.6,
+								}}
+							>
+								誰かのこころに
+								<br />
+								寄り添える存在になりたい！
+								<br />
+								猫耳がチャームポイントの、
+								<br />
+								ちょっぴりおっとりな女の子！
+							</p>
+						</div>
+					</div>
+
+					{/* Music Gallery */}
+					<div
+						style={{
+							paddingBlock: 40,
+						}}
+					>
+						<MusicGallery songs={siteConfig.songs} />
+					</div>
+
+					{/* Shop */}
+					<div
+						style={{
+							paddingInline: 24,
+							display: "grid",
+							gap: 24,
+						}}
+					>
+						<ClipReveal>
+							<WavyTitle
+								text="もちのあちゃんのおみせ"
+								style={{
+									color: "var(--color-teal)",
+									fontSize: 16,
+								}}
+							/>
+						</ClipReveal>
+						{siteConfig.shop.items.map((item, i) => (
+							<div
+								key={item.name}
+								style={{
+									display: "grid",
+									paddingInline: 24,
+									gridTemplateAreas:
+										i % 2 === 0
+											? `
+									". item item"
+									"tag item item"
+									"tag . ."
+								`
+											: `
+									"item item ."
+									"item item tag"
+									". . tag"
+								`,
+									gridTemplateColumns: "1fr 1fr 1fr",
+									gridTemplateRows: "1fr auto auto",
+								}}
+							>
+								<a
+									style={{
+										gridArea: "item",
+										rotate: i % 2 === 0 ? "10deg" : "-10deg",
+										display: "flex",
+										justifyContent: i % 2 === 0 ? "flex-end" : "flex-start",
+									}}
+									href={item.url}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<Image
+										src={item.image}
+										alt={item.name}
+										width={200}
+										height={(item.image.height / item.image.width) * 200}
+									/>
+								</a>
+								<a
+									className={styles.tagSway}
+									style={{
+										gridArea: "tag",
+										position: "relative",
+										rotate: i % 2 === 0 ? "-10deg" : "10deg",
+									}}
+									href={item.url}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<span
+										style={{
+											position: "absolute",
+											bottom: 58,
+											left: i % 2 === 0 ? "auto" : 0,
+											right: i % 2 === 0 ? 0 : "auto",
+											textAlign: "center",
+											width: 73,
+											fontSize: 12,
+										}}
+									>
+										{item.name}
+									</span>
+									<Image
+										src={i % 2 === 0 ? tag2Img : tag1Img}
+										alt="詳細はこちら"
+										width={80}
+										height={(tag2Img.height / tag2Img.width) * 80}
+									/>
+								</a>
+							</div>
+						))}
+					</div>
+
+					{/* Banners */}
+					{siteConfig.banners.map((banner, i) => (
+						<div
+							key={banner.alt}
+							style={{
+								paddingInline: 24,
+								display: "grid",
+								gap: 16,
+							}}
+						>
+							<ClipReveal>
+								<WavyTitle
+									text={banner.label}
+									style={{
+										color: "var(--color-teal)",
+										fontSize: 16,
+										textAlign: i % 2 === 0 ? "right" : "left",
+									}}
+								/>
+							</ClipReveal>
+							<a
+								href={banner.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								style={{ display: "block" }}
+							>
+								<TapeDecoration
+									position={i % 2 === 0 ? "topLeft" : "topRight"}
+									color={i % 2 === 0 ? "pink" : "teal"}
+								>
+									<Image
+										src={banner.image}
+										alt={banner.alt}
+										style={{
+											width: "100%",
+											height: "auto",
+										}}
+									/>
+								</TapeDecoration>
+							</a>
+						</div>
+					))}
+
+					{/* Contact */}
+					<div
+						style={{
+							paddingInline: 24,
+							display: "grid",
+							gap: 24,
+						}}
+					>
+						<ClipReveal>
+							<WavyTitle
+								text="お仕事に関するお問い合わせ"
+								style={{
+									fontSize: 16,
+									color: "var(--color-teal)",
+									textAlign: "right",
+								}}
+							/>
+						</ClipReveal>
+						<div
+							style={{
+								fontSize: 14,
+								lineHeight: 2,
+							}}
+						>
+							お仕事に関するお問い合わせや コラボのお誘いについては、Xの
+							DMまたは下記のメールアドレス までご連絡ください。案件や企
+							画などは詳細を最初に共有して いただけるとやり取りがスムー
+							ズに進むので助かります。特に 支障がなければ2,3日以内に返信
+							させていただきます。
+						</div>
+						<p
+							style={{
+								fontSize: 14,
+								textAlign: "center",
+							}}
+						>
+							連絡先： {siteConfig.contact.email}
+						</p>
+					</div>
+				</div>
+				<div className={styles.RightColumn}>
+					<div
+						style={{
+							display: "grid",
+							gap: 32,
+						}}
+					>
+						<nav
+							style={{
+								display: "grid",
+								alignItems: "center",
+								gap: 8,
+								fontSize: 16,
+							}}
+						>
+							<a href={`mailto:${siteConfig.contact.email}`}>
+								{siteConfig.contact.email}
+							</a>
+							<a
+								href={siteConfig.links.twitter.url}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Twitter : @_noach
+							</a>
+							<Link href={siteConfig.guidelines.streaming}>
+								配信ガイドライン
+							</Link>
+							<Link href={siteConfig.guidelines.fanart}>
+								著作物ガイドライン
+							</Link>
+						</nav>
+						<small
+							style={{
+								fontSize: 16,
+							}}
+						>
+							&copy; 2025 もちもちクリエイト
+						</small>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 }

@@ -1,0 +1,17 @@
+:root {
+	--color-paper: #f7f5e8;
+	--color-pink: #f9d4e1;
+	--color-teal: #63bac7;
+}
+
+::-webkit-scrollbar {
+	width: 20px;
+}
+::-webkit-scrollbar-track {
+	background: var(--color-paper);
+}
+::-webkit-scrollbar-thumb {
+	background: var(--color-pink);
+	border-radius: 10px;
+	border: 20px solid var(--color-pink);
+}

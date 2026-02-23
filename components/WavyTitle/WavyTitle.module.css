@@ -1,0 +1,17 @@
+.Root {
+	position: relative;
+	display: inline-block;
+	border-bottom: 2px solid transparent;
+}
+
+.Char {
+	display: inline-block;
+}
+
+.Underline {
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 100%;
+	overflow: visible;
+}

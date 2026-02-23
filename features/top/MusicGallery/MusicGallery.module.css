@@ -1,0 +1,145 @@
+.MusicGallery {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.FeaturedLink {
+	display: block;
+}
+
+.FeaturedBlob {
+	position: relative;
+	width: 240px;
+	height: 180px;
+	overflow: hidden;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+	animation: blobMorph 16s linear infinite;
+}
+
+@keyframes blobMorph {
+	0%,
+	100% {
+		border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+	}
+	25% {
+		border-radius: 30% 70% 55% 45% / 50% 60% 30% 50%;
+	}
+	50% {
+		border-radius: 45% 55% 70% 30% / 35% 65% 40% 60%;
+	}
+	75% {
+		border-radius: 70% 30% 40% 60% / 55% 35% 65% 45%;
+	}
+}
+
+.FeaturedImageWrapper {
+	position: absolute;
+	inset: 0;
+}
+
+.FeaturedImage {
+	object-fit: cover;
+}
+
+.TagTitle {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	white-space: nowrap;
+	font-size: 12px;
+	margin-right: 8px;
+	text-align: center;
+	pointer-events: none;
+}
+
+.TagMeasure {
+	position: absolute;
+	visibility: hidden;
+	white-space: nowrap;
+	pointer-events: none;
+}
+
+.TagTitleStatic {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.TagTitleInner {
+	display: inline-block;
+	animation: tagScroll 8s 1s linear infinite;
+}
+
+.TagSway {
+	animation: tagSway 1s linear infinite alternate;
+	transform-origin: center 30%;
+}
+
+@keyframes tagSway {
+	0% {
+		transform: rotate(3deg);
+	}
+	100% {
+		transform: rotate(-3deg);
+	}
+}
+
+@keyframes tagScroll {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+.TrackContainer {
+	overflow: hidden;
+	padding: 8px 0;
+}
+
+.Track {
+	display: flex;
+	gap: 12px;
+	width: max-content;
+}
+
+.ThumbnailButton {
+	flex-shrink: 0;
+	border: none;
+	background: none;
+	padding: 0;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.ThumbnailButton:hover {
+	transform: scale(1.15);
+}
+
+.ThumbnailActive {
+	transform: scale(1.15);
+}
+
+.ThumbnailActive:hover {
+	transform: scale(1.2);
+}
+
+.ThumbnailBlob {
+	width: 64px;
+	height: 64px;
+	overflow: hidden;
+}
+
+.ThumbnailActive .ThumbnailBlob {
+	box-shadow: 0 0 0 3px rgba(99, 186, 199, 0.6);
+}
+
+.Thumbnail {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
