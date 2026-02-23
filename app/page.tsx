@@ -157,13 +157,14 @@ export default function Page() {
 							height={(logoImg.height / logoImg.width) * 120}
 							priority
 						/>
-						<Image
-							src={topImg}
-							alt="望月のあ"
-							width={300}
-							height={(topImg.height / topImg.width) * 300}
-							priority
-						/>
+					<Image
+						src={topImg}
+						alt="望月のあ"
+						width={300}
+						height={(topImg.height / topImg.width) * 300}
+						priority
+						className={styles.swayImage}
+					/>
 						<div
 							style={{
 								display: "flex",
