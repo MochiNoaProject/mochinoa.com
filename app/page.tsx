@@ -325,8 +325,8 @@ export default function Page() {
 										style={{
 											position: "absolute",
 											bottom: 58,
-											left: i % 2 === 0 ? "auto" : 0,
-											right: i % 2 === 0 ? 0 : "auto",
+											left: i % 2 === 0 ? undefined : 0,
+											right: i % 2 === 0 ? 0 : undefined,
 											textAlign: "center",
 											width: 73,
 											fontSize: 12,
