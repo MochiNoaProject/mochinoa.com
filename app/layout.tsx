@@ -2,7 +2,7 @@ import "./global.css";
 import "./index.css";
 import clsx from "clsx";
 import type { Metadata, Viewport } from "next";
-import { irohamaruMikami } from "../styles/font";
+import { zenMaruGothic } from "../styles/font";
 import GoogleAnalytics from "./GoogleAnalytics";
 import styles from "./layout.module.css";
 
@@ -52,8 +52,8 @@ export default function RootLayout({
 		<html
 			lang="ja"
 			className={clsx(
-				irohamaruMikami.className,
-				irohamaruMikami.variable,
+				zenMaruGothic.className,
+				zenMaruGothic.variable,
 				styles.root,
 			)}
 		>

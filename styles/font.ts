@@ -1,23 +1,8 @@
-import localFont from "next/font/local";
+import { Zen_Maru_Gothic } from "next/font/google";
 
-export const irohamaruMikami = localFont({
-	src: [
-		{
-			path: "../public/fonts/irohamaru-mikami-Light.ttf",
-			weight: "300",
-			style: "normal",
-		},
-		{
-			path: "../public/fonts/irohamaru-mikami-Regular.ttf",
-			weight: "400",
-			style: "normal",
-		},
-		{
-			path: "../public/fonts/irohamaru-mikami-Medium.ttf",
-			weight: "500",
-			style: "normal",
-		},
-	],
+export const zenMaruGothic = Zen_Maru_Gothic({
+	weight: ["300", "400", "500"],
+	subsets: ["latin"],
 	display: "swap",
-	variable: "--font-irohamaru",
+	variable: "--font-zen-maru-gothic",
 });
