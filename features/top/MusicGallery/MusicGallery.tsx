@@ -1,11 +1,13 @@
 "use client";
 
+import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import {
 	useCallback,
 	useEffect,
 	useLayoutEffect,
+	useMemo,
 	useRef,
 	useState,
 } from "react";
@@ -122,7 +124,7 @@ export function MusicGallery({ songs }: Props) {
 		setSelectedIndex(index);
 	}, []);
 
-	const tripled = [...songs, ...songs, ...songs];
+	const tripled = useMemo(() => [...songs, ...songs, ...songs], [songs]);
 	const selected = songs[selectedIndex];
 
 	return (
@@ -203,7 +205,10 @@ export function MusicGallery({ songs }: Props) {
 							<button
 								key={`${Math.floor(i / songs.length)}-${song.title}`}
 								type="button"
-								className={`${styles.ThumbnailButton} ${isActive ? styles.ThumbnailActive : ""}`}
+								className={clsx(
+									styles.ThumbnailButton,
+									isActive && styles.ThumbnailActive,
+								)}
 								onClick={() => handleClick(idx)}
 								title={song.title}
 							>

@@ -1,6 +1,6 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import clsx from "clsx";
 import type { Metadata, Viewport } from "next";
-import GoogleAnalytics from "../components/GoogleAnalytics";
 import { zenMaruGothic } from "../styles/font";
 import "../styles/global.css";
 import "../styles/index.css";
@@ -57,13 +57,10 @@ export default function RootLayout({
 				styles.root,
 			)}
 		>
-			<head>
-				<GoogleAnalytics />
-			</head>
-
 			<body>
 				{children}
 				{modal}
+				<GoogleAnalytics gaId="G-J9CW3CGVL4" />
 			</body>
 		</html>
 	);
