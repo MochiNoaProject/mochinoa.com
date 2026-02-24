@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import { useEffect, useRef } from "react";
 import styles from "./ClipReveal.module.css";
 
@@ -34,7 +35,7 @@ export function ClipReveal({ children, className }: Props) {
 	}, []);
 
 	return (
-		<div ref={ref} className={`${styles.Root} ${className ?? ""}`}>
+		<div ref={ref} className={clsx(styles.Root, className)}>
 			{children}
 		</div>
 	);
