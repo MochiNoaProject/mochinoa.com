@@ -40,8 +40,8 @@ export const ShopSection = () => {
 						<Image
 							src={item.image}
 							alt={item.name}
-							width={200}
-							height={(item.image.height / item.image.width) * 200}
+							style={{ width: 200, height: "auto" }}
+							sizes="200px"
 						/>
 					</a>
 					<a
@@ -65,8 +65,8 @@ export const ShopSection = () => {
 						<Image
 							src={i % 2 === 0 ? tag2Img : tag1Img}
 							alt="詳細はこちら"
-							width={80}
-							height={(tag2Img.height / tag2Img.width) * 80}
+							style={{ width: 80, height: "auto" }}
+							sizes="80px"
 						/>
 					</a>
 				</div>

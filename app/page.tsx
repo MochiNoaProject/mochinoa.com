@@ -83,11 +83,7 @@ export default function Page() {
 					<ProfileSection />
 
 					{/* Music Gallery */}
-					<div
-						style={{
-							paddingBlock: 40,
-						}}
-					>
+					<div className={styles.MusicGalleryWrapper}>
 						<MusicGallery songs={siteConfig.songs} />
 					</div>
 
