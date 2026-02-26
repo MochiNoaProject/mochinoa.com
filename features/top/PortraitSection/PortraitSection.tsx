@@ -16,12 +16,17 @@ export const PortraitSection = () => {
 				<Image
 					src={portraitImg}
 					alt="望月のあ"
-					width={200}
-					height={200}
+					style={{ width: 200, height: "auto" }}
+					sizes="200px"
 					className={styles.floatingImage}
 				/>
 				<div className={styles.floatingBadge}>
-					<Image src={peachIconSvg} alt="" width={30} height={30} />
+					<Image
+						src={peachIconSvg}
+						alt=""
+						style={{ width: 30, height: "auto" }}
+						sizes="30px"
+					/>
 				</div>
 				<div className={styles.Label}>Healing Voice!</div>
 			</div>

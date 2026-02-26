@@ -3,14 +3,7 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import {
-	useCallback,
-	useEffect,
-	useLayoutEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import tag1Img from "../../../app/_assets/images/タグ1.png";
 import type { Song } from "../../../app/_site.config";
 import styles from "./MusicGallery.module.css";
@@ -36,7 +29,7 @@ function TagTitleMarquee({ title }: { title: string }) {
 	const measureRef = useRef<HTMLSpanElement>(null);
 	const [overflows, setOverflows] = useState(false);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		const container = containerRef.current;
 		const measure = measureRef.current;
 		if (!container || !measure) return;
@@ -178,8 +171,8 @@ export function MusicGallery({ songs }: Props) {
 						<Image
 							src={tag1Img}
 							alt=""
-							width={80}
-							height={(tag1Img.height / tag1Img.width) * 80}
+							style={{ width: 80, height: "auto" }}
+							sizes="80px"
 						/>
 						<AnimatePresence mode="wait">
 							<motion.div

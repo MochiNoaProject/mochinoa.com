@@ -133,6 +133,10 @@
 	transform: scale(1.2);
 }
 
+.MusicGalleryWrapper {
+	padding-block: 40px;
+}
+
 /* ===== Responsive: narrow screens ===== */
 
 @media (max-width: 780px) {

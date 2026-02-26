@@ -10,15 +10,15 @@ export const HeroSection = () => {
 			<Image
 				src={logoImg}
 				alt="mochi"
-				width={120}
-				height={(logoImg.height / logoImg.width) * 120}
+				style={{ width: 120, height: "auto" }}
+				sizes="120px"
 				priority
 			/>
 			<Image
 				src={topImg}
 				alt="望月のあ"
-				width={300}
-				height={(topImg.height / topImg.width) * 300}
+				style={{ width: 300, height: "auto" }}
+				sizes="300px"
 				priority
 				className={styles.swayImage}
 			/>
