@@ -12,29 +12,17 @@ export default function Modal({ children }: { children: React.ReactNode }) {
 		router.back();
 	}, [router]);
 
-	const onKeyDown = useCallback(
-		(e: KeyboardEvent) => {
-			if (e.key === "Escape") {
-				onDismiss();
-			}
-		},
-		[onDismiss],
-	);
-
 	useEffect(() => {
-		document.addEventListener("keydown", onKeyDown);
-		return () => {
-			document.removeEventListener("keydown", onKeyDown);
-		};
-	}, [onKeyDown]);
+		if (ref.current && !ref.current.open) {
+			ref.current.showModal();
+		}
+	}, []);
 
 	return (
 		// biome-ignore lint/a11y/useKeyWithClickEvents: The dialog is closed by pressing the Escape key.
 		<dialog
-			ref={(node) => {
-				node?.showModal();
-				ref.current = node;
-			}}
+			ref={ref}
+			onCancel={onDismiss}
 			onClick={(event) => {
 				const rect = event.currentTarget.getBoundingClientRect();
 				if (

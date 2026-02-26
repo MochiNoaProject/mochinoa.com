@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./ClipReveal.module.css";
 
 type Props = {
@@ -11,6 +11,7 @@ type Props = {
 
 export function ClipReveal({ children, className }: Props) {
 	const ref = useRef<HTMLDivElement>(null);
+	const [isVisible, setIsVisible] = useState(false);
 
 	useEffect(() => {
 		const el = ref.current;
@@ -21,7 +22,7 @@ export function ClipReveal({ children, className }: Props) {
 				if (entry.isIntersecting) {
 					observer.disconnect();
 					timeoutId = setTimeout(() => {
-						el.classList.add(styles.Visible);
+						setIsVisible(true);
 					}, 1000);
 				}
 			},
@@ -35,7 +36,10 @@ export function ClipReveal({ children, className }: Props) {
 	}, []);
 
 	return (
-		<div ref={ref} className={clsx(styles.Root, className)}>
+		<div
+			ref={ref}
+			className={clsx(styles.Root, isVisible && styles.Visible, className)}
+		>
 			{children}
 		</div>
 	);

@@ -29,12 +29,13 @@ function TagTitleMarquee({ title }: { title: string }) {
 	const measureRef = useRef<HTMLSpanElement>(null);
 	const [overflows, setOverflows] = useState(false);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: ensure effect runs when title changes
 	useEffect(() => {
 		const container = containerRef.current;
 		const measure = measureRef.current;
 		if (!container || !measure) return;
 		setOverflows(measure.scrollWidth > container.clientWidth);
-	});
+	}, [title]);
 
 	return (
 		<span ref={containerRef} className={styles.TagTitle}>
