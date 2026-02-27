@@ -55,7 +55,7 @@ const wavePath = buildScallopedArcPath();
 
 export default function Page() {
 	return (
-		<div className={styles.Root}>
+		<main className={styles.Root}>
 			<CursorSparkles />
 			{/* Fixed background: pink + teal sky with scallop wave */}
 			<div className={styles.fixedBackground}>
@@ -100,6 +100,6 @@ export default function Page() {
 					<SideNav />
 				</div>
 			</div>
-		</div>
+		</main>
 	);
 }
