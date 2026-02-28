@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import styles from "./TapeDecoration.module.css";
 
-export type TapePosition = "topRight" | "topLeft";
-export type TapeColor = "pink" | "teal";
+type TapePosition = "topRight" | "topLeft";
+type TapeColor = "pink" | "teal";
 
 type TapeDecorationProps = {
 	children: ReactNode;

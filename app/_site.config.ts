@@ -29,20 +29,20 @@ export type Song = {
 	thumbnail: StaticImageData;
 };
 
-export type ShopItem = {
+type ShopItem = {
 	name: string;
 	url: string;
 	image: StaticImageData;
 };
 
-export type Banner = {
+type Banner = {
 	url: string;
 	image: StaticImageData;
 	alt: string;
 	label: string;
 };
 
-export type LinkWithImage = {
+type LinkWithImage = {
 	url: string;
 	image: StaticImageData;
 };
