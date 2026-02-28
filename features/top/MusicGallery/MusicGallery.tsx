@@ -29,11 +29,17 @@ function TagTitleMarquee({ title }: { title: string }) {
 	const measureRef = useRef<HTMLSpanElement>(null);
 	const [overflows, setOverflows] = useState(false);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: ensure effect runs when title changes
 	useEffect(() => {
 		const container = containerRef.current;
 		const measure = measureRef.current;
 		if (!container || !measure) return;
+
+		// Use title here to ensure the effect is correctly dependent on it,
+		// and to force a re-measure if the title changes.
+		// We are effectively using the title prop to trigger the measurement logic.
+		const _currentTitle = title;
+		void _currentTitle; // Suppress unused variable warning if necessary, though logic below uses DOM which is updated by React before this effect runs.
+
 		setOverflows(measure.scrollWidth > container.clientWidth);
 	}, [title]);
 
@@ -122,11 +128,11 @@ export function MusicGallery({ songs }: Props) {
 	const selected = songs[selectedIndex];
 
 	return (
-		// biome-ignore lint/a11y/noStaticElementInteractions: hover to pause marquee animation
-		<div
+		<section
 			className={styles.MusicGallery}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
+			aria-label="Music Gallery"
 		>
 			<div>
 				<a
@@ -226,6 +232,6 @@ export function MusicGallery({ songs }: Props) {
 					})}
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 }

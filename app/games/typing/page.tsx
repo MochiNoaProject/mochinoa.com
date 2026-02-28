@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { toRomaji } from "wanakana";
 import styles from "./page.module.css";
 
@@ -9,6 +9,108 @@ interface ResultMessage {
 	message: string;
 	image: string | null;
 }
+
+// ローマ字の異体字マッピング
+const ROMAJI_VARIANTS: Record<string, string[]> = {
+	fu: ["hu"],
+	ji: ["zi"],
+	zu: ["du"],
+	cha: ["tya"],
+	chi: ["ti"],
+	chu: ["tyu"],
+	cho: ["tyo"],
+	sha: ["sya"],
+	shi: ["si"],
+	shu: ["syu"],
+	sho: ["syo"],
+	ja: ["zya"],
+	ju: ["zyu"],
+	jo: ["zyo"],
+	tsu: ["tu"],
+};
+
+const WORDS = [
+	"うさぎ",
+	"ねこ",
+	"いぬ",
+	"ぱんだ",
+	"ひよこ",
+	"くまさん",
+	"はむすたー",
+	"ことり",
+	"りすさん",
+	"あひる",
+	"まんまる",
+	"ふわふわ",
+	"もふもふ",
+	"ぷにぷに",
+	"にこにこ",
+	"わんわん",
+	"にゃんこ",
+	"ぴよぴよ",
+	"うさちゃん",
+	"こねこ",
+	"おやつ",
+	"けーき",
+	"ぷりん",
+	"あめちゃん",
+	"くっきー",
+	"わたあめ",
+	"どーなつ",
+	"ちょこれーと",
+	"きゃんでぃ",
+	"まかろん",
+	"はーと",
+	"らぶらぶ",
+	"にっこり",
+	"すまいる",
+	"きらきら",
+	"ゆめかわ",
+	"めろめろ",
+	"ぱきゅぱきゅ",
+	"ほわほわ",
+	"ぽかぽか",
+];
+
+// 異体字を含むすべての可能な入力パターンを生成
+const generateAllPatterns = (romaji: string): string[] => {
+	const patterns = [romaji.toLowerCase()];
+
+	for (const [standard, variants] of Object.entries(ROMAJI_VARIANTS)) {
+		for (const variant of variants) {
+			// 現在のパターンすべてに対して置換を試みる
+			const currentPatterns = [...patterns];
+			for (const pattern of currentPatterns) {
+				// 標準形を異体字に置換
+				const newPattern = pattern.replace(standard, variant);
+				if (newPattern !== pattern) {
+					patterns.push(newPattern);
+				}
+			}
+		}
+	}
+
+	return [...new Set(patterns)]; // 重複を除去
+};
+
+const getResultMessage = (chars: number): ResultMessage => {
+	if (chars >= 200) {
+		return {
+			message: "すごい！もちのあちゃんが感動してるよ！",
+			image: "/images/sugoi.jpg",
+		};
+	}
+	if (chars >= 120) {
+		return {
+			message: "まあまあ！もちのあちゃんが褒めてるよ！",
+			image: "/images/maamaa.jpg",
+		};
+	}
+	return {
+		message: "もっと頑張るともちのあちゃんが褒めてくれるよ",
+		image: null,
+	};
+};
 
 export default function TypingGame() {
 	const [text, setText] = useState("");
@@ -22,92 +124,6 @@ export default function TypingGame() {
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
-	// ローマ字の異体字マッピング
-	const romajiVariants: Record<string, string[]> = {
-		fu: ["hu"],
-		ji: ["zi"],
-		zu: ["du"],
-		cha: ["tya"],
-		chi: ["ti"],
-		chu: ["tyu"],
-		cho: ["tyo"],
-		sha: ["sya"],
-		shi: ["si"],
-		shu: ["syu"],
-		sho: ["syo"],
-		ja: ["zya"],
-		ju: ["zyu"],
-		jo: ["zyo"],
-		tsu: ["tu"],
-	};
-
-	// 異体字を含むすべての可能な入力パターンを生成
-	const generateAllPatterns = (romaji: string): string[] => {
-		const patterns = [romaji.toLowerCase()];
-
-		for (const [standard, variants] of Object.entries(romajiVariants)) {
-			for (const variant of variants) {
-				// 現在のパターンすべてに対して置換を試みる
-				const currentPatterns = [...patterns];
-				for (const pattern of currentPatterns) {
-					// 標準形を異体字に置換
-					const newPattern = pattern.replace(standard, variant);
-					if (newPattern !== pattern) {
-						patterns.push(newPattern);
-					}
-				}
-			}
-		}
-
-		return [...new Set(patterns)]; // 重複を除去
-	};
-
-	const words = useMemo(
-		() => [
-			"うさぎ",
-			"ねこ",
-			"いぬ",
-			"ぱんだ",
-			"ひよこ",
-			"くまさん",
-			"はむすたー",
-			"ことり",
-			"りすさん",
-			"あひる",
-			"まんまる",
-			"ふわふわ",
-			"もふもふ",
-			"ぷにぷに",
-			"にこにこ",
-			"わんわん",
-			"にゃんこ",
-			"ぴよぴよ",
-			"うさちゃん",
-			"こねこ",
-			"おやつ",
-			"けーき",
-			"ぷりん",
-			"あめちゃん",
-			"くっきー",
-			"わたあめ",
-			"どーなつ",
-			"ちょこれーと",
-			"きゃんでぃ",
-			"まかろん",
-			"はーと",
-			"らぶらぶ",
-			"にっこり",
-			"すまいる",
-			"きらきら",
-			"ゆめかわ",
-			"めろめろ",
-			"ぱきゅぱきゅ",
-			"ほわほわ",
-			"ぽかぽか",
-		],
-		[],
-	);
-
 	useEffect(() => {
 		audioRef.current = new Audio("/sounds/miss.mp3");
 	}, []);
@@ -120,12 +136,12 @@ export default function TypingGame() {
 		setCorrectWords(0);
 		setMissCount(0);
 		setInput("");
-		setText(words[Math.floor(Math.random() * words.length)]);
+		setText(WORDS[Math.floor(Math.random() * WORDS.length)]);
 		// 入力フィールドにフォーカスを設定
 		setTimeout(() => {
 			inputRef.current?.focus();
 		}, 0);
-	}, [words]);
+	}, []);
 
 	// キーボードイベントのハンドラー
 	useEffect(() => {
@@ -186,7 +202,7 @@ export default function TypingGame() {
 			if (possiblePatterns.includes(value)) {
 				setTotalChars((prev) => prev + text.length);
 				setCorrectWords((prev) => prev + 1);
-				setText(words[Math.floor(Math.random() * words.length)]);
+				setText(WORDS[Math.floor(Math.random() * WORDS.length)]);
 				setInput("");
 			}
 		} else {
@@ -197,25 +213,6 @@ export default function TypingGame() {
 				audioRef.current.play().catch(console.error);
 			}
 		}
-	};
-
-	const getResultMessage = (chars: number): ResultMessage => {
-		if (chars >= 200) {
-			return {
-				message: "すごい！もちのあちゃんが感動してるよ！",
-				image: "/images/sugoi.jpg",
-			};
-		}
-		if (chars >= 120) {
-			return {
-				message: "まあまあ！もちのあちゃんが褒めてるよ！",
-				image: "/images/maamaa.jpg",
-			};
-		}
-		return {
-			message: "もっと頑張るともちのあちゃんが褒めてくれるよ",
-			image: null,
-		};
 	};
 
 	const handleShare = () => {
