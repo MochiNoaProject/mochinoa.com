@@ -285,18 +285,18 @@ export default function MochinoaJump() {
 					))}
 					<div className={styles.ground} />
 				</div>
-				{!isPlaying && !gameOver && (
+				{!isPlaying && !gameOver ? (
 					<div className={styles.startMessage}>
 						スペースキーでスタート&ジャンプ
 					</div>
-				)}
-				{gameOver && (
+				) : null}
+				{gameOver ? (
 					<div className={styles.gameOver}>
 						<p className={styles.gameOverText}>ゲームオーバー</p>
 						<p className={styles.gameOverText}>スコア: {score}</p>
 						<p className={styles.gameOverText}>スペースキーでリスタート</p>
 					</div>
-				)}
+				) : null}
 			</div>
 		</div>
 	);

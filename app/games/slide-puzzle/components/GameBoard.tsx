@@ -169,11 +169,11 @@ export default function GameBoard() {
 			</div>
 			<div className={styles.controls}>
 				<p>移動回数: {moves}</p>
-				{!isComplete && (
+				{!isComplete ? (
 					<button type="button" onClick={handleShuffle}>
 						シャッフル
 					</button>
-				)}
+				) : null}
 			</div>
 		</div>
 	);

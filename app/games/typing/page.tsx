@@ -269,7 +269,7 @@ export default function TypingGame() {
 									Xでシェア
 								</button>
 							</div>
-							{getResultMessage(totalChars).image !== null && (
+							{getResultMessage(totalChars).image !== null ? (
 								<div className={styles.resultImage}>
 									<Image
 										src={
@@ -282,7 +282,7 @@ export default function TypingGame() {
 										className={styles.resultImage}
 									/>
 								</div>
-							)}
+							) : null}
 						</div>
 					</div>
 				) : (
