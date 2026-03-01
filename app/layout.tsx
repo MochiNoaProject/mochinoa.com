@@ -43,10 +43,9 @@ export const metadata = {
 
 export default function RootLayout({
 	children,
-	modal,
+
 }: {
 	children: React.ReactNode;
-	modal: React.ReactNode;
 }) {
 	return (
 		<html
@@ -59,7 +58,6 @@ export default function RootLayout({
 		>
 			<body>
 				{children}
-				{modal}
 				<GoogleAnalytics gaId="G-J9CW3CGVL4" />
 			</body>
 		</html>
