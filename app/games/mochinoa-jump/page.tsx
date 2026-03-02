@@ -160,32 +160,12 @@ export default function MochinoaJump() {
 		const obstacleBottom = groundLine;
 		const obstacleTop = groundLine - obstacle.height;
 
-		// 位置情報を出力
-		console.log("プレイヤー位置:", {
-			left: playerLeft,
-			right: playerRight,
-			top: playerTop,
-			bottom: playerBottom,
-		});
-		console.log("障害物位置:", {
-			left: obstacleLeft,
-			right: obstacleRight,
-			top: obstacleTop,
-			bottom: obstacleBottom,
-			groundLine: groundLine,
-			type: obstacle.type,
-		});
-
 		// 衝突判定（左右と上下）
 		const hasCollision =
 			playerLeft < obstacleRight &&
 			playerRight > obstacleLeft &&
 			playerBottom > obstacleTop &&
 			playerTop < obstacleBottom;
-
-		if (hasCollision) {
-			console.log("衝突発生！");
-		}
 
 		return hasCollision;
 	}, []);
