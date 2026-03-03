@@ -84,8 +84,9 @@ export default function MochinoaJump() {
 	}, [startGame]);
 
 	// キーボードイベントの処理
+	const handleKeyPressRef = useRef((_e: KeyboardEvent) => {});
 	useEffect(() => {
-		const handleKeyPress = (e: KeyboardEvent) => {
+		handleKeyPressRef.current = (e: KeyboardEvent) => {
 			if (e.code === "Space") {
 				if (!isPlaying) {
 					startGame();
@@ -97,10 +98,13 @@ export default function MochinoaJump() {
 				}
 			}
 		};
+	}, [isPlaying, gameOver, isJumping, startGame, resetGame, jump]);
 
+	useEffect(() => {
+		const handleKeyPress = (e: KeyboardEvent) => handleKeyPressRef.current(e);
 		window.addEventListener("keydown", handleKeyPress);
 		return () => window.removeEventListener("keydown", handleKeyPress);
-	}, [isPlaying, gameOver, jump, startGame, resetGame, isJumping]);
+	}, []);
 
 	// スコアに基づいて障害物の間隔を計算
 	const getObstacleInterval = useCallback(() => {
@@ -185,8 +189,9 @@ export default function MochinoaJump() {
 	}, [gameOver, score, router]);
 
 	// ゲームループ
+	const gameLoopRef = useRef(() => {});
 	useEffect(() => {
-		const gameLoop = () => {
+		gameLoopRef.current = () => {
 			if (!isPlaying || gameOver) return;
 
 			const player = playerRef.current;
@@ -194,8 +199,7 @@ export default function MochinoaJump() {
 			if (!player || !game) return;
 
 			// スコアの更新（状態の更新を同期的に行う）
-			const newScore = score + 1;
-			setScore(newScore);
+			setScore((prev) => prev + 1);
 
 			// 障害物の生成
 			createObstacle();
@@ -216,26 +220,25 @@ export default function MochinoaJump() {
 			// 衝突が発生した場合、即座にゲームオーバー処理を実行
 			if (hasCollision) {
 				handleGameOver();
-				return;
 			}
-
-			animationFrameRef.current = requestAnimationFrame(gameLoop);
 		};
+	}, [isPlaying, gameOver, createObstacle, checkCollision, handleGameOver]);
 
-		animationFrameRef.current = requestAnimationFrame(gameLoop);
+	useEffect(() => {
+		if (!isPlaying || gameOver) return;
+
+		const loop = () => {
+			gameLoopRef.current();
+			animationFrameRef.current = requestAnimationFrame(loop);
+		};
+		animationFrameRef.current = requestAnimationFrame(loop);
+
 		return () => {
 			if (animationFrameRef.current) {
 				cancelAnimationFrame(animationFrameRef.current);
 			}
 		};
-	}, [
-		isPlaying,
-		gameOver,
-		score,
-		createObstacle,
-		checkCollision,
-		handleGameOver,
-	]);
+	}, [isPlaying, gameOver]);
 
 	return (
 		<div className={styles.container}>
