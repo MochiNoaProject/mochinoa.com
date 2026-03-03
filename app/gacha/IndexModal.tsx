@@ -19,7 +19,7 @@ export const IndexModal = () => {
 					const count = collection.get(index) ?? 0;
 					const chara = count ? data[index] : null;
 					return (
-						<div key={`chara-${index}-${count}`} className={styles.chara}>
+						<div key={`chara-${chara ? chara.name : index}-${count}`} className={styles.chara}>
 							<p className={styles.chara_rare}>
 								{chara ? Array.from({ length: chara?.rare }, () => "☆") : "..."}
 							</p>
