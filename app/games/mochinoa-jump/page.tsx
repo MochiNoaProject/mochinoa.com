@@ -222,26 +222,23 @@ export default function MochinoaJump() {
 				handleGameOver();
 			}
 		};
-	}, [
-		isPlaying,
-		gameOver,
-		createObstacle,
-		checkCollision,
-		handleGameOver,
-	]);
+	}, [isPlaying, gameOver, createObstacle, checkCollision, handleGameOver]);
 
 	useEffect(() => {
+		if (!isPlaying || gameOver) return;
+
 		const loop = () => {
 			gameLoopRef.current();
 			animationFrameRef.current = requestAnimationFrame(loop);
 		};
 		animationFrameRef.current = requestAnimationFrame(loop);
+
 		return () => {
 			if (animationFrameRef.current) {
 				cancelAnimationFrame(animationFrameRef.current);
 			}
 		};
-	}, []);
+	}, [isPlaying, gameOver]);
 
 	return (
 		<div className={styles.container}>
