@@ -1,4 +1,4 @@
-export const voiceMap = {
+const voiceMap = {
 	タイトルコール: { src: "/mesugaki/title.mp3" },
 	がんばれがんばれ: { src: "/mesugaki/がんばれがんばれ.mp3" },
 	ざあこ: { src: "/mesugaki/ざあこ.mp3" },
