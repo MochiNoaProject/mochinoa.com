@@ -85,8 +85,8 @@ export default function MochinoaJump() {
 
 	// キーボードイベントの処理
 	const handleKeyPressRef = useRef((_e: KeyboardEvent) => {});
-	useEffect(() => {
-		handleKeyPressRef.current = (e: KeyboardEvent) => {
+	const handleKeyPress = useCallback(
+		(e: KeyboardEvent) => {
 			if (e.code === "Space") {
 				if (!isPlaying) {
 					startGame();
@@ -97,13 +97,18 @@ export default function MochinoaJump() {
 					jump();
 				}
 			}
-		};
-	}, [isPlaying, gameOver, isJumping, startGame, resetGame, jump]);
+		},
+		[isPlaying, gameOver, isJumping, startGame, resetGame, jump],
+	);
 
 	useEffect(() => {
-		const handleKeyPress = (e: KeyboardEvent) => handleKeyPressRef.current(e);
-		window.addEventListener("keydown", handleKeyPress);
-		return () => window.removeEventListener("keydown", handleKeyPress);
+		handleKeyPressRef.current = handleKeyPress;
+	}, [handleKeyPress]);
+
+	useEffect(() => {
+		const listener = (e: KeyboardEvent) => handleKeyPressRef.current(e);
+		window.addEventListener("keydown", listener);
+		return () => window.removeEventListener("keydown", listener);
 	}, []);
 
 	// スコアに基づいて障害物の間隔を計算
@@ -190,39 +195,41 @@ export default function MochinoaJump() {
 
 	// ゲームループ
 	const gameLoopRef = useRef(() => {});
-	useEffect(() => {
-		gameLoopRef.current = () => {
-			if (!isPlaying || gameOver) return;
+	const gameLoop = useCallback(() => {
+		if (!isPlaying || gameOver) return;
 
-			const player = playerRef.current;
-			const game = gameRef.current;
-			if (!player || !game) return;
+		const player = playerRef.current;
+		const game = gameRef.current;
+		if (!player || !game) return;
 
-			// スコアの更新（状態の更新を同期的に行う）
-			setScore((prev) => prev + 1);
+		// スコアの更新（状態の更新を同期的に行う）
+		setScore((prev) => prev + 1);
 
-			// 障害物の生成
-			createObstacle();
+		// 障害物の生成
+		createObstacle();
 
-			// 障害物の移動と衝突判定
-			const playerRect = player.getBoundingClientRect();
-			let hasCollision = false;
+		// 障害物の移動と衝突判定
+		const playerRect = player.getBoundingClientRect();
+		let hasCollision = false;
 
-			obstaclesRef.current = obstaclesRef.current.filter((obstacle) => {
-				obstacle.x -= GAME_SPEED;
-				if (checkCollision(playerRect, obstacle)) {
-					hasCollision = true;
-					return false;
-				}
-				return obstacle.x > -obstacle.width;
-			});
-
-			// 衝突が発生した場合、即座にゲームオーバー処理を実行
-			if (hasCollision) {
-				handleGameOver();
+		obstaclesRef.current = obstaclesRef.current.filter((obstacle) => {
+			obstacle.x -= GAME_SPEED;
+			if (checkCollision(playerRect, obstacle)) {
+				hasCollision = true;
+				return false;
 			}
-		};
+			return obstacle.x > -obstacle.width;
+		});
+
+		// 衝突が発生した場合、即座にゲームオーバー処理を実行
+		if (hasCollision) {
+			handleGameOver();
+		}
 	}, [isPlaying, gameOver, createObstacle, checkCollision, handleGameOver]);
+
+	useEffect(() => {
+		gameLoopRef.current = gameLoop;
+	}, [gameLoop]);
 
 	useEffect(() => {
 		if (!isPlaying || gameOver) return;
