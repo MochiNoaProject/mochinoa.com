@@ -128,7 +128,7 @@ export default function GameBoard() {
 			>
 				{board.map((value, index) => (
 					<button
-						key={`tile-${index}-${value}`}
+						key={value}
 						type="button"
 						className={`${styles.tile} ${
 							value === (difficulty === "easy" ? 8 : 15) ? styles.empty : ""
