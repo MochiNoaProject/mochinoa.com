@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useReducer, useRef, useState } from "react";
 import styles from "./GuessNumber.module.css";
 import { GuessNumberDialog } from "./GuessNumberDialog";
@@ -65,10 +66,12 @@ export const GuessNumber = () => {
 				{serif}
 			</button>
 			<div>
-				<img
+				<Image
 					src="/mesugaki/dummy.webp"
 					alt="望月のあ"
-					height="200px"
+					height={200}
+					width={200}
+					style={{ objectFit: "contain" }}
 					className={styles.Avatar}
 				/>
 			</div>

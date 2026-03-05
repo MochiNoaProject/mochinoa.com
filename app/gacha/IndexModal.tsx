@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import data from "../../public/gacha/data.json";
 import styles from "./IndexModal.module.css";
 import { useCollection } from "./useCollection";
@@ -24,13 +25,12 @@ export const IndexModal = () => {
 								{chara ? Array.from({ length: chara?.rare }, () => "☆") : "..."}
 							</p>
 							{chara ? (
-								<img
+								<Image
 									width={100}
 									height={100}
 									style={{ objectFit: "contain" }}
 									src={chara.image}
 									alt={chara.name}
-									decoding="async"
 								/>
 							) : (
 								<div className={styles.noimage}>？</div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { AppHeader } from "../../components/AppHeader/AppHeader";
 import { MarryOff } from "./MarryOff";
 import styles from "./page.module.css";
@@ -29,11 +30,12 @@ export default function Page() {
 					>
 						婚姻届をダウンロード！
 					</a>
-					<img
+					<Image
 						className={styles.preview}
 						src="/img/marriage-registration.png"
 						alt="署名入り婚姻届"
-						decoding="async"
+						width={3508}
+						height={2481}
 					/>
 				</div>
 			</div>
