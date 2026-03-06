@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Image from "next/image";
 import React from "react";
 import type data from "../../public/gacha/data.json";
 import styles from "./Result.module.css";
@@ -17,13 +18,12 @@ export const Result = ({ chara }: { chara?: (typeof data)[number] }) => {
 							{Array.from({ length: chara?.rare }, () => "☆")}
 						</div>
 
-						<img
+						<Image
 							className={styles.charaImage}
 							width={240}
 							height={240}
 							src={chara.image}
 							alt={chara.name}
-							decoding="async"
 						/>
 						<p className={styles.note}>{chara.description}</p>
 					</React.Fragment>
