@@ -144,7 +144,6 @@ export default function TypingGame() {
 	}, []);
 
 	// キーボードイベントのハンドラー
-	const handleKeyPressRef = useRef((_e: KeyboardEvent) => {});
 	const handleKeyPress = useCallback(
 		(e: KeyboardEvent) => {
 			if (!isPlaying && !gameOver && e.code === "Space") {
@@ -155,6 +154,7 @@ export default function TypingGame() {
 		[isPlaying, gameOver, startGame],
 	);
 
+	const handleKeyPressRef = useRef(handleKeyPress);
 	useEffect(() => {
 		handleKeyPressRef.current = handleKeyPress;
 	}, [handleKeyPress]);

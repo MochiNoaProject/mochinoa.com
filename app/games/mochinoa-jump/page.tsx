@@ -84,7 +84,6 @@ export default function MochinoaJump() {
 	}, [startGame]);
 
 	// キーボードイベントの処理
-	const handleKeyPressRef = useRef((_e: KeyboardEvent) => {});
 	const handleKeyPress = useCallback(
 		(e: KeyboardEvent) => {
 			if (e.code === "Space") {
@@ -101,6 +100,7 @@ export default function MochinoaJump() {
 		[isPlaying, gameOver, isJumping, startGame, resetGame, jump],
 	);
 
+	const handleKeyPressRef = useRef(handleKeyPress);
 	useEffect(() => {
 		handleKeyPressRef.current = handleKeyPress;
 	}, [handleKeyPress]);
