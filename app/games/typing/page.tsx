@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toRomaji } from "wanakana";
 import styles from "./page.module.css";
 
@@ -114,6 +114,10 @@ const getResultMessage = (chars: number): ResultMessage => {
 
 export default function TypingGame() {
 	const [text, setText] = useState("");
+	const possiblePatterns = useMemo(() => {
+		const romajiText = toRomaji(text);
+		return generateAllPatterns(romajiText);
+	}, [text]);
 	const [input, setInput] = useState("");
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [timeLeft, setTimeLeft] = useState(60);
@@ -199,8 +203,6 @@ export default function TypingGame() {
 		if (!isPlaying || gameOver) return;
 
 		const value = e.target.value.toLowerCase();
-		const romajiText = toRomaji(text);
-		const possiblePatterns = generateAllPatterns(romajiText);
 
 		// 入力文字が正しいかチェック（ローマ字のみ）
 		const isValidRomaji = possiblePatterns.some((pattern) =>
