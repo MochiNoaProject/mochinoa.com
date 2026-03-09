@@ -116,7 +116,8 @@ export default function TypingGame() {
 	const [text, setText] = useState("");
 	const possiblePatterns = useMemo(() => {
 		const romajiText = toRomaji(text);
-		return generateAllPatterns(romajiText);
+		const patterns = generateAllPatterns(romajiText);
+		return { patterns, patternSet: new Set(patterns) };
 	}, [text]);
 	const [input, setInput] = useState("");
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -205,14 +206,14 @@ export default function TypingGame() {
 		const value = e.target.value.toLowerCase();
 
 		// 入力文字が正しいかチェック（ローマ字のみ）
-		const isValidRomaji = possiblePatterns.some((pattern) =>
+		const isValidRomaji = possiblePatterns.patterns.some((pattern) =>
 			pattern.startsWith(value),
 		);
 		if (isValidRomaji) {
 			setInput(value);
 
 			// 単語が完成したかチェック
-			if (possiblePatterns.includes(value)) {
+			if (possiblePatterns.patternSet.has(value)) {
 				setTotalChars((prev) => prev + text.length);
 				setCorrectWords((prev) => prev + 1);
 				setText(WORDS[Math.floor(Math.random() * WORDS.length)]);
