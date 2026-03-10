@@ -33,6 +33,8 @@ export default function MochinoaJump() {
 	const router = useRouter();
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [score, setScore] = useState(0);
+	const scoreRef = useRef(0);
+	const scoreDisplayRef = useRef<HTMLDivElement>(null);
 	const [gameOver, setGameOver] = useState(false);
 	const [isJumping, setIsJumping] = useState(false);
 	const gameRef = useRef<HTMLDivElement>(null);
@@ -69,6 +71,10 @@ export default function MochinoaJump() {
 		setIsPlaying(true);
 		setGameOver(false);
 		setScore(0);
+		scoreRef.current = 0;
+		if (scoreDisplayRef.current) {
+			scoreDisplayRef.current.textContent = "スコア: 0";
+		}
 		obstaclesRef.current = [];
 		lastObstacleTimeRef.current = 0;
 		lastJumpTimeRef.current = 0; // ジャンプ時間をリセット
@@ -114,7 +120,7 @@ export default function MochinoaJump() {
 	// スコアに基づいて障害物の間隔を計算
 	const getObstacleInterval = useCallback(() => {
 		// スコアに応じて基本間隔を減少
-		const baseInterval = BASE_INTERVAL - score * SPEED_INCREASE;
+		const baseInterval = BASE_INTERVAL - scoreRef.current * SPEED_INCREASE;
 
 		// ランダム性を加味した最小・最大間隔の計算
 		const minInterval = Math.max(
@@ -182,7 +188,8 @@ export default function MochinoaJump() {
 	// ゲームオーバー処理
 	const handleGameOver = useCallback(() => {
 		if (!gameOver) {
-			const finalScore = score;
+			const finalScore = scoreRef.current;
+			setScore(finalScore);
 			setIsPlaying(false);
 			setGameOver(true);
 
@@ -191,7 +198,7 @@ export default function MochinoaJump() {
 				router.push(`/games/mochinoa-jump/result?score=${finalScore}`);
 			}, 0);
 		}
-	}, [gameOver, score, router]);
+	}, [gameOver, router]);
 
 	// ゲームループ
 	const gameLoopRef = useRef(() => {});
@@ -203,7 +210,10 @@ export default function MochinoaJump() {
 		if (!player || !game) return;
 
 		// スコアの更新（状態の更新を同期的に行う）
-		setScore((prev) => prev + 1);
+		scoreRef.current += 1;
+		if (scoreDisplayRef.current) {
+			scoreDisplayRef.current.textContent = `スコア: ${scoreRef.current}`;
+		}
 
 		// 障害物の生成
 		createObstacle();
@@ -251,7 +261,7 @@ export default function MochinoaJump() {
 		<div className={styles.container}>
 			<h1 className={styles.title}>もちのあジャンプ</h1>
 			<div className={styles.gameContainer}>
-				<div className={styles.score}>スコア: {score}</div>
+				<div ref={scoreDisplayRef} className={styles.score}>スコア: {score}</div>
 				<div ref={gameRef} className={styles.game}>
 					<div ref={playerRef} className={styles.player}>
 						<Image

@@ -117,7 +117,7 @@ export default function TypingGame() {
 	const possiblePatterns = useMemo(() => {
 		const romajiText = toRomaji(text);
 		const patterns = generateAllPatterns(romajiText);
-		return { patterns, patternSet: new Set(patterns) };
+		return { romajiText, patterns, patternSet: new Set(patterns) };
 	}, [text]);
 	const [input, setInput] = useState("");
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -308,7 +308,7 @@ export default function TypingGame() {
 							<p>ミス回数: {missCount}回</p>
 						</div>
 						<div className={styles.text}>{text}</div>
-						<div className={styles.romaji}>{toRomaji(text)}</div>
+						<div className={styles.romaji}>{possiblePatterns.romajiText}</div>
 						<input
 							ref={inputRef}
 							type="text"
