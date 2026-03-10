@@ -135,7 +135,7 @@ export default function MochinoaJump() {
 		const randomFactor = (random1 + random2) / 2; // より自然な分布を生成
 
 		return minInterval + (maxInterval - minInterval) * randomFactor;
-	}, [score]);
+	}, []);
 
 	// 障害物の生成
 	const createObstacle = useCallback(() => {
@@ -261,7 +261,9 @@ export default function MochinoaJump() {
 		<div className={styles.container}>
 			<h1 className={styles.title}>もちのあジャンプ</h1>
 			<div className={styles.gameContainer}>
-				<div ref={scoreDisplayRef} className={styles.score}>スコア: {score}</div>
+				<div className={styles.score}>
+					スコア: <span ref={scoreDisplayRef}>{score}</span>
+				</div>
 				<div ref={gameRef} className={styles.game}>
 					<div ref={playerRef} className={styles.player}>
 						<Image
