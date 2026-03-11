@@ -32,50 +32,63 @@ const OBSTACLE_TYPES = {
 export default function MochinoaJump() {
 	const router = useRouter();
 	const [isPlaying, setIsPlaying] = useState(false);
-	const [score, setScore] = useState(0);
 	const [gameOver, setGameOver] = useState(false);
-	const [isJumping, setIsJumping] = useState(false);
+
+	// Transient values (updated frequently, rendered directly or used in loops)
+	const scoreRef = useRef(0);
+	const isJumpingRef = useRef(false);
+
 	const gameRef = useRef<HTMLDivElement>(null);
 	const playerRef = useRef<HTMLDivElement>(null);
+	const scoreDisplayRef = useRef<HTMLDivElement>(null);
 	const obstaclesRef = useRef<Obstacle[]>([]);
 	const animationFrameRef = useRef<number | undefined>(undefined);
 	const lastObstacleTimeRef = useRef<number>(0);
 	const lastJumpTimeRef = useRef<number>(0); // 最後のジャンプ時間を記録
+	const obstacleContainerRef = useRef<HTMLDivElement>(null);
 
 	// ジャンプの処理
 	const jump = useCallback(() => {
 		const now = Date.now();
 		if (
-			!isJumping &&
+			!isJumpingRef.current &&
 			isPlaying &&
 			!gameOver &&
 			now - lastJumpTimeRef.current >= JUMP_COOLDOWN
 		) {
-			setIsJumping(true);
+			isJumpingRef.current = true;
 			lastJumpTimeRef.current = now; // ジャンプ時間を記録
 			const player = playerRef.current;
 			if (player) {
 				player.style.transform = `translateY(-${JUMP_HEIGHT}px)`;
 				setTimeout(() => {
-					player.style.transform = "translateY(0)";
-					setIsJumping(false);
+					if (playerRef.current) {
+						playerRef.current.style.transform = "translateY(0)";
+					}
+					isJumpingRef.current = false;
 				}, JUMP_DURATION);
 			}
 		}
-	}, [isJumping, isPlaying, gameOver]);
+	}, [isPlaying, gameOver]);
 
 	// ゲームの開始
 	const startGame = useCallback(() => {
 		setIsPlaying(true);
 		setGameOver(false);
-		setScore(0);
+		scoreRef.current = 0;
+		if (scoreDisplayRef.current) {
+			scoreDisplayRef.current.textContent = `スコア: 0`;
+		}
 		obstaclesRef.current = [];
+		if (obstacleContainerRef.current) {
+			obstacleContainerRef.current.innerHTML = "";
+		}
 		lastObstacleTimeRef.current = 0;
 		lastJumpTimeRef.current = 0; // ジャンプ時間をリセット
 		if (playerRef.current) {
 			playerRef.current.style.transform = "translateY(0)";
 		}
-		setIsJumping(false);
+		isJumpingRef.current = false;
 	}, []);
 
 	// ゲームのリセット
@@ -91,30 +104,24 @@ export default function MochinoaJump() {
 					startGame();
 				} else if (gameOver) {
 					resetGame();
-				} else if (!isJumping) {
+				} else if (!isJumpingRef.current) {
 					// ジャンプ中でない場合のみジャンプを実行
 					jump();
 				}
 			}
 		},
-		[isPlaying, gameOver, isJumping, startGame, resetGame, jump],
+		[isPlaying, gameOver, startGame, resetGame, jump],
 	);
 
-	const handleKeyPressRef = useRef(handleKeyPress);
 	useEffect(() => {
-		handleKeyPressRef.current = handleKeyPress;
+		window.addEventListener("keydown", handleKeyPress);
+		return () => window.removeEventListener("keydown", handleKeyPress);
 	}, [handleKeyPress]);
-
-	useEffect(() => {
-		const listener = (e: KeyboardEvent) => handleKeyPressRef.current(e);
-		window.addEventListener("keydown", listener);
-		return () => window.removeEventListener("keydown", listener);
-	}, []);
 
 	// スコアに基づいて障害物の間隔を計算
 	const getObstacleInterval = useCallback(() => {
 		// スコアに応じて基本間隔を減少
-		const baseInterval = BASE_INTERVAL - score * SPEED_INCREASE;
+		const baseInterval = BASE_INTERVAL - scoreRef.current * SPEED_INCREASE;
 
 		// ランダム性を加味した最小・最大間隔の計算
 		const minInterval = Math.max(
@@ -129,7 +136,7 @@ export default function MochinoaJump() {
 		const randomFactor = (random1 + random2) / 2; // より自然な分布を生成
 
 		return minInterval + (maxInterval - minInterval) * randomFactor;
-	}, [score]);
+	}, []);
 
 	// 障害物の生成
 	const createObstacle = useCallback(() => {
@@ -182,7 +189,7 @@ export default function MochinoaJump() {
 	// ゲームオーバー処理
 	const handleGameOver = useCallback(() => {
 		if (!gameOver) {
-			const finalScore = score;
+			const finalScore = scoreRef.current;
 			setIsPlaying(false);
 			setGameOver(true);
 
@@ -191,10 +198,30 @@ export default function MochinoaJump() {
 				router.push(`/games/mochinoa-jump/result?score=${finalScore}`);
 			}, 0);
 		}
-	}, [gameOver, score, router]);
+	}, [gameOver, router]);
+
+	// 障害物の描画更新 (直接DOM操作)
+	const renderObstacles = useCallback(() => {
+		if (!obstacleContainerRef.current) return;
+
+		const container = obstacleContainerRef.current;
+		// 既存のDOMと現在の配列を同期させるためのシンプルなアプローチ
+		// （Reactにレンダリングを任せると高頻度で再レンダリングが発生するため）
+
+		// 古い要素を削除し、新しい要素を作成/更新する
+		container.innerHTML = "";
+
+		for (const obstacle of obstaclesRef.current) {
+			const div = document.createElement("div");
+			div.className = `${styles.obstacle} ${styles[obstacle.type]}`;
+			div.style.left = `${obstacle.x}px`;
+			div.style.width = `${obstacle.width}px`;
+			div.style.height = `${obstacle.height}px`;
+			container.appendChild(div);
+		}
+	}, []);
 
 	// ゲームループ
-	const gameLoopRef = useRef(() => {});
 	const gameLoop = useCallback(() => {
 		if (!isPlaying || gameOver) return;
 
@@ -202,8 +229,12 @@ export default function MochinoaJump() {
 		const game = gameRef.current;
 		if (!player || !game) return;
 
-		// スコアの更新（状態の更新を同期的に行う）
-		setScore((prev) => prev + 1);
+		// スコアの更新（直接DOM操作で更新）
+		scoreRef.current += 1;
+		if (scoreDisplayRef.current && scoreRef.current % 10 === 0) {
+			// 頻度を少し落として更新
+			scoreDisplayRef.current.textContent = `スコア: ${scoreRef.current}`;
+		}
 
 		// 障害物の生成
 		createObstacle();
@@ -221,37 +252,42 @@ export default function MochinoaJump() {
 			return obstacle.x > -obstacle.width;
 		});
 
+		renderObstacles();
+
 		// 衝突が発生した場合、即座にゲームオーバー処理を実行
 		if (hasCollision) {
 			handleGameOver();
+		} else {
+			animationFrameRef.current = requestAnimationFrame(gameLoop);
 		}
-	}, [isPlaying, gameOver, createObstacle, checkCollision, handleGameOver]);
+	}, [
+		isPlaying,
+		gameOver,
+		createObstacle,
+		checkCollision,
+		handleGameOver,
+		renderObstacles,
+	]);
 
 	useEffect(() => {
-		gameLoopRef.current = gameLoop;
-	}, [gameLoop]);
-
-	useEffect(() => {
-		if (!isPlaying || gameOver) return;
-
-		const loop = () => {
-			gameLoopRef.current();
-			animationFrameRef.current = requestAnimationFrame(loop);
-		};
-		animationFrameRef.current = requestAnimationFrame(loop);
+		if (isPlaying && !gameOver) {
+			animationFrameRef.current = requestAnimationFrame(gameLoop);
+		}
 
 		return () => {
 			if (animationFrameRef.current) {
 				cancelAnimationFrame(animationFrameRef.current);
 			}
 		};
-	}, [isPlaying, gameOver]);
+	}, [isPlaying, gameOver, gameLoop]);
 
 	return (
 		<div className={styles.container}>
 			<h1 className={styles.title}>もちのあジャンプ</h1>
 			<div className={styles.gameContainer}>
-				<div className={styles.score}>スコア: {score}</div>
+				<div ref={scoreDisplayRef} className={styles.score}>
+					スコア: 0
+				</div>
 				<div ref={gameRef} className={styles.game}>
 					<div ref={playerRef} className={styles.player}>
 						<Image
@@ -262,17 +298,7 @@ export default function MochinoaJump() {
 							className={styles.playerImage}
 						/>
 					</div>
-					{obstaclesRef.current.map((obstacle) => (
-						<div
-							key={`${obstacle.x}-${obstacle.type}`}
-							className={`${styles.obstacle} ${styles[obstacle.type]}`}
-							style={{
-								left: `${obstacle.x}px`,
-								width: `${obstacle.width}px`,
-								height: `${obstacle.height}px`,
-							}}
-						/>
-					))}
+					<div ref={obstacleContainerRef} />
 					<div className={styles.ground} />
 				</div>
 				{!isPlaying && !gameOver ? (
@@ -283,7 +309,9 @@ export default function MochinoaJump() {
 				{gameOver ? (
 					<div className={styles.gameOver}>
 						<p className={styles.gameOverText}>ゲームオーバー</p>
-						<p className={styles.gameOverText}>スコア: {score}</p>
+						<p className={styles.gameOverText}>
+							スコア: <span>{scoreRef.current}</span>
+						</p>
 						<p className={styles.gameOverText}>スペースキーでリスタート</p>
 					</div>
 				) : null}

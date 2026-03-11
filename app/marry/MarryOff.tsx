@@ -1,17 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 export const MarryOff = ({ className }: { className?: string }) => {
 	const [score, setScore] = useState<number>();
-	const fired = useRef(false);
-	useEffect(() => {
-		if (fired.current) {
-			return;
-		}
-		const start = Date.now();
-		fired.current = true;
 
+	const handleStart = () => {
+		const start = Date.now();
 		let flag = true;
 		while (flag) {
 			const ok = window.confirm("望月のあと結婚したいですか？");
@@ -24,10 +19,15 @@ export const MarryOff = ({ className }: { className?: string }) => {
 				window.alert("は？");
 			}
 		}
-	}, []);
+	};
+
 	return (
 		<div className={className}>
-			{score !== undefined ? (
+			{score === undefined ? (
+				<button type="button" onClick={handleStart}>
+					スタート
+				</button>
+			) : (
 				<div>
 					<p>あなたが結婚に同意するまで、{score}秒かかりました。</p>
 					<p>
@@ -38,7 +38,7 @@ export const MarryOff = ({ className }: { className?: string }) => {
 								: "まあ合格やな。"}
 					</p>
 				</div>
-			) : null}
+			)}
 		</div>
 	);
 };
