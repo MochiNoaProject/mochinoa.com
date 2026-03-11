@@ -34,7 +34,7 @@ export default function MochinoaJump() {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [score, setScore] = useState(0);
 	const scoreRef = useRef(0);
-	const scoreDisplayRef = useRef<HTMLDivElement>(null);
+	const scoreDisplayRef = useRef<HTMLSpanElement>(null);
 	const [gameOver, setGameOver] = useState(false);
 	const [isJumping, setIsJumping] = useState(false);
 	const gameRef = useRef<HTMLDivElement>(null);
@@ -73,7 +73,7 @@ export default function MochinoaJump() {
 		setScore(0);
 		scoreRef.current = 0;
 		if (scoreDisplayRef.current) {
-			scoreDisplayRef.current.textContent = "スコア: 0";
+			scoreDisplayRef.current.textContent = "0";
 		}
 		obstaclesRef.current = [];
 		lastObstacleTimeRef.current = 0;
@@ -212,7 +212,7 @@ export default function MochinoaJump() {
 		// スコアの更新（状態の更新を同期的に行う）
 		scoreRef.current += 1;
 		if (scoreDisplayRef.current) {
-			scoreDisplayRef.current.textContent = `スコア: ${scoreRef.current}`;
+			scoreDisplayRef.current.textContent = scoreRef.current.toString();
 		}
 
 		// 障害物の生成
