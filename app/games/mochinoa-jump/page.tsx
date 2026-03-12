@@ -113,10 +113,16 @@ export default function MochinoaJump() {
 		[isPlaying, gameOver, startGame, resetGame, jump],
 	);
 
+	const handleKeyPressRef = useRef(handleKeyPress);
 	useEffect(() => {
-		window.addEventListener("keydown", handleKeyPress);
-		return () => window.removeEventListener("keydown", handleKeyPress);
+		handleKeyPressRef.current = handleKeyPress;
 	}, [handleKeyPress]);
+
+	useEffect(() => {
+		const handler = (e: KeyboardEvent) => handleKeyPressRef.current(e);
+		window.addEventListener("keydown", handler);
+		return () => window.removeEventListener("keydown", handler);
+	}, []);
 
 	// スコアに基づいて障害物の間隔を計算
 	const getObstacleInterval = useCallback(() => {
@@ -258,7 +264,9 @@ export default function MochinoaJump() {
 		if (hasCollision) {
 			handleGameOver();
 		} else {
-			animationFrameRef.current = requestAnimationFrame(gameLoop);
+			animationFrameRef.current = requestAnimationFrame(() =>
+				gameLoopRef.current(),
+			);
 		}
 	}, [
 		isPlaying,
@@ -269,9 +277,16 @@ export default function MochinoaJump() {
 		renderObstacles,
 	]);
 
+	const gameLoopRef = useRef(gameLoop);
+	useEffect(() => {
+		gameLoopRef.current = gameLoop;
+	}, [gameLoop]);
+
 	useEffect(() => {
 		if (isPlaying && !gameOver) {
-			animationFrameRef.current = requestAnimationFrame(gameLoop);
+			animationFrameRef.current = requestAnimationFrame(() =>
+				gameLoopRef.current(),
+			);
 		}
 
 		return () => {
@@ -279,7 +294,7 @@ export default function MochinoaJump() {
 				cancelAnimationFrame(animationFrameRef.current);
 			}
 		};
-	}, [isPlaying, gameOver, gameLoop]);
+	}, [isPlaying, gameOver]);
 
 	return (
 		<div className={styles.container}>
