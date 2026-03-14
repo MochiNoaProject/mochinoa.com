@@ -72,7 +72,15 @@ export function ImageModal({ src, alt }: ImageModalProps) {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						onClick={closeModal}
+						onClick={(e) => {
+							if (e.target === e.currentTarget) closeModal();
+						}}
+						onKeyDown={(e) => {
+							if (e.key === "Escape") closeModal();
+						}}
+						role="dialog"
+						aria-modal="true"
+						aria-label="画像拡大表示"
 					>
 						<button
 							className={styles.modalClose}
@@ -83,10 +91,7 @@ export function ImageModal({ src, alt }: ImageModalProps) {
 							<X size={24} />
 						</button>
 
-						<div
-							className={styles.modalContent}
-							onClick={(e) => e.stopPropagation()}
-						>
+						<div className={styles.modalContent}>
 							<button
 								className={`${styles.modalImageWrapper} ${isZoomed ? styles.zoomed : ""}`}
 								onClick={toggleZoom}
