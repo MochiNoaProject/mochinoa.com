@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Image from "next/image";
 import styles from "./page.module.css";
 
 const title = "活動6年目を迎えた「望月のあ」の収益公開";
@@ -17,12 +17,22 @@ export const metadata = {
 
 export default function PressReleasePage() {
 	return (
-		<main className={styles.container}>
+		<div className={styles.page}>
+			<div className={styles.heroBanner}>
+				<Image
+					src="/img/ogp-2025.jpg"
+					alt="望月のあ 6周年"
+					fill
+					priority
+					className={styles.heroImage}
+				/>
+			</div>
 			<div className={styles.fixedBackground} />
 
-			<div className={styles.contentWrapper}>
-				<header className={styles.header}>
-					<h1 className={styles.title}>{title}</h1>
+			<main className={styles.container}>
+				<div className={styles.contentWrapper}>
+					<header className={styles.header}>
+						<h1 className={styles.title}>{title}</h1>
 					<p className={styles.subtitle}>{description}</p>
 					<div className={styles.meta}>
 						<span>発信日：2026年3月15日</span>
@@ -31,6 +41,16 @@ export default function PressReleasePage() {
 				</header>
 
 				<div className={styles.content}>
+					<nav className={styles.toc}>
+						<div className={styles.tocTitle}>目次</div>
+						<ul>
+							<li><a href="#about">望月のあについて</a></li>
+							<li><a href="#history">収益推移と活動の歩み</a></li>
+							<li><a href="#lessons">低迷から学んだこと</a></li>
+							<li><a href="#future">今後の展望</a></li>
+						</ul>
+					</nav>
+
 					<h2>はじめに</h2>
 					<p>
 						本稿は、クリエイター「望月のあ」の活動開始から約6年間の歩みと、事業多角化による再起の成果をまとめた報告です。
@@ -42,9 +62,7 @@ export default function PressReleasePage() {
 						一度離れた人間が再び戻ってきた——その事実そのものが、望月のあがこの数年間でどれほどの変化を遂げたかを物語っていると考えます。本稿では、その変化の全体像を、初期から知る関係者の視点でお伝えします。
 					</p>
 
-					<div className={styles.divider}>***</div>
-
-					<h2>望月のあについて</h2>
+					<h2 id="about">望月のあについて</h2>
 					<p>
 						望月のあは、2020年1月にバーチャルYouTuber（VTuber）として活動を開始したクリエイターです。2019年12月よりTwitter（現X）にてイラストの発信を開始し、イラストの学習過程でLive2Dの技術を習得。自らキャラクターデザインとモデリングを手がけ、個人勢としてデビューしました。
 					</p>
@@ -52,7 +70,7 @@ export default function PressReleasePage() {
 						特筆すべきは、イラスト・Live2D・配信・企画といった多くの工程を一人で完結できるマルチスキルを持つ点です。現在はVTuberという肩書にとらわれず、より広義の「クリエイター」として活動の幅を広げています。
 					</p>
 
-					<h2>収益推移と活動の歩み</h2>
+					<h2 id="history">収益推移と活動の歩み</h2>
 					<p>活動開始からの収益推移は、以下のグラフをご覧ください。</p>
 					<p>
 						<a
@@ -87,15 +105,15 @@ export default function PressReleasePage() {
 					</p>
 					<ul>
 						<li>
-							<strong>コンテンツの没個性化</strong>
+							コンテンツの没個性化
 							：ジャンルを絞らずゲーム配信、歌、雑談と手広くこなすうちに、自身の良さや独自性が薄れてしまった
 						</li>
 						<li>
-							<strong>精神面の未熟さ</strong>
+							精神面の未熟さ
 							：既存および潜在的なファンや関係者を遠ざけてしまう言動があった
 						</li>
 						<li>
-							<strong>モチベーションの低下</strong>
+							モチベーションの低下
 							：収益の減少がモチベーションの低下を招き、活動を完全に終了する可能性が何度も浮上した
 						</li>
 					</ul>
@@ -131,13 +149,13 @@ export default function PressReleasePage() {
 					<p>2025年以降、望月のあの活動はさらに多角化が進みました。</p>
 					<ul>
 						<li>
-							<strong>2025年1月</strong>：実写での動画制作を開始
+							2025年1月：実写での動画制作を開始
 						</li>
 						<li>
-							<strong>2025年4月</strong>：音声作品サークルを立ち上げ、販売を開始
+							2025年4月：音声作品サークルを立ち上げ、販売を開始
 						</li>
 						<li>
-							<strong>事業収入の拡大</strong>
+							事業収入の拡大
 							：デザイン・広告・講師業の収入が月あたり15〜20万円規模に成長
 						</li>
 					</ul>
@@ -151,7 +169,7 @@ export default function PressReleasePage() {
 						現在、望月のあの収益は配信者業、音声作品、その他事業の3つの柱で構成されており、月収は活動開始以来の最高水準を記録しています。
 					</p>
 
-					<h2>低迷から学んだこと</h2>
+					<h2 id="lessons">低迷から学んだこと</h2>
 					<p>
 						筆者が一度離れ、再び戻ってきたからこそ見えたことがあります。望月のあの約6年間の活動を振り返り、他の配信者・クリエイターの方々にとっても示唆になり得ると感じた点を共有します。
 					</p>
@@ -174,9 +192,7 @@ export default function PressReleasePage() {
 						筆者自身がその証人です。一度離れた人間が戻ってきたという事実は、変化が本物であったことの何よりの証左だと考えています。
 					</p>
 
-					<div className={styles.divider}>***</div>
-
-					<h2>今後の展望</h2>
+					<h2 id="future">今後の展望</h2>
 					<p>著：望月のあ</p>
 					<p>
 						望月のあは、知性と品性を大切にしながら、精神的にも成長を続けていきます。多くの人と関わり、価値あるつながりを築きながら、自分らしい事業にも挑戦していく。そして、好きで始めた配信活動も変わらず大切にしながら、長く続けていきたいと思っています。
@@ -211,13 +227,8 @@ export default function PressReleasePage() {
 						とはいえ、配信活動が全く無意味かと言われると、そんなことはありません。むしろ配信活動により、広告費の削減や、信用の向上に繋り、全体の収益に繋がっていると考えられます。
 					</p>
 				</div>
-
-				<footer className={styles.footer}>
-					<Link href="/" className={styles.backLink}>
-						← トップページへ戻る
-					</Link>
-				</footer>
 			</div>
-		</main>
+			</main>
+		</div>
 	);
 }
