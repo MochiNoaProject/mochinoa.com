@@ -10,7 +10,8 @@ const numbers = [
 ];
 
 export const GuessNumber = () => {
-	const [time, setTime] = useState(0);
+	const timeRef = useRef(0);
+	const timeDisplayRef = useRef<HTMLDivElement>(null);
 	const timer = useRef<number | null>(null);
 	const [isStarted, setIsStarted] = useState(false);
 	const [correctNumber, setCorrectNumber] = useState<number>();
@@ -36,21 +37,29 @@ export const GuessNumber = () => {
 					結果をXで共有する
 				</a>
 			</div>
-			<div className={styles.Timer}>{time.toFixed(1)}s</div>
+			<div className={styles.Timer} ref={timeDisplayRef}>
+				0.0s
+			</div>
 			<button
 				className={styles.StartButton}
 				type="button"
 				onClick={() => {
 					if (isStarted) {
 						setIsStarted(false);
-						setTime(0);
+						timeRef.current = 0;
+						if (timeDisplayRef.current) {
+							timeDisplayRef.current.textContent = "0.0s";
+						}
 						setSerif("もう一回あそぶ？❤");
 						if (timer.current !== null) {
 							window.clearInterval(timer.current);
 						}
 					} else {
 						setIsStarted(true);
-						setTime(0);
+						timeRef.current = 0;
+						if (timeDisplayRef.current) {
+							timeDisplayRef.current.textContent = "0.0s";
+						}
 						setCount(0);
 						setCorrectNumber(
 							numbers[Math.floor(Math.random() * numbers.length)],
@@ -58,7 +67,10 @@ export const GuessNumber = () => {
 						updateResetKey();
 						setSerif("数字をえらんで❤");
 						timer.current = window.setInterval(() => {
-							setTime((prev) => (prev * 10 + 1) / 10);
+							timeRef.current = (timeRef.current * 10 + 1) / 10;
+							if (timeDisplayRef.current) {
+								timeDisplayRef.current.textContent = `${timeRef.current.toFixed(1)}s`;
+							}
 						}, 100);
 					}
 				}}
@@ -97,13 +109,13 @@ export const GuessNumber = () => {
 											window.clearInterval(timer.current);
 										}
 										setIsStarted(false);
-										if (time < 5) {
+										if (timeRef.current < 5) {
 											setSerif("すっご～い❤");
 											play("すっごーい");
-										} else if (time < 8) {
+										} else if (timeRef.current < 8) {
 											setSerif("がんばれ❤がんばれ❤");
 											play("がんばれがんばれ");
-										} else if (time < 20) {
+										} else if (timeRef.current < 20) {
 											setSerif("ざぁこ❤");
 											play("ざあこ");
 										} else {
