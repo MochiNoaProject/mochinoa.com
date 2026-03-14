@@ -1,16 +1,15 @@
-.page {
+.heroImageContainer {
+	margin-bottom: 32px;
 	width: 100%;
-}
-
-.heroBanner {
-	width: 100%;
-	height: 300px;
-	position: relative;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .heroImage {
-	object-fit: cover;
-	object-position: center 30%;
+	width: 100%;
+	height: auto;
+	display: block;
 }
 
 .container {
@@ -21,20 +20,17 @@
 	z-index: 10;
 	color: #333;
 	line-height: 1.8;
-	font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
-		"Hiragino Sans", Meiryo, sans-serif;
+	font-family:
+		"Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+		Meiryo, sans-serif;
 }
 
-@media (min-width: 768px) {
-	.heroBanner {
-		height: 400px;
-	}
-}
+/* Responsive */
 
 .contentWrapper {
 	background-color: #ffffff;
 	border-radius: 24px;
-	padding: 40px;
+	padding: 0 40px 40px;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 	position: relative;
 	overflow: hidden;
@@ -76,6 +72,18 @@
 	margin-bottom: 0;
 }
 
+.toc ul ul {
+	margin-top: 8px;
+	margin-bottom: 4px;
+	padding-left: 20px;
+	border-left: 1px solid rgba(99, 186, 199, 0.3);
+}
+
+.toc ul ul li {
+	font-size: 14px;
+	margin-bottom: 4px;
+}
+
 .toc a {
 	color: #555;
 	text-decoration: none;
@@ -109,10 +117,19 @@
 	color: #888;
 }
 
+.meta a {
+	color: var(--color-teal);
+	text-decoration: underline;
+}
+
+.meta a:hover {
+	color: var(--color-pink);
+}
+
 .content h2 {
 	font-size: 24px;
 	color: var(--color-teal);
-	margin-top: 48px;
+	margin-top: 80px;
 	margin-bottom: 24px;
 	padding-bottom: 8px;
 	border-bottom: 1px solid rgba(99, 186, 199, 0.3);
@@ -121,7 +138,7 @@
 .content h3 {
 	font-size: 20px;
 	color: var(--color-pink);
-	margin-top: 32px;
+	margin-top: 56px;
 	margin-bottom: 16px;
 }
 
@@ -163,6 +180,156 @@
 	margin-bottom: 0;
 }
 
+.chartContainer {
+	width: calc(100% + 80px);
+	margin-inline: -40px;
+	margin-bottom: 32px;
+	overflow: hidden;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	background-color: #ffffff;
+}
+
+.chartPeek {
+	position: relative;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.chartImage {
+	width: 100%;
+	height: auto;
+	display: block;
+	transition: transform 0.3s ease;
+}
+
+.chartPeek:hover .chartImage {
+	transform: scale(1.02);
+}
+
+.chartOverlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	gap: 8px;
+}
+
+.chartPeek:hover .chartOverlay {
+	opacity: 1;
+}
+
+/* Modal Styles */
+.modalBackdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.9);
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 40px;
+}
+
+.modalContent {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.modalImageWrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: zoom-in;
+	transition: all 0.3s ease;
+	overflow: auto;
+}
+
+.modalImageWrapper.zoomed {
+	cursor: zoom-out;
+	align-items: flex-start;
+}
+
+.modalImage {
+	max-width: 90%;
+	max-height: 90%;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.zoomed .modalImage {
+	max-width: 200%;
+	max-height: none;
+	transform: scale(1.5);
+}
+
+.modalClose {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: rgba(255, 255, 255, 0.1);
+	border: none;
+	color: white;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	z-index: 1010;
+	transition: background 0.2s;
+}
+
+.modalClose:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.modalControls {
+	position: absolute;
+	bottom: 20px;
+	display: flex;
+	gap: 12px;
+}
+
+.zoomButton {
+	background: rgba(255, 255, 255, 0.8);
+	border: none;
+	padding: 8px 16px;
+	border-radius: 99px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.zoomButton:hover {
+	background: white;
+}
+
 /* Background */
 .fixedBackground {
 	position: fixed;
@@ -184,7 +351,7 @@
 	}
 
 	.contentWrapper {
-		padding: 24px 20px;
+		padding: 0 20px 24px;
 		border-radius: 0;
 	}
 
@@ -198,5 +365,10 @@
 
 	.content h3 {
 		font-size: 18px;
+	}
+
+	.chartContainer {
+		width: calc(100% + 40px);
+		margin-inline: -20px;
 	}
 }
