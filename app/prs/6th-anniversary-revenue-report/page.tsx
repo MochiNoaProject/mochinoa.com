@@ -14,6 +14,11 @@ export const metadata = {
 	openGraph: {
 		title,
 		description,
+		images: ["https://www.mochinoa.com/images/ogp-pr2026.jpg"],
+	},
+	twitter: {
+		card: "summary_large_image",
+		images: ["https://www.mochinoa.com/images/ogp-pr2026.jpg"],
 	},
 } satisfies Metadata;
 
