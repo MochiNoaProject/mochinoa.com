@@ -8,7 +8,8 @@ export default function GameBoard() {
 	const router = useRouter();
 	const [board, setBoard] = useState<number[]>([]);
 	const [moves, setMoves] = useState(0);
-	const [isComplete, setIsComplete] = useState(false);
+	const isComplete =
+		board.length > 0 && board.every((value, index) => value === index);
 	const [startTime, setStartTime] = useState<number | null>(null);
 	const [difficulty, setDifficulty] = useState<"easy" | "hard">("easy");
 
@@ -65,7 +66,6 @@ export default function GameBoard() {
 		const initialBoard = Array.from({ length: size }, (_, i) => i);
 		setBoard(shuffleBoard(initialBoard));
 		setMoves(0);
-		setIsComplete(false);
 		setStartTime(Date.now());
 	}, [shuffleBoard, difficulty]);
 
@@ -89,22 +89,21 @@ export default function GameBoard() {
 			];
 			setBoard(newBoard);
 			setMoves((prev) => prev + 1);
-
-			// 状態更新後に完成チェックを実行
-			const isCompleted = newBoard.every((value, idx) => value === idx);
-			if (isCompleted) {
-				const finalTime = Date.now() - (startTime ?? 0);
-				setIsComplete(true);
-				setTimeout(() => {
-					router.push(
-						`/games/slide-puzzle/complete?time=${finalTime}&moves=${
-							moves + 1
-						}&difficulty=${difficulty}`,
-					);
-				}, 500);
-			}
 		}
 	};
+
+	// 完成時の処理
+	useEffect(() => {
+		if (isComplete) {
+			const finalTime = Date.now() - (startTime ?? 0);
+			const timer = setTimeout(() => {
+				router.push(
+					`/games/slide-puzzle/complete?time=${finalTime}&moves=${moves}&difficulty=${difficulty}`,
+				);
+			}, 500);
+			return () => clearTimeout(timer);
+		}
+	}, [isComplete, startTime, moves, difficulty, router]);
 
 	// シャッフルボタンのクリックハンドラ
 	const handleShuffle = () => {
