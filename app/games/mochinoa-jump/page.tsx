@@ -97,26 +97,27 @@ export default function MochinoaJump() {
 	}, [startGame]);
 
 	// キーボードイベントの処理
-	const handleKeyPress = useCallback(
-		(e: KeyboardEvent) => {
+	const handleKeyPressRef = useRef<(e: KeyboardEvent) => void>(() => {});
+
+	useEffect(() => {
+		handleKeyPressRef.current = (e: KeyboardEvent) => {
 			if (e.code === "Space") {
 				if (!isPlaying) {
 					startGame();
 				} else if (gameOver) {
 					resetGame();
 				} else if (!isJumpingRef.current) {
-					// ジャンプ中でない場合のみジャンプを実行
 					jump();
 				}
 			}
-		},
-		[isPlaying, gameOver, startGame, resetGame, jump],
-	);
+		};
+	}, [isPlaying, gameOver, startGame, resetGame, jump]);
 
 	useEffect(() => {
-		window.addEventListener("keydown", handleKeyPress);
-		return () => window.removeEventListener("keydown", handleKeyPress);
-	}, [handleKeyPress]);
+		const handler = (e: KeyboardEvent) => handleKeyPressRef.current(e);
+		window.addEventListener("keydown", handler);
+		return () => window.removeEventListener("keydown", handler);
+	}, []);
 
 	// スコアに基づいて障害物の間隔を計算
 	const getObstacleInterval = useCallback(() => {
