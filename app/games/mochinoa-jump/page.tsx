@@ -113,10 +113,17 @@ export default function MochinoaJump() {
 		[isPlaying, gameOver, startGame, resetGame, jump],
 	);
 
+	// advanced-event-handler-refs.md に基づく修正: stable subscription
+	const handleKeyPressRef = useRef(handleKeyPress);
 	useEffect(() => {
-		window.addEventListener("keydown", handleKeyPress);
-		return () => window.removeEventListener("keydown", handleKeyPress);
+		handleKeyPressRef.current = handleKeyPress;
 	}, [handleKeyPress]);
+
+	useEffect(() => {
+		const listener = (e: KeyboardEvent) => handleKeyPressRef.current(e);
+		window.addEventListener("keydown", listener);
+		return () => window.removeEventListener("keydown", listener);
+	}, []);
 
 	// スコアに基づいて障害物の間隔を計算
 	const getObstacleInterval = useCallback(() => {
