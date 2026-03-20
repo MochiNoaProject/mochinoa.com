@@ -38,7 +38,11 @@ export function ClipReveal({ children, className }: Props) {
 	return (
 		<div
 			ref={ref}
-			className={clsx(styles.Root, isVisible && styles.Visible, className)}
+			className={clsx(
+				styles.Root,
+				isVisible ? styles.Visible : undefined,
+				className,
+			)}
 		>
 			{children}
 		</div>
