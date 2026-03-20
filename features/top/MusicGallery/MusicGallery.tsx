@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import tag1Img from "../../../app/_assets/images/タグ1.png";
 import type { Song } from "../../../app/_site.config";
 import styles from "./MusicGallery.module.css";
@@ -124,7 +124,7 @@ export function MusicGallery({ songs }: Props) {
 		setSelectedIndex(index);
 	}, []);
 
-	const tripled = useMemo(() => [...songs, ...songs, ...songs], [songs]);
+	const tripled = [...songs, ...songs, ...songs];
 	const selected = songs[selectedIndex];
 
 	return (

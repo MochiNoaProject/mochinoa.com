@@ -66,7 +66,7 @@ export function ImageModal({ src, alt }: ImageModalProps) {
 			</button>
 
 			<AnimatePresence>
-				{isOpen && (
+				{isOpen ? (
 					<motion.div
 						className={styles.modalBackdrop}
 						initial={{ opacity: 0 }}
@@ -123,7 +123,7 @@ export function ImageModal({ src, alt }: ImageModalProps) {
 							</div>
 						</div>
 					</motion.div>
-				)}
+				) : null}
 			</AnimatePresence>
 		</>
 	);
