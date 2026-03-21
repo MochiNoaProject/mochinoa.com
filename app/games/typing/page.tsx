@@ -72,8 +72,14 @@ const WORDS = [
 	"ぽかぽか",
 ];
 
+const patternsCache = new Map<string, string[]>();
+
 // 異体字を含むすべての可能な入力パターンを生成
 const generateAllPatterns = (romaji: string): string[] => {
+	if (patternsCache.has(romaji)) {
+		return patternsCache.get(romaji)!;
+	}
+
 	const patterns = [romaji.toLowerCase()];
 
 	for (const [standard, variants] of Object.entries(ROMAJI_VARIANTS)) {
@@ -90,7 +96,9 @@ const generateAllPatterns = (romaji: string): string[] => {
 		}
 	}
 
-	return [...new Set(patterns)]; // 重複を除去
+	const result = [...new Set(patterns)]; // 重複を除去
+	patternsCache.set(romaji, result);
+	return result;
 };
 
 const getResultMessage = (chars: number): ResultMessage => {

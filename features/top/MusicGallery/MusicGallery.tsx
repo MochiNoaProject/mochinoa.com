@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import tag1Img from "../../../app/_assets/images/タグ1.png";
 import type { Song } from "../../../app/_site.config";
 import styles from "./MusicGallery.module.css";
@@ -84,25 +84,30 @@ export function MusicGallery({ songs }: Props) {
 		let rafId: number;
 
 		const tick = (time: number) => {
-			if (lastTime !== null && !isPausedRef.current) {
-				const dt = Math.min((time - lastTime) / 1000, 0.1);
-				posRef.current -= SCROLL_SPEED * dt;
-
-				if (posRef.current <= -setWidth) {
-					posRef.current += setWidth;
-				}
-
-				if (trackRef.current) {
-					trackRef.current.style.transform = `translateX(${posRef.current}px)`;
-				}
-
-				const offset = ((-posRef.current % setWidth) + setWidth) % setWidth;
-				const newIdx = Math.floor(offset / ITEM_STEP) % songs.length;
-				if (newIdx !== selectedRef.current) {
-					selectedRef.current = newIdx;
-					setSelectedIndex(newIdx);
-				}
+			if (lastTime === null || isPausedRef.current) {
+				lastTime = time;
+				rafId = requestAnimationFrame(tick);
+				return;
 			}
+
+			const dt = Math.min((time - lastTime) / 1000, 0.1);
+			posRef.current -= SCROLL_SPEED * dt;
+
+			if (posRef.current <= -setWidth) {
+				posRef.current += setWidth;
+			}
+
+			if (trackRef.current) {
+				trackRef.current.style.transform = `translateX(${posRef.current}px)`;
+			}
+
+			const offset = ((-posRef.current % setWidth) + setWidth) % setWidth;
+			const newIdx = Math.floor(offset / ITEM_STEP) % songs.length;
+			if (newIdx !== selectedRef.current) {
+				selectedRef.current = newIdx;
+				setSelectedIndex(newIdx);
+			}
+
 			lastTime = time;
 			rafId = requestAnimationFrame(tick);
 		};
@@ -124,7 +129,7 @@ export function MusicGallery({ songs }: Props) {
 		setSelectedIndex(index);
 	}, []);
 
-	const tripled = [...songs, ...songs, ...songs];
+	const tripled = useMemo(() => [...songs, ...songs, ...songs], [songs]);
 	const selected = songs[selectedIndex];
 
 	return (

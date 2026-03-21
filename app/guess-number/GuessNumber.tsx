@@ -122,26 +122,31 @@ export const GuessNumber = () => {
 											setSerif("なっさけな〜い❤");
 											play("なっさけない");
 										}
-									} else {
-										if (correctNumber === undefined) {
-											throw new Error("correctNumber is undefined");
-										}
-										if (count > 2) {
-											setSerif("ざぁこ❤ざぁこ❤");
-											play("ざあこざあこ");
-											setIsStarted(false);
-											if (timer.current !== null) {
-												window.clearInterval(timer.current);
-											}
-										} else if (number < correctNumber) {
-											setSerif("ちっさ❤");
-											play("ちっさ");
-										} else {
-											setSerif("でっか❤");
-											play("でっか");
-										}
-										setCount((prev) => prev + 1);
+										return;
 									}
+
+									if (correctNumber === undefined) {
+										throw new Error("correctNumber is undefined");
+									}
+
+									if (count > 2) {
+										setSerif("ざぁこ❤ざぁこ❤");
+										play("ざあこざあこ");
+										setIsStarted(false);
+										if (timer.current !== null) {
+											window.clearInterval(timer.current);
+										}
+										return;
+									}
+
+									if (number < correctNumber) {
+										setSerif("ちっさ❤");
+										play("ちっさ");
+									} else {
+										setSerif("でっか❤");
+										play("でっか");
+									}
+									setCount((prev) => prev + 1);
 								}}
 							/>
 							{number}
