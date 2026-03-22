@@ -7,7 +7,9 @@ import styles from "./Result.module.css";
 export const Result = ({ chara }: { chara?: (typeof data)[number] }) => {
 	return (
 		<div className={styles.container}>
-			<div className={clsx(styles.frame, chara ? styles.frame_active : undefined)}>
+			<div
+				className={clsx(styles.frame, chara ? styles.frame_active : undefined)}
+			>
 				{chara ? (
 					<React.Fragment>
 						<header>
