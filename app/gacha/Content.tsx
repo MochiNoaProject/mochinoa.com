@@ -9,6 +9,8 @@ import { TicketModal } from "./TicketModal";
 import { useDispatchCollection, useTicket } from "./useCollection";
 import { useModal } from "./useModal";
 
+let didInitPreload = false;
+
 export const Content = () => {
 	const [Modal, open] = useModal(IndexModal);
 	const ticket = useTicket();
@@ -18,6 +20,9 @@ export const Content = () => {
 	const [Ticket, openTicket] = useModal(TicketModal);
 
 	useEffect(() => {
+		if (didInitPreload) return;
+		didInitPreload = true;
+
 		const preloadImage = (url: string) => {
 			const img = new Image();
 			img.src = url;

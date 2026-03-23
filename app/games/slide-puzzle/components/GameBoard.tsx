@@ -116,54 +116,46 @@ export default function GameBoard() {
 		setDifficulty((prev) => (prev === "easy" ? "hard" : "easy"));
 	};
 
+	const isEasy = difficulty === "easy";
+	const gridSize = isEasy ? 3 : 4;
+	const emptyTileIndex = isEasy ? 8 : 15;
+	const bgImage = isEasy ? "puzzle1" : "puzzle2";
+	const bgSize = isEasy ? "300% 300%" : "400% 400%";
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.controls}>
 				<button type="button" onClick={toggleDifficulty}>
-					{difficulty === "easy" ? "難易度: 初級" : "難易度: 上級"}
+					{isEasy ? "難易度: 初級" : "難易度: 上級"}
 				</button>
 			</div>
-			<div
-				className={`${styles.grid} ${difficulty === "hard" ? styles.hard : ""}`}
-			>
+			<div className={`${styles.grid} ${!isEasy ? styles.hard : ""}`}>
 				{board.map((value, index) => (
 					<button
 						key={value}
 						type="button"
 						className={`${styles.tile} ${
-							value === (difficulty === "easy" ? 8 : 15) ? styles.empty : ""
+							value === emptyTileIndex ? styles.empty : ""
 						} ${isComplete ? styles.complete : ""}`}
 						style={
-							value !== (difficulty === "easy" ? 8 : 15)
+							value !== emptyTileIndex
 								? {
-										backgroundImage: `url(/images/slide-puzzle/${
-											difficulty === "easy" ? "puzzle1" : "puzzle2"
-										}.jpg)`,
-										backgroundSize: `${
-											difficulty === "easy" ? "300% 300%" : "400% 400%"
-										}`,
-										backgroundPosition: `${
-											-(value % (difficulty === "easy" ? 3 : 4)) * 100
-										}% ${
-											-Math.floor(value / (difficulty === "easy" ? 3 : 4)) * 100
+										backgroundImage: `url(/images/slide-puzzle/${bgImage}.jpg)`,
+										backgroundSize: bgSize,
+										backgroundPosition: `${-(value % gridSize) * 100}% ${
+											-Math.floor(value / gridSize) * 100
 										}%`,
-										transform: `translate(${
-											(index % (difficulty === "easy" ? 3 : 4)) * 100
-										}%, ${
-											Math.floor(index / (difficulty === "easy" ? 3 : 4)) * 100
+										transform: `translate(${(index % gridSize) * 100}%, ${
+											Math.floor(index / gridSize) * 100
 										}%)`,
 									}
 								: {
-										transform: `translate(${
-											(index % (difficulty === "easy" ? 3 : 4)) * 100
-										}%, ${
-											Math.floor(index / (difficulty === "easy" ? 3 : 4)) * 100
+										transform: `translate(${(index % gridSize) * 100}%, ${
+											Math.floor(index / gridSize) * 100
 										}%)`,
 									}
 						}
-						onClick={() =>
-							value !== (difficulty === "easy" ? 8 : 15) && moveTile(index)
-						}
+						onClick={() => value !== emptyTileIndex && moveTile(index)}
 					/>
 				))}
 			</div>
