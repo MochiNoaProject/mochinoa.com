@@ -28,6 +28,9 @@ const OBSTACLE_TYPES = {
 	medium: { width: 30, height: 50, shape: "circle" },
 	large: { width: 40, height: 70, shape: "triangle" },
 };
+const OBSTACLE_TYPE_KEYS = Object.keys(OBSTACLE_TYPES) as Array<
+	keyof typeof OBSTACLE_TYPES
+>;
 
 export default function MochinoaJump() {
 	const router = useRouter();
@@ -146,10 +149,10 @@ export default function MochinoaJump() {
 			lastObstacleTimeRef.current = now;
 
 			// ランダムな障害物タイプを選択
-			const types = Object.keys(OBSTACLE_TYPES) as Array<
-				keyof typeof OBSTACLE_TYPES
-			>;
-			const randomType = types[Math.floor(Math.random() * types.length)];
+			const randomType =
+				OBSTACLE_TYPE_KEYS[
+					Math.floor(Math.random() * OBSTACLE_TYPE_KEYS.length)
+				];
 			const obstacleConfig = OBSTACLE_TYPES[randomType];
 
 			obstaclesRef.current.push({
