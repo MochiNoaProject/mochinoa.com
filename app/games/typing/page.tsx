@@ -159,10 +159,16 @@ export default function TypingGame() {
 		[isPlaying, gameOver, startGame],
 	);
 
+	const handleKeyPressRef = useRef(handleKeyPress);
 	useEffect(() => {
-		window.addEventListener("keydown", handleKeyPress);
-		return () => window.removeEventListener("keydown", handleKeyPress);
+		handleKeyPressRef.current = handleKeyPress;
 	}, [handleKeyPress]);
+
+	useEffect(() => {
+		const listener = (e: KeyboardEvent) => handleKeyPressRef.current(e);
+		window.addEventListener("keydown", listener);
+		return () => window.removeEventListener("keydown", listener);
+	}, []);
 
 	const resetGame = useCallback(() => {
 		setIsPlaying(false);
