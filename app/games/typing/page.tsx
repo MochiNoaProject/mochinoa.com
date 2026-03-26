@@ -117,7 +117,15 @@ export default function TypingGame() {
 	const possiblePatterns = useMemo(() => {
 		const romajiText = toRomaji(text);
 		const patterns = generateAllPatterns(romajiText);
-		return { patterns, patternSet: new Set(patterns) };
+
+		const prefixSet = new Set<string>();
+		for (const pattern of patterns) {
+			for (let i = 1; i <= pattern.length; i++) {
+				prefixSet.add(pattern.slice(0, i));
+			}
+		}
+
+		return { patterns, patternSet: new Set(patterns), prefixSet };
 	}, [text]);
 	const [input, setInput] = useState("");
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -206,9 +214,7 @@ export default function TypingGame() {
 		const value = e.target.value.toLowerCase();
 
 		// 入力文字が正しいかチェック（ローマ字のみ）
-		const isValidRomaji = possiblePatterns.patterns.some((pattern) =>
-			pattern.startsWith(value),
-		);
+		const isValidRomaji = value === "" || possiblePatterns.prefixSet.has(value);
 		if (isValidRomaji) {
 			setInput(value);
 
