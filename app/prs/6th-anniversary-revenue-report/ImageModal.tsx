@@ -4,7 +4,7 @@ import { X, ZoomIn, ZoomOut } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type { StaticImageData } from "next/image";
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from "./page.module.css";
 
 interface ImageModalProps {
@@ -27,21 +27,16 @@ export function ImageModal({ src, alt }: ImageModalProps) {
 		document.body.style.overflow = "unset";
 	}, []);
 
-	const closeModalRef = useRef(closeModal);
-	useEffect(() => {
-		closeModalRef.current = closeModal;
-	}, [closeModal]);
-
 	useEffect(() => {
 		const handleEsc = (e: KeyboardEvent) => {
-			if (e.key === "Escape") closeModalRef.current();
+			if (e.key === "Escape") closeModal();
 		};
 		window.addEventListener("keydown", handleEsc);
 		return () => {
 			window.removeEventListener("keydown", handleEsc);
 			document.body.style.overflow = "unset";
 		};
-	}, []);
+	}, [closeModal]);
 
 	const toggleZoom = (e: React.MouseEvent) => {
 		e.stopPropagation();
