@@ -157,20 +157,22 @@ export default function TypingGame() {
 	}, []);
 
 	// キーボードイベントのハンドラー
-	const handleKeyPress = useCallback(
-		(e: KeyboardEvent) => {
+	const handleKeyPressRef = useRef<(e: KeyboardEvent) => void>(() => {});
+
+	useEffect(() => {
+		handleKeyPressRef.current = (e: KeyboardEvent) => {
 			if (!isPlaying && !gameOver && e.code === "Space") {
 				e.preventDefault();
 				startGame();
 			}
-		},
-		[isPlaying, gameOver, startGame],
-	);
+		};
+	}, [isPlaying, gameOver, startGame]);
 
 	useEffect(() => {
-		window.addEventListener("keydown", handleKeyPress);
-		return () => window.removeEventListener("keydown", handleKeyPress);
-	}, [handleKeyPress]);
+		const handler = (e: KeyboardEvent) => handleKeyPressRef.current(e);
+		window.addEventListener("keydown", handler);
+		return () => window.removeEventListener("keydown", handler);
+	}, []);
 
 	const resetGame = useCallback(() => {
 		setIsPlaying(false);

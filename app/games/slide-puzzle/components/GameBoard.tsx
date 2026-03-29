@@ -6,48 +6,39 @@ import styles from "./GameBoard.module.css";
 
 export default function GameBoard() {
 	const router = useRouter();
-	const [board, setBoard] = useState<number[]>([]);
-	const [moves, setMoves] = useState(0);
-	const [startTime, setStartTime] = useState<number | null>(null);
 	const [difficulty, setDifficulty] = useState<"easy" | "hard">("easy");
 
-	const isComplete =
-		board.length > 0 && board.every((value, index) => value === index);
-
-	// 移動可能なマスのインデックスを取得
+	// 移動可能なマスのインデックスを取得（difficultyを引数に取るように変更）
 	const getMovableIndices = useCallback(
-		(emptyIndex: number) => {
-			const size = difficulty === "easy" ? 3 : 4;
+		(emptyIndex: number, currentDifficulty: "easy" | "hard") => {
+			const size = currentDifficulty === "easy" ? 3 : 4;
 			const row = Math.floor(emptyIndex / size);
 			const col = emptyIndex % size;
 			const movableIndices: number[] = [];
 
-			// 上
 			if (row > 0) movableIndices.push(emptyIndex - size);
-			// 下
 			if (row < size - 1) movableIndices.push(emptyIndex + size);
-			// 左
 			if (col > 0) movableIndices.push(emptyIndex - 1);
-			// 右
 			if (col < size - 1) movableIndices.push(emptyIndex + 1);
 
 			return movableIndices;
 		},
-		[difficulty],
+		[],
 	);
 
 	// ボードをシャッフル
 	const shuffleBoard = useCallback(
-		(boardToShuffle: number[]) => {
-			const shuffled = [...boardToShuffle];
-			let emptyIndex = shuffled.indexOf(difficulty === "easy" ? 8 : 15);
+		(currentDifficulty: "easy" | "hard") => {
+			const size = currentDifficulty === "easy" ? 9 : 16;
+			const initialBoard = Array.from({ length: size }, (_, i) => i);
+			const shuffled = [...initialBoard];
+			let emptyIndex = currentDifficulty === "easy" ? 8 : 15;
 
 			for (let i = 0; i < 100; i++) {
-				const movableIndices = getMovableIndices(emptyIndex);
+				const movableIndices = getMovableIndices(emptyIndex, currentDifficulty);
 				if (movableIndices.length > 0) {
 					const randomIndex =
 						movableIndices[Math.floor(Math.random() * movableIndices.length)];
-					// 空マスと移動可能なマスを入れ替え
 					[shuffled[emptyIndex], shuffled[randomIndex]] = [
 						shuffled[randomIndex],
 						shuffled[emptyIndex],
@@ -58,29 +49,28 @@ export default function GameBoard() {
 
 			return shuffled;
 		},
-		[getMovableIndices, difficulty],
+		[getMovableIndices],
 	);
 
-	// ボードの初期化
-	const initializeBoard = useCallback(() => {
-		const size = difficulty === "easy" ? 9 : 16;
-		const initialBoard = Array.from({ length: size }, (_, i) => i);
-		setBoard(shuffleBoard(initialBoard));
-		setMoves(0);
-		setStartTime(Date.now());
-	}, [shuffleBoard, difficulty]);
+	const [board, setBoard] = useState<number[]>([]);
+	const [moves, setMoves] = useState(0);
+	const [startTime, setStartTime] = useState<number | null>(null);
 
-	// 初期化
+	// 初回マウント時にボードを初期化（SSRでのハイドレーションミスマッチを防ぐため）
 	useEffect(() => {
-		initializeBoard();
-	}, [initializeBoard]);
+		setBoard(shuffleBoard("easy"));
+		setStartTime(Date.now());
+	}, [shuffleBoard]);
+
+	const isComplete =
+		board.length > 0 && board.every((value, index) => value === index);
 
 	// タイルを移動
 	const moveTile = (index: number) => {
 		if (isComplete) return;
 
 		const emptyIndex = board.indexOf(difficulty === "easy" ? 8 : 15);
-		const movableIndices = getMovableIndices(emptyIndex);
+		const movableIndices = getMovableIndices(emptyIndex, difficulty);
 
 		if (movableIndices.includes(index)) {
 			const newBoard = [...board];
@@ -108,12 +98,20 @@ export default function GameBoard() {
 
 	// シャッフルボタンのクリックハンドラ
 	const handleShuffle = () => {
-		initializeBoard();
+		setBoard(shuffleBoard(difficulty));
+		setMoves(0);
+		setStartTime(Date.now());
 	};
 
 	// 難易度切り替え
 	const toggleDifficulty = () => {
-		setDifficulty((prev) => (prev === "easy" ? "hard" : "easy"));
+		setDifficulty((prev) => {
+			const next = prev === "easy" ? "hard" : "easy";
+			setBoard(shuffleBoard(next));
+			setMoves(0);
+			setStartTime(Date.now());
+			return next;
+		});
 	};
 
 	const isEasy = difficulty === "easy";

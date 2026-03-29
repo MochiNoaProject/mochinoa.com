@@ -124,7 +124,15 @@ export function MusicGallery({ songs }: Props) {
 		setSelectedIndex(index);
 	}, []);
 
-	const tripled = useMemo(() => [...songs, ...songs, ...songs], [songs]);
+	const tripled = useMemo(() => {
+		const result = new Array(songs.length * 3);
+		for (let i = 0; i < 3; i++) {
+			for (let j = 0; j < songs.length; j++) {
+				result[i * songs.length + j] = songs[j];
+			}
+		}
+		return result;
+	}, [songs]);
 	const selected = songs[selectedIndex];
 
 	return (
