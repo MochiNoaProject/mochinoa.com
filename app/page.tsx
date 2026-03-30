@@ -1,15 +1,43 @@
+import dynamic from "next/dynamic";
 import { CursorSparkles } from "../components/CursorSparkles/CursorSparkles";
-import { BannerSection } from "../features/top/BannerSection/BannerSection";
-import { ContactSection } from "../features/top/ContactSection/ContactSection";
 import { HeroSection } from "../features/top/HeroSection/HeroSection";
-import { MusicGallery } from "../features/top/MusicGallery/MusicGallery";
-import { PortraitSection } from "../features/top/PortraitSection/PortraitSection";
-import { ProfileSection } from "../features/top/ProfileSection/ProfileSection";
-import { ShopSection } from "../features/top/ShopSection/ShopSection";
-import { SideNav } from "../features/top/SideNav/SideNav";
 import { siteConfig } from "./_site.config";
 import "../styles/page.global.css";
 import styles from "./page.module.css";
+
+const BannerSection = dynamic(() =>
+	import("../features/top/BannerSection/BannerSection").then(
+		(mod) => mod.BannerSection,
+	),
+);
+const ContactSection = dynamic(() =>
+	import("../features/top/ContactSection/ContactSection").then(
+		(mod) => mod.ContactSection,
+	),
+);
+const MusicGallery = dynamic(() =>
+	import("../features/top/MusicGallery/MusicGallery").then(
+		(mod) => mod.MusicGallery,
+	),
+);
+const PortraitSection = dynamic(() =>
+	import("../features/top/PortraitSection/PortraitSection").then(
+		(mod) => mod.PortraitSection,
+	),
+);
+const ProfileSection = dynamic(() =>
+	import("../features/top/ProfileSection/ProfileSection").then(
+		(mod) => mod.ProfileSection,
+	),
+);
+const ShopSection = dynamic(() =>
+	import("../features/top/ShopSection/ShopSection").then(
+		(mod) => mod.ShopSection,
+	),
+);
+const SideNav = dynamic(() =>
+	import("../features/top/SideNav/SideNav").then((mod) => mod.SideNav),
+);
 
 const WAVE_W = 1000;
 const WAVE_ARC_DEPTH = 60;
@@ -44,7 +72,7 @@ function buildScallopedArcPath() {
 		const bulge = r - Math.sqrt(r * r - (dist / 2) ** 2);
 		const midY = (py + ty) / 2 + bulge;
 		if (midY > maxY) maxY = midY;
-		d += ` A ${r.toFixed(2)} ${r.toFixed(2)} 0 0 1 ${tx.toFixed(2)} ${ty.toFixed(2)}`;
+		d += ` A ${r.toFixed(1)} ${r.toFixed(1)} 0 0 1 ${tx.toFixed(1)} ${ty.toFixed(1)}`;
 	}
 
 	d += " Z";
@@ -53,23 +81,27 @@ function buildScallopedArcPath() {
 
 const wavePath = buildScallopedArcPath();
 
+const staticBackground = (
+	<div className={styles.fixedBackground}>
+		<div className={styles.skyArea}>
+			<svg
+				className={styles.wave}
+				aria-label="wave"
+				viewBox={`0 0 ${WAVE_W} ${wavePath.height}`}
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path d={wavePath.d} fill="#63bac7" />
+			</svg>
+		</div>
+	</div>
+);
+
 export default function Page() {
 	return (
 		<main className={styles.Root}>
 			<CursorSparkles />
 			{/* Fixed background: pink + teal sky with scallop wave */}
-			<div className={styles.fixedBackground}>
-				<div className={styles.skyArea}>
-					<svg
-						className={styles.wave}
-						aria-label="wave"
-						viewBox={`0 0 ${WAVE_W} ${wavePath.height}`}
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path d={wavePath.d} fill="#63bac7" />
-					</svg>
-				</div>
-			</div>
+			{staticBackground}
 
 			<div className={styles.MainContent}>
 				<div className={styles.LeftColumn}>
