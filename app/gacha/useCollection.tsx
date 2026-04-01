@@ -3,9 +3,29 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import data from "../../public/gacha/data.json";
 
-const COLLECTION_KEY = "mcgc";
-const TICKET_KEY = "mcgc_ticket";
-const TICKEY_LOG_KEY = "mcgc_ticket_log";
+const COLLECTION_KEY = "mcgc:v1";
+const TICKET_KEY = "mcgc_ticket:v1";
+const TICKEY_LOG_KEY = "mcgc_ticket_log:v1";
+
+function loadFromStorage<T>(key: string, defaultValue: T): T {
+	try {
+		const stored = localStorage.getItem(key);
+		if (stored) {
+			return JSON.parse(stored) as T;
+		}
+	} catch {
+		// Ignore errors in incognito mode or when disabled
+	}
+	return defaultValue;
+}
+
+function saveToStorage<T>(key: string, value: T) {
+	try {
+		localStorage.setItem(key, JSON.stringify(value));
+	} catch {
+		// Ignore errors if quota exceeded or disabled
+	}
+}
 
 interface TicketLog {
 	key: string;
@@ -91,16 +111,37 @@ export const CollectionProvider = ({ children }: CollectionProviderProps) => {
 	const [ticketLogs, setTicketLogs] = useState<TicketLog[]>([]);
 
 	useEffect(() => {
-		setCollection(
-			JSON.parse(localStorage.getItem(COLLECTION_KEY) ?? "[]") as [
-				number,
-				number,
-			][],
-		);
-		setTickets(Number.parseInt(localStorage.getItem(TICKET_KEY) ?? "0", 10));
-		setTicketLogs(
-			JSON.parse(localStorage.getItem(TICKEY_LOG_KEY) ?? "[]") as TicketLog[],
-		);
+		// Try to migrate old unversioned data first
+		try {
+			const oldTicketsStr = localStorage.getItem("mcgc_ticket");
+			if (oldTicketsStr) {
+				const oldTickets = Number.parseInt(oldTicketsStr, 10);
+				if (!Number.isNaN(oldTickets)) {
+					saveToStorage(TICKET_KEY, oldTickets);
+				}
+				localStorage.removeItem("mcgc_ticket");
+			}
+
+			const oldCollectionStr = localStorage.getItem("mcgc");
+			if (oldCollectionStr) {
+				const oldCollection = JSON.parse(oldCollectionStr);
+				saveToStorage(COLLECTION_KEY, oldCollection);
+				localStorage.removeItem("mcgc");
+			}
+
+			const oldLogsStr = localStorage.getItem("mcgc_ticket_log");
+			if (oldLogsStr) {
+				const oldLogs = JSON.parse(oldLogsStr);
+				saveToStorage(TICKEY_LOG_KEY, oldLogs);
+				localStorage.removeItem("mcgc_ticket_log");
+			}
+		} catch {
+			// Ignore migration errors
+		}
+
+		setCollection(loadFromStorage<[number, number][]>(COLLECTION_KEY, []));
+		setTickets(loadFromStorage<number>(TICKET_KEY, 0));
+		setTicketLogs(loadFromStorage<TicketLog[]>(TICKEY_LOG_KEY, []));
 	}, []);
 
 	return (
@@ -126,12 +167,12 @@ export const CollectionProvider = ({ children }: CollectionProviderProps) => {
 
 						setTicketLogs((prev) => {
 							const next = [...prev, { key, issuedAt }];
-							localStorage.setItem(TICKEY_LOG_KEY, JSON.stringify(next));
+							saveToStorage(TICKEY_LOG_KEY, next);
 							return next;
 						});
 						setTickets((prev) => {
 							const next = prev + 10;
-							localStorage.setItem(TICKET_KEY, next.toString());
+							saveToStorage(TICKET_KEY, next);
 							return next;
 						});
 					},
@@ -147,7 +188,7 @@ export const CollectionProvider = ({ children }: CollectionProviderProps) => {
 
 								setTickets((prev) => {
 									const next = prev ? prev - 1 : 0;
-									localStorage.setItem(TICKET_KEY, next.toString());
+									saveToStorage(TICKET_KEY, next);
 									return next;
 								});
 
@@ -162,7 +203,7 @@ export const CollectionProvider = ({ children }: CollectionProviderProps) => {
 									...collection.filter(([i]) => i !== index),
 									[index, count + 1],
 								];
-								localStorage.setItem(COLLECTION_KEY, JSON.stringify(next));
+								saveToStorage(COLLECTION_KEY, next);
 								setCollection(next);
 
 								return data[index];
