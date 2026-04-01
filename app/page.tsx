@@ -53,22 +53,24 @@ function buildScallopedArcPath() {
 
 const wavePath = buildScallopedArcPath();
 
+const waveSvg = (
+	<svg
+		className={styles.wave}
+		aria-label="wave"
+		viewBox={`0 0 ${WAVE_W} ${wavePath.height}`}
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path d={wavePath.d} fill="#63bac7" />
+	</svg>
+);
+
 export default function Page() {
 	return (
 		<main className={styles.Root}>
 			<CursorSparkles />
 			{/* Fixed background: pink + teal sky with scallop wave */}
 			<div className={styles.fixedBackground}>
-				<div className={styles.skyArea}>
-					<svg
-						className={styles.wave}
-						aria-label="wave"
-						viewBox={`0 0 ${WAVE_W} ${wavePath.height}`}
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path d={wavePath.d} fill="#63bac7" />
-					</svg>
-				</div>
+				<div className={styles.skyArea}>{waveSvg}</div>
 			</div>
 
 			<div className={styles.MainContent}>
