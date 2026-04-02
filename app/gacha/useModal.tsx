@@ -1,8 +1,10 @@
 "use client";
+
+import type { ComponentType } from "react";
 import { useCallback, useRef } from "react";
 import styles from "./useModal.module.css";
 
-export const useModal = (Content: () => React.ReactNode) => {
+export const useModal = (Content: ComponentType | (() => React.ReactNode)) => {
 	const dialogRef = useRef<HTMLDialogElement>(null);
 	const Modal = useCallback(() => {
 		return (

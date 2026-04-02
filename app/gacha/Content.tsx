@@ -1,13 +1,22 @@
 "use client";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { AppHeader } from "../../components/AppHeader/AppHeader";
 import data from "../../public/gacha/data.json";
-import { IndexModal } from "./IndexModal";
 import styles from "./page.module.css";
 import { Result } from "./Result";
-import { TicketModal } from "./TicketModal";
 import { useDispatchCollection, useTicket } from "./useCollection";
 import { useModal } from "./useModal";
+
+const IndexModal = dynamic(
+	() => import("./IndexModal").then((mod) => mod.IndexModal),
+	{ ssr: false },
+);
+
+const TicketModal = dynamic(
+	() => import("./TicketModal").then((mod) => mod.TicketModal),
+	{ ssr: false },
+);
 
 let didInitPreload = false;
 
