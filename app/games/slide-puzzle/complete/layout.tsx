@@ -1,8 +1,12 @@
+import type { ReactNode } from "react";
 import { slidePuzzleMetadata } from "../metadata";
-import CompletePage from "./page";
 
 export const metadata = slidePuzzleMetadata;
 
-export default function CompleteLayout() {
-	return <CompletePage />;
+type Props = {
+	children: ReactNode;
+};
+
+export default function CompleteLayout({ children }: Props) {
+	return <>{children}</>;
 }

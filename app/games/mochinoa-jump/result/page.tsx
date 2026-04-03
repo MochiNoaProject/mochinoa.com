@@ -1,22 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, use } from "react";
 import styles from "./page.module.css";
 
-export default function ResultPage() {
+type Props = {
+	searchParams: Promise<{ [key: string]: string | undefined }>;
+};
+
+export default function ResultPage({ searchParams }: Props) {
 	return (
 		<Suspense fallback={<div>Loading...</div>}>
-			<ResultContent />
+			<ResultContent searchParams={searchParams} />
 		</Suspense>
 	);
 }
 
-function ResultContent() {
-	const searchParams = useSearchParams();
-	const score = searchParams.get("score") || "0";
-	const _highScore = searchParams.get("highScore") || "0";
+function ResultContent({ searchParams: searchParamsPromise }: Props) {
+	const searchParams = use(searchParamsPromise);
+	const score = searchParams.score || "0";
+	const _highScore = searchParams.highScore || "0";
 
 	const shareOnX = () => {
 		const text = `もちのあジャンプで${score}点獲得しました！ #もちのあジャンプ`;
