@@ -18,6 +18,13 @@ export const SideNav = () => {
 				</a>
 				<Link href={siteConfig.guidelines.streaming}>配信ガイドライン</Link>
 				<Link href={siteConfig.guidelines.fanart}>著作物ガイドライン</Link>
+				<a
+					href={siteConfig.links.store}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					グッズ一覧
+				</a>
 			</nav>
 			<small className={styles.Copyright}>&copy; 2025 もちもちクリエイト</small>
 		</div>

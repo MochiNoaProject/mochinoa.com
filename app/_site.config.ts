@@ -63,6 +63,7 @@ export const siteConfig = {
 		} satisfies LinkWithImage,
 		cien: "https://ci-en.net/creator/22003",
 		lineStamp: "https://store.line.me/stickershop/product/31995151/ja",
+		store: "https://store.mochinoa.com/",
 	},
 	guidelines: {
 		streaming: "/guidelines/streaming",
