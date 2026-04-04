@@ -10,6 +10,14 @@
 	font-size: 16px;
 }
 
+.StoreLink {
+	text-decoration-line: underline;
+	text-decoration-style: wavy;
+	text-decoration-color: var(--color-pink);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.25em;
+}
+
 .Copyright {
 	font-size: 16px;
 }

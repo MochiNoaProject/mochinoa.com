@@ -19,6 +19,7 @@ export const SideNav = () => {
 				<Link href={siteConfig.guidelines.streaming}>配信ガイドライン</Link>
 				<Link href={siteConfig.guidelines.fanart}>著作物ガイドライン</Link>
 				<a
+					className={styles.StoreLink}
 					href={siteConfig.links.store}
 					target="_blank"
 					rel="noopener noreferrer"
