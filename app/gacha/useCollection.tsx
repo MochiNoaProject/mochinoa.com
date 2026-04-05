@@ -7,19 +7,28 @@ const COLLECTION_KEY = "mcgc:v1";
 const TICKET_KEY = "mcgc_ticket:v1";
 const TICKEY_LOG_KEY = "mcgc_ticket_log:v1";
 
+const storageCache = new Map<string, unknown>();
+
 function loadFromStorage<T>(key: string, defaultValue: T): T {
+	if (storageCache.has(key)) {
+		return storageCache.get(key) as T;
+	}
 	try {
 		const stored = localStorage.getItem(key);
 		if (stored) {
-			return JSON.parse(stored) as T;
+			const parsed = JSON.parse(stored) as T;
+			storageCache.set(key, parsed);
+			return parsed;
 		}
 	} catch {
 		// Ignore errors in incognito mode or when disabled
 	}
+	storageCache.set(key, defaultValue);
 	return defaultValue;
 }
 
 function saveToStorage<T>(key: string, value: T) {
+	storageCache.set(key, value);
 	try {
 		localStorage.setItem(key, JSON.stringify(value));
 	} catch {
