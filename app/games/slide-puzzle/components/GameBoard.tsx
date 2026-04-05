@@ -1,14 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./GameBoard.module.css";
 
 export default function GameBoard() {
 	const router = useRouter();
 	const [board, setBoard] = useState<number[]>([]);
 	const [moves, setMoves] = useState(0);
-	const [startTime, setStartTime] = useState<number | null>(null);
+	const startTimeRef = useRef<number | null>(null);
 	const [difficulty, setDifficulty] = useState<"easy" | "hard">("easy");
 
 	const isComplete =
@@ -67,7 +67,7 @@ export default function GameBoard() {
 		const initialBoard = Array.from({ length: size }, (_, i) => i);
 		setBoard(shuffleBoard(initialBoard));
 		setMoves(0);
-		setStartTime(Date.now());
+		startTimeRef.current = Date.now();
 	}, [shuffleBoard, difficulty]);
 
 	// 初期化
@@ -94,7 +94,7 @@ export default function GameBoard() {
 			// 状態更新後に完成チェックを実行
 			const isCompleted = newBoard.every((value, idx) => value === idx);
 			if (isCompleted) {
-				const finalTime = Date.now() - (startTime ?? 0);
+				const finalTime = Date.now() - (startTimeRef.current ?? 0);
 				setTimeout(() => {
 					router.push(
 						`/games/slide-puzzle/complete?time=${finalTime}&moves=${
