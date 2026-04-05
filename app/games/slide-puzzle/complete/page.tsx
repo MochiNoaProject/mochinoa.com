@@ -2,17 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, use } from "react";
 import styles from "./page.module.css";
 
-function CompleteContent() {
-	const searchParams = useSearchParams();
-	const timeParam = searchParams.get("time");
-	const movesParam = searchParams.get("moves");
-	const time = timeParam !== null ? Number(timeParam) : 0;
-	const moves = movesParam !== null ? Number(movesParam) : 0;
-	const difficulty = searchParams.get("difficulty") ?? "easy";
+type Props = {
+	searchParams: Promise<{ [key: string]: string | undefined }>;
+};
+
+function CompleteContent({ searchParams: searchParamsPromise }: Props) {
+	const searchParams = use(searchParamsPromise);
+	const timeParam = searchParams.time;
+	const movesParam = searchParams.moves;
+	const time = timeParam !== undefined ? Number(timeParam) : 0;
+	const moves = movesParam !== undefined ? Number(movesParam) : 0;
+	const difficulty = searchParams.difficulty ?? "easy";
 
 	const formatTime = (ms: number) => {
 		const seconds = Math.floor(ms / 1000);
@@ -64,10 +67,10 @@ function CompleteContent() {
 	);
 }
 
-export default function CompletePage() {
+export default function CompletePage({ searchParams }: Props) {
 	return (
 		<Suspense fallback={<div>Loading...</div>}>
-			<CompleteContent />
+			<CompleteContent searchParams={searchParams} />
 		</Suspense>
 	);
 }
