@@ -64,8 +64,10 @@ const waveSvg = (
 	</svg>
 );
 
-const CursorSparkles = dynamic(
-	() => import("../components/CursorSparkles/CursorSparkles").then((mod) => mod.CursorSparkles)
+const CursorSparkles = dynamic(() =>
+	import("../components/CursorSparkles/CursorSparkles").then(
+		(mod) => mod.CursorSparkles,
+	),
 );
 
 export default function Page() {
