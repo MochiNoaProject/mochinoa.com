@@ -93,7 +93,9 @@ export default function GameBoard() {
 		if (isComplete) return;
 
 		setBoard((prevBoard) => {
-			const currentEmptyIndex = prevBoard.indexOf(difficulty === "easy" ? 8 : 15);
+			const currentEmptyIndex = prevBoard.indexOf(
+				difficulty === "easy" ? 8 : 15,
+			);
 			const movableIndices = getMovableIndices(currentEmptyIndex);
 
 			if (movableIndices.includes(index)) {
