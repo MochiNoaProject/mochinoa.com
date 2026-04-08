@@ -1,4 +1,4 @@
-import { CursorSparkles } from "../components/CursorSparkles/CursorSparkles";
+import dynamic from "next/dynamic";
 import { BannerSection } from "../features/top/BannerSection/BannerSection";
 import { ContactSection } from "../features/top/ContactSection/ContactSection";
 import { HeroSection } from "../features/top/HeroSection/HeroSection";
@@ -62,6 +62,12 @@ const waveSvg = (
 	>
 		<path d={wavePath.d} fill="#63bac7" />
 	</svg>
+);
+
+const CursorSparkles = dynamic(() =>
+	import("../components/CursorSparkles/CursorSparkles").then(
+		(mod) => mod.CursorSparkles,
+	),
 );
 
 export default function Page() {
