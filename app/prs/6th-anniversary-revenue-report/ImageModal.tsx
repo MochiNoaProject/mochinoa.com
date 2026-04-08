@@ -40,7 +40,7 @@ export function ImageModal({ src, alt }: ImageModalProps) {
 
 	const toggleZoom = (e: React.MouseEvent) => {
 		e.stopPropagation();
-		setIsZoomed(!isZoomed);
+		setIsZoomed((prev) => !prev);
 	};
 
 	const handleKeyDown = (e: React.KeyboardEvent) => {

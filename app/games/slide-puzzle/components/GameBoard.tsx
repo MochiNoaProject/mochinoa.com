@@ -75,34 +75,44 @@ export default function GameBoard() {
 		initializeBoard();
 	}, [initializeBoard]);
 
+	// 完成チェックと画面遷移
+	useEffect(() => {
+		if (board.length > 0 && board.every((value, index) => value === index)) {
+			const finalTime = Date.now() - (startTimeRef.current ?? 0);
+			const timerId = setTimeout(() => {
+				router.push(
+					`/games/slide-puzzle/complete?time=${finalTime}&moves=${moves}&difficulty=${difficulty}`,
+				);
+			}, 500);
+			return () => clearTimeout(timerId);
+		}
+	}, [board, moves, difficulty, router]);
+
 	// タイルを移動
 	const moveTile = (index: number) => {
 		if (isComplete) return;
 
-		const emptyIndex = board.indexOf(difficulty === "easy" ? 8 : 15);
-		const movableIndices = getMovableIndices(emptyIndex);
+		setBoard((prevBoard) => {
+			const currentEmptyIndex = prevBoard.indexOf(difficulty === "easy" ? 8 : 15);
+			const movableIndices = getMovableIndices(currentEmptyIndex);
 
-		if (movableIndices.includes(index)) {
-			const newBoard = [...board];
-			[newBoard[emptyIndex], newBoard[index]] = [
-				newBoard[index],
-				newBoard[emptyIndex],
-			];
-			setBoard(newBoard);
-			setMoves((prev) => prev + 1);
-
-			// 状態更新後に完成チェックを実行
-			const isCompleted = newBoard.every((value, idx) => value === idx);
-			if (isCompleted) {
-				const finalTime = Date.now() - (startTimeRef.current ?? 0);
-				setTimeout(() => {
-					router.push(
-						`/games/slide-puzzle/complete?time=${finalTime}&moves=${
-							moves + 1
-						}&difficulty=${difficulty}`,
-					);
-				}, 500);
+			if (movableIndices.includes(index)) {
+				const newBoard = [...prevBoard];
+				[newBoard[currentEmptyIndex], newBoard[index]] = [
+					newBoard[index],
+					newBoard[currentEmptyIndex],
+				];
+				return newBoard;
 			}
+			return prevBoard;
+		});
+
+		// setMovesはboardが実際に更新された場合のみ呼びたいが、
+		// functional updateの中では副作用を呼べないので、movableIndicesチェックを外側でもう一度行う。
+		// 状態の依存を減らすため、getMovableIndicesにboardを渡さず、直接計算する。
+		const emptyIndex = board.indexOf(difficulty === "easy" ? 8 : 15);
+		if (getMovableIndices(emptyIndex).includes(index)) {
+			setMoves((prev) => prev + 1);
 		}
 	};
 
