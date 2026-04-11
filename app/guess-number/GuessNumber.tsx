@@ -18,10 +18,13 @@ export const GuessNumber = () => {
 	const [resetKey, updateResetKey] = useReducer((prev: number) => prev + 1, 0);
 	const [serif, setSerif] = useState<string>("あそぶ？❤");
 	const [count, setCount] = useState(0);
-	const audio = useRef(typeof Audio !== "undefined" ? new Audio() : null);
+	const audio = useRef<HTMLAudioElement | null>(null);
 
 	const play = (text: VoiceText) => {
-		playVoice(audio?.current, text);
+		if (typeof Audio !== "undefined" && audio.current === null) {
+			audio.current = new Audio();
+		}
+		playVoice(audio.current, text);
 	};
 
 	return (
