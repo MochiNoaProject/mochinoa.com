@@ -29,16 +29,11 @@ function TagTitleMarquee({ title }: { title: string }) {
 	const measureRef = useRef<HTMLSpanElement>(null);
 	const [overflows, setOverflows] = useState(false);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: We need to re-measure when title changes
 	useEffect(() => {
 		const container = containerRef.current;
 		const measure = measureRef.current;
 		if (!container || !measure) return;
-
-		// Use title here to ensure the effect is correctly dependent on it,
-		// and to force a re-measure if the title changes.
-		// We are effectively using the title prop to trigger the measurement logic.
-		const _currentTitle = title;
-		void _currentTitle; // Suppress unused variable warning if necessary, though logic below uses DOM which is updated by React before this effect runs.
 
 		setOverflows(measure.scrollWidth > container.clientWidth);
 	}, [title]);
