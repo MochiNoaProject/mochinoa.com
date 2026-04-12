@@ -37,9 +37,7 @@ export const GuessNumberDialog = () => {
 				}
 			}}
 		>
-			<div>
-				{VolumeIcon}
-			</div>
+			<div>{VolumeIcon}</div>
 			<p>
 				このサイトでは、ゲームを始めると音声が流れます。
 				スピーカーなどの音量にご注意ください。
