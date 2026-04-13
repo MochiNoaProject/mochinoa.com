@@ -36,6 +36,10 @@
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"sharp"
+		],
+		"allowBuilds": [
+			"sharp"
 		]
-	}
+	},
+	"packageManager": "pnpm@10.30.3"
 }
