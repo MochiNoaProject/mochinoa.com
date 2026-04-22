@@ -243,6 +243,8 @@ export default function TypingGame() {
 		);
 	};
 
+	const currentResultMessage = gameOver ? getResultMessage(totalChars) : null;
+
 	return (
 		<div className={styles.container}>
 			<h1 className={styles.title}>もちのあタイピング</h1>
@@ -262,7 +264,7 @@ export default function TypingGame() {
 						</button>
 						<p className={styles.keyHint}>スペースキーでもスタートできます</p>
 					</>
-				) : gameOver ? (
+				) : gameOver && currentResultMessage ? (
 					<div className={styles.result}>
 						<div className={styles.resultContent}>
 							<div className={styles.resultText}>
@@ -272,7 +274,7 @@ export default function TypingGame() {
 								<p>ミス回数: {missCount}回</p>
 								<p>1分間の入力速度: {totalChars}文字/分</p>
 								<div className={styles.resultMessage}>
-									<p>{getResultMessage(totalChars).message}</p>
+									<p>{currentResultMessage.message}</p>
 								</div>
 								<button
 									type="button"
@@ -289,11 +291,11 @@ export default function TypingGame() {
 									Xでシェア
 								</button>
 							</div>
-							{getResultMessage(totalChars).image !== null ? (
+							{currentResultMessage.image !== null ? (
 								<div className={styles.resultImage}>
 									<Image
 										src={
-											getResultMessage(totalChars).image ??
+											currentResultMessage.image ??
 											"/images/default.jpg"
 										}
 										alt="結果画像"
