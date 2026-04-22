@@ -294,10 +294,7 @@ export default function TypingGame() {
 							{currentResultMessage.image !== null ? (
 								<div className={styles.resultImage}>
 									<Image
-										src={
-											currentResultMessage.image ??
-											"/images/default.jpg"
-										}
+										src={currentResultMessage.image ?? "/images/default.jpg"}
 										alt="結果画像"
 										width={600}
 										height={400}
