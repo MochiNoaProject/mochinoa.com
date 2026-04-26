@@ -16,8 +16,8 @@ export default function GameBoard() {
 
 	// 移動可能なマスのインデックスを取得
 	const getMovableIndices = useCallback(
-		(emptyIndex: number) => {
-			const size = difficulty === "easy" ? 3 : 4;
+		(emptyIndex: number, currentDifficulty: "easy" | "hard") => {
+			const size = currentDifficulty === "easy" ? 3 : 4;
 			const row = Math.floor(emptyIndex / size);
 			const col = emptyIndex % size;
 			const movableIndices: number[] = [];
@@ -33,17 +33,17 @@ export default function GameBoard() {
 
 			return movableIndices;
 		},
-		[difficulty],
+		[],
 	);
 
 	// ボードをシャッフル
 	const shuffleBoard = useCallback(
-		(boardToShuffle: number[]) => {
+		(boardToShuffle: number[], currentDifficulty: "easy" | "hard") => {
 			const shuffled = [...boardToShuffle];
-			let emptyIndex = shuffled.indexOf(difficulty === "easy" ? 8 : 15);
+			let emptyIndex = shuffled.indexOf(currentDifficulty === "easy" ? 8 : 15);
 
 			for (let i = 0; i < 100; i++) {
-				const movableIndices = getMovableIndices(emptyIndex);
+				const movableIndices = getMovableIndices(emptyIndex, currentDifficulty);
 				if (movableIndices.length > 0) {
 					const randomIndex =
 						movableIndices[Math.floor(Math.random() * movableIndices.length)];
@@ -58,14 +58,14 @@ export default function GameBoard() {
 
 			return shuffled;
 		},
-		[getMovableIndices, difficulty],
+		[getMovableIndices],
 	);
 
 	// ボードの初期化
 	const initializeBoard = useCallback(() => {
 		const size = difficulty === "easy" ? 9 : 16;
 		const initialBoard = Array.from({ length: size }, (_, i) => i);
-		setBoard(shuffleBoard(initialBoard));
+		setBoard(shuffleBoard(initialBoard, difficulty));
 		setMoves(0);
 		startTimeRef.current = Date.now();
 	}, [shuffleBoard, difficulty]);
@@ -80,7 +80,7 @@ export default function GameBoard() {
 		if (isComplete) return;
 
 		const emptyIndex = board.indexOf(difficulty === "easy" ? 8 : 15);
-		const movableIndices = getMovableIndices(emptyIndex);
+		const movableIndices = getMovableIndices(emptyIndex, difficulty);
 
 		if (movableIndices.includes(index)) {
 			const newBoard = [...board];
