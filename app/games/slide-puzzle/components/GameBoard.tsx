@@ -12,7 +12,7 @@ export default function GameBoard() {
 	const [difficulty, setDifficulty] = useState<"easy" | "hard">("easy");
 
 	const isComplete =
-		board.length > 0 && board.every((value, index) => value === index);
+		board.length > 0 ? board.every((value, index) => value === index) : false;
 
 	// 移動可能なマスのインデックスを取得
 	const getMovableIndices = useCallback(
