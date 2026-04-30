@@ -207,11 +207,12 @@ export const CollectionProvider = ({ children }: CollectionProviderProps) => {
 								const rare = rate < 0.6 ? 3 : rate < 0.1 ? 2 : 1;
 								const index = shuffled.findIndex((item) => item.rare === rare);
 
-								const count = collection.find(([i]) => i === index)?.[1] ?? 0;
-								const next: [number, number][] = [
-									...collection.filter(([i]) => i !== index),
-									[index, count + 1],
-								];
+								const collectionMap = new Map(collection);
+								const count = collectionMap.get(index) ?? 0;
+								collectionMap.set(index, count + 1);
+								const next: [number, number][] = Array.from(
+									collectionMap.entries(),
+								);
 								saveToStorage(COLLECTION_KEY, next);
 								setCollection(next);
 
