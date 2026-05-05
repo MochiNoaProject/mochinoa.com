@@ -108,6 +108,8 @@ export const useDispatchCollection = () => {
 	return context;
 };
 
+let didInitMigration = false;
+
 interface CollectionProviderProps {
 	children: React.ReactNode;
 }
@@ -120,32 +122,35 @@ export const CollectionProvider = ({ children }: CollectionProviderProps) => {
 	const [ticketLogs, setTicketLogs] = useState<TicketLog[]>([]);
 
 	useEffect(() => {
-		// Try to migrate old unversioned data first
-		try {
-			const oldTicketsStr = localStorage.getItem("mcgc_ticket");
-			if (oldTicketsStr) {
-				const oldTickets = Number.parseInt(oldTicketsStr, 10);
-				if (!Number.isNaN(oldTickets)) {
-					saveToStorage(TICKET_KEY, oldTickets);
+		if (!didInitMigration) {
+			didInitMigration = true;
+			// Try to migrate old unversioned data first
+			try {
+				const oldTicketsStr = localStorage.getItem("mcgc_ticket");
+				if (oldTicketsStr) {
+					const oldTickets = Number.parseInt(oldTicketsStr, 10);
+					if (!Number.isNaN(oldTickets)) {
+						saveToStorage(TICKET_KEY, oldTickets);
+					}
+					localStorage.removeItem("mcgc_ticket");
 				}
-				localStorage.removeItem("mcgc_ticket");
-			}
 
-			const oldCollectionStr = localStorage.getItem("mcgc");
-			if (oldCollectionStr) {
-				const oldCollection = JSON.parse(oldCollectionStr);
-				saveToStorage(COLLECTION_KEY, oldCollection);
-				localStorage.removeItem("mcgc");
-			}
+				const oldCollectionStr = localStorage.getItem("mcgc");
+				if (oldCollectionStr) {
+					const oldCollection = JSON.parse(oldCollectionStr);
+					saveToStorage(COLLECTION_KEY, oldCollection);
+					localStorage.removeItem("mcgc");
+				}
 
-			const oldLogsStr = localStorage.getItem("mcgc_ticket_log");
-			if (oldLogsStr) {
-				const oldLogs = JSON.parse(oldLogsStr);
-				saveToStorage(TICKEY_LOG_KEY, oldLogs);
-				localStorage.removeItem("mcgc_ticket_log");
+				const oldLogsStr = localStorage.getItem("mcgc_ticket_log");
+				if (oldLogsStr) {
+					const oldLogs = JSON.parse(oldLogsStr);
+					saveToStorage(TICKEY_LOG_KEY, oldLogs);
+					localStorage.removeItem("mcgc_ticket_log");
+				}
+			} catch {
+				// Ignore migration errors
 			}
-		} catch {
-			// Ignore migration errors
 		}
 
 		setCollection(loadFromStorage<[number, number][]>(COLLECTION_KEY, []));
