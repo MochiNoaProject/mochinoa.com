@@ -22,8 +22,8 @@
 		"lucide-react": "1.14.0",
 		"motion": "12.38.0",
 		"next": "16.2.5",
-		"react": "19.2.5",
-		"react-dom": "19.2.5",
+		"react": "19.2.6",
+		"react-dom": "19.2.6",
 		"wanakana": "5.3.1"
 	},
 	"devDependencies": {
