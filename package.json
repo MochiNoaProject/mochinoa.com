@@ -33,13 +33,5 @@
 		"@types/react-dom": "19.2.3",
 		"typescript": "6.0.3"
 	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"sharp"
-		],
-		"allowBuilds": [
-			"sharp"
-		]
-	},
 	"packageManager": "pnpm@11.0.8"
 }
