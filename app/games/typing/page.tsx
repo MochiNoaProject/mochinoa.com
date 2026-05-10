@@ -264,7 +264,7 @@ export default function TypingGame() {
 						</button>
 						<p className={styles.keyHint}>スペースキーでもスタートできます</p>
 					</>
-				) : gameOver && currentResultMessage ? (
+				) : gameOver && currentResultMessage !== null ? (
 					<div className={styles.result}>
 						<div className={styles.resultContent}>
 							<div className={styles.resultText}>
