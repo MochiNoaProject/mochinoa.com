@@ -41,6 +41,19 @@ export const Content = () => {
 		}
 	}, []);
 
+	// Apply "Preload Based on User Intent" best practice (bundle-preload.md)
+	const preloadIndexModal = () => {
+		if (typeof window !== "undefined") {
+			void import("./IndexModal");
+		}
+	};
+
+	const preloadTicketModal = () => {
+		if (typeof window !== "undefined") {
+			void import("./TicketModal");
+		}
+	};
+
 	return (
 		<section className={styles.container}>
 			<AppHeader />
@@ -48,13 +61,21 @@ export const Content = () => {
 			<Modal />
 			<Result chara={chara} key={ticket.amount} />
 			<footer className={styles.footer}>
-				<button className={styles.button} type="button" onClick={open}>
+				<button
+					className={styles.button}
+					type="button"
+					onMouseEnter={preloadIndexModal}
+					onFocus={preloadIndexModal}
+					onClick={open}
+				>
 					図鑑
 				</button>
 
 				<button
 					className={styles.button}
 					type="button"
+					onMouseEnter={preloadTicketModal}
+					onFocus={preloadTicketModal}
 					onClick={() => {
 						const chara = collection.draw();
 						if (chara !== false) {
