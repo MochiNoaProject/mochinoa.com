@@ -4,6 +4,19 @@ import topImg from "../../../app/_assets/images/トップ画像.png";
 import { siteConfig } from "../../../app/_site.config";
 import styles from "./HeroSection.module.css";
 
+const SOCIAL_LINKS = [
+	{
+		url: siteConfig.links.youtube.url,
+		image: siteConfig.links.youtube.image,
+		alt: "YouTube",
+	},
+	{
+		url: siteConfig.links.twitter.url,
+		image: siteConfig.links.twitter.image,
+		alt: "Twitter",
+	},
+];
+
 export const HeroSection = () => {
 	return (
 		<div className={styles.HeroSection}>
@@ -23,18 +36,7 @@ export const HeroSection = () => {
 				className={styles.swayImage}
 			/>
 			<div className={styles.SocialLinks}>
-				{[
-					{
-						url: siteConfig.links.youtube.url,
-						image: siteConfig.links.youtube.image,
-						alt: "YouTube",
-					},
-					{
-						url: siteConfig.links.twitter.url,
-						image: siteConfig.links.twitter.image,
-						alt: "Twitter",
-					},
-				].map((link) => (
+				{SOCIAL_LINKS.map((link) => (
 					<a
 						key={link.url}
 						href={link.url}

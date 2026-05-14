@@ -24,6 +24,8 @@ const ITEM_GAP = 12;
 const ITEM_STEP = ITEM_SIZE + ITEM_GAP;
 const SCROLL_SPEED = 30;
 
+const MARQUEE_DUPLICATES = [0, 1, 2, 3];
+
 function TagTitleMarquee({ title }: { title: string }) {
 	const containerRef = useRef<HTMLSpanElement>(null);
 	const measureRef = useRef<HTMLSpanElement>(null);
@@ -45,7 +47,7 @@ function TagTitleMarquee({ title }: { title: string }) {
 			</span>
 			{overflows ? (
 				<span className={styles.TagTitleInner}>
-					{[0, 1, 2, 3].map((i) => (
+					{MARQUEE_DUPLICATES.map((i) => (
 						<span
 							key={i}
 							style={{ minWidth: 80, display: "inline-block", paddingLeft: 8 }}
