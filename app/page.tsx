@@ -1,15 +1,40 @@
 import dynamic from "next/dynamic";
-import { BannerSection } from "../features/top/BannerSection/BannerSection";
-import { ContactSection } from "../features/top/ContactSection/ContactSection";
 import { HeroSection } from "../features/top/HeroSection/HeroSection";
-import { MusicGallery } from "../features/top/MusicGallery/MusicGallery";
 import { PortraitSection } from "../features/top/PortraitSection/PortraitSection";
-import { ProfileSection } from "../features/top/ProfileSection/ProfileSection";
-import { ShopSection } from "../features/top/ShopSection/ShopSection";
 import { SideNav } from "../features/top/SideNav/SideNav";
 import { siteConfig } from "./_site.config";
 import "../styles/page.global.css";
 import styles from "./page.module.css";
+
+const ProfileSection = dynamic(() =>
+	import("../features/top/ProfileSection/ProfileSection").then(
+		(mod) => mod.ProfileSection,
+	),
+);
+
+const MusicGallery = dynamic(() =>
+	import("../features/top/MusicGallery/MusicGallery").then(
+		(mod) => mod.MusicGallery,
+	),
+);
+
+const ShopSection = dynamic(() =>
+	import("../features/top/ShopSection/ShopSection").then(
+		(mod) => mod.ShopSection,
+	),
+);
+
+const BannerSection = dynamic(() =>
+	import("../features/top/BannerSection/BannerSection").then(
+		(mod) => mod.BannerSection,
+	),
+);
+
+const ContactSection = dynamic(() =>
+	import("../features/top/ContactSection/ContactSection").then(
+		(mod) => mod.ContactSection,
+	),
+);
 
 const WAVE_W = 1000;
 const WAVE_ARC_DEPTH = 60;
