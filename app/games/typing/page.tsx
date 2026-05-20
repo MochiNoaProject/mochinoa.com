@@ -132,10 +132,11 @@ export default function TypingGame() {
 	const [timeLeft, setTimeLeft] = useState(60);
 	const [totalChars, setTotalChars] = useState(0);
 	const [correctWords, setCorrectWords] = useState(0);
-	const [gameOver, setGameOver] = useState(false);
 	const [missCount, setMissCount] = useState(0);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const inputRef = useRef<HTMLInputElement | null>(null);
+
+	const gameOver = !isPlaying && timeLeft === 0;
 
 	useEffect(() => {
 		audioRef.current = new Audio("/sounds/miss.mp3");
@@ -143,7 +144,6 @@ export default function TypingGame() {
 
 	const startGame = useCallback(() => {
 		setIsPlaying(true);
-		setGameOver(false);
 		setTimeLeft(60);
 		setTotalChars(0);
 		setCorrectWords(0);
@@ -180,7 +180,6 @@ export default function TypingGame() {
 
 	const resetGame = useCallback(() => {
 		setIsPlaying(false);
-		setGameOver(false);
 		setTimeLeft(60);
 		setTotalChars(0);
 		setCorrectWords(0);
@@ -196,7 +195,6 @@ export default function TypingGame() {
 				setTimeLeft((prev) => {
 					if (prev <= 1) {
 						setIsPlaying(false);
-						setGameOver(true);
 						return 0;
 					}
 					return prev - 1;
