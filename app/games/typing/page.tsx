@@ -93,6 +93,18 @@ const generateAllPatterns = (romaji: string): string[] => {
 	return [...new Set(patterns)]; // 重複を除去
 };
 
+const patternsCache = new Map<string, string[]>();
+
+const cachedGenerateAllPatterns = (romaji: string): string[] => {
+	const cached = patternsCache.get(romaji);
+	if (cached) {
+		return cached;
+	}
+	const result = generateAllPatterns(romaji);
+	patternsCache.set(romaji, result);
+	return result;
+};
+
 const getResultMessage = (chars: number): ResultMessage => {
 	if (chars >= 200) {
 		return {
@@ -116,7 +128,7 @@ export default function TypingGame() {
 	const [text, setText] = useState("");
 	const possiblePatterns = useMemo(() => {
 		const romajiText = toRomaji(text);
-		const patterns = generateAllPatterns(romajiText);
+		const patterns = cachedGenerateAllPatterns(romajiText);
 
 		const prefixSet = new Set<string>();
 		for (const pattern of patterns) {
