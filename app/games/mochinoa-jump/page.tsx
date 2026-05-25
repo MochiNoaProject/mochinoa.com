@@ -52,25 +52,28 @@ export default function MochinoaJump() {
 
 	// ジャンプの処理
 	const jump = useCallback(() => {
+		// BEST PRACTICE: Early Return from Functions (js-early-exit.md)
+		// Return early if the conditions for jumping are not met to avoid unnecessary nesting
+		if (isJumpingRef.current || !isPlaying || gameOver) {
+			return;
+		}
+
 		const now = Date.now();
-		if (
-			!isJumpingRef.current &&
-			isPlaying &&
-			!gameOver &&
-			now - lastJumpTimeRef.current >= JUMP_COOLDOWN
-		) {
-			isJumpingRef.current = true;
-			lastJumpTimeRef.current = now; // ジャンプ時間を記録
-			const player = playerRef.current;
-			if (player) {
-				player.style.transform = `translateY(-${JUMP_HEIGHT}px)`;
-				setTimeout(() => {
-					if (playerRef.current) {
-						playerRef.current.style.transform = "translateY(0)";
-					}
-					isJumpingRef.current = false;
-				}, JUMP_DURATION);
-			}
+		if (now - lastJumpTimeRef.current < JUMP_COOLDOWN) {
+			return;
+		}
+
+		isJumpingRef.current = true;
+		lastJumpTimeRef.current = now; // ジャンプ時間を記録
+		const player = playerRef.current;
+		if (player) {
+			player.style.transform = `translateY(-${JUMP_HEIGHT}px)`;
+			setTimeout(() => {
+				if (playerRef.current) {
+					playerRef.current.style.transform = "translateY(0)";
+				}
+				isJumpingRef.current = false;
+			}, JUMP_DURATION);
 		}
 	}, [isPlaying, gameOver]);
 
