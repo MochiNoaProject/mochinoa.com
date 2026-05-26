@@ -225,23 +225,26 @@ export default function TypingGame() {
 
 		// 入力文字が正しいかチェック（ローマ字のみ）
 		const isValidRomaji = value === "" || possiblePatterns.prefixSet.has(value);
-		if (isValidRomaji) {
-			setInput(value);
-
-			// 単語が完成したかチェック
-			if (possiblePatterns.patternSet.has(value)) {
-				setTotalChars((prev) => prev + text.length);
-				setCorrectWords((prev) => prev + 1);
-				setText(WORDS[Math.floor(Math.random() * WORDS.length)]);
-				setInput("");
-			}
-		} else {
+		// BEST PRACTICE: Early Return from Functions (js-early-exit.md)
+		// Return early on invalid input to avoid unnecessary nesting
+		if (!isValidRomaji) {
 			// 入力ミス時
 			setMissCount((prev) => prev + 1);
 			if (audioRef.current) {
 				audioRef.current.currentTime = 0;
 				audioRef.current.play().catch(console.error);
 			}
+			return;
+		}
+
+		setInput(value);
+
+		// 単語が完成したかチェック
+		if (possiblePatterns.patternSet.has(value)) {
+			setTotalChars((prev) => prev + text.length);
+			setCorrectWords((prev) => prev + 1);
+			setText(WORDS[Math.floor(Math.random() * WORDS.length)]);
+			setInput("");
 		}
 	};
 
