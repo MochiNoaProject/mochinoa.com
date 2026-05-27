@@ -4,7 +4,7 @@ import { X, ZoomIn, ZoomOut } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type { StaticImageData } from "next/image";
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useEffectEvent, useState } from "react";
 import styles from "./page.module.css";
 
 interface ImageModalProps {
@@ -27,20 +27,14 @@ export function ImageModal({ src, alt }: ImageModalProps) {
 		document.body.style.overflow = "unset";
 	}, []);
 
-	const handleEscRef = useRef((e: KeyboardEvent) => {
+	const onEscEvent = useEffectEvent((e: KeyboardEvent) => {
 		if (e.key === "Escape") closeModal();
 	});
-	useEffect(() => {
-		handleEscRef.current = (e: KeyboardEvent) => {
-			if (e.key === "Escape") closeModal();
-		};
-	}, [closeModal]);
 
 	useEffect(() => {
-		const handleEsc = (e: KeyboardEvent) => handleEscRef.current(e);
-		window.addEventListener("keydown", handleEsc);
+		window.addEventListener("keydown", onEscEvent);
 		return () => {
-			window.removeEventListener("keydown", handleEsc);
+			window.removeEventListener("keydown", onEscEvent);
 			document.body.style.overflow = "unset";
 		};
 	}, []);

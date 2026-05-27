@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 import styles from "./page.module.css";
 
 interface Obstacle {
@@ -119,15 +119,11 @@ export default function MochinoaJump() {
 		[isPlaying, gameOver, startGame, resetGame, jump],
 	);
 
-	const handleKeyPressRef = useRef(handleKeyPress);
-	useEffect(() => {
-		handleKeyPressRef.current = handleKeyPress;
-	}, [handleKeyPress]);
+	const onKeyPressEvent = useEffectEvent(handleKeyPress);
 
 	useEffect(() => {
-		const handler = (e: KeyboardEvent) => handleKeyPressRef.current(e);
-		window.addEventListener("keydown", handler);
-		return () => window.removeEventListener("keydown", handler);
+		window.addEventListener("keydown", onKeyPressEvent);
+		return () => window.removeEventListener("keydown", onKeyPressEvent);
 	}, []);
 
 	// スコアに基づいて障害物の間隔を計算

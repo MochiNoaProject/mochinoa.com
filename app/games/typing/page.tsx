@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { toRomaji } from "wanakana";
 import styles from "./page.module.css";
 
@@ -179,15 +179,11 @@ export default function TypingGame() {
 		[isPlaying, gameOver, startGame],
 	);
 
-	const handleKeyPressRef = useRef(handleKeyPress);
-	useEffect(() => {
-		handleKeyPressRef.current = handleKeyPress;
-	}, [handleKeyPress]);
+	const onKeyPressEvent = useEffectEvent(handleKeyPress);
 
 	useEffect(() => {
-		const handler = (e: KeyboardEvent) => handleKeyPressRef.current(e);
-		window.addEventListener("keydown", handler);
-		return () => window.removeEventListener("keydown", handler);
+		window.addEventListener("keydown", onKeyPressEvent);
+		return () => window.removeEventListener("keydown", onKeyPressEvent);
 	}, []);
 
 	const resetGame = useCallback(() => {
