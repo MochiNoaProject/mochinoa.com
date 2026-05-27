@@ -212,14 +212,16 @@ export const CollectionProvider = ({ children }: CollectionProviderProps) => {
 								const rare = rate < 0.6 ? 3 : rate < 0.1 ? 2 : 1;
 								const index = shuffled.findIndex((item) => item.rare === rare);
 
-								const collectionMap = new Map(collection);
-								const count = collectionMap.get(index) ?? 0;
-								collectionMap.set(index, count + 1);
-								const next: [number, number][] = Array.from(
-									collectionMap.entries(),
-								);
-								saveToStorage(COLLECTION_KEY, next);
-								setCollection(next);
+								setCollection((prevCollection) => {
+									const collectionMap = new Map(prevCollection);
+									const count = collectionMap.get(index) ?? 0;
+									collectionMap.set(index, count + 1);
+									const next: [number, number][] = Array.from(
+										collectionMap.entries(),
+									);
+									saveToStorage(COLLECTION_KEY, next);
+									return next;
+								});
 
 								return data[index];
 							},
