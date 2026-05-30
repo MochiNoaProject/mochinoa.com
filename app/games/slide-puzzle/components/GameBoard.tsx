@@ -155,7 +155,7 @@ export default function GameBoard() {
 										}%)`,
 									}
 						}
-						onClick={() => value !== emptyTileIndex && moveTile(index)}
+						onClick={() => value !== emptyTileIndex ? moveTile(index) : undefined}
 					/>
 				))}
 			</div>
