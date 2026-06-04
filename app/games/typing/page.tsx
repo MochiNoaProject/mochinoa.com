@@ -158,7 +158,10 @@ export default function TypingGame() {
 	const gameOver = !isPlaying && timeLeft === 0;
 
 	useEffect(() => {
-		audioRef.current = new Audio("/sounds/miss.mp3");
+		// BEST PRACTICE: Initialize App Once, Not Per Mount (8.1)
+		if (!audioRef.current) {
+			audioRef.current = new Audio("/sounds/miss.mp3");
+		}
 	}, []);
 
 	const startGame = useCallback(() => {

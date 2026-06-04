@@ -80,27 +80,28 @@ export default function GameBoard() {
 		const emptyIndex = board.indexOf(difficulty === "easy" ? 8 : 15);
 		const movableIndices = getMovableIndices(emptyIndex, difficulty);
 
-		if (movableIndices.includes(index)) {
-			const newBoard = [...board];
-			[newBoard[emptyIndex], newBoard[index]] = [
-				newBoard[index],
-				newBoard[emptyIndex],
-			];
-			setBoard(newBoard);
-			setMoves((prev) => prev + 1);
+		// BEST PRACTICE: Early Return from Functions (7.8)
+		if (!movableIndices.includes(index)) return;
 
-			// 状態更新後に完成チェックを実行
-			const isCompleted = newBoard.every((value, idx) => value === idx);
-			if (isCompleted) {
-				const finalTime = Date.now() - (startTimeRef.current ?? 0);
-				setTimeout(() => {
-					router.push(
-						`/games/slide-puzzle/complete?time=${finalTime}&moves=${
-							moves + 1
-						}&difficulty=${difficulty}`,
-					);
-				}, 500);
-			}
+		const newBoard = [...board];
+		[newBoard[emptyIndex], newBoard[index]] = [
+			newBoard[index],
+			newBoard[emptyIndex],
+		];
+		setBoard(newBoard);
+		setMoves((prev) => prev + 1);
+
+		// 状態更新後に完成チェックを実行
+		const isCompleted = newBoard.every((value, idx) => value === idx);
+		if (isCompleted) {
+			const finalTime = Date.now() - (startTimeRef.current ?? 0);
+			setTimeout(() => {
+				router.push(
+					`/games/slide-puzzle/complete?time=${finalTime}&moves=${
+						moves + 1
+					}&difficulty=${difficulty}`,
+				);
+			}, 500);
 		}
 	};
 
