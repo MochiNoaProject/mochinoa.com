@@ -64,6 +64,7 @@ function Page() {
 					src="/nyantomo/heroImage.jpg"
 					alt="hero image"
 					fill
+					sizes="100vw"
 					className={styles.heroImage}
 				/>
 			</section>
