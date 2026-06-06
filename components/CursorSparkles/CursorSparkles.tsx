@@ -44,8 +44,8 @@ export function CursorSparkles() {
 
 			sparkle.innerHTML = STAR_SVG;
 			sparkle.className = styles.sparkle;
-			sparkle.style.left = `${e.clientX + offsetX}px`;
-			sparkle.style.top = `${e.clientY + offsetY}px`;
+			sparkle.style.setProperty("--tx", `${e.clientX + offsetX}px`);
+			sparkle.style.setProperty("--ty", `${e.clientY + offsetY}px`);
 			sparkle.style.width = `${size}px`;
 			sparkle.style.height = `${size}px`;
 			sparkle.style.color = color;

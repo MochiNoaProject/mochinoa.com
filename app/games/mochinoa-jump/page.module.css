@@ -70,6 +70,7 @@
 .obstacle {
 	position: absolute;
 	bottom: 0;
+	left: 0;
 	background-color: #ffd8d8;
 	border-radius: 4px;
 }
