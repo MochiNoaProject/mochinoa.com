@@ -228,7 +228,7 @@ export default function MochinoaJump() {
 		for (const obstacle of obstaclesRef.current) {
 			const div = document.createElement("div");
 			div.className = `${styles.obstacle} ${styles[obstacle.type]}`;
-			div.style.left = `${obstacle.x}px`;
+			div.style.transform = `translateX(${obstacle.x}px)`;
 			div.style.width = `${obstacle.width}px`;
 			div.style.height = `${obstacle.height}px`;
 			container.appendChild(div);
