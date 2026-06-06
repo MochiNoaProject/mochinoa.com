@@ -17,10 +17,12 @@
 @keyframes sparkle-fade {
 	0% {
 		opacity: 1;
-		transform: translate(calc(var(--tx) - 50%), calc(var(--ty) - 50%)) scale(1) rotate(0deg);
+		transform: translate(calc(var(--tx) - 50%), calc(var(--ty) - 50%)) scale(1)
+			rotate(0deg);
 	}
 	100% {
 		opacity: 0;
-		transform: translate(calc(var(--tx) - 50%), calc(var(--ty) - 50% - 40px)) scale(0) rotate(120deg);
+		transform: translate(calc(var(--tx) - 50%), calc(var(--ty) - 50% - 40px))
+			scale(0) rotate(120deg);
 	}
 }
