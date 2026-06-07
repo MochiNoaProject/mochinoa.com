@@ -9,6 +9,19 @@ const numbers = [
 	1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
 ];
 
+const avatarImage = (
+	<div>
+		<Image
+			src="/mesugaki/dummy.webp"
+			alt="望月のあ"
+			height={200}
+			width={200}
+			style={{ objectFit: "contain" }}
+			className={styles.Avatar}
+		/>
+	</div>
+);
+
 export const GuessNumber = () => {
 	const timeRef = useRef(0);
 	const timerDisplayRef = useRef<HTMLDivElement>(null);
@@ -80,16 +93,7 @@ export const GuessNumber = () => {
 			>
 				{serif}
 			</button>
-			<div>
-				<Image
-					src="/mesugaki/dummy.webp"
-					alt="望月のあ"
-					height={200}
-					width={200}
-					style={{ objectFit: "contain" }}
-					className={styles.Avatar}
-				/>
-			</div>
+			{avatarImage}
 			<div className={styles.NumbersGroup}>
 				{numbers.map((number) => (
 					<label key={number} className={styles.Number}>
