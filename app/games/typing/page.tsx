@@ -1,13 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toRomaji } from "wanakana";
 import styles from "./page.module.css";
 
