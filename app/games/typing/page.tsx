@@ -4,7 +4,6 @@ import Image from "next/image";
 import {
 	useCallback,
 	useEffect,
-	useEffectEvent,
 	useMemo,
 	useRef,
 	useState,
@@ -189,11 +188,15 @@ export default function TypingGame() {
 		[isPlaying, gameOver, startGame],
 	);
 
-	const onKeyPressEvent = useEffectEvent(handleKeyPress);
+	const handleKeyPressRef = useRef(handleKeyPress);
+	useEffect(() => {
+		handleKeyPressRef.current = handleKeyPress;
+	}, [handleKeyPress]);
 
 	useEffect(() => {
-		window.addEventListener("keydown", onKeyPressEvent);
-		return () => window.removeEventListener("keydown", onKeyPressEvent);
+		const listener = (e: KeyboardEvent) => handleKeyPressRef.current(e);
+		window.addEventListener("keydown", listener);
+		return () => window.removeEventListener("keydown", listener);
 	}, []);
 
 	const resetGame = useCallback(() => {
