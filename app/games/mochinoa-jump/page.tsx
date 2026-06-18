@@ -2,7 +2,13 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+	useCallback,
+	useEffect,
+	useEffectEvent,
+	useRef,
+	useState,
+} from "react";
 import styles from "./page.module.css";
 
 interface Obstacle {
@@ -103,31 +109,22 @@ export default function MochinoaJump() {
 	}, [startGame]);
 
 	// キーボードイベントの処理
-	const handleKeyPress = useCallback(
-		(e: KeyboardEvent) => {
-			if (e.code === "Space") {
-				if (!isPlaying) {
-					startGame();
-				} else if (gameOver) {
-					resetGame();
-				} else if (!isJumpingRef.current) {
-					// ジャンプ中でない場合のみジャンプを実行
-					jump();
-				}
+	const onKeyPressEvent = useEffectEvent((e: KeyboardEvent) => {
+		if (e.code === "Space") {
+			if (!isPlaying) {
+				startGame();
+			} else if (gameOver) {
+				resetGame();
+			} else if (!isJumpingRef.current) {
+				// ジャンプ中でない場合のみジャンプを実行
+				jump();
 			}
-		},
-		[isPlaying, gameOver, startGame, resetGame, jump],
-	);
-
-	const handleKeyPressRef = useRef(handleKeyPress);
-	useEffect(() => {
-		handleKeyPressRef.current = handleKeyPress;
-	}, [handleKeyPress]);
+		}
+	});
 
 	useEffect(() => {
-		const listener = (e: KeyboardEvent) => handleKeyPressRef.current(e);
-		window.addEventListener("keydown", listener);
-		return () => window.removeEventListener("keydown", listener);
+		window.addEventListener("keydown", onKeyPressEvent);
+		return () => window.removeEventListener("keydown", onKeyPressEvent);
 	}, []);
 
 	// スコアに基づいて障害物の間隔を計算

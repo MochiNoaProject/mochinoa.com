@@ -1,7 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+	useCallback,
+	useEffect,
+	useEffectEvent,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 import { toRomaji } from "wanakana";
 import styles from "./page.module.css";
 
@@ -172,25 +179,16 @@ export default function TypingGame() {
 	}, []);
 
 	// キーボードイベントのハンドラー
-	const handleKeyPress = useCallback(
-		(e: KeyboardEvent) => {
-			if (!isPlaying && !gameOver && e.code === "Space") {
-				e.preventDefault();
-				startGame();
-			}
-		},
-		[isPlaying, gameOver, startGame],
-	);
-
-	const handleKeyPressRef = useRef(handleKeyPress);
-	useEffect(() => {
-		handleKeyPressRef.current = handleKeyPress;
-	}, [handleKeyPress]);
+	const onKeyPressEvent = useEffectEvent((e: KeyboardEvent) => {
+		if (!isPlaying && !gameOver && e.code === "Space") {
+			e.preventDefault();
+			startGame();
+		}
+	});
 
 	useEffect(() => {
-		const listener = (e: KeyboardEvent) => handleKeyPressRef.current(e);
-		window.addEventListener("keydown", listener);
-		return () => window.removeEventListener("keydown", listener);
+		window.addEventListener("keydown", onKeyPressEvent);
+		return () => window.removeEventListener("keydown", onKeyPressEvent);
 	}, []);
 
 	const resetGame = useCallback(() => {
