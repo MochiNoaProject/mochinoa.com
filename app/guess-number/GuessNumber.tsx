@@ -30,7 +30,7 @@ export const GuessNumber = () => {
 	const [correctNumber, setCorrectNumber] = useState<number>();
 	const [resetKey, updateResetKey] = useReducer((prev: number) => prev + 1, 0);
 	const [serif, setSerif] = useState<string>("あそぶ？❤");
-	const [count, setCount] = useState(0);
+	const countRef = useRef(0);
 	const audio = useRef<HTMLAudioElement | null>(null);
 
 	const play = (text: VoiceText) => {
@@ -76,7 +76,7 @@ export const GuessNumber = () => {
 						if (timerDisplayRef.current) {
 							timerDisplayRef.current.textContent = "0.0s";
 						}
-						setCount(0);
+						countRef.current = 0;
 						setCorrectNumber(
 							numbers[Math.floor(Math.random() * numbers.length)],
 						);
@@ -133,7 +133,7 @@ export const GuessNumber = () => {
 										if (correctNumber === undefined) {
 											throw new Error("correctNumber is undefined");
 										}
-										if (count > 2) {
+										if (countRef.current > 2) {
 											setSerif("ざぁこ❤ざぁこ❤");
 											play("ざあこざあこ");
 											setIsStarted(false);
@@ -147,7 +147,7 @@ export const GuessNumber = () => {
 											setSerif("でっか❤");
 											play("でっか");
 										}
-										setCount((prev) => prev + 1);
+										countRef.current += 1;
 									}
 								}}
 							/>
