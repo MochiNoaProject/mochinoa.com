@@ -148,52 +148,57 @@ export default function MochinoaJump() {
 	}, []);
 
 	// 障害物の生成
-	const createObstacle = useCallback(() => {
-		const now = Date.now();
-		const interval = getObstacleInterval();
-		if (now - lastObstacleTimeRef.current >= interval) {
-			lastObstacleTimeRef.current = now;
+	const createObstacle = useCallback(
+		(gameClientWidth: number) => {
+			const now = Date.now();
+			const interval = getObstacleInterval();
+			if (now - lastObstacleTimeRef.current >= interval) {
+				lastObstacleTimeRef.current = now;
 
-			// ランダムな障害物タイプを選択
-			const randomType =
-				OBSTACLE_TYPE_KEYS[
-					Math.floor(Math.random() * OBSTACLE_TYPE_KEYS.length)
-				];
-			const obstacleConfig = OBSTACLE_TYPES[randomType];
+				// ランダムな障害物タイプを選択
+				const randomType =
+					OBSTACLE_TYPE_KEYS[
+						Math.floor(Math.random() * OBSTACLE_TYPE_KEYS.length)
+					];
+				const obstacleConfig = OBSTACLE_TYPES[randomType];
 
-			obstaclesRef.current.push({
-				x: gameRef.current?.clientWidth || 800,
-				width: obstacleConfig.width,
-				height: obstacleConfig.height,
-				type: randomType,
-			});
-		}
-	}, [getObstacleInterval]);
+				obstaclesRef.current.push({
+					x: gameClientWidth,
+					width: obstacleConfig.width,
+					height: obstacleConfig.height,
+					type: randomType,
+				});
+			}
+		},
+		[getObstacleInterval],
+	);
 
 	// 衝突判定
-	const checkCollision = useCallback((player: DOMRect, obstacle: Obstacle) => {
-		// プレイヤーの位置を取得
-		const playerLeft = player.left;
-		const playerRight = player.right;
-		const playerTop = player.top;
-		const playerBottom = player.bottom;
+	const checkCollision = useCallback(
+		(player: DOMRect, obstacle: Obstacle, groundLine: number) => {
+			// プレイヤーの位置を取得
+			const playerLeft = player.left;
+			const playerRight = player.right;
+			const playerTop = player.top;
+			const playerBottom = player.bottom;
 
-		// 障害物の位置を取得
-		const obstacleLeft = obstacle.x;
-		const obstacleRight = obstacle.x + obstacle.width;
-		const groundLine = gameRef.current?.getBoundingClientRect().bottom || 0;
-		const obstacleBottom = groundLine;
-		const obstacleTop = groundLine - obstacle.height;
+			// 障害物の位置を取得
+			const obstacleLeft = obstacle.x;
+			const obstacleRight = obstacle.x + obstacle.width;
+			const obstacleBottom = groundLine;
+			const obstacleTop = groundLine - obstacle.height;
 
-		// 衝突判定（左右と上下）
-		const hasCollision =
-			playerLeft < obstacleRight &&
-			playerRight > obstacleLeft &&
-			playerBottom > obstacleTop &&
-			playerTop < obstacleBottom;
+			// 衝突判定（左右と上下）
+			const hasCollision =
+				playerLeft < obstacleRight &&
+				playerRight > obstacleLeft &&
+				playerBottom > obstacleTop &&
+				playerTop < obstacleBottom;
 
-		return hasCollision;
-	}, []);
+			return hasCollision;
+		},
+		[],
+	);
 
 	// ゲームオーバー処理
 	const handleGameOver = useCallback(() => {
@@ -238,28 +243,34 @@ export default function MochinoaJump() {
 		const game = gameRef.current;
 		if (!player || !game) return;
 
-		// スコアの更新（直接DOM操作で更新）
+		// READ phase - all layout queries first
+		const playerRect = player.getBoundingClientRect();
+		const gameClientWidth = game.clientWidth || 800;
+		const groundLine = game.getBoundingClientRect().bottom || 0;
+
+		// スコアの更新
 		scoreRef.current += 1;
-		if (scoreDisplayRef.current && scoreRef.current % 10 === 0) {
-			// 頻度を少し落として更新
-			scoreDisplayRef.current.textContent = `スコア: ${scoreRef.current}`;
-		}
 
 		// 障害物の生成
-		createObstacle();
+		createObstacle(gameClientWidth);
 
 		// 障害物の移動と衝突判定
-		const playerRect = player.getBoundingClientRect();
 		let hasCollision = false;
 
 		obstaclesRef.current = obstaclesRef.current.filter((obstacle) => {
 			obstacle.x -= GAME_SPEED;
-			if (checkCollision(playerRect, obstacle)) {
+			if (checkCollision(playerRect, obstacle, groundLine)) {
 				hasCollision = true;
 				return false;
 			}
 			return obstacle.x > -obstacle.width;
 		});
+
+		// WRITE phase - DOM writes
+		if (scoreDisplayRef.current && scoreRef.current % 10 === 0) {
+			// 頻度を少し落として更新
+			scoreDisplayRef.current.textContent = `スコア: ${scoreRef.current}`;
+		}
 
 		renderObstacles();
 
