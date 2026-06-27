@@ -131,6 +131,8 @@ const getResultMessage = (chars: number): ResultMessage => {
 	};
 };
 
+let sharedAudio: HTMLAudioElement | null = null;
+
 export default function TypingGame() {
 	const [text, setText] = useState("");
 	const possiblePatterns = useMemo(() => {
@@ -159,9 +161,10 @@ export default function TypingGame() {
 
 	useEffect(() => {
 		// BEST PRACTICE: Initialize App Once, Not Per Mount (8.1)
-		if (!audioRef.current) {
-			audioRef.current = new Audio("/sounds/miss.mp3");
+		if (!sharedAudio) {
+			sharedAudio = new Audio("/sounds/miss.mp3");
 		}
+		audioRef.current = sharedAudio;
 	}, []);
 
 	const startGame = useCallback(() => {
