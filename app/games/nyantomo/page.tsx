@@ -66,6 +66,7 @@ function Page() {
 					fill
 					sizes="100vw"
 					className={styles.heroImage}
+					priority
 				/>
 			</section>
 
