@@ -1,13 +1,21 @@
+import dynamic from "next/dynamic";
 import { CursorSparkles } from "../components/CursorSparkles/CursorSparkles";
 import { BannerSection } from "../features/top/BannerSection/BannerSection";
 import { ContactSection } from "../features/top/ContactSection/ContactSection";
 import { HeroSection } from "../features/top/HeroSection/HeroSection";
-import { MusicGallery } from "../features/top/MusicGallery/MusicGallery";
 import { PortraitSection } from "../features/top/PortraitSection/PortraitSection";
 import { ProfileSection } from "../features/top/ProfileSection/ProfileSection";
 import { ShopSection } from "../features/top/ShopSection/ShopSection";
 import { SideNav } from "../features/top/SideNav/SideNav";
 import { siteConfig } from "./_site.config";
+
+// BEST PRACTICE: Dynamic Imports for Heavy Components (bundle-dynamic-imports.md)
+const MusicGallery = dynamic(() =>
+	import("../features/top/MusicGallery/MusicGallery").then(
+		(mod) => mod.MusicGallery,
+	),
+);
+
 import "../styles/page.global.css";
 import styles from "./page.module.css";
 
