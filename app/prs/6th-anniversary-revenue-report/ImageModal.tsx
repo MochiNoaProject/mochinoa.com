@@ -12,6 +12,12 @@ interface ImageModalProps {
 	alt: string;
 }
 
+// BEST PRACTICE: Hoist Static JSX Elements (rendering-hoist-jsx.md)
+const zoomInIconLarge = <ZoomIn size={32} />;
+const zoomInIconSmall = <ZoomIn size={20} />;
+const zoomOutIconSmall = <ZoomOut size={20} />;
+const closeIcon = <X size={24} />;
+
 export function ImageModal({ src, alt }: ImageModalProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isZoomed, setIsZoomed] = useState(false);
@@ -61,7 +67,7 @@ export function ImageModal({ src, alt }: ImageModalProps) {
 			>
 				<Image src={src} alt={alt} className={styles.chartImage} />
 				<div className={styles.chartOverlay}>
-					<ZoomIn size={32} />
+					{zoomInIconLarge}
 					<span>クリックで拡大</span>
 				</div>
 			</button>
@@ -89,7 +95,7 @@ export function ImageModal({ src, alt }: ImageModalProps) {
 							aria-label="閉じる"
 							type="button"
 						>
-							<X size={24} />
+							{closeIcon}
 						</button>
 
 						<div className={styles.modalContent}>
@@ -118,7 +124,7 @@ export function ImageModal({ src, alt }: ImageModalProps) {
 									className={styles.zoomButton}
 									type="button"
 								>
-									{isZoomed ? <ZoomOut size={20} /> : <ZoomIn size={20} />}
+									{isZoomed ? zoomOutIconSmall : zoomInIconSmall}
 									{isZoomed ? "縮小" : "拡大"}
 								</button>
 							</div>
