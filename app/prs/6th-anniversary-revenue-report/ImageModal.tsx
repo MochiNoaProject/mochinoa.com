@@ -18,6 +18,20 @@ const zoomInIconSmall = <ZoomIn size={20} />;
 const zoomOutIconSmall = <ZoomOut size={20} />;
 const closeIcon = <X size={24} />;
 
+// BEST PRACTICE: Deduplicate Global Event Listeners (client-event-listeners.md)
+const keydownCallbacks = new Set<(e: KeyboardEvent) => void>();
+let isGlobalKeydownListenerAdded = false;
+
+function addGlobalKeydownListener() {
+	if (typeof window === "undefined" || isGlobalKeydownListenerAdded) return;
+	window.addEventListener("keydown", (e: KeyboardEvent) => {
+		for (const cb of keydownCallbacks) {
+			cb(e);
+		}
+	});
+	isGlobalKeydownListenerAdded = true;
+}
+
 export function ImageModal({ src, alt }: ImageModalProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isZoomed, setIsZoomed] = useState(false);
@@ -38,9 +52,10 @@ export function ImageModal({ src, alt }: ImageModalProps) {
 	});
 
 	useEffect(() => {
-		window.addEventListener("keydown", onEscEvent);
+		addGlobalKeydownListener();
+		keydownCallbacks.add(onEscEvent);
 		return () => {
-			window.removeEventListener("keydown", onEscEvent);
+			keydownCallbacks.delete(onEscEvent);
 			document.body.style.overflow = "unset";
 		};
 	}, []);

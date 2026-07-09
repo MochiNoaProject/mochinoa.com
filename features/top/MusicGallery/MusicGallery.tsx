@@ -81,25 +81,31 @@ export function MusicGallery({ songs }: Props) {
 		let rafId: number;
 
 		const tick = (time: number) => {
-			if (lastTime !== null && !isPausedRef.current) {
-				const dt = Math.min((time - lastTime) / 1000, 0.1);
-				posRef.current -= SCROLL_SPEED * dt;
-
-				if (posRef.current <= -setWidth) {
-					posRef.current += setWidth;
-				}
-
-				if (trackRef.current) {
-					trackRef.current.style.transform = `translateX(${posRef.current}px)`;
-				}
-
-				const offset = ((-posRef.current % setWidth) + setWidth) % setWidth;
-				const newIdx = Math.floor(offset / ITEM_STEP) % songs.length;
-				if (newIdx !== selectedRef.current) {
-					selectedRef.current = newIdx;
-					setSelectedIndex(newIdx);
-				}
+			// BEST PRACTICE: Early Return from Functions (js-early-exit.md)
+			if (lastTime === null || isPausedRef.current) {
+				lastTime = time;
+				rafId = requestAnimationFrame(tick);
+				return;
 			}
+
+			const dt = Math.min((time - lastTime) / 1000, 0.1);
+			posRef.current -= SCROLL_SPEED * dt;
+
+			if (posRef.current <= -setWidth) {
+				posRef.current += setWidth;
+			}
+
+			if (trackRef.current) {
+				trackRef.current.style.transform = `translateX(${posRef.current}px)`;
+			}
+
+			const offset = ((-posRef.current % setWidth) + setWidth) % setWidth;
+			const newIdx = Math.floor(offset / ITEM_STEP) % songs.length;
+			if (newIdx !== selectedRef.current) {
+				selectedRef.current = newIdx;
+				setSelectedIndex(newIdx);
+			}
+
 			lastTime = time;
 			rafId = requestAnimationFrame(tick);
 		};
