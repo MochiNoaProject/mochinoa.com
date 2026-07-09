@@ -40,6 +40,52 @@ export const GuessNumber = () => {
 		playVoice(audio.current, text);
 	};
 
+	const handleGuess = (number: number) => {
+		if (number === correctNumber) {
+			if (timer.current !== null) {
+				window.clearInterval(timer.current);
+			}
+			setIsStarted(false);
+			if (timeRef.current < 5) {
+				setSerif("すっご～い❤");
+				play("すっごーい");
+			} else if (timeRef.current < 8) {
+				setSerif("がんばれ❤がんばれ❤");
+				play("がんばれがんばれ");
+			} else if (timeRef.current < 20) {
+				setSerif("ざぁこ❤");
+				play("ざあこ");
+			} else {
+				setSerif("なっさけな〜い❤");
+				play("なっさけない");
+			}
+			return;
+		}
+
+		if (correctNumber === undefined) {
+			throw new Error("correctNumber is undefined");
+		}
+
+		if (countRef.current > 2) {
+			setSerif("ざぁこ❤ざぁこ❤");
+			play("ざあこざあこ");
+			setIsStarted(false);
+			if (timer.current !== null) {
+				window.clearInterval(timer.current);
+			}
+			return;
+		}
+
+		if (number < correctNumber) {
+			setSerif("ちっさ❤");
+			play("ちっさ");
+		} else {
+			setSerif("でっか❤");
+			play("でっか");
+		}
+		countRef.current += 1;
+	};
+
 	return (
 		<div className={styles.root}>
 			<GuessNumberDialog />
@@ -110,46 +156,7 @@ export const GuessNumber = () => {
 								key={resetKey}
 								value={number}
 								disabled={isStarted === false}
-								onChange={() => {
-									if (number === correctNumber) {
-										if (timer.current !== null) {
-											window.clearInterval(timer.current);
-										}
-										setIsStarted(false);
-										if (timeRef.current < 5) {
-											setSerif("すっご～い❤");
-											play("すっごーい");
-										} else if (timeRef.current < 8) {
-											setSerif("がんばれ❤がんばれ❤");
-											play("がんばれがんばれ");
-										} else if (timeRef.current < 20) {
-											setSerif("ざぁこ❤");
-											play("ざあこ");
-										} else {
-											setSerif("なっさけな〜い❤");
-											play("なっさけない");
-										}
-									} else {
-										if (correctNumber === undefined) {
-											throw new Error("correctNumber is undefined");
-										}
-										if (countRef.current > 2) {
-											setSerif("ざぁこ❤ざぁこ❤");
-											play("ざあこざあこ");
-											setIsStarted(false);
-											if (timer.current !== null) {
-												window.clearInterval(timer.current);
-											}
-										} else if (number < correctNumber) {
-											setSerif("ちっさ❤");
-											play("ちっさ");
-										} else {
-											setSerif("でっか❤");
-											play("でっか");
-										}
-										countRef.current += 1;
-									}
-								}}
+								onChange={() => handleGuess(number)}
 							/>
 							{number}
 						</span>
