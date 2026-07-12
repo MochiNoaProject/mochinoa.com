@@ -68,10 +68,13 @@ export default function GameBoard() {
 	}, []);
 
 	// 初期化
-	// biome-ignore lint/correctness/useExhaustiveDependencies: Initialize only on mount
+	// BEST PRACTICE: Initialize App Once, Not Per Mount (advanced-init-once.md)
+	const didInitRef = useRef(false);
 	useEffect(() => {
+		if (didInitRef.current) return;
+		didInitRef.current = true;
 		initializeBoard(difficulty);
-	}, []);
+	}, [initializeBoard, difficulty]);
 
 	// タイルを移動
 	const moveTile = (index: number) => {
