@@ -15,5 +15,13 @@
 	"lockFileMaintenance": {
 		"enabled": true,
 		"schedule": ["before 9am on the first day of the month"]
-	}
+	},
+	"packageRules": [
+		{
+			"description": "TypeScript 7 drops the JS Compiler API; Next.js stable (16.2.x) does not support it yet. Re-enable when Next.js ships experimental.useTypeScriptCli (or equivalent) on latest.",
+			"matchPackageNames": ["typescript"],
+			"matchUpdateTypes": ["major"],
+			"enabled": false
+		}
+	]
 }
