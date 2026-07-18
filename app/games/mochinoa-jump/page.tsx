@@ -9,6 +9,7 @@ import {
 	useRef,
 	useState,
 } from "react";
+import { useGlobalKeydown } from "../../../components/hooks/useGlobalKeydown";
 import styles from "./page.module.css";
 
 interface Obstacle {
@@ -122,10 +123,7 @@ export default function MochinoaJump() {
 		}
 	});
 
-	useEffect(() => {
-		window.addEventListener("keydown", onKeyPressEvent);
-		return () => window.removeEventListener("keydown", onKeyPressEvent);
-	}, []);
+	useGlobalKeydown(onKeyPressEvent);
 
 	// スコアに基づいて障害物の間隔を計算
 	const getObstacleInterval = useCallback(() => {

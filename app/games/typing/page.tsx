@@ -10,6 +10,7 @@ import {
 	useState,
 } from "react";
 import { toRomaji } from "wanakana";
+import { useGlobalKeydown } from "../../../components/hooks/useGlobalKeydown";
 import styles from "./page.module.css";
 
 interface ResultMessage {
@@ -189,10 +190,7 @@ export default function TypingGame() {
 		}
 	});
 
-	useEffect(() => {
-		window.addEventListener("keydown", onKeyPressEvent);
-		return () => window.removeEventListener("keydown", onKeyPressEvent);
-	}, []);
+	useGlobalKeydown(onKeyPressEvent);
 
 	const resetGame = useCallback(() => {
 		setIsPlaying(false);
