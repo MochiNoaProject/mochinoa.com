@@ -35,3 +35,19 @@
 .socialLink:hover {
 	transform: scale(1.2);
 }
+
+.MobileFantiaLink {
+	display: none;
+}
+
+@media (max-width: 780px) {
+	.MobileFantiaLink {
+		display: block;
+		line-height: 0;
+		transition: transform 0.2s ease;
+	}
+
+	.MobileFantiaLink:hover {
+		transform: scale(1.05);
+	}
+}
