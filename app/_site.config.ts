@@ -1,4 +1,5 @@
 import type { StaticImageData } from "next/image";
+import fantiaLinkImg from "./_assets/images/FantiaLink.png";
 import lineBannerImg from "./_assets/images/LINEスタンプバナー.png";
 import twitterLinkImg from "./_assets/images/TwitterLink.png";
 import tshirtImg from "./_assets/images/Tシャツ.png";
@@ -60,6 +61,10 @@ export const siteConfig = {
 		twitter: {
 			url: "https://x.com/_noach",
 			image: twitterLinkImg,
+		} satisfies LinkWithImage,
+		fantia: {
+			url: "https://fantia.jp/mmmchi",
+			image: fantiaLinkImg,
 		} satisfies LinkWithImage,
 		cien: "https://ci-en.net/creator/22003",
 		lineStamp: "https://store.line.me/stickershop/product/31995151/ja",
