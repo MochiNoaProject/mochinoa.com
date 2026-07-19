@@ -48,6 +48,19 @@ export const HeroSection = () => {
 					</a>
 				))}
 			</div>
+			<a
+				className={styles.MobileFantiaLink}
+				href={siteConfig.links.fantia.url}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<Image
+					src={siteConfig.links.fantia.image}
+					alt="Fantia"
+					width={200}
+					height={40}
+				/>
+			</a>
 		</div>
 	);
 };

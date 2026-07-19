@@ -1,10 +1,26 @@
 .Container {
 	display: grid;
 	gap: 16px;
+	justify-items: center;
+}
+
+.BrandLink {
+	display: grid;
+	gap: 16px;
 }
 
 .ImageContainer {
 	position: relative;
+}
+
+.FantiaLink {
+	display: block;
+	line-height: 0;
+	transition: transform 0.2s ease;
+}
+
+.FantiaLink:hover {
+	transform: scale(1.05);
 }
 
 @keyframes float {
