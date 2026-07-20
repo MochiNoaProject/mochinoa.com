@@ -4,7 +4,8 @@ import { X, ZoomIn, ZoomOut } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type { StaticImageData } from "next/image";
 import Image from "next/image";
-import { useCallback, useEffect, useEffectEvent, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import useSWRSubscription from "swr/subscription";
 import styles from "./page.module.css";
 
 interface ImageModalProps {
@@ -19,17 +20,37 @@ const zoomOutIconSmall = <ZoomOut size={20} />;
 const closeIcon = <X size={24} />;
 
 // BEST PRACTICE: Deduplicate Global Event Listeners (client-event-listeners.md)
-const keydownCallbacks = new Set<(e: KeyboardEvent) => void>();
-let isGlobalKeydownListenerAdded = false;
+const keyCallbacks = new Map<string, Set<() => void>>();
 
-function addGlobalKeydownListener() {
-	if (typeof window === "undefined" || isGlobalKeydownListenerAdded) return;
-	window.addEventListener("keydown", (e: KeyboardEvent) => {
-		for (const cb of keydownCallbacks) {
-			cb(e);
+function useKeyboardShortcut(key: string, callback: () => void) {
+	useEffect(() => {
+		if (!keyCallbacks.has(key)) {
+			keyCallbacks.set(key, new Set());
 		}
+		keyCallbacks.get(key)?.add(callback);
+
+		return () => {
+			const set = keyCallbacks.get(key);
+			if (set) {
+				set.delete(callback);
+				if (set.size === 0) {
+					keyCallbacks.delete(key);
+				}
+			}
+		};
+	}, [key, callback]);
+
+	useSWRSubscription("global-keydown", () => {
+		const handler = (e: KeyboardEvent) => {
+			if (keyCallbacks.has(e.key)) {
+				keyCallbacks.get(e.key)?.forEach((cb) => {
+					cb();
+				});
+			}
+		};
+		window.addEventListener("keydown", handler);
+		return () => window.removeEventListener("keydown", handler);
 	});
-	isGlobalKeydownListenerAdded = true;
 }
 
 export function ImageModal({ src, alt }: ImageModalProps) {
@@ -47,15 +68,10 @@ export function ImageModal({ src, alt }: ImageModalProps) {
 		document.body.style.overflow = "unset";
 	}, []);
 
-	const onEscEvent = useEffectEvent((e: KeyboardEvent) => {
-		if (e.key === "Escape") closeModal();
-	});
+	useKeyboardShortcut("Escape", closeModal);
 
 	useEffect(() => {
-		addGlobalKeydownListener();
-		keydownCallbacks.add(onEscEvent);
 		return () => {
-			keydownCallbacks.delete(onEscEvent);
 			document.body.style.overflow = "unset";
 		};
 	}, []);
