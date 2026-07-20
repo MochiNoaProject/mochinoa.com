@@ -52,7 +52,7 @@ export const HeroSection = () => {
 				className={styles.MobileFantiaLink}
 				href={siteConfig.links.fantia.url}
 				target="_blank"
-				rel="noopener noreferrer"
+				rel="noopener"
 			>
 				<Image
 					src={siteConfig.links.fantia.image}

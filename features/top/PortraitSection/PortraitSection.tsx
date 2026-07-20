@@ -37,7 +37,7 @@ export const PortraitSection = () => {
 				className={styles.FantiaLink}
 				href={siteConfig.links.fantia.url}
 				target="_blank"
-				rel="noopener noreferrer"
+				rel="noopener"
 			>
 				<Image
 					src={siteConfig.links.fantia.image}
