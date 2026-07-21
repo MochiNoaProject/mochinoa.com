@@ -1,4 +1,4 @@
-"ues client";
+"use client";
 
 import { useRef, useState } from "react";
 import styles from "./GuessNumberDialog.module.css";
